@@ -153,6 +153,18 @@ be the target requested distribution. The uniform target is
 \mu_e = \frac{1}{E}.
 \]
 
+Since each token can request a given expert at most once,
+\[
+R_e(q) \le T,
+\qquad
+\frac{R_e(q)}{K T} \le \frac{1}{K}.
+\]
+Hence any exactly matched requested target must satisfy the necessary bound
+\[
+\mu_e \le \frac{1}{K}.
+\]
+The uniform target satisfies this bound because \(K \le E\). The bound is necessary, but does not guarantee that a particular finite batch and fixed affinity matrix can realize \(\mu\) under hard Top-\(K\) routing.
+
 \section{Gauge quotient and nonnegative pressure dynamics}
 
 Because the score vector is invariant under common shifts of \(q\),
@@ -198,6 +210,7 @@ The map \(\gproj\) is not the Euclidean projection onto the nonconvex set \(\mat
 \[
 \{q \in \mathcal{Q} : q_e = 0\}.
 \]
+Thus the update is a step on the gauge quotient followed by gauge normalization, not Euclidean projection onto a convex feasible set.
 \end{remark}
 
 Let
@@ -220,6 +233,7 @@ q^{+}
 (1-\delta)q + \eta\,\varepsilon(q)
 \right).
 \]
+Since \(\gproj(z+c\one)=\gproj(z)\), adding any common-mode component to \(\varepsilon(q)\) leaves this update unchanged. Equivalently, the gauge dynamics depend only on the centered component of the feedback.
 
 \begin{lemma}[Boundary exit and re-entry]
 Let
@@ -428,6 +442,7 @@ R_e(q) \ge C_e,
 \qquad
 \forall e.
 \]
+Since \(\sum_e R_e(q)=K T\) and \(C_e=c K T/E\), summing the saturation inequalities gives \(K T\ge c K T\), so necessarily \(c\le 1\). If \(c=1\), equality throughout implies \(R_e(q)=C_e=K T/E\) for every expert, so the requested load is already balanced. The nontrivial saturation-freeze case is \(c<1\).
 Then under canonical admission,
 \[
 A_e(q) = C_e,
@@ -459,9 +474,9 @@ q^{+}
 Hence:
 \begin{enumerate}
 \item if \(\delta = 0\), admitted feedback induces no relative pressure change;
-\item if \(\delta > 0\), admitted feedback contracts the existing relative pressure to zero.
+\item if \(\delta > 0\), each update scales the existing relative pressure by \(1-\delta\); if global saturation persists, the pressure converges geometrically to zero.
 \end{enumerate}
-In particular, under global saturation, admitted-load feedback cannot correct an imbalance in requested demand.
+While global saturation persists, admitted-load feedback cannot correct an imbalance in requested demand.
 \end{theorem}
 
 \begin{proof}
@@ -626,7 +641,21 @@ Therefore
 \in
 \partial H(q).
 \]
-Consequently, the gauge-projected update
+Consequently, the equivalence-class update
+\[
+[q]^+
+=
+\left[q
++
+\eta \gamma
+\left(
+\frac{R(q)}{K T}
+-
+\mu
+\right)
+\right]
+\]
+is a quotient subgradient step for \(H\). Its canonical nonnegative representative is
 \[
 q^{+}
 =
@@ -641,7 +670,7 @@ q
 \right)
 \right)
 \]
-is gauge-projected subgradient descent on \(H\).
+obtained by gauge normalization.
 \end{proposition}
 
 \begin{proof}
@@ -913,18 +942,28 @@ The factor \(1/K\) ensures that the limiting potential is the average Top-\(K\) 
 
 \section{Capacity-constrained objective and gauge reduction}
 
-We now derive the capacity-constrained dual objective.
-
-Consider the fractional requested assignment problem with Top-\(K\) token budgets and expert capacities. For each token, the requested assignment satisfies
+We now derive the capacity-constrained dual objective. Consider the assignment problem
 \[
-x_t \in \{0,1\}^E,
+\max_x \sum_{t=1}^T\sum_{e=1}^E a_{t,e}x_{t,e}
+\]
+subject to the per-token Top-\(K\) budgets and expert capacities. In the binary formulation,
+\[
+x_{t,e} \in \{0,1\},
 \qquad
-\sum_e x_{t,e} = K.
+\sum_{e=1}^E x_{t,e} = K.
 \]
 The capacity constraints are
 \[
 \sum_{t=1}^T x_{t,e} \le C_e.
 \]
+The same Lagrangian dual function results if the binary token constraints are replaced by their fractional relaxation \(0\le x_{t,e}\le1\), \(\sum_e x_{t,e}=K\), since a linear function over this per-token polytope attains its maximum at a binary Top-\(K\) indicator.
+
+A necessary condition for admitting all \(K T\) requested slots is
+\[
+\sum_{e=1}^E C_e \ge K T.
+\]
+This condition is not sufficient in general, because each token must use \(K\) distinct experts. If the condition fails, the hard-capacity assignment problem is infeasible and the pressure controller can only represent relative scarcity; aggregate shortage must be reported separately.
+
 Introduce nonnegative dual variables \(\gamma q_e\) for the capacity constraints. The scaled Lagrangian dual function is
 \[
 \mathcal{L}_C(q)
@@ -957,7 +996,22 @@ A subgradient of \(\mathcal{L}_C\) is
 \frac{R(q)}{K T}
 \right).
 \]
-Thus dual descent on \(\mathcal{L}_C\) gives the requested-capacity feedback update
+The dual function is minimized over \(q\in\R_+^E\). The usual coordinatewise projected subgradient step is
+\[
+\widehat q^{+}
+=
+\relu{\left(
+q
++
+\eta \gamma
+\left(
+\frac{R(q)}{K T}
+-
+\frac{C}{K T}
+\right)
+\right)}.
+\]
+The gauge controller instead uses the relative update
 \[
 q^{+}
 =
@@ -972,6 +1026,7 @@ q
 \right)
 \right).
 \]
+This is an exact quotient subgradient-descent step when \(\sum_e C_e=K T\), in which case \(\mathcal{L}_C\) is gauge-invariant. When \(\sum_e C_e\ne K T\), the gauge update removes a common-mode component that affects \(\mathcal{L}_C\); it is then a gauge-centered relative controller, not descent on the full dual objective.
 \end{proposition}
 
 \begin{proof}
@@ -995,7 +1050,7 @@ For the second term, by the same Top-\(K\) subgradient argument as above,
 Adding the two terms gives the result.
 \end{proof}
 
-Because routing is invariant under common shifts of \(q\), only the quotient component of the capacity feedback matters. Let
+Routing is invariant under common shifts of \(q\), so the relative controller uses only the quotient component of the capacity feedback. Let
 \[
 P_0 : \R^E \to \one^{\perp}
 \]
@@ -1047,7 +1102,7 @@ Then
 -
 \frac{1}{E}\one.
 \]
-Thus, for uniform capacities, the gauge quotient of the capacity-constrained dual update is exactly the requested-balance update with target \(\mu_e = 1/E\).
+Thus, for uniform capacities, the gauge-centered capacity direction is exactly the requested-balance direction with target \(\mu_e = 1/E\). It is an exact quotient dual-descent direction when \(c=1\), for which \(\sum_e C_e=K T\).
 \end{proposition}
 
 \begin{proof}
@@ -1111,7 +1166,7 @@ define the total overflow
 \]
 
 \begin{proposition}[Balanced requested load minimizes overflow]
-Fix total requested load
+Among nonnegative real requested-load vectors with fixed total load
 \[
 \sum_{e=1}^E R_e = K T.
 \]
@@ -1151,7 +1206,7 @@ is majorized by every other vector with the same sum. By Karamata's inequality,
 \end{proof}
 
 \begin{corollary}
-Requested-balance feedback is not merely a load-balancing aesthetic. Under uniform capacities, it minimizes the total number of capacity-rejected assignments.
+Under uniform capacities, balanced requested load minimizes total overflow among relaxed load vectors with fixed total mass. This is a static optimality statement; it does not by itself prove that the hard Top-\(K\) pressure dynamics converge to a balanced load. If the dynamics do converge to a balanced requested load, that load attains the minimum overflow.
 \end{corollary}
 
 \section{Exact experimental update rules}
@@ -1251,6 +1306,7 @@ P_0
 \]
 
 For uniform capacities and uniform target \(\mu_e = 1/E\), variants \((R)\) and \((C)\) coincide on the gauge quotient.
+For uniform \(\mu\), variants \((A)\) and \((A_0)\) also define the same gauge dynamics: their feedback vectors differ only by a common-mode component, which \(\gproj\) removes.
 
 \section{Corrected scientific claims}
 
@@ -1262,6 +1318,13 @@ Requested load satisfies the conservation law
 \[
 \sum_e R_e = K T.
 \]
+It also satisfies
+\[
+0\le R_e\le T,
+\qquad
+0\le \frac{R_e}{K T}\le \frac{1}{K}.
+\]
+Thus any exactly matched requested target must satisfy \(\mu_e\le 1/K\), a necessary bound that is not generally sufficient for hard Top-\(K\) attainability.
 Admitted load satisfies
 \[
 \sum_e A_e \le K T,
@@ -1281,13 +1344,13 @@ A_e = C_e,
 so admitted feedback cannot distinguish different levels of excess demand.
 
 \item
-Under uniform capacities and global saturation, admitted feedback becomes a constant vector in the gauge quotient. Therefore it induces no relative corrective dynamics. With decay, it collapses existing pressure.
+Under uniform capacities \(C_e=c K T/E\), global saturation requires \(c\le1\). If \(c=1\), global saturation implies balanced requested load. For \(c<1\), while global saturation persists, admitted feedback is constant modulo the gauge and induces no relative corrective dynamics. With decay, pressure contracts geometrically toward zero while saturation persists.
 
 \item
-Requested Top-\(K\) feedback is a valid subgradient of a convex hard Top-\(K\) potential. The smooth Top-\(K\) potential requires the normalization \(\tau/K\), not \(\tau\), so that the normalized inclusion probabilities sum to one and the zero-temperature limit matches the hard Top-\(K\) average potential.
+Requested Top-\(K\) feedback is a valid quotient subgradient step for a convex hard Top-\(K\) potential, followed by gauge normalization. The smooth Top-\(K\) potential requires the normalization \(\tau/K\), so that the normalized inclusion probabilities sum to one and the zero-temperature limit matches the hard Top-\(K\) average potential.
 
 \item
-The requested-balance controller is the gauge quotient of a capacity-constrained dual ascent method. For uniform capacities, the quotient capacity feedback reduces exactly to
+The capacity-constrained Lagrangian dual function is minimized by dual descent. When \(\sum_e C_e=K T\), it is gauge-invariant and the quotient capacity update is an exact quotient dual-descent step. When \(\sum_e C_e\ne K T\), gauge normalization removes a common-mode component that affects the full dual objective, so the relative update is not descent on that objective. For uniform capacities, its centered capacity direction reduces exactly to
 \[
 \frac{R(q)}{K T}
 -
@@ -1295,7 +1358,7 @@ The requested-balance controller is the gauge quotient of a capacity-constrained
 \]
 
 \item
-Under uniform capacities, balanced requested load minimizes total overflow. Therefore requested-demand feedback is directly tied to reducing rejected assignments.
+Under uniform capacities, balanced requested load minimizes total overflow among relaxed nonnegative load vectors with fixed total mass. This is a static result and does not by itself prove convergence of the hard Top-\(K\) dynamics.
 \end{enumerate}
 
 \end{document}
