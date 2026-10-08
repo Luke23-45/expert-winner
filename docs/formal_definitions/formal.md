@@ -116,9 +116,11 @@ K T.
 
 Let
 \[
-C \in \R_+^E
+C \in \mathbb{N}_0^E,
+\qquad
+\mathbb{N}_0 := \{0,1,2,\dots\}
 \]
-be expert capacities. Under canonical slot-wise capacity admission,
+be integer expert capacities. Under canonical slot-wise capacity admission,
 \[
 A_e(q)
 :=
@@ -163,7 +165,7 @@ Hence any exactly matched requested target must satisfy the necessary bound
 \[
 \mu_e \le \frac{1}{K}.
 \]
-The uniform target satisfies this bound because \(K \le E\). The bound is necessary, but does not guarantee that a particular finite batch and fixed affinity matrix can realize \(\mu\) under hard Top-\(K\) routing.
+For exact matching on a finite batch, one also needs \(K T\mu_e\in\mathbb{N}_0\) for every \(e\). The uniform target satisfies the coordinate bound because \(K \le E\). These conditions are necessary, but do not guarantee that a particular finite batch and fixed affinity matrix can realize \(\mu\) under hard Top-\(K\) routing.
 
 \section{Gauge quotient and nonnegative pressure dynamics}
 
@@ -430,7 +432,7 @@ C_e = c \frac{K T}{E},
 \qquad
 c > 0,
 \]
-and uniform target
+with \(c K T/E \in \mathbb{N}_0\), and uniform target
 \[
 \mu_e = \frac{1}{E}.
 \]
@@ -442,7 +444,7 @@ R_e(q) \ge C_e,
 \qquad
 \forall e.
 \]
-Since \(\sum_e R_e(q)=K T\) and \(C_e=c K T/E\), summing the saturation inequalities gives \(K T\ge c K T\), so necessarily \(c\le 1\). If \(c=1\), equality throughout implies \(R_e(q)=C_e=K T/E\) for every expert, so the requested load is already balanced. The nontrivial saturation-freeze case is \(c<1\).
+Then necessarily \(c\le1\). If \(c=1\), then \(R_e(q)=C_e=K T/E\) for every expert, so the requested load is already balanced. The nontrivial saturation-freeze case is therefore \(c<1\).
 Then under canonical admission,
 \[
 A_e(q) = C_e,
@@ -480,6 +482,8 @@ While global saturation persists, admitted-load feedback cannot correct an imbal
 \end{theorem}
 
 \begin{proof}
+Summing \(R_e(q)\ge C_e=c K T/E\) over \(e\) gives \(K T\ge c K T\), hence \(c\le1\). If \(c=1\), then the nonnegative values \(R_e(q)-C_e\) have zero sum, so each is zero.
+
 Since \(R_e \ge C_e\), canonical admission gives
 \[
 A_e = \min\{R_e,C_e\} = C_e.
@@ -880,7 +884,7 @@ Moreover,
 \text{as }
 \tau \to 0,
 \]
-so the smooth theory converges to the hard Top-\(K\) theory.
+so the smooth potentials converge pointwise to the hard Top-\(K\) potential. Away from Top-\(K\) ties, their gradients converge to the gradient associated with the unique selected subset. At ties, the limiting smooth gradients are elements of the hard subdifferential and need not coincide with the subgradient selected by an arbitrary fixed tie-breaking rule.
 \end{proposition}
 
 \begin{proof}
@@ -938,6 +942,7 @@ Convexity follows because \(\log\sum \exp(\cdot)\) is convex and composition wit
 \max_i f_i.
 \]
 The factor \(1/K\) ensures that the limiting potential is the average Top-\(K\) score and that the normalized demand sums to one.
+For each token, the Gibbs distribution concentrates on the active maximizing subsets as \(\tau\to0\). If the maximizer is unique, this gives the stated gradient limit. At a tie, the limiting gradient is a convex combination of gradients of active affine pieces, and hence belongs to the hard subdifferential.
 \end{proof}
 
 \section{Capacity-constrained objective and gauge reduction}
@@ -1146,10 +1151,13 @@ P_0 x_e
 \end{proof}
 
 \begin{remark}
-If \(\sum_e C_e = K T\), then \(\mathcal{L}_C\) is gauge-invariant without quotient projection. If \(\sum_e C_e \ne K T\), the common mode corresponds to aggregate scarcity or surplus. The relative pressure controller observes only the quotient component; aggregate scarcity should be reported separately by rejected mass
+If \(\sum_e C_e = K T\), then \(\mathcal{L}_C\) is gauge-invariant without quotient projection. If \(\sum_e C_e \ne K T\), the common mode corresponds to aggregate capacity mismatch. The relative pressure controller observes only the quotient component, so the signed mismatch \(\sum_e C_e-K T\) must be tracked separately. Under canonical admission, total rejected mass
 \[
-J_e(q) = \relu{R_e(q) - C_e}.
+\sum_e J_e(q)
+=
+\sum_e \relu{R_e(q) - C_e}
 \]
+records realized assignment rejection; it does not measure aggregate capacity surplus.
 \end{remark}
 
 \section{Overflow minimization}
@@ -1324,7 +1332,7 @@ It also satisfies
 \qquad
 0\le \frac{R_e}{K T}\le \frac{1}{K}.
 \]
-Thus any exactly matched requested target must satisfy \(\mu_e\le 1/K\), a necessary bound that is not generally sufficient for hard Top-\(K\) attainability.
+Thus any exactly matched requested target must satisfy \(\mu_e\le 1/K\) and, on a finite batch, \(K T\mu_e\in\mathbb{N}_0\). These necessary conditions are not generally sufficient for hard Top-\(K\) attainability.
 Admitted load satisfies
 \[
 \sum_e A_e \le K T,
