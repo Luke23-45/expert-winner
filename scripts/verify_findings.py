@@ -273,11 +273,19 @@ def check_sweep_group(runs, eta):
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--runs-dir", default="results/runs")
+    ap.add_argument("--runs-dir", default=None,
+                    help="run bundle directory; defaults to the suite's "
+                         "published runs dir")
     ap.add_argument("--suite", choices=("v1", "v2", "v3"), default="v1",
                     help="v1: protocol 0.1.0 findings; v2: protocol 0.2.0 hardened checks; "
                          "v3: protocol 0.3.0 utmost-version checks")
     args = ap.parse_args()
+    if args.runs_dir is None:
+        args.runs_dir = {
+            "v1": "docs/control_experiment_results/runs",
+            "v2": "docs/control_experiment_results/v2_runs",
+            "v3": "docs/control_experiment_results/v3_runs",
+        }[args.suite]
     if args.suite == "v2":
         return main_v2(Path(args.runs_dir))
     if args.suite == "v3":
