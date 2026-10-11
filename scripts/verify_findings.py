@@ -835,22 +835,91 @@ def main_v3(runs_dir: Path) -> int:
     for e in extra[:12]:
         print(f"    extra: {e}")
 
-    # ---- V3-PAIR: paired affinity batches -------------------------------
-    print("# V3-PAIR paired affinity batches")
+    # ---- V3-PAIR: paired affinity batches + declared comparison coverage --
+    print("# V3-PAIR paired affinity batches and declared comparisons")
+    # (scenario, capacity_regime, seed) -> expected controller set for the
+    # declared comparison in that group. Every group must be declared: a
+    # lone controller in an undeclared group can no longer pass silently,
+    # and a group missing a declared controller fails loudly.
+    T1_CTRLS = frozenset(("requested", "admitted", "admitted_centered",
+                          "admitted_antiwindup", "capacity_relative",
+                          "bias_integral"))
+    T5_CTRLS = frozenset(("requested", "bias_integral"))
+    expected_pairing = {}
+    for regime in ("hetero_balanced", "hetero_shortage"):
+        for seed in (17, 23, 42):
+            expected_pairing[("nonuniform_target", regime, seed)] = T1_CTRLS
+    for sc, regime in (("saturation_windup", "windup_tight"),
+                       ("adversarial_init", "shortage"),
+                       ("adversarial_batches", "exact_total"),
+                       ("specialization_probe", "shortage"),
+                       ("small_batch", "small_shortage")):
+        for seed in (42, 99):
+            expected_pairing[(sc, regime, seed)] = T5_CTRLS
+        for seed in (17, 23):
+            # T2 probe: singleton by design; paired against the v2 runs of
+            # the same scenario+seed via the affinity cross-check below.
+            expected_pairing[(sc, regime, seed)] = frozenset(
+                ("admitted_antiwindup",))
+    for seed in (17, 23, 42):
+        # T3 flip-invariant eta sweep (paired across etas) + T4 prospective.
+        expected_pairing[("shortage", "shortage", seed)] = frozenset(
+            ("requested",))
+    # T3 freeze retest: genuine requested-vs-admitted pair on a fresh seed.
+    expected_pairing[("shortage", "shortage", 99)] = frozenset(
+        ("requested", "admitted"))
+    # T3 leaky retest shares its batch with the T5 seed-42 pair: declared as
+    # the full group composition, not a lone singleton.
+    expected_pairing[("adversarial_init", "shortage", 42)] = frozenset(
+        ("requested", "bias_integral", "requested_leaky"))
+
+    def _affinity_hash(a):
+        h = a.get("content_hash_sha256", a.get("content_hash_sha256_base"))
+        if h is None:
+            h = "+".join(a.get("content_hash_sha256_bursts", []))
+        return h
+
+    # v2 affinity hashes, for the T2 cross-suite pairing check (lightweight:
+    # only summary + affinity reference are read, not the metrics).
+    v2_hashes = {}
+    v2_dir = runs_dir.resolve().parent / "v2_runs"
+    if v2_dir.is_dir():
+        for v2_run_dir in sorted(v2_dir.iterdir()):
+            aff_p = v2_run_dir / "affinity_reference.json"
+            sum_p = v2_run_dir / "summary.json"
+            if not (aff_p.exists() and sum_p.exists()):
+                continue
+            va = json.loads(aff_p.read_text())
+            vs = json.loads(sum_p.read_text())
+            v2_hashes[(vs["scenario"], vs["seed"])] = _affinity_hash(va)
+
     groups = {}
     for r in runs:
         s = r["summary"]
-        groups.setdefault((s["scenario"], s["seed"]), []).append(r)
-    for (sc, sd), grp in sorted(groups.items()):
-        hashes = set()
-        for r in grp:
-            a = r["affinity"]
-            h = a.get("content_hash_sha256", a.get("content_hash_sha256_base"))
-            if h is None:
-                h = "+".join(a.get("content_hash_sha256_bursts", []))
-            hashes.add(h)
-        check(f"paired batch {sc} seed={sd}", len(hashes) == 1,
-              f"{len(grp)} controllers, {len(hashes)} distinct hashes")
+        groups.setdefault(
+            (s["scenario"], s["capacity_regime"], s["seed"]), []).append(r)
+    for key in sorted(set(groups) | set(expected_pairing)):
+        sc, regime, sd = key
+        grp = groups.get(key, [])
+        exp = expected_pairing.get(key)
+        tag = f"{sc}/{regime} seed={sd}"
+        if exp is None:
+            ctrls = sorted({r["summary"]["controller"] for r in grp})
+            check(f"V3-PAIR {tag} declared", False,
+                  f"unexpected group, controllers={ctrls}")
+            continue
+        ctrls = {r["summary"]["controller"] for r in grp}
+        check(f"V3-PAIR {tag} declared comparison", ctrls == set(exp),
+              f"expected={sorted(exp)} found={sorted(ctrls)}")
+        hashes = {_affinity_hash(r["affinity"]) for r in grp}
+        check(f"V3-PAIR {tag} single affinity hash", len(hashes) == 1,
+              f"{len(grp)} runs, {len(hashes)} distinct hashes")
+        if exp == frozenset(("admitted_antiwindup",)):
+            v2h = v2_hashes.get((sc, sd))
+            check(f"V3-PAIR {tag} paired against v2 batch",
+                  v2h is not None and next(iter(hashes)) == v2h,
+                  "v3 hash matches v2 batch" if v2h else
+                  "no v2 run for this scenario+seed")
 
     # ---- V3-DUP: duplicate run-configuration detection (fail loudly) -----
     print("# V3-DUP duplicate run-configuration detection")

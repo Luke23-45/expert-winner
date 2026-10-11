@@ -78,7 +78,8 @@ class CapacityRelativeFeedback:
 class AdmittedAntiwindupFeedback:
     """(AW) Admitted feedback with conditional integration (anti-windup).
 
-    Textbook anti-windup fix for the censored-signal pathology diagnosed in
+    Conditional-integration-inspired anti-windup fix for the censored-signal
+    pathology diagnosed in
     the v2 experiments: integrate the admitted signal only on coordinates
     where it carries information, and freeze the integrator on saturated
     (censored) coordinates.
@@ -102,8 +103,9 @@ class AdmittedAntiwindupFeedback:
     * Global saturation (S = all experts): the admitted signal is 100%
       censored (constant with respect to demand), so epsilon = 0: a full
       integrator freeze. Under heterogeneous capacities this differs from
-      (A)/(A_0), which would integrate the phantom gradient P_0(C/(K*T))
-      built from pure capacity heterogeneity while blind to demand.
+      (A)/(A_0), which would integrate the phantom gradient P_0(C/(K*T) - mu)
+      built from capacity heterogeneity and the target while blind to
+      current demand.
     * Partial saturation: saturated coordinates are frozen relative to the
       gauge (their P_0 component is exactly 0) while unsaturated
       coordinates integrate their deviation from the unsaturated mean.

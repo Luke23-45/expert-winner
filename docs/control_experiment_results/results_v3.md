@@ -16,6 +16,19 @@ check V3-IMM confirms byte-identity via git); all v3 runs live under
 scenario/controller/seed combination ran on the identical affinity batch
 (SHA-256 content hashes match across controllers within each scenario and
 seed; verifier V3-PAIR), so all controller comparisons are paired.
+Within v3, every declared comparison group shares one identical affinity
+batch: verifier V3-PAIR enforces the exact expected controller set for
+each declared (scenario, capacity-regime, seed) group -- T1's 6-controller
+matrix, T5's requested-vs-bias_integral pairs, the T3 freeze-retest pair --
+and fails loudly on any undeclared group, so no comparison is vacuously
+"paired". Declared singleton groups (T2 probe runs, T4 prospective runs,
+T3 eta sweeps) are asserted as exactly those singletons; the T3 leaky
+retest shares its batch with the T5 seed-42 pair and is declared as that
+full group.
+The T2 antiwindup runs additionally share their affinity batch with the
+v2 runs of the same scenario and seed (cross-suite hash check in V3-PAIR),
+so the antiwindup-vs-v2 comparisons are paired too; T3 eta sweeps share
+the batch across etas.
 
 Reproduce with `bash scripts/run_v3_matrix.sh` (from repo root, `.venv`
 active). Verify with `scripts/verify_findings.py --suite v3 --runs-dir
@@ -75,11 +88,12 @@ capacity, the admitted signal is 100% censored -- and the two
 admitted-direction controllers diverge exactly as the anti-windup design
 predicts:
 
-- `admitted` integrates the phantom gradient P_0(C/(K*T)): pressure moves
-  on 799/799 consecutive saturated step pairs, building range 1.484 over
-  800 steps while routing stays frozen (viol constant 0.0576). The state
-  is pure windup: 1.48 units of pressure built from a signal containing
-  zero demand information.
+- `admitted` integrates the phantom gradient P_0(C/(K*T) - mu): pressure
+  moves on 799/799 consecutive saturated step pairs, building range 1.484
+  over 800 steps while routing stays frozen (viol constant 0.0576). The
+  state is pure windup: 1.48 units of pressure built from a signal
+  containing zero *current-demand* information -- it is independent of R
+  while saturation persists, though it still encodes the target mu.
 - `admitted_antiwindup` is exactly frozen: feedback `[0]*8` on all 800
   saturated steps, zero pressure movement (max step delta 0.0),
   bit-identical freeze.
@@ -129,7 +143,8 @@ sense but not capacity-feasible (sum of relu(target - C) = 160 > 122).
 ## 3. T2: the anti-windup controller -- honest verdict
 
 **Design.** `admitted_antiwindup` (new, backward-compatible; `src/
-moe_control/controllers/base.py`): textbook conditional integration on
+moe_control/controllers/base.py`): a conditional-integration-inspired rule
+on
 the admitted signal. Per-coordinate saturation is R_e >= C_e; saturated
 coordinates are frozen at the unsaturated mean before the zero-sum
 projection (their relative feedback is exactly 0); unsaturated
@@ -137,7 +152,7 @@ coordinates integrate A_e/(K*T) - mu_e; global saturation gives epsilon
 = 0 (full freeze). Reduction properties proved by unit test
 (`scripts/check_antiwindup_unit.py`, all pass): unsaturated ->
 gauge update bit-identical to (A) admitted; global saturation ->
-epsilon = 0 while (A)/(A_0) integrate the phantom P_0(C/(K*T)).
+epsilon = 0 while (A)/(A_0) integrate the phantom P_0(C/(K*T) - mu).
 
 **Verdict: it does not beat requested / admitted / bias_integral on any
 rebalancing metric.** It never beats requested on final violation in any
@@ -158,7 +173,8 @@ of the 10 scenario-seed pairs (verifier V3-T2). Head-to-head:
   coordinates carry no differential signal, conditional integration is a
   full freeze.
 
-The textbook fix prevents miscalibration but cannot recover the
+The conditional-integration-inspired fix prevents miscalibration but
+cannot recover the
 information censoring destroys -- it trades under-correction for
 no-correction. The admitted controller's partial successes exploit
 *ordinal* information in the censored signal (saturated = at least as
@@ -266,8 +282,8 @@ on any collision: 79 unique configs, zero duplicates.
 1. **Synthetic only.** All closed-loop results use synthetic affinities,
    E=8/K=2, CPU. Nothing here implies the pressure controller trains a
    better model; the SimBal caution stands.
-2. **The anti-windup verdict is negative on rebalancing.** Conditional
-   integration is the textbook fix faithfully implemented; the
+2. **The anti-windup verdict is negative on rebalancing.** The rule is
+   conditional-integration-inspired, faithfully implemented; the
    experiment shows its limits, not its triumph. Do not cite it as an
    improvement over requested/admitted on balance metrics.
 3. **(A_0) divergence is regime-specific.** It holds for heterogeneous
