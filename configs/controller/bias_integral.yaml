@@ -1,0 +1,14 @@
+# @package controller
+# DeepSeek-style aux-loss-free bias controller: sign-based per-expert bias
+# added to scores for Top-K SELECTION only (score_sign=+1). Pure integrator:
+# eta=1, update_gain=1, delta=0, projection=identity, so the state update is
+# exactly b <- b + bias_gamma * sign(over/under-loaded from ADMITTED counts).
+# Default bias_gamma=0.001 matches DeepSeek-V3.
+name: bias_integral
+step_size: 1.0
+pressure_decay: 0.0
+score_sign: 1.0
+projection: identity
+score_gain_override: 1.0
+update_gain_override: 1.0
+bias_gamma: 0.001

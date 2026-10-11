@@ -1,0 +1,12 @@
+# @package scenario
+# Adversarial initialization: expert 0 dominates every token's affinity
+# (rich-get-richer start; R_0 = T at step 0). Run with capacity=shortage.
+name: adversarial_init
+kind: adversarial_init
+seed: 17
+group_sizes: [300, 270, 240, 214]
+dominant_expert: 0
+dominant_offset: 3.0
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: unconstrained

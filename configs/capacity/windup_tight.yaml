@@ -1,0 +1,7 @@
+# @package capacity
+# Tight capacity: uniform C = 256 = K*T/E (c = 1.0). No aggregate shortage;
+# saturation is purely distributional. Pairs with scenario=saturation_windup.
+name: windup_tight
+kind: uniform
+value: 256
+policy: canonical

@@ -1,0 +1,11 @@
+# @package scenario
+# Small-batch stress: T=64 tokens per step (group_sizes sum to 64).
+# MUST be run with problem.tokens=64 and capacity=small_shortage.
+# Load estimates are noisy at this batch size.
+name: small_batch
+kind: synthetic
+seed: 17
+group_sizes: [19, 17, 15, 13]
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: unconstrained

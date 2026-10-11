@@ -1,0 +1,31 @@
+{
+  "capacity_regime": "small_shortage",
+  "controller": "requested_no_projection",
+  "final_all_experts_saturated": true,
+  "final_requested_cv": 0.0625,
+  "final_requested_max_violation": 0.0078125,
+  "final_total_overflow": 32,
+  "fraction_steps_saturated": 1.0,
+  "initial_condition": {
+    "declared": "unconstrained",
+    "detail": "no requirement declared; recorded only",
+    "realized_requested": [
+      19,
+      19,
+      17,
+      17,
+      15,
+      15,
+      13,
+      13
+    ],
+    "verified": true
+  },
+  "projection": "identity",
+  "run_id": "20261011-082233-saturation_signal_test-small_batch-requested_no_projection-fc657ef3",
+  "scenario": "small_batch",
+  "score_sign": -1.0,
+  "seed": 17,
+  "steps": 800,
+  "update_gain": 1.0
+}

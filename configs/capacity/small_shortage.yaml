@@ -1,0 +1,8 @@
+# @package capacity
+# Uniform C = 12 for the small-batch scenario (T=64): K*T = 128,
+# sum(C) = 96 -> aggregate shortage of 32 slots (c = 0.75).
+# MUST be run with problem.tokens=64 and scenario=small_batch.
+name: small_shortage
+kind: uniform
+value: 12
+policy: canonical

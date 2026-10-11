@@ -1,0 +1,31 @@
+{
+  "capacity_regime": "windup_tight",
+  "controller": "bias_integral",
+  "final_all_experts_saturated": false,
+  "final_requested_cv": 0.005524271728019903,
+  "final_requested_max_violation": 0.0009765625,
+  "final_total_overflow": 5,
+  "fraction_steps_saturated": 0.0,
+  "initial_condition": {
+    "declared": "unconstrained",
+    "detail": "no requirement declared; recorded only",
+    "realized_requested": [
+      300,
+      300,
+      270,
+      270,
+      240,
+      240,
+      214,
+      214
+    ],
+    "verified": true
+  },
+  "projection": "identity",
+  "run_id": "20261011-082156-saturation_signal_test-saturation_windup-bias_integral-ed2c5961",
+  "scenario": "saturation_windup",
+  "score_sign": 1.0,
+  "seed": 17,
+  "steps": 1200,
+  "update_gain": 1.0
+}

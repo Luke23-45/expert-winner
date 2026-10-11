@@ -37,7 +37,7 @@ class ProblemConfig:
 @dataclass
 class ScenarioConfig:
     name: str = "shortage"
-    kind: str = "synthetic"   # "synthetic" | "demand_shift"
+    kind: str = "synthetic"   # "synthetic" | "demand_shift" | hardened kinds below
     seed: int = 17
     # Synthetic affinity construction: token group g (of size group_sizes[g])
     # strongly prefers expert pair (2g, 2g+1). Requires E even and
@@ -48,6 +48,20 @@ class ScenarioConfig:
     # Demand shift: from this step onward (0-based) use shift_group_sizes.
     shift_step: Optional[int] = None
     shift_group_sizes: Optional[List[int]] = None
+    # saturation_windup: demand spike on [spike_step, spike_end), then release
+    # to the base pattern. spike_group_sizes uses the same pair convention.
+    spike_step: Optional[int] = None
+    spike_end: Optional[int] = None
+    spike_group_sizes: Optional[List[int]] = None
+    # adversarial_init: dominant_offset added to dominant_expert for all tokens.
+    dominant_expert: int = 0
+    dominant_offset: float = 3.0
+    # adversarial_batches: bursty preference shifts every burst_period steps.
+    # group_sizes is accepted for config uniformity but ignored by this kind.
+    burst_period: int = 100
+    n_bursts: int = 12
+    preference_gap: float = 0.15
+    burst_noise_scale: float = 0.01
     # Declared initial condition, verified against realized counts at step 0:
     # "all_saturated" (every R_e >= C_e), "balanced" (R_e == K*T/E for all e),
     # "unconstrained" (record only, no requirement).
@@ -65,9 +79,25 @@ class CapacityConfig:
 
 @dataclass
 class ControllerConfig:
-    name: str = "requested"   # requested | admitted | admitted_centered | capacity_relative
+    name: str = "requested"   # requested | admitted | admitted_centered |
+                              # capacity_relative | bias_integral |
+                              # requested_leaky | requested_no_projection
     step_size: float = 0.05   # eta
     pressure_decay: float = 0.0  # delta in [0, 1)
+    # Score modulation: -1.0 subtracts the state from scores (pressure);
+    # +1.0 adds it (bias_integral).
+    score_sign: float = -1.0
+    # State normalization in the update: "gauge" (canonical) or "identity"
+    # (no-projection ablation; isolates the gauge projection's contribution).
+    projection: str = "gauge"
+    # Optional overrides of the problem score gain, used for the state update
+    # scale (update_gain) and score modulation. None means "use
+    # problem.score_gain". The bias_integral controller sets both to 1.0 so
+    # the update is exactly b <- b + bias_gamma * sign.
+    score_gain_override: Optional[float] = None
+    update_gain_override: Optional[float] = None
+    # bias_integral only: sign-step magnitude (DeepSeek-V3 uses 0.001).
+    bias_gamma: float = 0.001
 
 
 @dataclass
@@ -203,11 +233,61 @@ def validate_config(cfg: RootConfig) -> List[str]:
         raise ConfigValidationError(
             f"Require 0 <= pressure_decay (delta) < 1, got {ctl.pressure_decay}."
         )
+    if ctl.score_sign not in (-1.0, 1.0):
+        raise ConfigValidationError(
+            f"Require controller.score_sign in {{-1.0, 1.0}}, got {ctl.score_sign}."
+        )
+    if ctl.projection not in ("gauge", "identity"):
+        raise ConfigValidationError(
+            f"Unknown controller.projection {ctl.projection!r}; "
+            "expected 'gauge' or 'identity'."
+        )
+    for field_name, value in (
+        ("score_gain_override", ctl.score_gain_override),
+        ("update_gain_override", ctl.update_gain_override),
+    ):
+        if value is not None and value <= 0:
+            raise ConfigValidationError(
+                f"Require controller.{field_name} > 0, got {value}."
+            )
+    if ctl.bias_gamma <= 0:
+        raise ConfigValidationError(
+            f"Require controller.bias_gamma > 0, got {ctl.bias_gamma}."
+        )
+    if ctl.name not in (
+        "requested", "admitted", "admitted_centered", "capacity_relative",
+        "bias_integral", "requested_leaky", "requested_no_projection",
+    ):
+        raise ConfigValidationError(
+            f"Unknown controller.name {ctl.name!r}."
+        )
+    # Ablation configs must actually ablate: requested_leaky needs a leak,
+    # requested_no_projection needs the identity projection, bias_integral
+    # needs the additive score sign and identity projection.
+    if ctl.name == "requested_leaky" and ctl.pressure_decay <= 0:
+        raise ConfigValidationError(
+            "requested_leaky requires controller.pressure_decay > 0."
+        )
+    if ctl.name == "requested_no_projection" and ctl.projection != "identity":
+        raise ConfigValidationError(
+            "requested_no_projection requires controller.projection='identity'."
+        )
+    if ctl.name == "bias_integral" and (
+        ctl.score_sign != 1.0 or ctl.projection != "identity"
+    ):
+        raise ConfigValidationError(
+            "bias_integral requires score_sign=1.0 and projection='identity'."
+        )
 
     # Scenario tensor dimensions.
-    if s.kind not in ("synthetic", "demand_shift"):
+    hardened_kinds = (
+        "saturation_windup", "adversarial_init", "adversarial_batches",
+        "specialization_probe",
+    )
+    if s.kind not in ("synthetic", "demand_shift") + hardened_kinds:
         raise ConfigValidationError(
-            f"Unknown scenario.kind {s.kind!r}; expected 'synthetic' or 'demand_shift'."
+            f"Unknown scenario.kind {s.kind!r}; expected 'synthetic', "
+            f"'demand_shift', or one of {hardened_kinds}."
         )
     if p.experts % 2 != 0:
         raise ConfigValidationError(
@@ -215,16 +295,18 @@ def validate_config(cfg: RootConfig) -> List[str]:
             f"(pairs (2g, 2g+1)); got E={p.experts}."
         )
     n_groups = p.experts // 2
-    if len(s.group_sizes) != n_groups:
-        raise ConfigValidationError(
-            f"len(group_sizes)={len(s.group_sizes)} does not match E/2={n_groups}."
-        )
-    if sum(s.group_sizes) != p.tokens:
-        raise ConfigValidationError(
-            f"sum(group_sizes)={sum(s.group_sizes)} does not match T={p.tokens}."
-        )
-    if any(g < 0 for g in s.group_sizes):
-        raise ConfigValidationError("group_sizes must be nonnegative.")
+    uses_group_sizes = s.kind != "adversarial_batches"
+    if uses_group_sizes:
+        if len(s.group_sizes) != n_groups:
+            raise ConfigValidationError(
+                f"len(group_sizes)={len(s.group_sizes)} does not match E/2={n_groups}."
+            )
+        if sum(s.group_sizes) != p.tokens:
+            raise ConfigValidationError(
+                f"sum(group_sizes)={sum(s.group_sizes)} does not match T={p.tokens}."
+            )
+        if any(g < 0 for g in s.group_sizes):
+            raise ConfigValidationError("group_sizes must be nonnegative.")
     if s.kind == "demand_shift":
         if s.shift_step is None or s.shift_group_sizes is None:
             raise ConfigValidationError(
@@ -241,6 +323,54 @@ def validate_config(cfg: RootConfig) -> List[str]:
         if sum(s.shift_group_sizes) != p.tokens:
             raise ConfigValidationError(
                 "sum(shift_group_sizes) does not match T."
+            )
+    if s.kind == "saturation_windup":
+        if s.spike_step is None or s.spike_end is None or s.spike_group_sizes is None:
+            raise ConfigValidationError(
+                "saturation_windup requires spike_step, spike_end, and "
+                "spike_group_sizes."
+            )
+        if not (0 < s.spike_step < s.spike_end < cfg.experiment.steps):
+            raise ConfigValidationError(
+                f"Require 0 < spike_step={s.spike_step} < spike_end={s.spike_end} "
+                f"< steps={cfg.experiment.steps}."
+            )
+        if len(s.spike_group_sizes) != n_groups:
+            raise ConfigValidationError(
+                "len(spike_group_sizes) does not match E/2."
+            )
+        if sum(s.spike_group_sizes) != p.tokens:
+            raise ConfigValidationError(
+                "sum(spike_group_sizes) does not match T."
+            )
+        if any(g < 0 for g in s.spike_group_sizes):
+            raise ConfigValidationError("spike_group_sizes must be nonnegative.")
+    if s.kind == "adversarial_init":
+        if not (0 <= s.dominant_expert < p.experts):
+            raise ConfigValidationError(
+                f"dominant_expert={s.dominant_expert} out of range for "
+                f"E={p.experts}."
+            )
+        if s.dominant_offset <= 0:
+            raise ConfigValidationError(
+                f"Require dominant_offset > 0, got {s.dominant_offset}."
+            )
+    if s.kind == "adversarial_batches":
+        if s.burst_period <= 0:
+            raise ConfigValidationError(
+                f"Require burst_period > 0, got {s.burst_period}."
+            )
+        if s.n_bursts <= 0:
+            raise ConfigValidationError(
+                f"Require n_bursts > 0, got {s.n_bursts}."
+            )
+        if s.preference_gap <= 0:
+            raise ConfigValidationError(
+                f"Require preference_gap > 0, got {s.preference_gap}."
+            )
+        if s.burst_noise_scale < 0:
+            raise ConfigValidationError(
+                f"Require burst_noise_scale >= 0, got {s.burst_noise_scale}."
             )
     if s.initial_condition not in ("all_saturated", "balanced", "unconstrained"):
         raise ConfigValidationError(

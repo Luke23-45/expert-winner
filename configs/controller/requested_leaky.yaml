@@ -1,0 +1,6 @@
+# @package controller
+# Ablation: requested feedback with leaky pressure (delta > 0).
+# Isolates what the leak contributes vs. the pure integrator (requested).
+name: requested_leaky
+step_size: 0.05
+pressure_decay: 0.05

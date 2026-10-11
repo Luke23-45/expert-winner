@@ -13,12 +13,30 @@ import torch
 from torch import Tensor
 
 
-def pressured_scores(affinity: Tensor, pressure: Tensor, gamma: float) -> Tensor:
-    """Compute pressured scores s_{t,e} = a_{t,e} - gamma * q_e.
+def pressured_scores(
+    affinity: Tensor, pressure: Tensor, gamma: float, sign: float = -1.0
+) -> Tensor:
+    """Compute modulated scores s_{t,e} = a_{t,e} + sign * gamma * q_e.
 
     ``affinity`` is (T, E); ``pressure`` is (E,) and broadcasts over tokens.
+    The default ``sign=-1.0`` recovers the pressure form s = a - gamma * q;
+    ``sign=+1.0`` adds the state (DeepSeek-style selection bias).
     """
-    return affinity - gamma * pressure
+    if sign not in (-1.0, 1.0):
+        raise ValueError(f"sign must be -1.0 or 1.0, got {sign}.")
+    return affinity + sign * gamma * pressure
+
+
+def deterministic_topk_order(scores: Tensor) -> Tensor:
+    """Stable descending expert order per token (T, E) int64 indices.
+
+    Among equal scores the lower expert index comes first (stable sort
+    preserves the original ascending index order within ties). This is the
+    documented tie rule; it must not depend on ``torch.topk`` ordering.
+    """
+    if scores.dim() != 2:
+        raise ValueError(f"scores must be (T, E); got shape {tuple(scores.shape)}.")
+    return torch.argsort(scores, dim=1, descending=True, stable=True)
 
 
 def deterministic_topk_mask(scores: Tensor, k: int) -> Tensor:
@@ -28,14 +46,10 @@ def deterministic_topk_mask(scores: Tensor, k: int) -> Tensor:
     index is selected first (stable sort preserves the original ascending
     index order within ties).
     """
-    if scores.dim() != 2:
-        raise ValueError(f"scores must be (T, E); got shape {tuple(scores.shape)}.")
     e = scores.shape[1]
     if not (1 <= k <= e):
         raise ValueError(f"Require 1 <= K <= E, got K={k}, E={e}.")
-    # Stable descending sort: equal scores keep ascending index order.
-    order = torch.argsort(scores, dim=1, descending=True, stable=True)
-    chosen = order[:, :k]
+    chosen = deterministic_topk_order(scores)[:, :k]
     mask = torch.zeros_like(scores, dtype=torch.bool)
     mask.scatter_(1, chosen, True)
     return mask

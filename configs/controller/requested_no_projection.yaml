@@ -1,0 +1,10 @@
+# @package controller
+# Ablation: requested feedback with the gauge projection replaced by the
+# identity. Isolates what the projection contributes. Prediction from the
+# formal document: routing depends only on the gauge class, so requested
+# counts must be bit-identical to (requested); only the recorded state
+# values differ by a common-mode drift.
+name: requested_no_projection
+step_size: 0.05
+pressure_decay: 0.0
+projection: identity

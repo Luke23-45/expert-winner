@@ -1,0 +1,31 @@
+{
+  "capacity_regime": "shortage",
+  "controller": "admitted",
+  "final_all_experts_saturated": false,
+  "final_requested_cv": 0.6186166947231818,
+  "final_requested_max_violation": 0.1982421875,
+  "final_total_overflow": 578,
+  "fraction_steps_saturated": 0.0,
+  "initial_condition": {
+    "declared": "unconstrained",
+    "detail": "no requirement declared; recorded only",
+    "realized_requested": [
+      1024,
+      300,
+      213,
+      57,
+      188,
+      52,
+      162,
+      52
+    ],
+    "verified": true
+  },
+  "projection": "gauge",
+  "run_id": "20261011-082247-saturation_signal_test-adversarial_init-admitted-8f4e9d95",
+  "scenario": "adversarial_init",
+  "score_sign": -1.0,
+  "seed": 23,
+  "steps": 800,
+  "update_gain": 1.0
+}

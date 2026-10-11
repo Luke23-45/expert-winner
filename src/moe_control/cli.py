@@ -88,8 +88,20 @@ def main(cfg: RootConfig) -> None:
         affinity_dtype=scen.affinity_dtype,
         shift_step=scen.shift_step,
         shift_group_sizes=list(scen.shift_group_sizes) if scen.shift_group_sizes else None,
+        spike_step=scen.spike_step,
+        spike_end=scen.spike_end,
+        spike_group_sizes=list(scen.spike_group_sizes) if scen.spike_group_sizes else None,
+        dominant_expert=scen.dominant_expert,
+        dominant_offset=scen.dominant_offset,
+        burst_period=scen.burst_period,
+        n_bursts=scen.n_bursts,
+        preference_gap=scen.preference_gap,
+        burst_noise_scale=scen.burst_noise_scale,
     )
-    controller = build_controller(ctl.name)
+    controller_kwargs = {}
+    if ctl.name == "bias_integral":
+        controller_kwargs["bias_gamma"] = ctl.bias_gamma
+    controller = build_controller(ctl.name, **controller_kwargs)
 
     # The affinity batch is a pure function of the scenario seed and
     # parameters, so runs that share a scenario seed compare controllers on
@@ -108,9 +120,17 @@ def main(cfg: RootConfig) -> None:
         experts=prob.experts,
         top_k=prob.top_k,
         tokens=prob.tokens,
-        gamma=prob.score_gain,
+        gamma=(ctl.score_gain_override if ctl.score_gain_override is not None
+               else prob.score_gain),
+        score_sign=ctl.score_sign,
         eta=ctl.step_size,
         delta=ctl.pressure_decay,
+        update_gain=(ctl.update_gain_override
+                     if ctl.update_gain_override is not None
+                     else (ctl.score_gain_override
+                           if ctl.score_gain_override is not None
+                           else prob.score_gain)),
+        projection=ctl.projection,
         target=target,
         capacity=capacity_vec,
         initial_condition=scen.initial_condition,
@@ -126,6 +146,20 @@ def main(cfg: RootConfig) -> None:
     capacity_uniform = cap.kind == "uniform"
     target_uniform = prob.target == "uniform"
     equivalence = gauge_equivalence_classes(capacity_uniform, target_uniform)
+    controller_notes = []
+    if ctl.name == "bias_integral":
+        controller_notes.append(
+            "bias_integral observes ADMITTED (post-capacity assigned) load, "
+            "matching the deployed aux-loss-free system where dropped tokens "
+            "are unobserved; bias_gamma=%.6g, sign update outside autograd, "
+            "selection-only modulation (score_sign=+1)." % ctl.bias_gamma
+        )
+    if ctl.name in ("requested_leaky", "requested_no_projection"):
+        controller_notes.append(
+            "Ablation variant: identical requested feedback vector to "
+            f"(requested); dynamics differ (pressure_decay={ctl.pressure_decay}, "
+            f"projection={ctl.projection})."
+        )
     manifest = artifacts.build_manifest(
         repo_root=REPO_ROOT,
         seed=exp.seed,
@@ -137,6 +171,8 @@ def main(cfg: RootConfig) -> None:
         equivalence=equivalence,
         config_warnings=warnings,
     )
+    if controller_notes:
+        manifest["controller_notes"] = controller_notes
     resolved = OmegaConf.create(OmegaConf.to_container(cfg, resolve=True))
     artifacts.write_run(
         run_dir=run_dir,

@@ -1,0 +1,25 @@
+{
+  "affinity_dtype": "float32",
+  "burst_noise_scale": 0.01,
+  "burst_period": 100,
+  "content_hash_sha256_bursts": [
+    "9b8b7156ac5e5e90296edeba5ee0f60478c7fc91b026634c5fc36de666eef7f7",
+    "615b4786dab177167260a41b4944af51311179b41c459d9a7a0ab3b0083cd80c",
+    "cd6df9cf8e05e964211153e34b345332062951ed3b25b5d2cc665ebd99670c77",
+    "906a2e86ffcb2645a698fbeb6464f3488e30d26d7e9feceae0cee111975f2994",
+    "504c54ec788be47990de724733b98473144be4c871b0464327fb36ab49300b08",
+    "bfbb63fd498e6613d10fcbaf390fda4ccadc4b0657cc34a0251c2b7d6c13fd4f",
+    "dcd3f7e4ca88e374571dee66c907187f377abf106b9706e76a229b81fb02379a",
+    "26530b25c54369bdbb5561f769d19f2c9756bd8f6d7f00814552f21cd55c2d36",
+    "ebd493c19771598306b42398706b10f0268919d375969621dc450c5ece2ad104",
+    "84aa6f469d624724faced8483ec84973603ee4129b53d9a4cd8cad7f0ad605f8",
+    "bcd14ff7e0e9b240555a61f6bb27445ac3fde1fa9ec296cf44b73b5bba220b1f",
+    "f13151bd8e15e70c6c64f26b06fb9986d7ac4fcacd70eab4b4c4d8f2cbe24d10"
+  ],
+  "experts": 8,
+  "kind": "adversarial_batches",
+  "n_bursts": 12,
+  "preference_gap": 0.15,
+  "seed": 23,
+  "tokens": 1024
+}

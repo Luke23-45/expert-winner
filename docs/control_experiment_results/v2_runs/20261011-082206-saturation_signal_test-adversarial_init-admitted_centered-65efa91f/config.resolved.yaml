@@ -1,0 +1,57 @@
+experiment:
+  name: saturation_signal_test
+  steps: 800
+  seed: 17
+  protocol_version: 0.2.0
+  output_root: docs/control_experiment_results/v2_runs
+problem:
+  experts: 8
+  top_k: 2
+  tokens: 1024
+  target: uniform
+  target_weights: null
+  score_gain: 1.0
+scenario:
+  name: adversarial_init
+  kind: adversarial_init
+  seed: 17
+  group_sizes:
+  - 300
+  - 270
+  - 240
+  - 214
+  noise_scale: 0.1
+  affinity_dtype: float32
+  shift_step: null
+  shift_group_sizes: null
+  spike_step: null
+  spike_end: null
+  spike_group_sizes: null
+  dominant_expert: 0
+  dominant_offset: 3.0
+  burst_period: 100
+  n_bursts: 12
+  preference_gap: 0.15
+  burst_noise_scale: 0.01
+  initial_condition: unconstrained
+capacity:
+  name: shortage
+  kind: uniform
+  value: 192
+  values: null
+  policy: canonical
+controller:
+  name: admitted_centered
+  step_size: 0.05
+  pressure_decay: 0.0
+  score_sign: -1.0
+  projection: gauge
+  score_gain_override: null
+  update_gain_override: null
+  bias_gamma: 0.001
+runtime:
+  device: cpu
+  deterministic: true
+  dtype: float32
+artifacts:
+  save_token_masks: false

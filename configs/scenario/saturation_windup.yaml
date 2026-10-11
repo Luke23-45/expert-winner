@@ -1,0 +1,15 @@
+# @package scenario
+# Saturation windup probe: base demand, then a demand spike on
+# [spike_step, spike_end) that saturates several experts, then release to
+# the base pattern. Run with capacity=windup_tight (C=256, c=1.0) and
+# experiment.steps=1200.
+name: saturation_windup
+kind: saturation_windup
+seed: 17
+group_sizes: [300, 270, 240, 214]
+spike_step: 400
+spike_end: 800
+spike_group_sizes: [600, 300, 80, 44]
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: unconstrained

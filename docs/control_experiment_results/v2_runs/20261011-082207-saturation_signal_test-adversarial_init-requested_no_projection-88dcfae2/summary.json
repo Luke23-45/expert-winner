@@ -1,0 +1,31 @@
+{
+  "capacity_regime": "shortage",
+  "controller": "requested_no_projection",
+  "final_all_experts_saturated": true,
+  "final_requested_cv": 0.08626977666155382,
+  "final_requested_max_violation": 0.021484375,
+  "final_total_overflow": 512,
+  "fraction_steps_saturated": 0.91875,
+  "initial_condition": {
+    "declared": "unconstrained",
+    "detail": "no requirement declared; recorded only",
+    "realized_requested": [
+      1024,
+      300,
+      209,
+      61,
+      183,
+      57,
+      169,
+      45
+    ],
+    "verified": true
+  },
+  "projection": "identity",
+  "run_id": "20261011-082207-saturation_signal_test-adversarial_init-requested_no_projection-88dcfae2",
+  "scenario": "adversarial_init",
+  "score_sign": -1.0,
+  "seed": 17,
+  "steps": 800,
+  "update_gain": 1.0
+}

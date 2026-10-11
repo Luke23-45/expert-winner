@@ -1,0 +1,15 @@
+# @package scenario
+# Adversarial batches: near-identical token affinities (collapsed variance)
+# with bursty preference shifts every burst_period steps. group_sizes is
+# ignored by this kind (config uniformity only). Run with
+# capacity=exact_total.
+name: adversarial_batches
+kind: adversarial_batches
+seed: 17
+group_sizes: [300, 270, 240, 214]
+burst_period: 100
+n_bursts: 12
+preference_gap: 0.15
+burst_noise_scale: 0.01
+affinity_dtype: float32
+initial_condition: unconstrained

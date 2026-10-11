@@ -1,0 +1,13 @@
+# @package scenario
+# Specialization probe: planted skill-block affinity with deliberately
+# unbalanced skill sizes. Rebalancing necessarily moves tokens off their
+# skill experts, so this measures the balance-vs-specialization Pareto
+# frontier via the per-step specialization_mi metric. Run with
+# capacity=shortage.
+name: specialization_probe
+kind: specialization_probe
+seed: 17
+group_sizes: [400, 300, 200, 124]
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: unconstrained
