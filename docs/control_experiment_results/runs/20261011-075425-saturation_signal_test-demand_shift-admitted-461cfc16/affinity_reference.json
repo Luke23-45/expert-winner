@@ -1,0 +1,27 @@
+{
+  "affinity_dtype": "float32",
+  "content_hash_sha256_after": "0d1cd161366c633ee5c7626cd087b2396882e66da28bd01f48b6bb9eb84064e9",
+  "content_hash_sha256_before": "645004f4f85c9d25f4fc59bd3e23141f970d8e35dd95670ac817caf70707f28c",
+  "experts": 8,
+  "favorite_offsets": [
+    2.0,
+    1.9
+  ],
+  "group_sizes": [
+    300,
+    270,
+    240,
+    214
+  ],
+  "kind": "demand_shift",
+  "noise_scale": 0.1,
+  "seed": 42,
+  "shift_group_sizes": [
+    214,
+    240,
+    270,
+    300
+  ],
+  "shift_step": 250,
+  "tokens": 1024
+}

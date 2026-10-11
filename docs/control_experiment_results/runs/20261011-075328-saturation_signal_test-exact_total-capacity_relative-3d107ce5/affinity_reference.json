@@ -1,0 +1,19 @@
+{
+  "affinity_dtype": "float32",
+  "content_hash_sha256": "97c32e1a50a9ba30cf383b7f666873c597dff24f8bff7658596d82ee854cc490",
+  "experts": 8,
+  "favorite_offsets": [
+    2.0,
+    1.9
+  ],
+  "group_sizes": [
+    256,
+    256,
+    256,
+    256
+  ],
+  "kind": "synthetic",
+  "noise_scale": 0.1,
+  "seed": 17,
+  "tokens": 1024
+}

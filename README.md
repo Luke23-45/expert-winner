@@ -76,9 +76,14 @@ Generated outputs live under `results/` and are git-ignored.
 
 ### Results
 
-The full 16-run experiment (4 scenarios x 4 controllers, 500 steps) is
+The full experiment (64 runs: 4 scenarios x 4 controllers x 3 seeds at 500
+steps, plus a shared step-size sweep in the shortage regime at 2000 steps) is
 documented in [`docs/control_experiment_results/results.md`](docs/control_experiment_results/results.md),
-regenerated from the run artifacts with `python scripts/summarize_runs.py`.
+with the published run artifacts committed alongside it in
+`docs/control_experiment_results/runs/`. Regenerate the tables and verify the
+headline findings from the artifacts with
+`python scripts/summarize_runs.py --runs-dir docs/control_experiment_results/runs`
+and `python scripts/verify_findings.py --runs-dir docs/control_experiment_results/runs`.
 
 ### Scientific notes
 

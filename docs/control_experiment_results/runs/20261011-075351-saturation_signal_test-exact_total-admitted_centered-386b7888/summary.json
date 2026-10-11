@@ -1,0 +1,29 @@
+{
+  "capacity_regime": "exact_total",
+  "controller": "admitted_centered",
+  "final_all_experts_saturated": true,
+  "final_requested_cv": 0.0,
+  "final_requested_max_violation": 0.0,
+  "final_total_overflow": 0,
+  "fraction_steps_saturated": 1.0,
+  "initial_condition": {
+    "declared": "balanced",
+    "detail": "R_e == K*T/E == 256 for all e",
+    "max_abs_deviation": 0,
+    "realized_requested": [
+      256,
+      256,
+      256,
+      256,
+      256,
+      256,
+      256,
+      256
+    ],
+    "verified": true
+  },
+  "run_id": "20261011-075351-saturation_signal_test-exact_total-admitted_centered-386b7888",
+  "scenario": "exact_total",
+  "seed": 23,
+  "steps": 500
+}
