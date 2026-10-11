@@ -961,9 +961,15 @@ def main_v3(runs_dir: Path) -> int:
             cases.append((f"v1 seed={sd} eta={eta}", cands[0], sd, eta))
     for sd in (23, 42):
         for eta in (0.05, 0.1, 0.2, 0.4):
-            r = find(runs, "shortage", "requested", sd, 1200)
-            if r is not None and abs((r["eta_parsed"] or -1) - eta) < 1e-12:
-                cases.append((f"v3 seed={sd} eta={eta}", r, sd, eta))
+            cands = [r for r in runs
+                     if r["summary"]["scenario"] == "shortage"
+                     and r["summary"]["controller"] == "requested"
+                     and r["summary"]["seed"] == sd
+                     and r["summary"]["steps"] == 1200
+                     and abs((r["eta_parsed"] or -1) - eta) < 1e-12
+                     and "flip_invariant_test" in r["run_id"]]
+            if cands:
+                cases.append((f"v3 seed={sd} eta={eta}", cands[0], sd, eta))
     for eta in (0.15, 0.3):
         cands = [r for r in runs
                  if r["summary"]["scenario"] == "shortage"
