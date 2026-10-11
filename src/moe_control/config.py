@@ -139,16 +139,34 @@ def resolve_target(problem: ProblemConfig):
     )
 
 
+def _node_get(node, key):
+    """Read ``key`` from a config node, whether it is a dataclass instance,
+    a plain dict, or an OmegaConf DictConfig.
+
+    Attribute access (``node.values``) is unsafe on DictConfig because keys
+    that collide with dict-method names (``values``, ``items``, ``keys``,
+    ``get``) resolve to the method instead of the stored value.
+    """
+    if isinstance(node, dict):
+        return node.get(key)
+    getter = getattr(node, "get", None)
+    if callable(getter):
+        # OmegaConf DictConfig (not a dict subclass): key-based lookup.
+        return getter(key)
+    return getattr(node, key)
+
+
 def resolve_capacity_vector(capacity: CapacityConfig, experts: int) -> List[int]:
     """Return the per-expert integer capacity vector of length E."""
     if capacity.kind == "uniform":
         return [int(capacity.value)] * experts
     if capacity.kind == "explicit":
-        if capacity.values is None:
+        values = _node_get(capacity, "values")
+        if values is None:
             raise ConfigValidationError(
                 "capacity.kind is 'explicit' but capacity.values is not set."
             )
-        return [int(v) for v in capacity.values]
+        return [int(v) for v in values]
     raise ConfigValidationError(
         f"Unknown capacity.kind {capacity.kind!r}; expected 'uniform' or 'explicit'."
     )

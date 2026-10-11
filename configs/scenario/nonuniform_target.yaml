@@ -1,0 +1,15 @@
+# @package scenario
+# Non-uniform-target experiment (v3 T1, reviewer's proposal): explicit
+# feasible integer-count target with heterogeneous capacities. The affinity
+# group structure matches v1 ([300, 270, 240, 214]) for comparability; the
+# declared initial condition is unconstrained because the explicit target
+# differs from the group skew. The target itself is set from the CLI
+# (problem.target=explicit problem.target_weights=[...]); see
+# scripts/run_v3_matrix.sh.
+name: nonuniform_target
+kind: synthetic
+seed: 17
+group_sizes: [300, 270, 240, 214]
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: unconstrained

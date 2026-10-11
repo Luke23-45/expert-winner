@@ -1,0 +1,7 @@
+# @package capacity
+# Heterogeneous capacities with aggregate shortage: sum(C) = 1536 < K*T,
+# i.e. aggregate c = 0.75 with per-expert skew. v3 T1 (reviewer's proposal).
+name: hetero_shortage
+kind: explicit
+values: [300, 270, 240, 210, 180, 150, 120, 66]
+policy: canonical
