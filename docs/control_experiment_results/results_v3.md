@@ -32,7 +32,7 @@ the batch across etas.
 
 Reproduce with `bash scripts/run_v3_matrix.sh` (from repo root, `.venv`
 active). Verify with `scripts/verify_findings.py --suite v3 --runs-dir
-docs/control_experiment_results/v3_runs` (164 checks, all pass; the v1
+docs/control_experiment_results/v3_runs` (213 checks, all pass; the v1
 and v2 suites are unaffected and still pass).
 
 ## 1. What was run
@@ -319,7 +319,7 @@ perplexity -- beyond this VM's scope.
 - This report: `docs/control_experiment_results/results_v3.md` (draft).
 - Notes: `docs/control_experiment_results/v3_notes/` (theorem + proof
   script, feasibility estimate + verdict, smoke test, T1/T2/T5 analyses).
-- Verification: `scripts/verify_findings.py --suite v3` (164 checks);
+- Verification: `scripts/verify_findings.py --suite v3` (213 checks);
   unit checks `scripts/check_antiwindup_unit.py`; matrix
   `scripts/run_v3_matrix.sh`.
 - New code: `src/moe_control/controllers/base.py`
