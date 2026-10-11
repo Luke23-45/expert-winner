@@ -1,0 +1,13 @@
+# @package scenario
+# Demand shift: affinity preferences change at shift_step while the pressure
+# state is preserved by the runner. Pre-shift preferences mirror the
+# shortage scenario; post-shift preferences reverse the skew.
+name: demand_shift
+kind: demand_shift
+seed: 17
+group_sizes: [300, 270, 240, 214]
+shift_step: 250
+shift_group_sizes: [214, 240, 270, 300]
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: all_saturated

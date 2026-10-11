@@ -1,0 +1,11 @@
+# @package scenario
+# Slack capacity: skewed requested load where some experts saturate and
+# others remain below capacity. K*T = 2048, sum(C) = 2304 -> surplus of 256.
+# No hard initial requirement; saturation is recorded per step.
+name: slack
+kind: synthetic
+seed: 17
+group_sizes: [340, 300, 220, 164]
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: unconstrained

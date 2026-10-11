@@ -1,0 +1,11 @@
+# @package scenario
+# Shortage/saturation: skewed requested load; every expert at or above
+# capacity at step 0 (verified against realized counts at runtime).
+# K*T = 2048, sum(C) = 1536 -> aggregate shortage of 512 slots.
+name: shortage
+kind: synthetic
+seed: 17
+group_sizes: [300, 270, 240, 214]
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: all_saturated

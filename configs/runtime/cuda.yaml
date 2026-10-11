@@ -1,0 +1,4 @@
+# @package runtime
+device: cuda
+deterministic: true
+dtype: float32

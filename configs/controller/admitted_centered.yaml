@@ -1,0 +1,5 @@
+# @package controller
+# (A_0) Admitted feedback with common mode removed: P_0(A / (K*T)).
+name: admitted_centered
+step_size: 0.05
+pressure_decay: 0.0

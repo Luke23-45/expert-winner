@@ -1,0 +1,6 @@
+# @package capacity
+# Uniform C = 192. K*T = 2048, sum(C) = 1536: aggregate shortage (c = 0.75).
+name: shortage
+kind: uniform
+value: 192
+policy: canonical

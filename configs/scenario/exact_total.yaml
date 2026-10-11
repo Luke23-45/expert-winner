@@ -1,0 +1,11 @@
+# @package scenario
+# Exact-total boundary: balanced requested load, R_e = K*T/E = 256 for all e.
+# K*T = 2048, sum(C) = 2048 -> no aggregate shortage; checks the c = 1
+# boundary result (global saturation then implies balanced requested load).
+name: exact_total
+kind: synthetic
+seed: 17
+group_sizes: [256, 256, 256, 256]
+noise_scale: 0.1
+affinity_dtype: float32
+initial_condition: balanced

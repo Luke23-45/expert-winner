@@ -1,0 +1,6 @@
+# @package capacity
+# Uniform C = 288. K*T = 2048, sum(C) = 2304: aggregate surplus (c = 1.125).
+name: slack
+kind: uniform
+value: 288
+policy: canonical

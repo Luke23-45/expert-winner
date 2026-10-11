@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "moe-control"
+version = "0.1.0"
+description = "Deterministic closed-loop routing control experiment: requested vs admitted load feedback under capacity saturation."
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "hydra-core>=1.3",
+    "pyarrow>=14",
+    "numpy",
+]
+
+[project.scripts]
+moe-control = "moe_control.cli:entry"
+
+[tool.setuptools.packages.find]
+where = ["src"]

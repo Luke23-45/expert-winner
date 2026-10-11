@@ -1,0 +1,6 @@
+# @package capacity
+# Uniform C = 256. K*T = 2048, sum(C) = 2048: exact total (c = 1).
+name: exact_total
+kind: uniform
+value: 256
+policy: canonical

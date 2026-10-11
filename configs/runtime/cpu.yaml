@@ -1,0 +1,4 @@
+# @package runtime
+device: cpu
+deterministic: true
+dtype: float32

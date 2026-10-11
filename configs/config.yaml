@@ -1,0 +1,26 @@
+# Base experiment composition. Override any group or value from the CLI, e.g.:
+#   python -m moe_control.cli scenario=slack capacity=slack controller=admitted
+#   python -m moe_control.cli controller=requested,admitted,admitted_centered,capacity_relative --multirun
+defaults:
+  # _self_ first: the primary config's own keys compose before the group
+  # files, so a selected group option always overwrites the schema default
+  # for its node instead of being clobbered by it.
+  - _self_
+  - scenario: shortage
+  - capacity: shortage
+  - controller: requested
+  - runtime: cpu
+
+experiment:
+  name: saturation_signal_test
+  steps: 500
+  seed: 17
+  protocol_version: "0.1.0"
+  output_root: results/runs
+
+problem:
+  experts: 8
+  top_k: 2
+  tokens: 1024
+  target: uniform
+  score_gain: 1.0
