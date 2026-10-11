@@ -1,0 +1,73 @@
+experiment:
+  name: nonuniform_target_test
+  steps: 800
+  seed: 23
+  protocol_version: 0.3.0
+  output_root: docs/control_experiment_results/v3_runs
+problem:
+  experts: 8
+  top_k: 2
+  tokens: 1024
+  target: explicit
+  target_weights:
+  - 0.1875
+  - 0.171875
+  - 0.15625
+  - 0.140625
+  - 0.125
+  - 0.109375
+  - 0.0625
+  - 0.046875
+  score_gain: 1.0
+scenario:
+  name: nonuniform_target
+  kind: synthetic
+  seed: 23
+  group_sizes:
+  - 300
+  - 270
+  - 240
+  - 214
+  noise_scale: 0.1
+  affinity_dtype: float32
+  shift_step: null
+  shift_group_sizes: null
+  spike_step: null
+  spike_end: null
+  spike_group_sizes: null
+  dominant_expert: 0
+  dominant_offset: 3.0
+  burst_period: 100
+  n_bursts: 12
+  preference_gap: 0.15
+  burst_noise_scale: 0.01
+  initial_condition: unconstrained
+capacity:
+  name: hetero_balanced
+  kind: explicit
+  value: 192
+  values:
+  - 384
+  - 320
+  - 288
+  - 256
+  - 224
+  - 192
+  - 192
+  - 192
+  policy: canonical
+controller:
+  name: capacity_relative
+  step_size: 0.05
+  pressure_decay: 0.0
+  score_sign: -1.0
+  projection: gauge
+  score_gain_override: null
+  update_gain_override: null
+  bias_gamma: 0.001
+runtime:
+  device: cpu
+  deterministic: true
+  dtype: float32
+artifacts:
+  save_token_masks: false

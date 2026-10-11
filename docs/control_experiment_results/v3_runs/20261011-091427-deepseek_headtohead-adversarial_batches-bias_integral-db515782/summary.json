@@ -1,0 +1,31 @@
+{
+  "capacity_regime": "exact_total",
+  "controller": "bias_integral",
+  "final_all_experts_saturated": false,
+  "final_requested_cv": 1.6319723934007786,
+  "final_requested_max_violation": 0.375,
+  "final_total_overflow": 1441,
+  "fraction_steps_saturated": 0.0,
+  "initial_condition": {
+    "declared": "unconstrained",
+    "detail": "no requirement declared; recorded only",
+    "realized_requested": [
+      1024,
+      0,
+      0,
+      0,
+      1024,
+      0,
+      0,
+      0
+    ],
+    "verified": true
+  },
+  "projection": "identity",
+  "run_id": "20261011-091427-deepseek_headtohead-adversarial_batches-bias_integral-db515782",
+  "scenario": "adversarial_batches",
+  "score_sign": 1.0,
+  "seed": 99,
+  "steps": 1000,
+  "update_gain": 1.0
+}

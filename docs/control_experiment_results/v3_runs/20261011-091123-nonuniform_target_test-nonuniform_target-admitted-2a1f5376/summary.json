@@ -1,0 +1,31 @@
+{
+  "capacity_regime": "hetero_shortage",
+  "controller": "admitted",
+  "final_all_experts_saturated": true,
+  "final_requested_cv": 0.12585159135614854,
+  "final_requested_max_violation": 0.0576171875,
+  "final_total_overflow": 512,
+  "fraction_steps_saturated": 1.0,
+  "initial_condition": {
+    "declared": "unconstrained",
+    "detail": "no requirement declared; recorded only",
+    "realized_requested": [
+      300,
+      300,
+      270,
+      270,
+      240,
+      240,
+      214,
+      214
+    ],
+    "verified": true
+  },
+  "projection": "gauge",
+  "run_id": "20261011-091123-nonuniform_target_test-nonuniform_target-admitted-2a1f5376",
+  "scenario": "nonuniform_target",
+  "score_sign": -1.0,
+  "seed": 23,
+  "steps": 800,
+  "update_gain": 1.0
+}

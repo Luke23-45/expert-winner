@@ -1,0 +1,31 @@
+{
+  "capacity_regime": "windup_tight",
+  "controller": "bias_integral",
+  "final_all_experts_saturated": false,
+  "final_requested_cv": 0.00647778279366289,
+  "final_requested_max_violation": 0.001953125,
+  "final_total_overflow": 5,
+  "fraction_steps_saturated": 0.0,
+  "initial_condition": {
+    "declared": "unconstrained",
+    "detail": "no requirement declared; recorded only",
+    "realized_requested": [
+      300,
+      300,
+      270,
+      270,
+      240,
+      240,
+      214,
+      214
+    ],
+    "verified": true
+  },
+  "projection": "identity",
+  "run_id": "20261011-091417-deepseek_headtohead-saturation_windup-bias_integral-86d52a1f",
+  "scenario": "saturation_windup",
+  "score_sign": 1.0,
+  "seed": 99,
+  "steps": 1200,
+  "update_gain": 1.0
+}

@@ -1,0 +1,15 @@
+{
+  "affinity_dtype": "float32",
+  "content_hash_sha256": "6e3129d2685682979122759cc6be51dddd098a1a13031fa13c6cb7aa6119af07",
+  "experts": 8,
+  "group_sizes": [
+    400,
+    300,
+    200,
+    124
+  ],
+  "kind": "specialization_probe",
+  "noise_scale": 0.1,
+  "seed": 42,
+  "tokens": 1024
+}
