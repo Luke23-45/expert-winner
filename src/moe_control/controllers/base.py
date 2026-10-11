@@ -55,19 +55,20 @@ class AdmittedFeedback:
 
 
 class AdmittedCenteredFeedback:
-    """(A_0) Admitted feedback error with common mode removed: P_0(eps^A).
+    """(A_0) Admitted feedback with common mode removed: P_0(A / (K*T)).
 
-    eps^A = A / (K*T) - mu, so this is P_0(A / (K*T) - mu). For uniform mu
-    this coincides with P_0(A / (K*T)); for explicit targets the mu term
-    must be inside the projection.
+    Per the formal document, the centered variant applies the zero-sum
+    projection to the normalized admitted load only, not to the full
+    error A / (K*T) - mu. For uniform mu the two coincide; for explicit
+    targets they differ, which is exactly the intended comparison:
+    admitted is target-aware, admitted_centered is target-blind but
+    centered.
     """
 
     name = "admitted_centered"
 
     def feedback(self, obs: Observation) -> Tensor:
-        return zero_sum_project(
-            normalized_admitted(obs) - obs.target.to(torch.float64)
-        )
+        return zero_sum_project(normalized_admitted(obs))
 
 
 class CapacityRelativeFeedback:
