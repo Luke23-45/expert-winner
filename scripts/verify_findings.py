@@ -2,31 +2,41 @@
 """Cross-seed verification of the headline findings in
 docs/control_experiment_results/results.md.
 
-Loads every run in results/runs/, groups by (scenario, capacity_regime, seed),
+Loads every run in the runs dir, groups by (scenario, capacity_regime, seed),
 and checks each headline finding independently per seed:
 
-  F1 saturation freeze: in the shortage regime, admitted/admitted_centered
-     feedback is the constant (c-1)/E and pressure stays [0]*E all 500 steps.
-  F2 gauge equivalence: requested == capacity_relative (bit-identical pressure
-     trajectories); admitted == admitted_centered (bit-identical pressure).
+  F1 saturation freeze: in the shortage regime, admitted feedback is the
+     constant (c-1)/E and admitted_centered feedback differs from it only by
+     a common-mode vector; pressure stays [0]*E all steps for both.
+  F2 gauge equivalence: requested == capacity_relative pressure trajectories,
+     and admitted == admitted_centered pressure trajectories, up to
+     floating-point rounding (tol 1e-9; bit-identical for frozen runs).
   F3 slack contrast: requested-direction rebalances and cuts overflow while
      admitted-direction barely moves (first routing change much later).
   F4 demand shift: pressure state preserved exactly across the shift step;
      stale requested-pattern unwinds after the shift.
   F5 paired batches: identical affinity content hash across controllers
      within each (scenario, seed).
+  F6 run inventory: the expected 64-run set is present (48 main-matrix runs:
+     4 scenarios x 4 controllers x seeds {17,23,42} at 500 steps; 16 sweep
+     runs: shortage x 4 controllers x etas {0.05,0.1,0.2,0.4} at 2000 steps).
+  F7 shortage sweep: at every eta, admitted-direction pressure stays [0]*E
+     with no routing change ever, while requested-direction changes routing
+     and reduces the violation; overflow stays fixed at 512 for all.
 
 Usage:
-    .venv/bin/python scripts/verify_findings.py [--runs-dir results/runs]
+    .venv/bin/python scripts/verify_findings.py [--runs-dir docs/control_experiment_results/runs]
 
 Exits nonzero if any check fails. Tolerances are deliberately tight for
-deterministic quantities (F1/F2/F5) and loose for behavioral ones (F3/F4).
+deterministic quantities (F1/F2/F5/F7-freeze) and loose for behavioral ones
+(F3/F4/F7-rebalance).
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -45,12 +55,21 @@ def load_runs(runs_dir: Path):
         rows = pq.read_table(metrics_path).to_pylist()
         summary = json.loads((run_dir / "summary.json").read_text())
         affinity = json.loads((run_dir / "affinity_reference.json").read_text())
+        # step_size is not in summary.json; read it from the resolved config
+        eta = None
+        cfg_path = run_dir / "config.resolved.yaml"
+        if cfg_path.exists():
+            m = re.search(r"step_size:\s*([\d.]+)",
+                          cfg_path.read_text())
+            if m:
+                eta = float(m.group(1))
         runs.append(
             {
                 "run_id": run_dir.name,
                 "rows": rows,
                 "summary": summary,
                 "affinity": affinity,
+                "eta": eta,
             }
         )
     return runs
@@ -188,26 +207,128 @@ def check_group(runs):
     return out
 
 
+def first_routing_change(rows):
+    """First step where requested counts differ from step 0 (None if never)."""
+    r0 = [float(v) for v in rows[0]["requested_counts"]]
+    for row in rows:
+        if any(abs(a - b) > 1e-9
+               for a, b in zip([float(v) for v in row["requested_counts"]], r0)):
+            return row["step"]
+    return None
+
+
+def check_sweep_group(runs, eta):
+    """F7: shortage eta-sweep checks for one eta (4 controllers, 2000 steps)."""
+    out = {"checks": []}
+    by_ctl = {r["summary"]["controller"]: r for r in runs}
+
+    def add(name, ok, detail=""):
+        out["checks"].append({"name": name, "ok": bool(ok), "detail": detail})
+
+    # F7-freeze: admitted-direction never moves at any eta
+    for ctl in ("admitted", "admitted_centered"):
+        rows = by_ctl[ctl]["rows"]
+        p_zero = all(
+            all(abs(float(v)) < 1e-12 for v in row["pressure_after"])
+            for row in rows
+        )
+        fc = first_routing_change(rows)
+        viol = [row["requested_max_violation"] for row in rows]
+        add(f"F7 freeze eta={eta} {ctl} pressure==[0]*{E}", p_zero)
+        add(f"F7 freeze eta={eta} {ctl} no routing change ever", fc is None,
+            f"first_change={fc}")
+        add(f"F7 freeze eta={eta} {ctl} violation constant",
+            max(viol) - min(viol) < 1e-12, f"viol={viol[0]:.4f}")
+
+    # F7-rebalance: requested-direction changes routing and reduces violation
+    for ctl in ("requested", "capacity_relative"):
+        rows = by_ctl[ctl]["rows"]
+        viol = [row["requested_max_violation"] for row in rows]
+        fc = first_routing_change(rows)
+        ov = [row["total_overflow"] for row in rows]
+        tail = viol[-500:]
+        add(f"F7 rebalance eta={eta} {ctl} routing changes", fc is not None,
+            f"first_change step={fc}")
+        add(f"F7 rebalance eta={eta} {ctl} violation reduced",
+            viol[-1] < viol[0], f"{viol[0]:.4f} -> {viol[-1]:.4f}")
+        add(f"F7 rebalance eta={eta} {ctl} overflow fixed at 512",
+            all(v == 512 for v in ov))
+        add(f"F7 rebalance eta={eta} {ctl} tail settled (range < 4 tokens)",
+            max(tail) - min(tail) < 4 / 2048,
+            f"tail range={max(tail) - min(tail):.5f}")
+
+    # F2 in the sweep too
+    rq, cr = by_ctl["requested"], by_ctl["capacity_relative"]
+    maxdiff = max(
+        abs(a - b)
+        for r1, r2 in zip(rq["rows"], cr["rows"])
+        for a, b in zip([float(v) for v in r1["pressure_after"]],
+                        [float(v) for v in r2["pressure_after"]])
+    )
+    add(f"F2 sweep eta={eta} requested==capacity_relative (tol 1e-9)",
+        maxdiff < 1e-9, f"max |diff| = {maxdiff:.3e}")
+
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--runs-dir", default="results/runs")
     args = ap.parse_args()
     runs = load_runs(Path(args.runs_dir))
+
+    failures = 0
+
+    # F6: expected 64-run inventory
+    scenarios = ("shortage", "exact_total", "slack", "demand_shift")
+    controllers = ("requested", "admitted", "admitted_centered",
+                   "capacity_relative")
+    seeds = (17, 23, 42)
+    etas = (0.05, 0.1, 0.2, 0.4)
+    have = set()
+    for r in runs:
+        s = r["summary"]
+        have.add((s["scenario"], s["controller"], s["seed"], s["steps"],
+                  r["eta"]))
+    expected = set()
+    for sc in scenarios:
+        for ct in controllers:
+            for sd in seeds:
+                expected.add((sc, ct, sd, 500, 0.05))
+    for ct in controllers:
+        for et in etas:
+            expected.add(("shortage", ct, 17, 2000, et))
+    missing = sorted(expected - have)
+    extra = sorted(have - expected)
+    print("# F6 run inventory")
+    print(f"  expected 64 runs; found {len(have & expected)} expected, "
+          f"{len(missing)} missing, {len(extra)} unexpected")
+    for m in missing:
+        print(f"  [FAIL] missing: scenario={m[0]} controller={m[1]} "
+              f"seed={m[2]} steps={m[3]} eta={m[4]}")
+        failures += 1
+    for e in extra:
+        print(f"  [note] unexpected run (not a failure): {e}")
+    if not missing:
+        print("  [PASS] all 64 expected runs present")
+    print()
+
+    # 500-step matrix groups (F1-F5)
     groups = {}
     for r in runs:
         s = r["summary"]
         if s["steps"] != 500:
-            continue  # smoke runs excluded
+            continue
         groups.setdefault(
             (s["scenario"], s["capacity_regime"], s["seed"]), []
         ).append(r)
 
-    failures = 0
     print(f"# Findings verification ({len(groups)} scenario x seed groups)\n")
     for (scenario, cap, seed), grp in sorted(groups.items()):
         if len(grp) != 4:
-            print(f"## scenario={scenario} capacity={cap} seed={seed}: "
-                  f"SKIP (only {len(grp)} controllers)")
+            print(f"## scenario={scenario} capacity={cap} seed={seed}")
+            print(f"  [FAIL] expected 4 controllers, found {len(grp)}")
+            failures += 1
             continue
         res = check_group(sorted(grp, key=lambda r: r["summary"]["controller"]))
         print(f"## scenario={scenario} capacity={cap} seed={seed}")
@@ -219,6 +340,34 @@ def main() -> int:
             print(line)
             failures += not c["ok"]
         print()
+
+    # 2000-step sweep groups (F7), one eta per group
+    sweep = {}
+    for r in runs:
+        s = r["summary"]
+        if s["steps"] != 2000 or s["scenario"] != "shortage":
+            continue
+        sweep.setdefault(r["eta"], []).append(r)
+    print(f"# Sweep verification ({len(sweep)} eta groups)\n")
+    for eta in sorted(sweep):
+        grp = sweep[eta]
+        if len(grp) != 4:
+            print(f"## eta={eta}")
+            print(f"  [FAIL] expected 4 controllers, found {len(grp)}")
+            failures += 1
+            continue
+        res = check_sweep_group(
+            sorted(grp, key=lambda r: r["summary"]["controller"]), eta)
+        print(f"## eta={eta}")
+        for c in res["checks"]:
+            mark = "PASS" if c["ok"] else "FAIL"
+            line = f"  [{mark}] {c['name']}"
+            if c["detail"]:
+                line += f" -- {c['detail']}"
+            print(line)
+            failures += not c["ok"]
+        print()
+
     print(f"{'ALL CHECKS PASSED' if failures == 0 else f'{failures} CHECKS FAILED'}")
     return 1 if failures else 0
 

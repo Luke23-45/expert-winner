@@ -268,16 +268,16 @@ All headline findings replicate across the three paired seeds:
 
 Separating pressure response, routing changes, overflow, and oscillation:
 
-| eta | Controller | first routing change | viol 0 -> 2000 | overflow | prange final | tail oscillation |
+| eta | Controller | first routing change | viol 0 -> 2000 | overflow | prange final | viol range, last 500 steps |
 |---|---|---|---|---|---|---|
-| 0.05 | requested / capacity_relative | step 703 | 0.0215 -> 0.0068 | 512 fixed | 1.83 | none |
-| 0.05 | admitted / admitted_centered | never | 0.0215 -> 0.0215 | 512 fixed | 0.00 | none |
-| 0.10 | requested / capacity_relative | step 352 | 0.0215 -> 0.0000 | 512 fixed | 1.82 | none |
-| 0.10 | admitted / admitted_centered | never | 0.0215 -> 0.0215 | 512 fixed | 0.00 | none |
-| 0.20 | requested / capacity_relative | step 176 | 0.0215 -> 0.0000 | 512 fixed | 1.82 | none |
-| 0.20 | admitted / admitted_centered | never | 0.0215 -> 0.0215 | 512 fixed | 0.00 | none |
-| 0.40 | requested / capacity_relative | step 88 | 0.0215 -> 0.0005 | 512 fixed | 1.82 | none |
-| 0.40 | admitted / admitted_centered | never | 0.0215 -> 0.0215 | 512 fixed | 0.00 | none |
+| 0.05 | requested / capacity_relative | step 703 | 0.0215 -> 0.0068 | 512 fixed | 1.83 | 0.00098 |
+| 0.05 | admitted / admitted_centered | never | 0.0215 -> 0.0215 | 512 fixed | 0.00 | 0.00000 |
+| 0.10 | requested / capacity_relative | step 352 | 0.0215 -> 0.0000 | 512 fixed | 1.82 | 0.00000 |
+| 0.10 | admitted / admitted_centered | never | 0.0215 -> 0.0215 | 512 fixed | 0.00 | 0.00000 |
+| 0.20 | requested / capacity_relative | step 176 | 0.0215 -> 0.0000 | 512 fixed | 1.82 | 0.00000 |
+| 0.20 | admitted / admitted_centered | never | 0.0215 -> 0.0215 | 512 fixed | 0.00 | 0.00000 |
+| 0.40 | requested / capacity_relative | step 88 | 0.0215 -> 0.0005 | 512 fixed | 1.82 | 0.00000 |
+| 0.40 | admitted / admitted_centered | never | 0.0215 -> 0.0215 | 512 fixed | 0.00 | 0.00000 |
 
 Findings:
 
@@ -299,6 +299,8 @@ Findings:
 - **Overflow is fixed at 512 throughout the sweep** for every controller and
   step size: rebalancing redistributes the fixed rejected mass, it cannot
   reduce it. No overflow reduction is claimed here.
-- **No oscillation observed:** the violation's range over the final 500 steps
-  is 0.00000 at every eta. At eta = 0.4 the run settles at violation 0.0005
-  (exactly one token, `1/2048`), the granularity floor, not a limit cycle.
+- **No oscillation observed.** At eta >= 0.1 the violation is exactly constant
+  over the final 500 steps. At eta = 0.05 the final-window range is 0.00098
+  (= 2/2048) from two single-token routing changes, both downward (the window
+  minimum equals the final value), so the run is still settling toward balance,
+  not oscillating. A longer horizon would be needed to see eta = 0.05 settle.
