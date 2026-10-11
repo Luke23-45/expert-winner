@@ -55,12 +55,19 @@ class AdmittedFeedback:
 
 
 class AdmittedCenteredFeedback:
-    """(A_0) Admitted feedback with common mode removed: P_0(A / (K*T))."""
+    """(A_0) Admitted feedback error with common mode removed: P_0(eps^A).
+
+    eps^A = A / (K*T) - mu, so this is P_0(A / (K*T) - mu). For uniform mu
+    this coincides with P_0(A / (K*T)); for explicit targets the mu term
+    must be inside the projection.
+    """
 
     name = "admitted_centered"
 
     def feedback(self, obs: Observation) -> Tensor:
-        return zero_sum_project(normalized_admitted(obs))
+        return zero_sum_project(
+            normalized_admitted(obs) - obs.target.to(torch.float64)
+        )
 
 
 class CapacityRelativeFeedback:
