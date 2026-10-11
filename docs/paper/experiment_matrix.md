@@ -361,7 +361,7 @@ that seed executes.
   not manufacture a cascade narrative.
 
 **Section A run total:** 40 + 27 + 18 + 12 + 5 + 6 + 5 + 5 + 8 + 15 +
-4 + 5 + 21 + 4 + 10 = **179 runs** (S-PF reuses S-T1a artifacts: 0 new).
+4 + 5 + 21 + 4 + 10 = **185 runs** (S-PF reuses S-T1a artifacts: 0 new).
 At v3 pace (79 runs, CPU, minutes each including analysis) this is a
 few hours of wall-clock on this VM, dominated by analysis scripting,
 not compute.
@@ -571,7 +571,7 @@ funded follow-up; the number exists so the ask is concrete.
 ## D. Feasibility assessment for this VM (CPU-only, torch CPU, no GPUs)
 
 **Plain statement.** This VM can produce: the entire Section A
-synthetic matrix (179 runs, deterministic CPU — v3's 79 runs ran in
+synthetic matrix (185 runs, deterministic CPU — v3's 79 runs ran in
 minutes each including analysis); the S0 mechanics probe (~45 min);
 all verification/analysis scripting; the formal core's computational
 checks. **This VM cannot produce paper-grade trained evidence.**
