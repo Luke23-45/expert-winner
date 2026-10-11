@@ -134,10 +134,10 @@ otherwise accumulate.
 **specialization_probe** (skills [400,300,200,124], C=192):
 - requested-direction reaches the overflow floor (648 -> 512, the minimum
   achievable since every expert must carry >= 192) at an MI cost:
-  1.301 -> 1.06 nats (both seeds).
+  1.301 -> 1.060 (seed 17) / 1.071 (seed 23) nats.
 - admitted-direction preserves MI perfectly (1.301 -> 1.301) but keeps
   overflow at 648 and viol at 0.0703.
-- This is the Pareto frontier the review demanded: (overflow 512, MI 1.06)
+- This is the Pareto frontier the review demanded: (overflow 512, MI ~1.06)
   vs (overflow 648, MI 1.30). Requested-direction finds the better balance
   point, but it does pay in specialization — balance by partial smearing.
   Whether that trade is acceptable is a model-quality question this harness
@@ -225,7 +225,8 @@ just mathematical bookkeeping. (Verifier W3 encodes both halves of this.)
   limit cycle at eta=10 (tail_osc=143); bias chatters (tail_osc 132-198)
   at all working gains; post-release transients are bounded, not
   oscillatory, for pressure controllers.
-- **Specialization:** MI 1.301 -> 1.06 for requested-direction on the probe
+- **Specialization:** MI 1.301 -> 1.060/1.071 (seeds 17/23) for
+  requested-direction on the probe
   (balance at partial smearing cost); preserved at 1.301 by frozen
   controllers that also fail to rebalance.
 
