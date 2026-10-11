@@ -1,0 +1,8 @@
+# @package controller
+# (AW) Admitted feedback with conditional integration (anti-windup):
+# integrates the admitted signal only on unsaturated coordinates and
+# freezes saturated (censored) coordinates relative to the gauge.
+# Reduces to admitted feedback exactly when nothing is saturated.
+name: admitted_antiwindup
+step_size: 0.05
+pressure_decay: 0.0

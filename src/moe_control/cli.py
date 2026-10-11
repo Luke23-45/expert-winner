@@ -160,6 +160,17 @@ def main(cfg: RootConfig) -> None:
             f"(requested); dynamics differ (pressure_decay={ctl.pressure_decay}, "
             f"projection={ctl.projection})."
         )
+    if ctl.name == "admitted_antiwindup":
+        controller_notes.append(
+            "admitted_antiwindup: conditional-integration anti-windup on the "
+            "admitted signal. Per-coordinate saturation is R_e >= C_e; "
+            "saturated coordinates are frozen at the unsaturated mean before "
+            "the zero-sum projection (their relative feedback is exactly 0), "
+            "unsaturated coordinates integrate A_e/(K*T) - mu_e, and global "
+            "saturation gives epsilon = 0 (full integrator freeze). Reduces "
+            "to admitted feedback bit-identically on the gauge quotient when "
+            "nothing is saturated."
+        )
     manifest = artifacts.build_manifest(
         repo_root=REPO_ROOT,
         seed=exp.seed,

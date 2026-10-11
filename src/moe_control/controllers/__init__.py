@@ -1,5 +1,6 @@
 from moe_control.controllers.base import (
     CONTROLLERS,
+    AdmittedAntiwindupFeedback,
     AdmittedCenteredFeedback,
     AdmittedFeedback,
     BiasIntegralFeedback,
@@ -15,6 +16,7 @@ __all__ = [
     "RequestedFeedback",
     "AdmittedFeedback",
     "AdmittedCenteredFeedback",
+    "AdmittedAntiwindupFeedback",
     "CapacityRelativeFeedback",
     "BiasIntegralFeedback",
     "build_controller",

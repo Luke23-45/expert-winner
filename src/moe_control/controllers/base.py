@@ -75,6 +75,63 @@ class CapacityRelativeFeedback:
         return zero_sum_project(r - c)
 
 
+class AdmittedAntiwindupFeedback:
+    """(AW) Admitted feedback with conditional integration (anti-windup).
+
+    Textbook anti-windup fix for the censored-signal pathology diagnosed in
+    the v2 experiments: integrate the admitted signal only on coordinates
+    where it carries information, and freeze the integrator on saturated
+    (censored) coordinates.
+
+    Let S = {e : R_e >= C_e} be the saturated coordinates. Under canonical
+    admission A_e = C_e there, so the excess demand R_e - C_e is invisible
+    and the admitted signal is censored on S. Define the per-coordinate
+    signal::
+
+        g_e = A_e / (K*T) - mu_e                          if e not in S
+        g_e = mean_{u not in S} (A_u/(K*T) - mu_u)         if e in S
+
+    and return epsilon = P_0(g) (zero-sum projection). Consequences:
+
+    * No saturation (S empty): g = A/(K*T) - mu, so the runner update
+      q+ = Pi_g(q + eta*gamma*P_0(g)) is bit-identical to the (A) admitted
+      update q+ = Pi_g(q + eta*gamma*(A/(K*T) - mu)), because the gauge
+      projection Pi_g removes exactly the common-mode difference between
+      P_0(g) and g. The controller reduces to admitted feedback whenever
+      the signal is uncensored.
+    * Global saturation (S = all experts): the admitted signal is 100%
+      censored (constant with respect to demand), so epsilon = 0: a full
+      integrator freeze. Under heterogeneous capacities this differs from
+      (A)/(A_0), which would integrate the phantom gradient P_0(C/(K*T))
+      built from pure capacity heterogeneity while blind to demand.
+    * Partial saturation: saturated coordinates are frozen relative to the
+      gauge (their P_0 component is exactly 0) while unsaturated
+      coordinates integrate their deviation from the unsaturated mean.
+
+    Backward compatible: feedback-only change. The runner's state update,
+    the gauge projection, and all existing controllers and configs are
+    untouched.
+    """
+
+    name = "admitted_antiwindup"
+
+    def feedback(self, obs: Observation) -> Tensor:
+        kt = obs.top_k * obs.tokens
+        g = obs.admitted.to(torch.float64) / kt - obs.target.to(torch.float64)
+        saturated = obs.requested >= obs.capacity  # (E,) bool; canonical A=min(R,C)
+        n_unsat = int((~saturated).sum().item())
+        if n_unsat == 0:
+            # Fully censored signal: freeze the integrator.
+            return torch.zeros_like(g)
+        if bool(saturated.any().item()):
+            # Freeze saturated coordinates at the unsaturated mean; P_0 then
+            # gives them exactly zero relative feedback (conditional
+            # integration).
+            mean_unsat = g[~saturated].mean()
+            g = torch.where(saturated, mean_unsat, g)
+        return zero_sum_project(g)
+
+
 class BiasIntegralFeedback:
     """DeepSeek-style aux-loss-free bias controller (integral control).
 
@@ -123,6 +180,7 @@ CONTROLLERS = {
     "admitted": AdmittedFeedback,
     "admitted_centered": AdmittedCenteredFeedback,
     "capacity_relative": CapacityRelativeFeedback,
+    "admitted_antiwindup": AdmittedAntiwindupFeedback,
     "bias_integral": BiasIntegralFeedback,
     # Ablation variants: same requested feedback vector, different dynamics.
     # "requested_leaky" runs with pressure_decay > 0 (isolates the leak);
@@ -180,6 +238,10 @@ def gauge_equivalence_classes(capacity_uniform: bool, target_uniform: bool) -> d
         "capacity_relative": "gauge-class-R",
         "admitted": "gauge-class-A",
         "admitted_centered": "gauge-class-A",
+        # admitted_antiwindup reduces to admitted exactly when nothing is
+        # saturated, but differs under partial/global saturation, so it is
+        # its own class even in the uniform regime.
+        "admitted_antiwindup": "gauge-class-AW",
         "requested_leaky": "gauge-class-R",
         "requested_no_projection": "gauge-class-R",
         "bias_integral": "gauge-class-bias",

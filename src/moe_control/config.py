@@ -80,7 +80,8 @@ class CapacityConfig:
 @dataclass
 class ControllerConfig:
     name: str = "requested"   # requested | admitted | admitted_centered |
-                              # capacity_relative | bias_integral |
+                              # capacity_relative | admitted_antiwindup |
+                              # bias_integral |
                               # requested_leaky | requested_no_projection
     step_size: float = 0.05   # eta
     pressure_decay: float = 0.0  # delta in [0, 1)
@@ -256,6 +257,7 @@ def validate_config(cfg: RootConfig) -> List[str]:
         )
     if ctl.name not in (
         "requested", "admitted", "admitted_centered", "capacity_relative",
+        "admitted_antiwindup",
         "bias_integral", "requested_leaky", "requested_no_projection",
     ):
         raise ConfigValidationError(
