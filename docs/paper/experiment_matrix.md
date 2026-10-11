@@ -5,8 +5,15 @@
 runnable specification of the paper's evidence plan. Nothing in it is
 evidence yet — it is the *plan* against which evidence will be judged.
 
-**Track A dependency:** `docs/paper/formal_core.md` does not exist yet
-(the theorist is writing it in parallel). Rows below are marked
+**Track A dependency:** `docs/paper/formal_core.md` now exists (landed as
+commit `4f5623e`, after this matrix was drafted) with theorems T1–T8 and
+lemma L1. Rows marked `[Track A: pending confirmation]` must be
+re-checked against those landed statements before their predictions
+count as theorem tests — in particular, S-T1c's leak asymptote is now
+proved in stronger exact finite-`t` form by formal-core T8, so that row
+should be upgraded from boundary-probe to theorem test. Theorem
+numbering: the matrix's `S-T*` row labels are its own; formal-core
+theorems are cited as `formal-core T1–T8 / L1`. Rows below are marked
 `[Track A: proved in v3_notes]` where the statement already has a proof
 on record (`docs/control_experiment_results/v3_notes/eta_flip_theorem.md`),
 and `[Track A: pending confirmation]` where the formal statement the row
