@@ -1,0 +1,32 @@
+# Python bytecode and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+
+# Test, type-checker, and linter caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+
+# Local experiment outputs and checkpoints
+/outputs/
+/multirun/
+/results/runs/
+/lightning_logs/
+/checkpoints/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Operating-system files
+.DS_Store
+Thumbs.db
