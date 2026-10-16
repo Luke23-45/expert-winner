@@ -265,7 +265,19 @@ when $H\ge4$. See
 [`phase1_g3_steering_2026-10-16.md`](phase1_g3_steering_2026-10-16.md).
 This closes the fixed-instance value calculation. Its gap is
 constant in $H$, and the reduction risk remains: this is not the general
-small-$B$ theorem or proof of a Top-K-specific theory contribution.
+all-horizon admitted-value characterization or proof of a Top-K-specific
+theory contribution.
+
+**Parameterized update (2026-10-16).** For this same score/capacity instance,
+varying only the step budget gives an exact requested value
+$V_R(H)=E_S\min\{H,n(B)\}$ and an exact admitted value at the first
+reachable horizon; the gap there remains exactly $E_S$, while the normalized
+gap vanishes as $B\to0$. See
+[phase1_parameterized_small_b_2026-10-16.md](phase1_parameterized_small_b_2026-10-16.md).
+Thus changing only the travel radius does not establish a growing signal-value
+gap. The next candidate is the trajectory-level T7 construction in §3, with
+the reduction attack against all causal admitted policies required from the
+start.
 
 **Prior-theory boundary to check.** Bayesian active learning studies
 adaptive selection of informative tests, including nonuniform test

@@ -147,16 +147,22 @@ table in the companion lemma, not on the lattice values.
 
 ## 4. What remains open
 
-1. Derive a theorem for a parameterized small-$B$ regime, with explicit
-   $H(B)$, capacities, margins, and prior. Do not call a $B$-dependent
-   transient “horizon-growing” unless the theorem proves that scaling.
-2. Prove a matching lower bound for every causal randomized admitted policy
-   in that regime; an open-loop Dijkstra path is not sufficient.
-3. Compare the theorem to a general state-constrained adaptive-testing or
-   belief-state control model. The $E=3$ result alone is an instance, not
-   evidence that Top-K/gauge geometry yields a new general theory.
-4. If the lower bound reduces to a constrained testing instance, state that
-   honestly. A stronger MoE claim needs a property of the score-cell geometry
-   or reachability metric that the abstract model does not preserve.
+1. The existing E=3 instance now has an exact small-$B$ parameterization:
+   $n(B)=\lfloor 1/(\sqrt2\,\eta\gamma^2B)\rfloor+1$,
+   $V_R(H)=E_S\min\{H,n(B)\}$, and the first-horizon gap at $H=n(B)+1$
+   is exactly $E_S$. The normalized gap there shrinks as $B\to0$.
+   Therefore small $B$ alone does not yield a growing signal gap. A new
+   family must change the information/cost geometry, not only the travel
+   radius.
+2. For horizons beyond the first reachable horizon, determine the optimal
+   admitted value and whether any raw gap grows. The present prefix argument
+   gives $V_A(H)\ge(n(B)+1)E_S$ but no matching long-horizon upper/lower bound.
+3. The exact reduction to state-constrained adaptive testing is recorded in
+   [phase1_parameterized_small_b_2026-10-16.md](phase1_parameterized_small_b_2026-10-16.md).
+   Any stronger theorem must identify a score-cell or gauge-metric property
+   that yields a bound beyond the same abstract outcome/cost/transition model.
+4. The T7 trajectory candidate is separate. It must be proved against every
+   causal randomized admitted policy and subjected to its own reduction
+   attack; the fixed E=3 result does not transfer to it.
 
 No large parameter sweep or trained-model experiment was run.
