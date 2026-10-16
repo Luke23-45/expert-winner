@@ -74,44 +74,80 @@ the formal groundwork (proved, verified).
 
 The single highest-value unsolved problem. Well-posed: T4 gives the
 exact fiber geometry; the question is what the best (A,C,μ)-measurable
-feedback can achieve on it.
+feedback can achieve on it. **Bar (reviewer 2026-10-16):** worst-case
+lower bounds under censored feedback are not themselves new (censored
+newsvendor, inventory regret, censored Kalman filtering). The
+contribution must be MoE-specific: Top-K discontinuities, gauge
+projection, hetero capacities/targets, closed-loop state evolution.
+The five requirements below are all mandatory.
 
-**1a. The lower bound (the "cannot").** Fiber-mates argument, verified
-2026-10-16: take S = {1,2} saturated, fiber-mates R = (C_1+E_S, C_2)
-and R' = (C_1, C_2+E_S) with E_S the known total excess on S. Both give
-the same observation A. Requested feedbacks differ by
-(R−R')/(KT) = (E_S/(KT), −E_S/(KT), 0…) on the gauge quotient. Any
-measurable ε̂ is identical for both; by triangle inequality,
-max over fiber-mates of gauge-L2 error ≥ E_S/(√2·KT). **Theorem to
-prove:** no (A,C,μ)-measurable feedback achieves worst-case gauge
-error below Ω(E_S/(KT)). The censoring cost scales with saturation
-severity — quantitative, not just "information is lost."
+**The 5 requirements:**
 
-**1b. The optimal feedback (the "can").** Minimax over the fiber F(A):
-min over measurable ε̂ of max over R ∈ F(A) of gauge error vs ε^R.
-Closed form if it exists; otherwise characterize the minimax solution
-and give a principled approximation with guarantees.
+1. **Controller class + information history.** Formalize the
+   observation at step t: (A_t, C, μ, S_t, q_t, history). Define the
+   measurable feedback class precisely — what the admitted-only
+   controller sees, and what it doesn't.
+2. **Comparator + cost.** R-informed controller as comparator. Cost
+   stated explicitly: overflow O(R), target violation ‖R/(KT)−μ‖,
+   or routing regret — pick one (objectives can conflict; the paper
+   says which one it solves).
+3. **Quantitative gap.** Worst-case cost gap ≥ X under explicit
+   assumptions — not just non-identifiability. Starting point:
+   fiber-mates → gauge error ≥ E_S/(√2·KT); must be connected to the
+   chosen COST, not just feedback error.
+4. **MoE-specific mechanism.** The gap must run through Top-K
+   discontinuities, gauge projection Π_g, hetero C/μ, closed-loop
+   state evolution. This is what survives comparison with generic
+   censored-demand theory.
+5. **Remedy + information cost.** Minimal sufficient extra signal.
+   A+J = R is sufficient (trivial). A saturation bit alone is
+   insufficient (no amount above capacity). Find the minimal signal
+   for the stated objective.
 
-**1c. O-c as corollary.** The optimal solution dictates exactly when
-the saturation-pattern signal helps vs hurts — the principled switch
-replacing (AW)'s all-or-nothing freeze.
+**Work items:**
 
-**1d. Position existing controllers as special cases.** (A) = raw
-pattern signal, (AW) = freeze, (A₀) = target-blind variant; the optimal
-feedback is the principled interpolation. This turns our honest
-negatives into theory: we can say exactly why each fails and what the
-best achievable is.
+**1a. Formalize (requirements 1–2).** Controller information model,
+comparator, loss. Write the definitions before any theorem.
 
-**Success criterion:** theorem(s) + proofs in formal.md stating the
-lower bound and the optimal (or minimax-characterized) censored
-feedback. This is the paper's centerpiece — the result a reviewer
-cites.
+**1b. Lower bound (requirements 3–4).** Fiber-mates argument as the
+starting point (verified 2026-10-16: S = {1,2} saturated, R =
+(C_1+E_S, C_2) vs R' = (C_1, C_2+E_S), same A, opposite optimal
+updates → max gauge-L2 error ≥ E_S/(√2·KT) by triangle inequality).
+Strengthen with the MoE mechanism: how the gap propagates through
+Top-K switching and pressure dynamics (T7's mechanism is the
+prototype).
 
-**Honesty note:** 1b may not admit a pretty closed form. The lower
-bound (1a) plus a characterized minimax solution is still
-conference-level. If 1b resists, the paper leads with the lower bound
-and the principled approximation — still a "cannot + best-known-can"
-arc.
+**1c. REDUCTION ATTACK (mandatory).** Actively try to reduce the bound
+to Kumar & Mouchtaki (censored newsvendor), Yang & Shi (inventory
+regret), censored Kalman filtering, Tobit. If it reduces with no
+MoE-specific remainder → STOP, pivot (do not present as a new
+theorem). The novelty lives in requirement 4 or nowhere.
+
+**1d. Remedy (requirement 5).** Minimal sufficient extra signal for
+the stated objective. O-c falls out as corollary: the optimal
+solution dictates exactly when the saturation-pattern signal helps
+vs hurts — the principled switch replacing (AW)'s all-or-nothing
+freeze.
+
+**1e. Position existing controllers as special cases.** (A) = raw
+pattern signal, (AW) = freeze, (A₀) = target-blind variant; the
+optimal feedback is the principled interpolation. This turns our
+honest negatives into theory: we can say exactly why each fails and
+what the best achievable is.
+
+**Stop conditions (Phase 1):**
+- If the bound reduces to known censored-demand/partial-monitoring
+  with no MoE-specific consequence → do not present as new; pivot.
+- If "optimal feedback" collapses to "observe R" and R is
+  obtainable at negligible cost → the remedy claim is weak;
+  re-scope as pure theory or investigate another consequence.
+- If 1b resists closed form → lower bound + characterized minimax +
+  principled approximation still complete ("cannot +
+  best-known-can" arc). Not a stop, a scope note.
+
+**Success criterion:** theorem(s) + proofs meeting all 5
+requirements, surviving the reduction attack (1c). This is the
+paper's centerpiece — the result a reviewer cites.
 
 ### Phase 2 — Supporting theory
 
@@ -133,9 +169,13 @@ what censored feedback can and cannot do" — lower bounds, optimal
 feedback, failure conditions. Honest premise throughout (R observable
 in common designs; restricted-telemetry setting named where invoked).
 
-**3b.** Related work positions ID Balancing, φ-Balancing, and
-2512.03915 explicitly per the 2026-10-16 comparison (claim-by-claim,
-dated).
+**3b.** Related work positions ID Balancing, φ-Balancing,
+2512.03915, Trinity/SMEBU (equation-level), FreeBalance and LAER-MoE
+(systems boundary: placement/migration vs feedback control), and the
+censored-decision literature (censored newsvendor, inventory regret,
+censored Kalman filtering, Tobit) explicitly per the comparison
+matrix — with the precise MoE-specific difference stated for each,
+not keyword matching.
 
 **3c.** Contribution list: (i) censoring fiber + lower bounds (NOVEL),
 (ii) optimal censored feedback (NOVEL), (iii) gauge quotient theory
@@ -146,17 +186,37 @@ consequences.
 **Success criterion:** the framing is both honest and ambitious — a
 reviewer can see the conference-level claim on page one.
 
-### Phase 4 — Synthetic validation of the NEW theory
+### Phase 4 — Validation in stages (theory decides experiments)
 
-**4a.** Factorial redesign (reviewer's step 4): target type × capacity
-shape × aggregate capacity, matched batches/seeds. Attributes T1's
-effects instead of confounding them.
+**4a. Small exact cases.** Enumerate controlled examples exposing
+missing assumptions; compare observed behavior with the theorem.
+(No GPU needed.)
 
-**4b.** Pre-registered predictions from Phase 1 (not the old
-mechanics): e.g., the lower bound's E_S-scaling, the optimal
-feedback's predicted edge over (A)/(AW) in specified regimes.
+**4b. Real router traces (new).** Instrument a real MoE
+implementation before and after capacity enforcement: record R, A,
+J, C, the feedback actually used, and the telemetry boundary. Tests
+whether the formal model matches real code. Does not prove the
+lower bound. (No GPU needed.)
 
-**4c.** Sweeps stay stopped until Phase 1 delivers predictions. The
+**4c. Factorial synthetic redesign (reviewer's step 4).** Target
+type × capacity shape × aggregate capacity, matched batches/seeds.
+Attributes T1's effects instead of confounding them. Pre-registered
+predictions from Phase 1: the lower bound's E_S-scaling, the
+optimal feedback's predicted edge over (A)/(AW) in specified
+regimes.
+
+**4d. Controlled interventions (only after theorem + traces
+survive).** Test the theorem's predictions in a real router/model
+setting. Keep overflow, target error, quality, specialization, and
+systems cost distinct — a better load metric alone is not enough.
+
+**Stop conditions (Phase 4):**
+- If traces show the assumed admission/censoring regime is absent
+  in the intended workload → no deployment claim about it.
+- If experiments only reproduce "R beats A" in the synthetic
+  harness → does not clear the conference bar; back to Phase 1.
+
+**4e.** Sweeps stay stopped until Phase 1 delivers predictions. The
 reviewer's gate stands, now with a theory-shaped key.
 
 **Success criterion:** predictions committed to git before runs
@@ -189,9 +249,25 @@ appears (collaborator, grant), S1 executes per the matrix.
 
 ---
 
-## 5. Sequencing
+## 6. Branch discipline
+
+- `feat/research-censored-feedback` (this branch): Phase 1–2
+  exploration — proofs, negative results, attack notes. Created
+  2026-10-16 from the paper branch tip.
+- `feat/paper-feedback-moe-routing`: integration target. Promote
+  only findings that pass the gates (novelty, theory, reproduction,
+  external validity, significance), with proofs/artifacts and
+  limitations.
+- v1/v2/v3 branches and artifacts: immutable, never touched.
+- `main`: merge only when material is reviewed and accepted.
+
+---
+
+## 7. Sequencing
 
 Phase 1 → Phase 2 → Phase 3 → Phase 4, in that order. Phase 5 is
 blocked externally and proceeds in parallel if compute appears.
-Phase 3's rewrite can begin once Phase 1's statements are fixed
-(theorem statements, not full proofs, suffice for framing).
+Phase 3's rewrite can begin once Phase 1's theorem statements are
+fixed (statements, not full proofs, suffice for framing). The
+reduction attack (1c) runs in parallel with 1b from the start —
+kill the bound early if it's reducible.
