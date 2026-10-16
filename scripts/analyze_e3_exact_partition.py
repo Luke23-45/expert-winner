@@ -1,22 +1,19 @@
-"""Exhaustively enumerate the E=3 score arrangement and its costs.
+"""Enumerate the E=3 score arrangement using rational arithmetic.
 
-The open 2-D cells are enumerated by checking all 3^4 winner assignments
-with a strict-margin linear program. Every score-equality line is then
-partitioned at all intersections; one point per open line segment and every
-vertex captures lower-dimensional tie strata under the router's lower-index
-tie rule. This is a reproducibility aid for the finite case analysis, not a
-replacement for writing that case analysis in a theorem proof.
-
-Requires the optional research dependency SciPy.
+The four token types each have three affine expert scores in (x,y). Their
+pairwise equalities form a finite line arrangement. A rational vertical-slab
+decomposition visits every open 2-D cell; rational samples on every line
+segment and at every vertex cover tie strata under the lower-index tie rule.
+The output is a compact, reproducible finite-case certificate, not a
+substitute for presenting the score inequalities in a paper proof.
 """
 from __future__ import annotations
 
-import itertools
+from fractions import Fraction as F
+from itertools import combinations, product
+from math import gcd, lcm
 import sys
 from pathlib import Path
-
-import numpy as np
-from scipy.optimize import linprog
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from moe_control.research.e3_instance import (  # noqa: E402
@@ -25,174 +22,203 @@ from moe_control.research.e3_instance import (  # noqa: E402
     E_S,
     M_LOW,
     M_MARGIN,
-    admitted_and_cost,
-    score_cells,
 )
 
-
-def score_affines():
-    """For each token type, return score intercepts and (x,y) slopes."""
-    slopes = [(-1.0, 0.0), (0.0, -1.0), (0.0, 0.0)]
-    return [
-        ([M_LOW, -M_MARGIN, 0.0], slopes),
-        ([M_MARGIN, -M_MARGIN, 0.0], slopes),
-        ([-M_MARGIN, M_LOW, 0.0], slopes),
-        ([-M_MARGIN, M_MARGIN, 0.0], slopes),
-    ]
-
-
-def open_cell_witnesses():
-    """Return a strict-interior point for every nonempty full-dimensional cell."""
-    affine = score_affines()
-    witnesses = {}
-    for winners in itertools.product(range(3), repeat=4):
-        rows, rhs = [], []
-        for (intercepts, slopes), winner in zip(affine, winners):
-            for other in range(3):
-                if other == winner:
-                    continue
-                # score[winner] - score[other] >= margin > 0
-                rows.append([
-                    slopes[other][0] - slopes[winner][0],
-                    slopes[other][1] - slopes[winner][1],
-                    1.0,
-                ])
-                rhs.append(intercepts[winner] - intercepts[other])
-        result = linprog(
-            [0.0, 0.0, -1.0],
-            A_ub=np.asarray(rows),
-            b_ub=np.asarray(rhs),
-            bounds=[(-100.0, 100.0), (-100.0, 100.0), (0.0, None)],
-            method="highs",
-        )
-        if result.success and result.x[2] > 1e-8:
-            witnesses[winners] = tuple(float(v) for v in result.x[:2])
-    return witnesses
+# Each score is intercept + x_slope*x + y_slope*y.
+SCORES = (
+    ((F(M_LOW), -1, 0), (F(-M_MARGIN), 0, -1), (F(0), 0, 0)),
+    ((F(M_MARGIN), -1, 0), (F(-M_MARGIN), 0, -1), (F(0), 0, 0)),
+    ((F(-M_MARGIN), -1, 0), (F(M_LOW), 0, -1), (F(0), 0, 0)),
+    ((F(-M_MARGIN), -1, 0), (F(M_MARGIN), 0, -1), (F(0), 0, 0)),
+)
+C_EXACT, E_S_EXACT, C_SINK_EXACT = F(C), F(E_S), F(C_SINK)
+CAP = (C_EXACT, C_EXACT, C_SINK_EXACT)
 
 
-def equality_lines():
-    """Return unique lines a*x+b*y=c at which any pair of token scores tie."""
+def _canonical_line(a: F, b: F, c: F) -> tuple[int, int, int]:
+    """Normalize a*x+b*y=c to a unique primitive integer triple."""
+    denominator = lcm(a.denominator, b.denominator, c.denominator)
+    ai, bi, ci = int(a * denominator), int(b * denominator), int(c * denominator)
+    divisor = gcd(gcd(abs(ai), abs(bi)), abs(ci))
+    ai, bi, ci = ai // divisor, bi // divisor, ci // divisor
+    if ai < 0 or (ai == 0 and bi < 0):
+        ai, bi, ci = -ai, -bi, -ci
+    return ai, bi, ci
+
+
+def equality_lines() -> tuple[tuple[int, int, int], ...]:
     lines = set()
-    for intercepts, slopes in score_affines():
-        for i, j in itertools.combinations(range(3), 2):
-            a = slopes[i][0] - slopes[j][0]
-            b = slopes[i][1] - slopes[j][1]
-            c = intercepts[j] - intercepts[i]
-            if a < 0 or (a == 0 and b < 0):
-                a, b, c = -a, -b, -c
-            lines.add((a, b, c))
-    return sorted(lines)
+    for scores in SCORES:
+        for i, j in combinations(range(3), 2):
+            ci, ai, bi = scores[i]
+            cj, aj, bj = scores[j]
+            lines.add(_canonical_line(ai - aj, bi - bj, cj - ci))
+    return tuple(sorted(lines))
 
 
-def boundary_witnesses():
-    """Sample every vertex and every open 1-D stratum in the line arrangement."""
-    lines = equality_lines()
-    vertices = []
-    for line1, line2 in itertools.combinations(lines, 2):
-        a = np.asarray([line1[:2], line2[:2]], dtype=float)
-        if abs(float(np.linalg.det(a))) <= 1e-12:
+def intersections(lines):
+    points = set()
+    for (a1, b1, c1), (a2, b2, c2) in combinations(lines, 2):
+        determinant = a1 * b2 - a2 * b1
+        if determinant == 0:
             continue
-        b = np.asarray([line1[2], line2[2]], dtype=float)
-        point = np.linalg.solve(a, b)
-        vertices.append(point)
-
-    points = [tuple(map(float, p)) for p in vertices]
-    for a, b, c in lines:
-        norm2 = float(a * a + b * b)
-        p0 = np.asarray([a * c / norm2, b * c / norm2], dtype=float)
-        direction = np.asarray([-b, a], dtype=float)
-        ts = sorted({
-            round(float(np.dot(point - p0, direction) / np.dot(direction, direction)), 10)
-            for point in vertices
-            if abs(a * point[0] + b * point[1] - c) <= 1e-8
-        })
-        if not ts:
-            intervals = [(-1.0, 1.0)]
-        else:
-            intervals = [(ts[0] - 1.0, ts[0])]
-            intervals.extend(zip(ts, ts[1:]))
-            intervals.append((ts[-1], ts[-1] + 1.0))
-        for left, right in intervals:
-            t = (left + right) / 2.0
-            point = p0 + t * direction
-            points.append(tuple(map(float, point)))
+        x = F(c1 * b2 - c2 * b1, determinant)
+        y = F(a1 * c2 - a2 * c1, determinant)
+        points.add((x, y))
     return points
 
 
-def main():
-    points = list(open_cell_witnesses().values()) + boundary_witnesses()
-    cells = {}
-    for x, y in points:
-        pattern = score_cells(x, y)
-        a1, c1, a2, c2 = admitted_and_cost(x, y)
-        signature = (
-            tuple(pattern),
-            int(round(c1)),
-            int(round(c2)),
-            tuple(int(round(v)) for v in a1),
-            tuple(int(round(v)) for v in a2),
-        )
-        cells[signature] = (x, y)
+def _interval_samples(values):
+    values = sorted(set(values))
+    if not values:
+        return [F(0)]
+    samples = [values[0] - 1]
+    samples.extend((left + right) / 2 for left, right in zip(values, values[1:]))
+    samples.append(values[-1] + 1)
+    return samples
 
-    if len(cells) != 13:
-        raise RuntimeError(f"expected 13 exact signatures for this instance; found {len(cells)}")
-    for (pattern, c1, c2, a1, a2), witness in sorted(cells.items()):
-        informative = a1 != a2
-        if (c1 + c2) / 2 < E_S - 1e-9:
-            raise AssertionError(f"cost-information bound failed in cell {pattern}")
-        if not informative and (c1 != c2 or c1 < E_S - 1e-9):
-            raise AssertionError(f"uninformative-cell property failed in {pattern}")
-        if informative and max(c1, c2) < 2 * E_S - 1e-9:
-            raise AssertionError(f"informative-cell property failed in {pattern}")
-        print(
-            f"pattern={pattern} costs=({c1},{c2}) informative={informative} "
-            f"A1={a1} A2={a2} witness=({witness[0]:.6g},{witness[1]:.6g})"
-        )
 
-    # Check the continuous-pressure witness paths used in the companion note.
-    gamma, eta, B = 1.0, 0.1, 2.65
-    step_limit = eta * gamma * B
+def open_2d_witnesses(lines, vertices):
+    """Sample every full-dimensional arrangement cell by exact vertical slabs."""
+    critical_x = {x for x, _ in vertices}
+    critical_x.update(F(c, a) for a, b, c in lines if b == 0)
+    x_samples = _interval_samples(critical_x)
+    witnesses = set()
+    for x in x_samples:
+        y_breaks = [F(c - a * x, b) for a, b, c in lines if b != 0]
+        witnesses.update((x, y) for y in _interval_samples(y_breaks))
+    return witnesses
 
-    def pressure_distance(p, q):
-        dx, dy = q[0] - p[0], q[1] - p[1]
-        qform = dx * dx - dx * dy + dy * dy
-        return float(np.sqrt(2.0 * qform / (3.0 * gamma**2)))
 
+def boundary_witnesses(lines, vertices):
+    """Sample every open line stratum and every arrangement vertex exactly."""
+    points = set(vertices)
+    for a, b, c in lines:
+        norm2 = a * a + b * b
+        p0 = (F(a * c, norm2), F(b * c, norm2))
+        direction = (-b, a)
+        ts = set()
+        for x, y in vertices:
+            if a * x + b * y == c:
+                ts.add(F((x - p0[0]) * direction[0] + (y - p0[1]) * direction[1], norm2))
+        samples = _interval_samples(ts)
+        if not ts:
+            samples = [F(0)]
+        points.update((p0[0] + t * direction[0], p0[1] + t * direction[1]) for t in samples)
+    return points
+
+
+def winner(scores, x: F, y: F) -> int:
+    values = [intercept + xs * x + ys * y for intercept, xs, ys in scores]
+    best = 0
+    for index in range(1, 3):
+        if values[index] > values[best]:
+            best = index
+    return best
+
+
+def evaluate(x: F, y: F):
+    pattern = tuple(winner(scores, x, y) for scores in SCORES)
+    r1 = [F(0), F(0), F(0)]
+    r2 = [F(0), F(0), F(0)]
+    d1l, d1h, d2l, d2h = pattern
+    r1[d1h] += C_EXACT
+    r1[d1l] += E_S_EXACT
+    r1[d2l] += C_EXACT
+    r2[d1l] += C_EXACT
+    r2[d2h] += C_EXACT
+    r2[d2l] += E_S_EXACT
+    a1 = tuple(min(value, cap) for value, cap in zip(r1, CAP))
+    a2 = tuple(min(value, cap) for value, cap in zip(r2, CAP))
+    c1 = sum(r1) - sum(a1)
+    c2 = sum(r2) - sum(a2)
+    return pattern, a1, c1, a2, c2
+
+
+def _fmt_vector(values):
+    return "(" + ",".join(str(int(value)) for value in values) + ")"
+
+
+EXPECTED_LINES = {
+    (0, 1, -3), (0, 1, 1), (0, 1, 3),
+    (1, -1, -6), (1, -1, -4), (1, -1, 4), (1, -1, 6),
+    (1, 0, -3), (1, 0, 1), (1, 0, 3),
+}
+EXPECTED_PATTERNS = {
+    (0, 0, 0, 0), (0, 0, 0, 1), (0, 0, 1, 1),
+    (0, 0, 2, 1), (0, 0, 2, 2), (1, 0, 1, 1),
+    (1, 1, 1, 1), (2, 0, 1, 1), (2, 0, 2, 1),
+    (2, 0, 2, 2), (2, 2, 1, 1), (2, 2, 2, 1),
+    (2, 2, 2, 2),
+}
+
+
+def pressure_norm_squared(p, q):
+    dx, dy = q[0] - p[0], q[1] - p[1]
+    return F(2, 3) * (dx * dx - dx * dy + dy * dy)
+
+
+def verify_paths():
     requested = [
-        (0.0, 0.0),
-        (1.01 / 3.0, 0.505 / 3.0),
-        (2.0 * 1.01 / 3.0, 2.0 * 0.505 / 3.0),
-        (1.01, 0.505),
+        (F(0), F(0)), (F(101, 300), F(101, 600)),
+        (F(101, 150), F(101, 300)), (F(101, 100), F(101, 200)),
     ]
     admitted_common = [
-        (0.0, 0.0),
-        (1.01 / 3.0, 0.3),
-        (2.0 * 1.01 / 3.0, 0.6),
-        (1.01, 0.9),
+        (F(0), F(0)), (F(101, 300), F(3, 10)),
+        (F(101, 150), F(3, 5)), (F(101, 100), F(9, 10)),
     ]
-    admitted_world2 = (0.99, 1.01)
-    if max(pressure_distance(a, b) for a, b in zip(requested, requested[1:])) > step_limit:
-        raise AssertionError("requested witness path violates Reach")
-    if max(pressure_distance(a, b) for a, b in zip(admitted_common, admitted_common[1:])) > step_limit:
-        raise AssertionError("admitted common path violates Reach")
-    if pressure_distance(admitted_common[-1], admitted_world2) > step_limit:
-        raise AssertionError("admitted world-2 branch violates Reach")
+    admitted_world2 = (F(99, 100), F(101, 100))
+    radius_squared = F(53, 200) ** 2
+    for path in (requested, admitted_common):
+        if any(pressure_norm_squared(a, b) > radius_squared for a, b in zip(path, path[1:])):
+            raise AssertionError("a displayed continuous-pressure path violates Reach")
+    if pressure_norm_squared(admitted_common[-1], admitted_world2) > radius_squared:
+        raise AssertionError("the admitted world-2 branch violates Reach")
+    if [evaluate(*point)[2] for point in requested] != [20, 20, 20, 0]:
+        raise AssertionError("requested path costs changed")
+    if [sum(evaluate(*point)[2::2]) / 2 for point in admitted_common] != [20, 20, 20, 20]:
+        raise AssertionError("admitted common-path expected costs changed")
+    if evaluate(*admitted_common[-1])[2] != 0 or evaluate(*admitted_world2)[4] != 0:
+        raise AssertionError("a post-identification pressure is not zero-overflow")
 
-    requested_costs_world1 = [admitted_and_cost(*p)[1] for p in requested]
-    if requested_costs_world1 != [E_S, E_S, E_S, 0.0]:
-        raise AssertionError(f"unexpected requested witness costs: {requested_costs_world1}")
-    admitted_prebranch = [admitted_and_cost(*p) for p in admitted_common]
-    expected_admitted_costs = [(c1 + c2) / 2 for _, c1, _, c2 in admitted_prebranch]
-    if expected_admitted_costs != [E_S, E_S, E_S, E_S]:
-        raise AssertionError(f"unexpected admitted common costs: {expected_admitted_costs}")
-    if admitted_and_cost(*admitted_common[-1])[1] != 0.0:
-        raise AssertionError("world-1 branch endpoint must have zero overflow")
-    if admitted_and_cost(*admitted_world2)[3] != 0.0:
-        raise AssertionError("world-2 branch endpoint must have zero overflow")
-    print("Requested witness: 3 feasible updates; costs (world 1) = [20, 20, 20, 0]")
-    print("Admitted witness: 3 common updates + 1 feasible branch; expected 5-round total = 80")
-    print(f"Enumerated arrangement signatures: {len(cells)}")
-    print(f"Minimum equal-prior expected overflow: {min((k[1] + k[2]) / 2 for k in cells):g}")
+
+def main():
+    lines = equality_lines()
+    if set(lines) != EXPECTED_LINES:
+        raise AssertionError(f"unexpected equality-line set: {lines}")
+    vertices = intersections(lines)
+    if len(vertices) != 25:
+        raise AssertionError(f"expected 25 arrangement vertices, found {len(vertices)}")
+    points = open_2d_witnesses(lines, vertices) | boundary_witnesses(lines, vertices)
+    cells = {}
+    for x, y in points:
+        pattern, a1, c1, a2, c2 = evaluate(x, y)
+        cells.setdefault(pattern, (x, y, a1, c1, a2, c2))
+
+    if set(cells) != EXPECTED_PATTERNS:
+        missing = sorted(EXPECTED_PATTERNS - set(cells))
+        extra = sorted(set(cells) - EXPECTED_PATTERNS)
+        raise RuntimeError(f"score-pattern mismatch; missing={missing}, extra={extra}")
+    for pattern, (x, y, a1, c1, a2, c2) in sorted(cells.items()):
+        informative = a1 != a2
+        if c1 + c2 < 2 * E_S_EXACT:
+            raise AssertionError(f"expected-cost bound failed for pattern {pattern}")
+        if not informative and (c1 != c2 or c1 < E_S_EXACT):
+            raise AssertionError(f"uninformative-cell bound failed for pattern {pattern}")
+        if informative and max(c1, c2) < 2 * E_S:
+            raise AssertionError(f"information/worst-world bound failed for pattern {pattern}")
+        if any(cost != 0 and cost < E_S_EXACT for cost in (c1, c2)):
+            raise AssertionError(f"positive-overflow quantization failed for pattern {pattern}")
+        print(
+            f"pattern={tuple(i + 1 for i in pattern)} witness=({x},{y}) "
+            f"A1={_fmt_vector(a1)} c1={c1} A2={_fmt_vector(a2)} c2={c2} "
+            f"informative={informative}"
+        )
+
+    verify_paths()
+    print(f"Distinct winner patterns: {len(cells)}")
+    print(f"Equality lines: {len(lines)}; vertices: {len(vertices)}")
+    print("Arithmetic: exact rational arrangement, costs, and reach checks")
 
 
 if __name__ == "__main__":

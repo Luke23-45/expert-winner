@@ -258,12 +258,12 @@ strictly stronger than H=2. A reviewer may still reduce it to costly
 search or bandits.
 **This candidate has non-trivial reduction risk.**
 
-**Update (2026-10-16).** A separate computer-assisted finite-horizon
-calculation supports $V_R(H)=60$ and $V_A(H)=80$ for one $E=3$, two-world,
-small-$B$ instance when $H\ge4$; its score-cell lower bound still needs a
-hand-checkable proof. See
+**Update (2026-10-16).** A separate finite-horizon calculation, with its
+score-cell costs now stated in a hand-checkable table, gives
+$V_R(H)=60$ and $V_A(H)=80$ for one $E=3$, two-world, small-$B$ instance
+when $H\ge4$. See
 [`phase1_g3_steering_2026-10-16.md`](phase1_g3_steering_2026-10-16.md).
-This closes the numerical value calculation for that specific instance. Its gap is
+This closes the fixed-instance value calculation. Its gap is
 constant in $H$, and the reduction risk remains: this is not the general
 small-$B$ theorem or proof of a Top-K-specific theory contribution.
 

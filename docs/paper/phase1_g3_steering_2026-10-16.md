@@ -2,9 +2,9 @@
 
 **Date:** 2026-10-16.
 **Branch:** `feat/research-censored-feedback`.
-**Status:** computer-assisted value calculation for one (E=3), two-world
-parameter instance. Its hand-checkable score-cell proof, general small-(B)
-scaling, and reduction attack remain open.
+**Status:** hand-checkable fixed-instance value calculation for one (E=3),
+two-world parameter instance. The parameterized small-(B) theorem and its
+reduction attack remain open.
 
 This note supersedes the earlier heuristic that estimated the admitted cost
 as approximately (1.5) times an open-loop steering cost. That estimate was
@@ -39,9 +39,10 @@ $$
 The previous scripts checked Euclidean distance against a circular bound.
 That circle allowed some infeasible edges. Both steering scripts now check
 `Reach-xy`; their discretized shortest paths are still exploratory and are
-not policy-value bounds. The score-arrangement enumerator uses floating-point
-LP and intersection calculations, so its output is a reproducible
-computer-assisted check, not a rational-arithmetic certificate.
+not policy-value bounds. The score-arrangement enumerator now uses exact
+rational arithmetic for line intersections, tie strata, costs, and the
+displayed reach witnesses. The separate finite-grid Bellman diagnostic
+remains a numerical check only.
 
 ## 2. Finite-horizon value calculation for the documented $E=3$ instance
 
@@ -51,11 +52,10 @@ pressure-step radius in the original centered-pressure norm is
 $r=\eta\gamma B=0.265$. The prior is uniform over the two static worlds,
 and $q_0=0$. The objective is raw cumulative overflow.
 
-A score-line arrangement enumeration gives 13 pressure-outcome signatures,
-including lower-dimensional tie strata. The finite-case verification uses
-floating-point LP and intersection calculations; it is not a standalone
-formal proof. The reproducible
-enumerator is [`analyze_e3_exact_partition.py`](../../scripts/analyze_e3_exact_partition.py).
+The exact winner inequalities and 13-row outcome table are proved in
+[`phase1_cost_info_lemma_2026-10-16.md`](phase1_cost_info_lemma_2026-10-16.md).
+The rational checker [`analyze_e3_exact_partition.py`](../../scripts/analyze_e3_exact_partition.py)
+independently validates the line arrangement, including tie strata.
 Across the enumerated signatures:
 
 - every uninformative pressure has equal world costs, each at least 20;
@@ -84,8 +84,8 @@ $$
 
 Each update has centered-pressure norm $0.2381<0.265$. The first three
 visited pressures cost 20 in world 1; the last has zero overflow. World 2 uses the symmetric sequence. The distance argument and the
-enumerated cell-cost table give the matching lower bound, subject to the
-proof gap stated above. Consequently,
+complete winner/cost table in the companion lemma give the matching lower
+bound. Consequently,
 
 $$
 V_R(H)=60\qquad(H\ge 3).
@@ -95,9 +95,8 @@ $$
 
 The first informative pressure cannot occur before the fourth visited
 pressure (three updates). Before that, the observation is shared by both
-worlds. The enumerated cell-cost check indicates that each of those first
-four rounds has expected cost at least 20, whether its observation is
-informative or not; this inequality still needs a hand-checkable cell proof.
+worlds. The complete cell table shows that each of those first four rounds
+has expected cost at least 20, whether its observation is informative or not.
 Hence $V_A(H)\ge80$ for $H\ge4$.
 
 For an attaining policy, use the common pressure sequence
@@ -120,10 +119,10 @@ V_A(H)-V_R(H)=20\qquad(H\ge4).
 $$
 
 At $H=3$, neither policy can reach an informative pressure and both values
-are 60. This exact instance **does not produce a horizon-growing raw gap**.
-It demonstrates a finite signal-value gap for the stated plant and prior;
-it does not close the general G3 problem or establish that the result is
-irreducible relative to constrained adaptive testing.
+are 60. This exact instance **does not produce a horizon-growing raw gap**. It
+proves a finite signal-value gap for the stated plant and prior; it does not
+close the parameterized G3 problem or establish irreducibility relative to
+constrained adaptive testing.
 
 ## 3. Finite-grid Bellman computation and its limits
 
@@ -142,10 +141,9 @@ These are exact values **for their respective finite action grids**, not
 certified values for continuous pressure. The non-monotone refinement is a
 warning that coarse grids miss narrow useful cells; the $H=5$, $n=241$
 admitted value of 90 misses the explicit continuous-pressure policy of cost
-80 above. Do not use the lattice table as a continuous-space result. The instance
-value claim rests on the analytic reach argument and the enumerated cell
-inequalities; those inequalities still need a hand-checkable proof before
-this becomes a paper-ready theorem.
+80 above. Do not use the lattice table as a continuous-space result. The fixed-instance
+value claim rests on the analytic reach argument and the explicit winner/cost
+table in the companion lemma, not on the lattice values.
 
 ## 4. What remains open
 

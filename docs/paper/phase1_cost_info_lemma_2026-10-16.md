@@ -1,68 +1,104 @@
-# Cost-versus-information lemma (E=3): finite-partition enumeration
+# Cost-versus-information lemma (E=3): exact score-cell proof
 
 **Date:** 2026-10-16.
 **Branch:** `feat/research-censored-feedback`.
-**Status:** the score-line arrangement script enumerates 13 pressure-outcome
-signatures, including tie strata. Its floating-point finite-case check
-supports the lemma for this parameter instance; the paper still needs a
-concise hand-checkable case proof.
+**Status:** the fixed-instance lemma below has an exact finite case table;
+the parameterized G3 theorem and prior-art reduction remain open.
 
 ---
 
-## 1. What the partition reveals
+## 1. Model and exact winner regions
 
-Enumerating all 13 distinct (A¹,A²) signatures over the full (x,y)
-plane—including boundary-only outcomes under the lower-index tie rule—
-with [`scripts/analyze_e3_exact_partition.py`](../../scripts/analyze_e3_exact_partition.py)
-gives the cost pairs summarized below. The script tests every open
-winner assignment by a strict-margin linear program, then samples every
-vertex and one-dimensional stratum of the exact score-line arrangement.
+Use $C=50$, $E_S=20$, $C_{sink}=30$, $m=1$, $M=3$, and equal prior on
+two static worlds. For a pressure $(x,y)$, the four token types have score
+vectors
 
-| informative? | E[c] | (c₁,c₂) | interpretation |
+$$
+L_1=(1-x,-3-y,0),\quad H_1=(3-x,-3-y,0),\\
+L_2=(-3-x,1-y,0),\quad H_2=(-3-x,3-y,0).
+$$
+
+Experts are indexed $1,2,3$; ties go to the lower index. The requests are
+$R^1=C e_{d_{1H}}+E_S e_{d_{1L}}+C e_{d_{2L}}$ and
+$R^2=C e_{d_{1L}}+C e_{d_{2H}}+E_S e_{d_{2L}}$, where $d$ is the winning
+expert. Admission is $A^w_e=\min(R^w_e,C_e)$ for capacities
+$(C,C,C_{sink})$, and overflow is $c_w=\sum_e(R^w_e-A^w_e)$.
+
+The exact winner conditions (including tie priority) are:
+
+| Token | Winner 1 | Winner 2 | Winner 3 |
 |---|---|---|---|
-| No | 20.00 | (20,20) | do nothing; learn nothing |
-| Yes | 20.00 | (40,0) or (0,40) | probe; learn perfectly |
-| Yes | 40.00 | (40,40) | probe both; learn, but costly |
-| No | 40.00 | (40,40) | uninformative but costly |
-| Yes | 45.00 | (70,20) or (20,70) | partial probe |
-| Yes | 65.00 | (40,90) or (90,40) | bad probe |
-| No | 70–90 | (70,70) etc. | very costly, uninformative |
+| $L_1$ | $x\le1$, $x-y\le4$ | $y\le-3$, $x-y>4$ | $x>1$, $y>-3$ |
+| $H_1$ | $x\le3$, $x-y\le6$ | $y\le-3$, $x-y>6$ | $x>3$, $y>-3$ |
+| $L_2$ | $x\le-3$, $x-y\le-4$ | $y\le1$, $x-y>-4$ | $x>-3$, $y>1$ |
+| $H_2$ | $x\le-3$, $x-y\le-6$ | $y\le3$, $x-y>-6$ | $x>-3$, $y>3$ |
 
-**Finding 1.** min_{(x,y)} E[c] = E_S = 20, attained both by the
-uninformative "do nothing" and by the informative probe. The
-no-hedging lower bound E[c] ≥ E_S/4 = 5 is **not tight**; the true
-minimum is 4× larger.
+These conditions partition each token's choices. Their score-equality lines
+are exactly $x\in\{-3,1,3\}$, $y\in\{-3,1,3\}$, and
+$x-y\in\{-6,-4,4,6\}$. Intersecting the four token conditions gives the
+following compatibility table. Here row labels encode $(d_{1L},d_{1H})$;
+column labels encode $(d_{2L},d_{2H})$. A check means the four inequalities
+have a nonempty intersection; blank entries are inconsistent.
 
-**Finding 2.** There is **no pressure that is both cheap
-(E[c] < E_S) and informative**. Every informative pressure has
-E[c] ≥ E_S, with max(c₁,c₂) ≥ 2E_S.
+| $(d_{1L},d_{1H})$ | $a=(1,1)$ | $b=(1,2)$ | $c=(2,2)$ | $d=(3,2)$ | $e=(3,3)$ |
+|---|---:|---:|---:|---:|---:|
+| $A=(1,1)$ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| $B=(2,1)$ |  |  | ✓ |  |  |
+| $C=(2,2)$ |  |  | ✓ |  |  |
+| $D=(3,1)$ |  |  | ✓ | ✓ | ✓ |
+| $E=(3,3)$ |  |  | ✓ | ✓ | ✓ |
 
-**Finding 3.** The cheapest informative pressures are exactly the
-single-world sweet spots: (c₁,c₂) = (2E_S, 0) or (0, 2E_S). They
-reveal the world perfectly (A¹ ≠ A²) but cost 2E_S in the wrong
-world.
+Thus there are 13 possible winner patterns. The exact rational checker
+[`analyze_e3_exact_partition.py`](../../scripts/analyze_e3_exact_partition.py)
+independently decomposes all ten lines into their 25 vertices, open line
+segments, and open 2-D cells. It verifies these 13 patterns and checks the
+costs using integer capacities and exact rational witnesses. The full
+outcome table is below; each witness certifies that its row is attainable.
 
----
+## 2. Complete outcome and cost table
 
-## 2. Lemma statement (cost versus information, E=3)
+$A^1,A^2$ are admitted-count vectors; $(c_1,c_2)$ are the corresponding
+overflows. A signal is informative exactly when $A^1\ne A^2$.
 
-*Lemma.* For the E=3 construction with equal prior, for every
-pressure (x,y):
-- (a) If A¹(x,y) = A²(x,y) (uninformative), then c₁ = c₂ ≥ E_S and
-  the posterior remains (1/2, 1/2).
-- (b) If A¹(x,y) ≠ A²(x,y) (informative), then E[c] ≥ E_S and
-  max(c₁,c₂) ≥ 2E_S, and the posterior collapses to a point mass.
+| $(d_{1L},d_{1H},d_{2L},d_{2H})$ | Rational witness $(x,y)$ | $A^1$; $c_1$ | $A^2$; $c_2$ |
+|---|---|---|---|
+| $(1,1,1,1)$ | $(-6,1)$ | $(50,0,0)$; 70 | $(50,0,0)$; 70 |
+| $(1,1,1,2)$ | $(-4,3/2)$ | $(50,0,0)$; 70 | $(50,50,0)$; 20 |
+| $(1,1,2,2)$ | $(-5,-3)$ | $(50,50,0)$; 20 | $(50,50,0)$; 20 |
+| $(1,1,3,2)$ | $(-2,5/2)$ | $(50,0,30)$; 40 | $(50,50,20)$; 0 |
+| $(1,1,3,3)$ | $(0,5)$ | $(50,0,30)$; 40 | $(50,0,30)$; 40 |
+| $(2,1,2,2)$ | $(-10,-15)$ | $(50,50,0)$; 20 | $(0,50,0)$; 70 |
+| $(2,2,2,2)$ | $(1,-6)$ | $(0,50,0)$; 70 | $(0,50,0)$; 70 |
+| $(3,1,2,2)$ | $(3,1)$ | $(50,50,20)$; 0 | $(0,50,30)$; 40 |
+| $(3,1,3,2)$ | $(2,2)$ | $(50,0,30)$; 40 | $(0,50,30)$; 40 |
+| $(3,1,3,3)$ | $(2,9/2)$ | $(50,0,30)$; 40 | $(0,0,30)$; 90 |
+| $(3,3,2,2)$ | $(4,1/2)$ | $(0,50,30)$; 40 | $(0,50,30)$; 40 |
+| $(3,3,3,2)$ | $(6,5/2)$ | $(0,0,30)$; 90 | $(0,50,30)$; 40 |
+| $(3,3,3,3)$ | $(4,9)$ | $(0,0,30)$; 90 | $(0,0,30)$; 90 |
 
-*Verification of (a) and (b).* The exhaustive arrangement enumerator
-checks each of the 13 signatures and enforces the stated inequalities.
-This is a reproducible finite-case verification, not a replacement for
-the paper proof: the final theorem should include the score inequalities
-or a compact exact table that lets a reader check all cells without
-trusting code.
+The table proves the following for **every** pressure:
 
-*Corollary.* The "cost of one bit of information" (going from
-1 bit of uncertainty to 0) is at least E_S in expectation. There
-are no cheap informative actions.
+1. If the admitted observation is uninformative, $A^1=A^2$ and
+   $c_1=c_2\ge E_S$.
+2. If it is informative, $(c_1+c_2)/2\ge E_S$ and
+   $\max(c_1,c_2)\ge2E_S$.
+3. Each world’s overflow is either zero or at least $E_S$.
+
+Under equal prior, an informative observation distinguishes the two static
+worlds exactly, since the observation is deterministic and the two possible
+admitted vectors differ. Therefore the expected stage cost is at least
+$E_S$ whenever the pressure is informative; there is no cheaper informative
+action. The smallest informative cost pairs are $(2E_S,0)$ and $(0,2E_S)$.
+
+*Proof status.* The winner inequalities and compatibility table provide a
+short manual route to verify completeness. The script is an exact-arithmetic
+cross-check of the arrangement and tie strata, not the source of the claim.
+A paper proof should retain the inequalities and table (or an equivalent
+appendix), rather than cite the script as proof.
+
+*Corollary.* In this instance, acquiring the one bit that identifies the
+world costs at least $E_S$ in expected stage overflow. This is a fixed-instance
+cost-information statement, not a general lower bound for censored feedback.
 
 ---
 
@@ -82,10 +118,10 @@ admitted policy probes once: its total is $2E_S=40$, while the requested
 policy pays only the initial $E_S=20$. The resulting cumulative gap is
 $E_S$, a one-time learning cost rather than a horizon-growing gap. With the
 small-step reach constraint in the companion instance, travel changes the
-values: the computer-assisted calculation gives 60 versus 80 for $H\ge4$.
+values: the exact fixed-instance calculation gives 60 versus 80 for $H\ge4$.
 That instance has normalized gap $20/(HKT)$, which also decays as $H$ grows.
 
-**For a horizon-growing gap, one of the following must hold:**
+**Candidate mechanisms to investigate for a horizon-growing gap:**
 1. The world **changes** over time (Markov switching) — out of
    scope for the current static-world Bellman recursion; requires
    extending (DP-A) with a transition kernel.
@@ -118,7 +154,6 @@ The gap is constant in $H$, so it does not establish a horizon-growing
 lower bound. A parameterized $B\to0$ result remains open and must optimize
 over all causal policies; one-world shortest paths do not establish it.
 
-No large experiment sweep was run. The arrangement check is a deterministic
-floating-point finite-case verification, and the companion G3 note gives a
-value argument whose
-score-cell inequalities still need a hand-checkable proof.
+No large experiment sweep was run. The arrangement checker uses exact
+rational arithmetic; the companion G3 value argument is derived from the
+explicit score-cell table and exact reach calculations.
