@@ -391,3 +391,54 @@ the signal is censored.
 12. **(A_0) ≡ (A) gauge-equivalence** holds only under uniform target + uniform
     capacity (proved); the fragility outside that regime is the finding, not a
     general indictment — keep the regime qualifier attached to every mention.
+
+---
+
+## Addendum 2026-10-16: φ-Balancing and the ALF-LB theoretical framework
+
+Full comparison: `docs/paper/prior_art_comparison_2026-10-16.md`. Both papers
+were read in full (PDF via arXiv, pdftotext) with full-text censoring-term
+searches. Nothing in §1 above is rewritten; what follows records what changed
+and why.
+
+**What changed:**
+1. **(vi) gauge-projection formulation — must-cite list grows, verdict
+   unchanged (PARTIALLY PREDATED).** φ-Balancing (arXiv:2605.15403, ICML 2026)
+   maintains a dual price `q = ∇φ(m)` over an EMA of batch routing
+   distributions — a persistent per-expert load-error state, the closest
+   non-bias-controller analogue of a "pressure state" in the literature. It is
+   loss-actuated (via `L_aux`), not routing-actuated, and has no gauge/zero-sum
+   structure (mirror descent on the dual, not a projected feedback loop), so it
+   does not predate the quotient formal theory. Cite as adjacent
+   stateful-load-tracking prior art.
+2. **NEW verdict (vii): primal-dual theory of feedback load balancing —
+   PARTIALLY PREDATED.** Han & Zhong, arXiv:2512.03915, cast DeepSeek's ALF-LB
+   as single-shot primal-dual on the assignment LP, with a monotonic
+   Lagrangian-improvement condition (Thm 1), overloaded→underloaded preference
+   rule (Thm 5), band-stability (Thm 9), and a logarithmic regret bound from
+   strong convexity of the expected dual (Thm 17). This is the primal-dual
+   theory of ALF-LB and must be cited as such. Our claimed-novel part is now
+   scoped precisely: the capacity-censored extension (their model has no
+   capacity, no dropping, no censoring — verified zero hits), the gauge
+   quotient structure (their dual has an unnamed, unexploited common-mode
+   invariance; our `Π_g` makes it explicit and load-bearing), target
+   dependence, and failure conditions under saturation.
+3. **Never-claim list additions:** (a) "persistent per-expert load state" as a
+   concept (φ-Balancing's dual price); (b) "first (sub)gradient/primal-dual
+   theory of feedback load balancing" (2512.03915).
+
+**What did not change:** (i) requested-vs-admitted axis — NOVEL (neither new
+paper names it; φ-Balancing sidesteps hard counts entirely via soft
+probabilities). (ii) censoring formalization — NOVEL (verified zero hits in
+both papers). (iii) target-aware vs target-blind — NOVEL (both papers uniform
+targets only). (iv) t_flip law — CLASSICAL mechanism, ours as verified law.
+(v) anti-windup — CLASSICAL mechanism, honest negative result.
+
+**Note for the deployment-model question (reviewer issue 3):** φ-Balancing's
+deliberate avoidance of hard dispatch statistics ("relies solely on the dual
+variable `q`, which tracks the history of the soft routing probabilities…
+avoiding the instability associated with discrete routing decisions") is
+independent corroboration that the *tap point* of the feedback signal is a
+live design decision in the field — consistent with framing the paper around
+"which signal controls better under saturation" rather than asserting a
+telemetry restriction. See `docs/paper/deployment_telemetry_model.md`.
