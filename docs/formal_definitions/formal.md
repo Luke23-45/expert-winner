@@ -232,7 +232,7 @@ the gauge-quotient pressure dynamics are
 q^{+}
 =
 \gproj\!\left(
-(1-\delta)q + \eta\,\varepsilon(q)
+(1-\delta)q + \eta\gamma\,varepsilon(q)
 \right).
 \]
 Since \(\gproj(z+c\one)=\gproj(z)\), adding any common-mode component to \(\varepsilon(q)\) leaves this update unchanged. Equivalently, the gauge dynamics depend only on the centered component of the feedback.
@@ -240,7 +240,7 @@ Since \(\gproj(z+c\one)=\gproj(z)\), adding any common-mode component to \(\vare
 \begin{lemma}[Boundary exit and re-entry]
 Let
 \[
-z_e := (1-\delta)q_e + \eta\,\varepsilon_e(q),
+z_e := (1-\delta)q_e + \eta\gamma\,varepsilon_e(q),
 \qquad
 m := \min_j z_j.
 \]
@@ -264,9 +264,9 @@ z_e = m.
 \]
 In particular, an expert at the boundary, \(q_e = 0\), re-enters with positive pressure if and only if
 \[
-\eta\,\varepsilon_e(q)
+\eta\gamma\,varepsilon_e(q)
 >
-\min_j\left((1-\delta)q_j + \eta\,\varepsilon_j(q)\right).
+\min_j\left((1-\delta)q_j + \eta\gamma\,varepsilon_j(q)\right).
 \]
 \end{lemma}
 
@@ -361,7 +361,7 @@ Before passing to the gauge quotient, consider the absolute reflected update on 
 \[
 \widehat{U}_{\varepsilon}(q)
 :=
-\relu{(1-\delta)q + \eta\,\varepsilon(q)}.
+\relu{(1-\delta)q + \eta\gamma\,varepsilon(q)}.
 \]
 
 \begin{proposition}[No interior fixed point under admitted feedback]
@@ -369,13 +369,13 @@ Suppose \(q \in \R_{++}^E\) is a fixed point of
 \[
 q
 =
-\relu{(1-\delta)q + \eta\,\varepsilon(q)}.
+\relu{(1-\delta)q + \eta\gamma\,varepsilon(q)}.
 \]
 Then
 \[
 \delta q_e
 =
-\eta\,\varepsilon_e(q),
+\eta\gamma\,varepsilon_e(q),
 \qquad
 e \in [E].
 \]
@@ -383,7 +383,7 @@ Consequently,
 \[
 \delta \sum_{e=1}^E q_e
 =
-\eta \sum_{e=1}^E \varepsilon_e(q).
+\eta\gamma \sum_{e=1}^E \varepsilon_e(q).
 \]
 If \(\varepsilon = \varepsilon^{\mathrm{A}}\) and any assignment is rejected, then
 \[
@@ -397,19 +397,19 @@ If \(q_e > 0\), the ReLU is inactive at coordinate \(e\), so
 \[
 q_e
 =
-(1-\delta)q_e + \eta \varepsilon_e(q).
+(1-\delta)q_e + \eta\gamma \varepsilon_e(q).
 \]
 Thus
 \[
 \delta q_e
 =
-\eta \varepsilon_e(q).
+\eta\gamma \varepsilon_e(q).
 \]
 Summing over \(e\) gives
 \[
 \delta \sum_e q_e
 =
-\eta \sum_e \varepsilon_e(q).
+\eta\gamma \sum_e \varepsilon_e(q).
 \]
 The left-hand side is nonnegative. Under admitted feedback with rejection,
 \[
@@ -468,7 +468,7 @@ Thus \(\varepsilon^{\mathrm{A}}(q)\) is a constant vector. The gauge update beco
 q^{+}
 =
 \gproj\!\left(
-(1-\delta)q + \eta \frac{c-1}{E}\one
+(1-\delta)q + \eta\gamma \frac{c-1}{E}\one
 \right)
 =
 (1-\delta)q.
@@ -510,15 +510,15 @@ Let
 \]
 Then
 \[
-(1-\delta)q + \eta \varepsilon^{\mathrm{A}}
+(1-\delta)q + \eta\gamma \varepsilon^{\mathrm{A}}
 =
-(1-\delta)q + \eta \alpha \one.
+(1-\delta)q + \eta\gamma \alpha \one.
 \]
 Because \(q \in \mathcal{Q}\), \(\min_e q_e = 0\), so
 \[
-\min_e\left((1-\delta)q_e + \eta \alpha\right)
+\min_e\left((1-\delta)q_e + \eta\gamma \alpha\right)
 =
-\eta \alpha.
+\eta\gamma \alpha.
 \]
 Applying the gauge projection,
 \[
