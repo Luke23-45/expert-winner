@@ -8,8 +8,9 @@ Uses Dijkstra over the discretized (x,y) grid.
 import numpy as np
 import heapq
 import sys
-sys.path.insert(0, 'tests')
-from test_phase1_h3_math import admitted_and_cost, M_LOW, M_MARGIN, GAMMA, E_S
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+from moe_control.research.e3_instance import admitted_and_cost, M_MARGIN, GAMMA
 
 ETA = 0.1
 
@@ -18,11 +19,13 @@ def is_world1_sweet_spot(x, y):
     return c1 < 1e-9
 
 def min_cost_steering(B, extent=6.0, n=61):
-    step_bound = ETA * GAMMA * B
+    # In (x,y) score-difference coordinates, exact Reach is the ellipse
+    # dx^2-dx*dy+dy^2 <= 3/2 * (eta*gamma^2*B)^2.
+    step_xy_radius = ETA * GAMMA**2 * B
     xs = np.linspace(-extent, extent, n)
     ys = np.linspace(-extent, extent, n)
     dx = xs[1] - xs[0]
-    max_dxy = GAMMA * np.sqrt(2) * step_bound
+    max_dxy = np.sqrt(3) * step_xy_radius
     grid_reach = max(1, int(np.ceil(max_dxy / dx)))
 
     # Cost of being at each cell (expected overflow, equal prior)
@@ -61,8 +64,10 @@ def min_cost_steering(B, extent=6.0, n=61):
                     continue
                 if (jx, jy) == (ix, iy):
                     continue
-                dist_xy = np.sqrt((xs[jx]-xs[ix])**2 + (ys[jy]-ys[iy])**2)
-                if dist_xy <= max_dxy + 1e-9:
+                dx = xs[jx] - xs[ix]
+                dy = ys[jy] - ys[iy]
+                reach_q = dx * dx - dx * dy + dy * dy
+                if reach_q <= 1.5 * step_xy_radius**2 + 1e-12:
                     nd = d + cost[jx, jy]
                     if nd < dist[jx, jy]:
                         dist[jx, jy] = nd

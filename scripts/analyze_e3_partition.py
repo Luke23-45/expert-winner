@@ -11,9 +11,10 @@ Goal: characterize the Pareto frontier of (information, cost).
 """
 import numpy as np
 import sys
-sys.path.insert(0, 'tests')
-from test_phase1_h3_math import (
-    admitted_and_cost, C, E_S, C_SINK, M_LOW, M_MARGIN
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+from moe_control.research.e3_instance import (
+    admitted_and_cost
 )
 
 def analyze_partition(n=121, extent=6.0):

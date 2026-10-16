@@ -243,17 +243,44 @@ makes final assignments. Contribution is prediction + placement;
 counts. (Assessment from abstract + method; full-text read deferred —
 structural boundary confirmed.)
 
-### 5.6 What this changes
+### 5.6 State-constrained sensing and finite-horizon partial observability
+
+Smallwood & Sondik (1973) formulate finite-horizon control with a hidden
+finite-state process and partial observations; their value-function result
+and dynamic-programming method make belief-state control an established
+general comparator `[VERIFIED-PRIMARY: abstract]`
+([Operations Research DOI](https://doi.org/10.1287/opre.21.5.1071)).
+Davenport et al. (2016) study adaptive sensing when measurement vectors
+must satisfy physical constraints, and analyze both limits and benefits of
+adaptivity in that setting `[VERIFIED-PRIMARY: full text]`
+([IEEE TSP DOI](https://doi.org/10.1109/TSP.2016.2597130)).
+These are not the same MoE plant: the former is a general partial-observation
+control framework, and the latter is constrained linear sensing/estimation.
+They do, however, invalidate any broad assertion that sequential information
+gathering under state/action constraints is itself new.
+
+**Required reduction test:** express the MoE construction as a finite-horizon
+belief-state control problem with pressure as the physical state, reachable
+pressure changes as the action constraint, Top-K plus admission as the
+observation kernel, and overflow as the stage cost. Then identify a theorem
+or invariant—such as the exact Top-K score-cell arrangement, clipping map, or
+gauge-induced reach metric—that is not preserved by the strongest relevant
+abstract model. Until that separation is proved, the E=3 calculation is a
+model-specific instance of constrained adaptive control, not evidence of a
+new general theory.
+
+### 5.7 What this changes
 
 - **Reduction outcome:** the current paired-world Phase 1 gap reduces to
   a two-point censored newsvendor regret game. Keep it as an MoE
   realization/example, not as the novel lower-bound centerpiece. The full
   mapping is in `phase1_reduction_audit_2026-10-16.md`.
 - **Next novelty gate:** any replacement theorem must identify and prove
-  the quantitative property that survives the static two-state reduction
-  (for example a multi-round state-transition effect, a gauge-dependent
-  value difference, or a minimal-signal characterization). Merely adding
-  MoE terminology or parameters does not pass this gate.
+  the quantitative property that survives both the static two-state
+  reduction and the state-constrained sensing / belief-control comparison
+  above (for example a multi-round state-transition effect, a
+  gauge-dependent value difference, or a minimal-signal characterization).
+  Merely adding MoE terminology or parameters does not pass this gate.
 - **Yang & Shi 2023** (POMS, DOI 10.1111/poms.13824): journal paper,
   full text not verified — accept reviewer's characterization
   (regret under censored demand, inventory control) pending direct

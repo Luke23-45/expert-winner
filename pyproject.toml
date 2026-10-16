@@ -14,6 +14,9 @@ dependencies = [
     "numpy",
 ]
 
+[project.optional-dependencies]
+research = ["scipy>=1.10"]
+
 [project.scripts]
 moe-control = "moe_control.cli:entry"
 

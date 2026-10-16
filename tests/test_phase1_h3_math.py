@@ -15,82 +15,18 @@ Parameters (from §5 of phase1_h3_dp_reduction.md):
   E_S < C_sink < C - E_S/2, 0 < m < M, delta = 0
 """
 import math
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import numpy as np
 import pytest
 
-# ---------------------------------------------------------------------------
-# Parameters
-# ---------------------------------------------------------------------------
-C = 50.0
-E_S = 20.0
-C_SINK = 30.0
-M_MARGIN = 3.0   # high margin M
-M_LOW = 1.0      # low margin m
-GAMMA = 1.0
-
-CAP = np.array([C, C, C_SINK])
-T_BATCH = 2 * C + E_S  # 120
-
-
-def _check_params():
-    assert E_S < C_SINK < C - E_S / 2, "capacity ordering violated"
-    assert 0 < M_LOW < M_MARGIN
-
-
-_check_params()
-
-# ---------------------------------------------------------------------------
-# Score-cell machinery (§4.1)
-# ---------------------------------------------------------------------------
-def winning_expert(scores):
-    """Argmax with lower-index tie priority. scores: array-like length 3."""
-    s = np.asarray(scores, dtype=float)
-    best = 0
-    for j in range(1, 3):
-        if s[j] > s[best]:
-            best = j
-    return best  # 0-based
-
-
-def score_cells(x, y):
-    """Return (d_1L, d_1H, d_2L, d_2H) as 0-based winning expert indices."""
-    m, M = M_LOW, M_MARGIN
-    L1 = (m - x, -M - y, 0.0)
-    H1 = (M - x, -M - y, 0.0)
-    L2 = (-M - x, m - y, 0.0)
-    H2 = (-M - x, M - y, 0.0)
-    return (
-        winning_expert(L1),
-        winning_expert(H1),
-        winning_expert(L2),
-        winning_expert(H2),
-    )
-
-
-def request_vectors(x, y):
-    """Return (R^1, R^2) as in (Requests)."""
-    d_1L, d_1H, d_2L, d_2H = score_cells(x, y)
-    R1 = np.zeros(3)
-    R1[d_1H] += C
-    R1[d_1L] += E_S
-    R1[d_2L] += C
-    R2 = np.zeros(3)
-    R2[d_1L] += C
-    R2[d_2H] += C
-    R2[d_2L] += E_S
-    return R1, R2
-
-
-def admitted_and_cost(x, y):
-    """Return (A^1, c_1, A^2, c_2)."""
-    R1, R2 = request_vectors(x, y)
-    A1 = np.minimum(R1, CAP)
-    A2 = np.minimum(R2, CAP)
-    c1 = float(np.sum(R1 - A1))
-    c2 = float(np.sum(R2 - A2))
-    return A1, c1, A2, c2
-
+from moe_control.research.e3_instance import (
+    C, E_S, C_SINK, M_MARGIN, M_LOW, GAMMA, CAP, T_BATCH,
+    admitted_and_cost, request_vectors, score_cells, winning_expert,
+)
 
 # ---------------------------------------------------------------------------
 # Test 1: origin cell matches the construction (§5 setup)

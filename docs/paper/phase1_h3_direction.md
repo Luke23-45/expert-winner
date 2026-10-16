@@ -258,6 +258,15 @@ strictly stronger than H=2. A reviewer may still reduce it to costly
 search or bandits.
 **This candidate has non-trivial reduction risk.**
 
+**Update (2026-10-16).** A separate computer-assisted finite-horizon
+calculation supports $V_R(H)=60$ and $V_A(H)=80$ for one $E=3$, two-world,
+small-$B$ instance when $H\ge4$; its score-cell lower bound still needs a
+hand-checkable proof. See
+[`phase1_g3_steering_2026-10-16.md`](phase1_g3_steering_2026-10-16.md).
+This closes the numerical value calculation for that specific instance. Its gap is
+constant in $H$, and the reduction risk remains: this is not the general
+small-$B$ theorem or proof of a Top-K-specific theory contribution.
+
 **Prior-theory boundary to check.** Bayesian active learning studies
 adaptive selection of informative tests, including nonuniform test
 costs and noisy or correlated outcomes; costly-bandit work studies
@@ -325,9 +334,12 @@ realization of a two-point value gap, but its own reduction audit shows
 that it is not a novel centerpiece. The T7-divergence (§3) and
 Markov-switching (§4) directions are research hypotheses, not results.
 
-**Recommendation:** develop the E-world probing lower bound to
-completion (close G1–G3), then subject it to the full reduction
-attack. If it collapses, pivot to T7-divergence. Do not run
-experiments until a replacement theorem survives the attack.
+**Recommendation:** generalize the exact $E=3$ value calculation only
+after a full reduction comparison. First determine whether a parameterized
+small-$B$ gap survives against every causal admitted policy and whether
+its bound uses a score-cell/reachability property absent from the abstract
+constrained-testing model. If not, report it as a constrained-testing
+result/application or pivot to T7-divergence. Do not run large sweeps until
+that theorem and reduction boundary are fixed.
 
 No sweeps were run. No theorem is claimed here.

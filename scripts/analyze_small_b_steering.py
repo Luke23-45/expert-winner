@@ -12,10 +12,9 @@ cell from origin, as a function of B.
 """
 import numpy as np
 import sys
-sys.path.insert(0, 'tests')
-from test_phase1_h3_math import (
-    admitted_and_cost, M_LOW, M_MARGIN, GAMMA, E_S, C
-)
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+from moe_control.research.e3_instance import admitted_and_cost, M_MARGIN, GAMMA
 
 ETA = 0.1
 
@@ -48,7 +47,8 @@ def min_steps_to_sweet_spot(B, max_steps=50):
     origin to any world-1 sweet-spot cell, with step bound eta*gamma*B.
     Uses a grid discretization for tractability.
     """
-    step_bound = ETA * GAMMA * B
+    # Exact transformed Reach ellipse in (x,y) coordinates.
+    step_xy_radius = ETA * GAMMA**2 * B
     # Discretize (x,y) space
     extent = 6.0
     n = 61
@@ -72,13 +72,10 @@ def min_steps_to_sweet_spot(B, max_steps=50):
     if sweet[start]:
         return 0
 
-    # For BFS, we need to know which grid points are within step_bound.
-    # In (x,y) coords: moving from q to q' changes (x,y) by
-    # gamma*P0(q'-q) projected. Approximate: ||(dx, dy)|| <=~ step_bound * sqrt(2).
-    # Actually: x=gamma(q1-q3), so dx = gamma*d(q1-q3).
-    # ||P0(dq)|| <= step_bound implies |d(q1-q3)| <= sqrt(2)*step_bound roughly.
-    # Use conservative: max(|dx|,|dy|) <= gamma*sqrt(2)*step_bound.
-    max_dxy = GAMMA * np.sqrt(2) * step_bound
+    # The maximum Euclidean coordinate displacement over the exact ellipse is
+    # sqrt(3)*step_xy_radius; use it only to bound the candidate grid loop.
+    # Every candidate is then checked against the exact quadratic form below.
+    max_dxy = np.sqrt(3) * step_xy_radius
     # Grid steps reachable
     grid_reach = max(1, int(np.ceil(max_dxy / dx)))
 
@@ -94,9 +91,11 @@ def min_steps_to_sweet_spot(B, max_steps=50):
                     continue
                 if (jx, jy) in visited:
                     continue
-                # Check Euclidean distance in (x,y)
-                dist = np.sqrt((xs[jx] - xs[ix])**2 + (ys[jy] - ys[iy])**2)
-                if dist <= max_dxy + 1e-9:
+                # Exact metric: ||P0(dq)||^2 = 2/(3 gamma^2) * Q(dx,dy).
+                dx = xs[jx] - xs[ix]
+                dy = ys[jy] - ys[iy]
+                qmetric = dx * dx - dx * dy + dy * dy
+                if qmetric <= 1.5 * step_xy_radius**2 + 1e-12:
                     visited[(jx, jy)] = d + 1
                     if sweet[jx, jy]:
                         return d + 1
