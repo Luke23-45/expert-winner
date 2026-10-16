@@ -270,17 +270,23 @@ exact expected raw cost are proved in
 \[
 E_S+\frac{E_S+C-C_{\rm sink}}2\qquad(H\ge3).
 \]
-Writing \(V^A(H)\) for the admitted value from \(q_0=0\), the rigorous
-bounds currently established for this instance
-are
+The no-hedging lemma also gives a lower bound. Both worlds have the same
+admitted observation at round zero, so the admitted policy chooses a
+common (possibly randomized) pressure for round one. For every fixed
+pressure, at most one world has round-one overflow below \(E_S/2\).
+Under the equal prior its expected round-one overflow is therefore at
+least \(E_S/4\). Averaging over any private randomization preserves the
+bound. Thus, writing \(V^A(H)\) for the admitted value from \(q_0=0\),
+the rigorous bounds currently established for this instance are
 \[
-E_S\le V^A(H)\le
+5E_S/4\le V^A(H)\le
 \min\!\left\{H E_S,\ E_S+\frac{E_S+C-C_{\rm sink}}2\right\}.
 \tag{Bounds}
 \]
-No equality or lower bound beyond \(V^A(H)\ge V^R(H)\) is established.
-In particular, (Bounds) does not prove the conjectured
-\(\Omega(E E_S)\) lower bound for the E-world family.
+Since \(V^R(H)=E_S\), this proves a raw cumulative value gap of at least
+\(E_S/4\), or \(E_S/(4HKT)\) after normalization. No horizon-growing
+gap is established. In particular, (Bounds) does not prove the
+conjectured \(\Omega(E E_S)\) lower bound for the E-world family.
 
 ## 6. What would count as a surviving MoE theorem
 

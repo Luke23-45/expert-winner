@@ -93,6 +93,22 @@ Top-1 determinism, and the capacity inequalities. It does not assume
 the sink has minimum pressure. It establishes the static all-state
 no-hedging lemma (G1), not a sequential value lower bound.
 
+*One-round value corollary.* Let \(N=E-1\) and use the uniform prior on
+the N worlds. At round zero all admitted observations are identical,
+so the admitted controller chooses a common round-one pressure (couple
+its private coins across worlds). By the lemma, at most one world can
+have round-one overflow below \(E_S/2\). Therefore its expected
+round-one overflow is at least
+\((N-1)E_S/(2N)\), and its expected cumulative raw overflow is at least
+\(E_S+(N-1)E_S/(2N)\). If the requested controller can reach each
+sweet spot in one update, its total is \(E_S\), giving a shared-prior
+value gap of at least \((N-1)E_S/(2N)\), provided
+\(\delta=0\) and
+\(B\ge M\sqrt{1-1/E}/(\eta\gamma^2)\), which suffices to reach any
+chosen sweet spot from q_0=0 in one update and hold it thereafter.
+This is a one-round gap; after normalization by \(HKT\) it decays as
+\(1/H\). It does not close G3.
+
 *Restricted-action calculation.* For J=∅, each world has overflow
 E_S. For a single specified sweet-spot probe j, world j has overflow
 zero; every world i≠j has overflow E_S+(C−C_sink). Under the uniform
