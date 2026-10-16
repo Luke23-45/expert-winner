@@ -42,58 +42,60 @@ newsvendors") does not satisfy this: it collapses round-by-round.
 ### 2.1 Setup
 
 E experts: 1..E−1 can carry excess, E is a limited sink.
-C_e = C for e < E, C_E = C_sink < 2·E_S (sink cannot absorb two
-deflections; this is the heterogeneous-capacity structure doing work).
+C_e = C for e < E. For a correct probe to fit and a wrong probe to
+overload the sink, the construction requires
+E_S ≤ C_sink < C−E_S/2 (hence C > 3E_S/2).
+The earlier condition C_sink < 2·E_S alone does not imply these facts.
 Worlds i = 1..E−1: R_{0,i} = C + E_S, R_{0,e} = C for e < E, e ≠ i,
 R_{0,E} = 0. Then A_0 = (C,...,C,0) in *every* world: the admitted
 policy is blind to i. T = (E−1)·C + E_S.
 
-Each expert e < E has the H=2 margin structure: E_S low-margin tokens
-(deflectable to the sink via a pressure sweet spot
-q_e ∈ (m/γ, M/γ]) and high-margin tokens that do not deflect there.
-The sweet spots are *mutually exclusive*: pressuring two experts into
-their sweet spots overflows the sink (Lemma 4 generalized; the
-H=2 case is proved in `phase1_lower_bound_draft.md` Lemma 4).
+Use an explicit token construction. In world i, every regular expert
+e < E has C baseline tokens; the baseline margin is M at e=i and m at
+e≠i. There are E_S additional low-margin (m) tokens at expert i.
+For a token assigned to e, set affinity m or M at e, 0 at the sink E,
+and −M at all other regular experts. At q=0 these tokens realize the
+stated request counts. A probe of j is the particular pressure state
+with q_j−q_E in (m/γ,M/γ] and q_e=q_E for e≠j,E; it moves the low-margin
+j tokens, but retains high-margin baseline tokens. These are properties
+of those probe states, not yet a proof for every reachable pressure.
 
-### 2.2 What is proved: E-world mutual exclusivity (new)
+### 2.2 Proposed E-world mutual exclusivity (not yet proved)
 
-*Lemma (E-world no-hedging).* Fix E−1 worlds i = 1..E−1 and E experts
-(E is a sink with C_E = C_sink < C). World i: R_{0,i} = C + E_S,
-R_{0,e} = C for e < E, e ≠ i, R_{0,E} = 0; thus A_0 = (C,...,C,0) in
-every world. Margin structure: in world i, expert i carries E_S
-low-margin tokens (margin m, deflectable to the sink via sweet-spot
-pressure q_i ∈ (m/γ, M/γ]); every other expert e < E, e ≠ i, carries
-*all* C tokens at low margin m. Then for any fixed pressure q, the set
+*Proposed lemma (E-world no-hedging).* Use the explicit construction
+in §2.1, integer parameters satisfying its capacity conditions, and a
+fixed affinity matrix for each world. For any pressure q in the declared
+reachable state set, the set
 G(q) = {i : overflow_i(q) < E_S/2} satisfies |G(q)| ≤ 1.
 
-*Proof.* Suppose i ≠ j both lie in G(q). To drive world-i overflow
-below E_S/2, q must deflect i's excess: q_i > m/γ. Likewise
-q_j > m/γ for world j. But in world i, expert j ≠ i holds C
-low-margin tokens; q_j > m/γ deflects all C to the sink, giving
-overflow at least (C − C_sink) from the sink alone. Choosing
-C_sink < C − E_S/2 makes this ≥ E_S/2, contradicting i ∈ G(q).
-Hence |G(q)| ≤ 1. ∎
+*Proof status.* The submitted proof uses q_i>m/γ instead of the required
+relative threshold q_i−q_E>m/γ, and assumes that deflected tokens choose
+the sink. The latter holds for the single-expert probe states defined
+above, but has not been established for arbitrary reachable q: a
+pressured sink or another low-pressure regular expert can alter the
+second-best choice. So the all-q lemma is a target, not a proved result.
+∎
 
-*Corollary (per-round lower bound).* For fixed q, let J = {e < E :
-q_e > m/γ}. If J = ∅, every world incurs overflow E_S (excess
-unfixed): average E_S. If J = {j} with q_j in j's sweet spot,
-world j has overflow 0 but each world i ≠ j incurs ≥ (C − C_sink)
-(sink flooded by j's C deflected tokens) plus its own E_S:
-average ≥ [(E−2)(C − C_sink + E_S)]/(E−1). If C − C_sink ≫ E_S,
-the minimizer is J = ∅ ("do nothing"), so min_q average ≥ E_S,
-and the bound is tight.
+*Restricted-action calculation.* For J=∅, each world has overflow
+E_S. For a single specified sweet-spot probe j, world j has overflow
+zero; every world i≠j has overflow E_S+(C−C_sink). Under the uniform
+prior the probe's average one-round overflow is therefore
+\((E−2)(E_S+C−C_sink)/(E−1)\). Thus no-probe is no worse than this
+single probe if \((E−2)(C−C_sink) ≥ E_S\). This calculation is only
+for the listed actions; it is not a lower bound over arbitrary pressure
+vectors, multi-expert actions, or history-dependent policies. Thresholds
+are relative (q_e−q_E), not q_e alone.
 
 The requested policy observes R_0, identifies i, and holds expert i
 in its sweet spot: per-round overflow 0 after Round 0. Over H rounds
-with per-round blind decisions, the admitted policy's optimal
-("do nothing") total is H·E_S vs E_S for the requested policy.
+with per-round blind decisions, the no-probe admitted policy costs
+H·E_S, versus E_S for the requested policy. This does not establish
+that no-probe is optimal for the admitted policy over the horizon.
 
-*Why this matters.* The lemma closes gap (G1): mutual exclusivity
-holds for E worlds, not just 2, and the *catastrophic* wrong-probe
-cost (C − C_sink, not merely E_S) is what forces the admitted policy
-to *rationally* stay blind. The Top-K thresholds and the limited
-sink are load-bearing: smooth the thresholds and the sweet spots
-dissolve; enlarge the sink and hedging becomes safe.
+*Why this would matter if proved.* The lemma would close the static
+mutual-exclusivity claim for E worlds, not the sequential lower bound.
+The Top-K thresholds and limited sink create the probe costs. Whether
+they yield a non-reducible control theorem remains open.
 
 *Limitation.* This is a *per-round* (one-shot) bound repeated over H
 rounds. It does not yet establish an *irreducible* multi-round gap:
@@ -107,42 +109,96 @@ irreducibility. See §2.3.
 
 *Conjecture.* With H ≥ E rounds, any admitted policy π_A incurs
 expected cumulative overflow Ω(E·E_S), while a requested policy
-achieves O(E_S). The normalized gap is Ω(E_S/(KT)), non-vanishing in H.
+achieves O(E_S). This would give a cumulative gap Ω(E·E_S) in the
+specified parameter regime. Under the document's normalized cost, the
+corresponding gap is Ω(E·E_S/(HKT)); it decreases as H grows with fixed
+E, so no horizon-independent normalized gap is claimed.
 
-*Proof skeleton (incomplete).*
+This is not yet a well-posed theorem statement: the constants and
+quantifiers must specify how C−C_sink scales with E, E_S, and H, as
+well as B, δ, the prior, and the exact policy class. In particular,
+H≥E alone does not imply the proposed tradeoff.
+
+*Proof skeleton (incomplete and conditional on unproved claims).*
 π_R observes R_0, identifies i immediately, and pressures expert i
 to its sweet spot from Round 1: total cost E_S (Round 0 sunk).
-π_A observes A_0 = (C,...,C,0), blind to i. To find i, it must
-*probe*: apply a sweet-spot pressure to a candidate expert j and
-observe whether A_t changes (success: sink receives E_S, revealing
-j = i; failure: A_t unchanged, ruling out j). By mutual exclusivity,
-probes are sequential (one expert per round). Each failed probe
+π_A observes A_0 = (C,...,C,0), blind to i. In the proposed
+single-candidate strategy, it applies a sweet-spot pressure to a
+candidate expert j and
+read the sink coordinate of A_t (success: it is E_S, revealing j=i;
+failure: it is C_sink, ruling out j). If the unproved
+no-hedging/action-class claim forces probes to be sequential, they use
+one expert per round. Each failed probe
 leaves expert i's excess in place, incurring Ω(E_S) overflow that
 round. In the worst case over worlds (adversarial ordering), or
 Ω(E) expected over a uniform prior, π_A needs Ω(E) probes before
 succeeding. Total: Ω(E·E_S) vs O(E_S).
 
 *Gaps in the proof.*
-- (G1) CLOSED by the Lemma above (mutual exclusivity for E worlds,
-  with catastrophic wrong-probe cost forcing rational blindness).
-- (G2) The probing *informativeness* claim (A_t reveals success)
-  assumes the sink capacity and margin structure make success/failure
-  distinguishable from A_t alone; this needs verification per probe.
-  Note: under the Lemma's margin structure, probing is *catastrophic*
-  when wrong, so a rational admitted policy does *not* probe — the
-  "do nothing" bound above is the operative one, and (G2) is moot
-  for the lower bound (it would matter only for an *upper* bound
-  via a probing policy).
+- (G1) The all-reachable-state no-hedging lemma is open; the current
+  argument only calculates the designated probe states.
+- (G2) Probes can be informative. In the explicit single-probe
+  construction with E_S<C_sink, a correct probe produces admitted sink
+  load E_S and a wrong probe produces C_sink. This distinguishes the
+  probed world from the others using A, so information acquisition must
+  be included in the lower-bound analysis.
 - (G3) For *full irreducibility* (beyond "H copies of a static
   game"), the multi-round learning analysis remains open: a
   construction where probing is *worthwhile but slow*, so the
   admitted policy *does* learn over rounds and the *rate* of
   learning — governed by Top-K informativeness — determines the
-  gap. The current Lemma gives a *valid* H-round lower bound
-  (H·E_S vs E_S); whether it *survives* the reduction attack as
-  stated is the open question for §2.4.
+  gap. The current note does **not** prove a lower bound against all
+  admitted policies, nor establish the claimed H·E_S versus E_S value
+  gap. Whether a corrected theorem survives the reduction attack is
+  open; see §2.4.
 
-### 2.4 Reduction attack on E-world probing (preliminary)
+### 2.4 Exact three-round probe policy: why the horizon matters
+
+Take E=3 and worlds i=1,2, with E_S<C_sink<C−E_S/2. At q=0 both
+worlds have A_0=(C,C,0) and overflow E_S. Probe j=1 at the next round.
+The explicit token margins above give:
+
+| World | Probe-round requests (1,2,sink) | Admitted sink load | Overflow |
+|---|---:|---:|---:|
+| i=1 (correct probe) | (C,C,E_S) | E_S | 0 |
+| i=2 (wrong probe) | (0,C+E_S,C) | C_sink | E_S+C−C_sink |
+
+**Proposition (exact one-probe upper bound for the admitted value).**
+Assume integer capacities and counts with
+\(E_S<C_{sink}<C−E_S/2\), \(0<m<M\), \(\delta=0\), persistent
+affinities, equal prior on the two worlds, and
+\(B\ge\sqrt{2}M/(\eta\gamma^2)\). For any \(H\ge3\), there is a
+causal admitted policy with expected cumulative raw overflow exactly
+\(E_S+(E_S+C−C_{sink})/2\). It observes only admitted counts.
+
+*Proof.* At round 0 both worlds reveal \(A_0=(C,C,0)\), with raw
+overflow \(E_S\). Apply the j=1 probe. The table gives round-1 cost
+zero in world 1 and \(E_S+C−C_{sink}\) in world 2. The admitted vectors
+are \((C,C,E_S)\) and \((0,C,C_{sink})\), so the policy identifies the
+world because \(E_S<C_{sink}\). For \(L\in(m/\gamma,M/\gamma]\), it
+reaches \(q_1=Le_1\) from zero with a zero-sum update of norm
+\(L\sqrt{2/3}/(\eta\gamma)\), then switches to \(q_2=Le_2\) in world 2
+using update \(L(e_2-e_1)/(\eta\gamma)\), whose norm is
+\(L\sqrt{2}/(\eta\gamma)\le B\). In world 1 it holds \(q_1\). With
+\(\delta=0\), zero subsequent updates preserve the selected pressure;
+the chosen sweet spot yields zero overflow for every later round.
+Taking the equal-prior expectation gives the stated total. ∎
+
+The no-probe policy costs \(H E_S\). Thus this explicit probe beats
+no-probe exactly when
+\((H−1)E_S>(E_S+C−C_{sink})/2\). This refutes the unqualified
+claim that a costly wrong probe makes an admitted controller stay
+blind. It does not characterize the optimal admitted policy, and it
+does not provide a lower bound. The normalized gap associated with this
+example divides these cumulative costs by (HKT).
+
+This is a correction, not G3's solution. A complete theorem must
+optimize over causal policies that trade probe cost, information,
+remaining horizon, and pressure switching. Even this exact probe game
+still resembles costly search/bandits, so it has not passed the
+reduction attack.
+
+### 2.5 Reduction attack on E-world probing (preliminary)
 
 *Attack:* "This is multi-armed bandits: E−1 arms, costly pulls,
 find the best arm. The Ω(E) lower bound is standard."
@@ -162,11 +218,25 @@ find the best arm. The Ω(E) lower bound is standard."
 
 *Honest assessment.* The *framework* (search with costly tests) is
 generic. The *mechanism* (Top-K probes, censored observations) is
-MoE-specific. Whether this clears the novelty gate depends on whether
-"MoE-specific instantiation of sequential search" is deemed a
-contribution. It is *strictly stronger* than H=2 (multi-round,
-scales with E), but a strict reviewer may still see bandits.
+MoE-specific. The full-history controller problem and exact value bound
+have not been derived, so this candidate is not yet known to be
+strictly stronger than H=2. A reviewer may still reduce it to costly
+search or bandits.
 **This candidate has non-trivial reduction risk.**
+
+**Prior-theory boundary to check.** Bayesian active learning studies
+adaptive selection of informative tests, including nonuniform test
+costs and noisy or correlated outcomes; costly-bandit work studies
+action-dependent observation costs and exploration/exploitation
+tradeoffs ([Golovin, Krause & Ray, 2010/2013](https://arxiv.org/abs/1010.3091);
+[Schur, Lago & Fiez, UAI 2026](https://proceedings.mlr.press/v337/schur26a.html)).
+These sources do not, from their stated models alone, settle whether the
+MoE plant reduces to those settings: here pressure induces a Top-K
+routing transition, admission clips the resulting vector, and the same
+pressure state carries into later rounds. The reduction attack must
+formalize that transition and show either an exact reduction or a
+quantitative property those models do not preserve. This is a scope
+boundary, not a novelty claim.
 
 ---
 
@@ -213,11 +283,12 @@ analysis of the censored observation kernel.
 
 ## 5. Decision
 
-The E-world probing direction (§2) is the most developed: it has a
-proved 2-world core (Lemma 4), a clear E-world generalization path,
-and a concrete (if risky) reduction defense. The T7-divergence (§3)
-and Markov-switching (§4) directions are less developed but may have
-stronger irreducibility.
+The E-world probing direction (§2) is the most developed, but its
+all-state lemma and sequential value bound are unproved. The H=2
+construction in `phase1_lower_bound_draft.md` remains a valid MoE
+realization of a two-point value gap, but its own reduction audit shows
+that it is not a novel centerpiece. The T7-divergence (§3) and
+Markov-switching (§4) directions are research hypotheses, not results.
 
 **Recommendation:** develop the E-world probing lower bound to
 completion (close G1–G3), then subject it to the full reduction
