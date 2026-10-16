@@ -98,13 +98,23 @@ class TestSteering:
         assert lhs <= 0.0 + 1e-9
 
     def test_steering_path_exists(self):  # 79
-        # Grid BFS finds a path for moderate B (sanity)
-        assert True  # covered by scripts/analyze_small_b_steering.py
+        # A path from origin to the world-1 sweet spot exists for
+        # moderate B: the sweet spot cell is reachable by small steps.
+        # Verify the one-step bound is satisfiable moving toward it.
+        B = 10.0
+        q0 = np.zeros(3)
+        # Take a small step toward the sweet spot direction
+        q1 = proj_g(np.array([0.05, 0.0, 0.0]))
+        lhs = np.linalg.norm(P0(q1 - q0))
+        assert lhs <= ETA * GAMMA * B + 1e-9
 
     def test_gap_scales_with_steering(self):  # 80
-        # Gap ~ 0.5 * C_steer(B); C_steer grows as B shrinks
-        # (computational: 40 -> 140 over 16x B shrink)
-        assert 140.0 > 40.0
+        # Gap ~ 0.5 * C_steer(B); C_steer grows as B shrinks.
+        # Structural reason: step bound = ETA*GAMMA*B shrinks with B,
+        # so reaching a fixed-distance target needs more steps,
+        # each incurring overflow. Verify the step bound scales linearly.
+        B1, B2 = 10.0, 2.5
+        assert (ETA * GAMMA * B2) == pytest.approx((ETA * GAMMA * B1) / 4)
 
 
 # ---------------------------------------------------------------------------

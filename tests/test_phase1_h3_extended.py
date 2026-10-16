@@ -265,10 +265,13 @@ class TestBellmanExact:
                 assert (d['c1'] + d['c2']) / 2 >= 20.0 - 1e-9
 
     def test_posterior_after_informative(self):  # 51
-        # Deterministic worlds: informative observation -> point mass
-        # (version-space update removes inconsistent hypotheses)
-        # With 2 worlds and A1 != A2, observing A^i leaves {i}.
-        assert True  # structural; verified by cell A1 != A2
+        # Deterministic worlds: informative observation -> point mass.
+        # Version-space update: observing A at (x,y) keeps only worlds
+        # i with A^i(x,y) == A. When A^1 != A^2, exactly one survives.
+        # Direct check: at the probe cell, admitted vectors differ,
+        # so the observation identifies the world.
+        A1, _, A2, _ = admitted_and_cost(2.0, 0.0)
+        assert not np.allclose(A1, A2)
 
     def test_dp_recursion_terminal(self):  # 52
         # V^A_H = 0 by definition
