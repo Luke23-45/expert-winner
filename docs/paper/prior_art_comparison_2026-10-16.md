@@ -138,9 +138,9 @@ Heuristic, no theory of its own, no censoring analysis. 2512.03915 is now its th
 
 ## 4. What changed vs `novelty_outline.md` §1 (2026-10-11)
 
-- **(i) requested-vs-admitted axis:** unchanged — NOVEL. Neither new paper names the axis (φ-Balancing sidesteps hard counts entirely; 2512 has no censoring).
-- **(ii) censoring formalization:** unchanged — NOVEL. Verified zero hits in both new papers.
-- **(iii) target-aware vs target-blind:** unchanged — NOVEL. Both new papers use uniform targets only.
+- **(i) requested-vs-admitted axis:** candidate, not cleared. Neither of these two papers names the axis, but that limited search is not a novelty proof.
+- **(ii) censoring formalization:** candidate claims need separate audits. The clipping fiber is a generic censoring object; the current Phase 1 gap reduces to a two-point censored-newsvendor game (see `phase1_reduction_audit_2026-10-16.md`). The independent saturation-dynamics results are not adjudicated by that reduction.
+- **(iii) target-aware vs target-blind:** candidate, not cleared. Both papers use uniform targets, but this does not establish priority against the wider load-balancing and control literature.
 - **(iv) t_flip law:** unchanged — CLASSICAL mechanism, ours as verified law.
 - **(v) anti-windup:** unchanged — CLASSICAL mechanism, honest negative result.
 - **(vi) gauge-projection formulation:** verdict stays PARTIALLY PREDATED, must-cite list grows — add φ-Balancing's dual price `q = ∇φ(m)` as adjacent stateful-load-tracking prior art (loss-actuated, no gauge structure). The claimed-novel part remains exactly the quotient formal theory.
@@ -169,16 +169,16 @@ regret from passive censored data; targeted uncensored observations cut
 worst-case regret ~23.5% (1 sample) to ~61% (5 samples) at n=50.
 
 **Boundary:** closest structural neighbor to our lower-bound *shape*
-(censoring → identification set → worst-case regret → targeted
-observations help). Everything else differs: offline one-shot scalar
-decision vs per-step closed-loop control; no Top-K discontinuity, no
-gauge structure, no hetero capacities/targets, no pressure-state
-evolution. **Blunt consequence:** if our lower bound is just
-"fiber-mates force nonzero worst-case error," it reduces to their
-argument renamed. Our novelty MUST live in the MoE-specific mechanism
-(requirement 4 of the roadmap) — the generic bound alone will not
-survive review. This is the reduction attack's primary target (roadmap
-§3, item 1c).
+(censoring → identification set → decision regret → extra information
+helps). The current Phase 1 draft has an (H=2) plant, but only one
+post-observation action affects its final-round cost. The explicit
+reduction in `phase1_reduction_audit_2026-10-16.md` maps its two-world
+overflow loss pairs to a two-point newsvendor regret game with identical
+censored histories. Therefore the present draft's gap argument does not
+clear roadmap §3, item 1c as a new result. Top-1/capacity structure
+realizes the loss table, but the proof's value gap is the generic binary
+information-value gap. A later result must show a quantitative dynamic,
+gauge, or signal-structure property that this reduction fails to preserve.
 
 ### 5.2 "Kalman Filtering With Censored Measurements" (2002.08597)
 
@@ -245,13 +245,15 @@ structural boundary confirmed.)
 
 ### 5.6 What this changes
 
-- **Never-claim addition:** "worst-case lower bounds under censored
-  feedback" as a generic claim (Kumar & Mouchtaki). Our claim must be
-  the MoE-specific instantiation + mechanism.
-- **Phase 1 requirement 4 is now the whole game.** The reduction
-  attack (roadmap §3, 1c) has its primary target named: K&M's
-  identification-set regret. Survive it via Top-K/gauge/hetero/dynamics
-  or pivot.
+- **Reduction outcome:** the current paired-world Phase 1 gap reduces to
+  a two-point censored newsvendor regret game. Keep it as an MoE
+  realization/example, not as the novel lower-bound centerpiece. The full
+  mapping is in `phase1_reduction_audit_2026-10-16.md`.
+- **Next novelty gate:** any replacement theorem must identify and prove
+  the quantitative property that survives the static two-state reduction
+  (for example a multi-round state-transition effect, a gauge-dependent
+  value difference, or a minimal-signal characterization). Merely adding
+  MoE terminology or parameters does not pass this gate.
 - **Yang & Shi 2023** (POMS, DOI 10.1111/poms.13824): journal paper,
   full text not verified — accept reviewer's characterization
   (regret under censored demand, inventory control) pending direct

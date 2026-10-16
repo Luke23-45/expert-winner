@@ -15,8 +15,17 @@ FEEDBACK — explicitly NOT on introducing feedback control to MoE routing.
 Four deployed at-scale bias controllers now exist (DeepSeek 2024, SMEBU/Trinity 2026,
 Kimi K3 Quantile Balancing 2026, ID Balancing 2026). Every one of them feeds back
 post-assignment counts against a uniform target and says nothing about what happens
-to the feedback signal under capacity saturation. That gap — what the controller
-observes, not that it controls — is the paper.
+to the feedback signal under capacity saturation. The research question is
+whether a theory of that observation gap yields results that survive reduction
+to established censored-decision and control frameworks.
+
+**Research status update (2026-10-16):** the verdicts below are candidate
+claims, not established novelty findings. The current Phase 1 (H=2)
+paired-world gap has an explicit reduction to a two-point censored newsvendor
+game; it remains a valid MoE construction but is not a novel lower-bound
+centerpiece. See `phase1_reduction_audit_2026-10-16.md`. This audit does not
+settle the separate saturation-dynamics or target-dependence claims; those
+require their own claim-level reduction checks.
 
 ---
 
@@ -27,9 +36,13 @@ Verdict scale: **NOVEL** (no prior art found; ours to claim) /
 **PRIOR ART** (a specific paper already does it — cite it, do not claim) /
 **PARTIALLY PREDATED** (some layer is prior art; the rest may be novel — split it honestly).
 
-### (i) Requested-vs-admitted as a design axis under saturation — NOVEL
+### (i) Requested-vs-admitted as a design axis under saturation — candidate; not cleared
 
-No prior art found for the distinction as a load-balancing design axis.
+The earlier sweep found no prior art naming this distinction as a
+load-balancing design axis, but absence from the papers searched is not a
+novelty proof. The field-wide comparison of requested versus admitted signals
+under capacity remains open. Scope any eventual claim to results that survive
+generic signal-selection and partial-observation reductions.
 Classical dispatch-time feedback (power-of-two-choices, JIQ, backpressure) uses
 exclusively admitted-state signals — queue backlogs, idle tokens, outstanding
 connections `(v3, [NOT FOUND] after direct search)`. All four deployed MoE bias
@@ -43,20 +56,26 @@ distribution `[SECONDARY]` (K3 tech report via ID Balancing §2.3).
 ID Balancing unifies these in PID terms without ever naming the requested/admitted
 axis — full-text search of the paper finds no "windup", "saturation", "dropped",
 or capacity-constraint treatment of the feedback signal `[VERIFIED-PRIMARY]`.
-The v3 review's classical search found no sensor-side telling of saturation anywhere:
+The v3 review's classical search found no sensor-side telling of saturation in
+the sources it checked:
 the anti-windup canon always tells the story from the actuator side (the control
 signal saturates; the integrator doesn't know). Ours is the sensor-side dual (the
 feedback signal saturates; the integrator sees a constant). The math is dual;
 the MoE instantiation — GShard/Switch-style capacity clipping censoring the load
 observation — appears in no paper found.
 
-### (ii) Censoring formalization (A=C reveals only R≥C) — NOVEL
+### (ii) Censoring formalization (A=C reveals only R≥C) — candidate results; fiber alone is not novel
 
-The formal results — information-loss proposition (`min{R_e,C_e}` constant on
-`[C_e,∞)`, so excess demand is invisible), sign-reversal corollary
-(`ε^R_e > 0` while `ε^A_e < 0`), and the saturation-freeze theorem
+The elementary fiber fact is that `min{R_e,C_e}` is constant on
+`[C_e,∞)`, so excess demand is invisible. The sign-reversal corollary
+(`ε^R_e > 0` while `ε^A_e < 0`) and the saturation-freeze theorem
 (global saturation → admitted feedback is common-mode → `q^+ = (1−δ)q`, no relative
-corrective dynamics) — have no prior art located. Classical anti-windup
+corrective dynamics) must be assessed as separate claims. The fiber geometry
+alone is a standard censoring pattern: [censored-newsvendor work](https://arxiv.org/abs/2602.16842)
+uses indistinguishable histories and decision-value gaps. The current Phase 1
+lower-bound draft reduces to that two-point decision structure. This does not
+settle novelty of the independent MoE saturation-freeze theorem. Classical
+anti-windup
 (Fertik & Ross 1967; Hanus et al. 1987; Åström & Hägglund 2006; Caparroz et al.
 2026 review) treats actuator saturation, never a censored load observation.
 Adjacent but different: RED (Floyd & Jacobson 1993) acts on a pre-saturation queue
@@ -66,9 +85,10 @@ is largely dropless (SimBal §6 explicitly trains dropless models `[VERIFIED-PRI
 so in training, assigned counts coincide with requested counts and the
 admitted/requested distinction is invisible. It becomes visible exactly under hard
 per-expert capacity — i.e., our formalization predicts when and how the deployed
-controllers' feedback degrades, a regime none of them analyzes.
+controllers' feedback degrades, a regime none of the reviewed controllers
+analyzes.
 
-### (iii) Target-aware vs target-blind distinction; failure under non-uniform μ — NOVEL
+### (iii) Target-aware vs target-blind distinction; failure under non-uniform μ — candidate; not cleared
 
 All deployed controllers use uniform targets (`nbar` = mean load in ID Balancing
 Eq. 3 and SMEBU Eq. 23; `q = mK/E` in Kimi K3). None analyzes non-uniform targets
@@ -76,8 +96,9 @@ or target dependence `[VERIFIED-PRIMARY]` for ID Balancing (no "non-uniform" hit
 `[NOT FOUND]` for the rest. Our formal doc proves `(A)` ≡ `(A_0)` on the gauge
 quotient *only* under uniform target + uniform capacity, and T1 measures the
 breakdown outside that regime: target-blind `(A_0) = P_0(A/(KT))` equalizes the
-censored admitted load, ignoring both target and capacity. The distinction itself
-and its measured consequence are ours to claim.
+censored admitted load, ignoring both target and capacity. The distinction and
+its measured consequence are candidates for a contribution; the present
+comparison is not broad enough to establish priority.
 
 ### (iv) The t_flip(η) = ceil(X/η) pre-flip law — CLASSICAL (mechanism); our instantiation measured
 
@@ -426,12 +447,13 @@ and why.
    concept (φ-Balancing's dual price); (b) "first (sub)gradient/primal-dual
    theory of feedback load balancing" (2512.03915).
 
-**What did not change:** (i) requested-vs-admitted axis — NOVEL (neither new
-paper names it; φ-Balancing sidesteps hard counts entirely via soft
-probabilities). (ii) censoring formalization — NOVEL (verified zero hits in
-both papers). (iii) target-aware vs target-blind — NOVEL (both papers uniform
-targets only). (iv) t_flip law — CLASSICAL mechanism, ours as verified law.
-(v) anti-windup — CLASSICAL mechanism, honest negative result.
+**Current status after the reduction audit:** requested-vs-admitted, the
+censoring formalization, and target-aware vs target-blind remain candidate
+contributions; the literature scans summarized here do not establish novelty.
+The current Phase 1 value-gap theorem is explicitly reducible and cannot be
+used as evidence that those broader claims are new. The (t_{flip}) law remains
+a CLASSICAL mechanism reported as a verified law; anti-windup remains a
+CLASSICAL mechanism with an honest negative result.
 
 **Note for the deployment-model question (reviewer issue 3):** φ-Balancing's
 deliberate avoidance of hard dispatch statistics ("relies solely on the dual

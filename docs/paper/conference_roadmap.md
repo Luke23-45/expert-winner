@@ -123,6 +123,15 @@ regret), censored Kalman filtering, Tobit. If it reduces with no
 MoE-specific remainder → STOP, pivot (do not present as a new
 theorem). The novelty lives in requirement 4 or nowhere.
 
+**Audit result (2026-10-16): current paired-world draft fails this gate.**
+`phase1_reduction_audit_2026-10-16.md` gives an explicit mapping from its
+Round-1 overflow loss pairs to a two-point censored newsvendor regret game.
+At `H=2`, pressure is a single post-observation decision; the proof does
+not make gauge projection or `mu` load-bearing. Keep the construction as a
+correct MoE realization/example, but do not claim its `1/12` gap as the
+paper's novel lower bound. A replacement theorem must demonstrate a
+specific quantitative property that the reduction does not preserve.
+
 **1d. Remedy (requirement 5).** Minimal sufficient extra signal for
 the stated objective. O-c falls out as corollary: the optimal
 solution dictates exactly when the saturation-pattern signal helps
@@ -146,8 +155,10 @@ what the best achievable is.
   best-known-can" arc). Not a stop, a scope note.
 
 **Success criterion:** theorem(s) + proofs meeting all 5
-requirements, surviving the reduction attack (1c). This is the
-paper's centerpiece — the result a reviewer cites.
+requirements, surviving the reduction attack (1c). The current paired-world
+draft does not meet this criterion; the reduction result is recorded above.
+Do not begin sweeps for that draft. A replacement theorem must first state
+its non-reducible MoE-specific property and its falsifiable implications.
 
 ### Phase 2 — Supporting theory
 
@@ -177,11 +188,12 @@ censored Kalman filtering, Tobit) explicitly per the comparison
 matrix — with the precise MoE-specific difference stated for each,
 not keyword matching.
 
-**3c.** Contribution list: (i) censoring fiber + lower bounds (NOVEL),
-(ii) optimal censored feedback (NOVEL), (iii) gauge quotient theory
-(explicit vs 2512.03915's implicit), (iv) target-dependence + failure
-conditions incl. T7 (NOVEL), (v) honest negatives as theory
-consequences.
+**3c.** Contribution list is provisional until each component has a
+proved result and a completed reduction audit. The current paired-world
+overflow gap is not a novel lower-bound claim (see the Phase 1 audit).
+Do not label the censoring fiber, optimal censored feedback, gauge quotient,
+or target-dependence as novel based on the present draft. Rebuild this list
+only from results that pass the theory and prior-art gates.
 
 **Success criterion:** the framing is both honest and ambitious — a
 reviewer can see the conference-level claim on page one.
@@ -265,7 +277,11 @@ appears (collaborator, grant), S1 executes per the matrix.
 
 ## 7. Sequencing
 
-Phase 1 → Phase 2 → Phase 3 → Phase 4, in that order. Phase 5 is
+The current Phase 1 theorem is stopped as a candidate centerpiece after
+the explicit censored-newsvendor reduction. Phase 1 resumes only with a
+replacement theorem target that states the property the reduction cannot
+preserve. Once that target is fixed: Phase 1 → Phase 2 → Phase 3 → Phase 4,
+in that order. Phase 5 is
 blocked externally and proceeds in parallel if compute appears.
 Phase 3's rewrite can begin once Phase 1's theorem statements are
 fixed (statements, not full proofs, suffice for framing). The

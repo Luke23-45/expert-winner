@@ -1,6 +1,6 @@
-# Phase 1 lower bound: draft theorem (v0.2)
+# Phase 1 lower bound: draft theorem (v0.3)
 
-**Status:** proof draft; Lemma 4 covers all reachable gauge states. Requirements 3–4 of `conference_roadmap.md`.
+**Status:** the MoE construction and value-gap proof are retained; the reduction audit finds that the lower-bound argument reduces to a two-point censored newsvendor game. It does not clear the novelty gate in `conference_roadmap.md`.
 **Branch:** `feat/research-censored-feedback`.
 **Depends on:** `phase1_controller_model.md` (v0.3) for policy classes,
 comparator, and cost definitions. Uses the implemented dynamics
@@ -317,55 +317,38 @@ no adaptive environment is considered.
 
 ---
 
-## 6. Reduction audit (provisional; 2026-10-16)
+## 6. Reduction audit (completed for this theorem; 2026-10-16)
 
-A dedicated literature sweep (five angles + follow-ups, Appendix A) did
-not identify an exact prior theorem for this model. That search result is
-not proof of novelty, and the reduction attack is not yet cleared. The
-closest works below must be compared at the level of problem classes,
-quantifiers, and reducibility—not only by listing missing MoE terminology.
+The paired-world value-gap argument has an explicit reduction to a
+two-point censored newsvendor decision. The two environments can have
+identical historical sales and stockout indicators while their clairvoyant
+orders differ. The resulting equal-prior regret game has endpoint loss
+pairs \((0,40)\), \((40,0)\), and blind value 20. Lemma 4 supplies the same
+pairwise loss lower bound for every common admitted-policy pressure; the
+MoE sweet spots attain the same endpoint values. The round-0 overflow is
+common sunk cost and cancels from the value difference.
 
-**Primary target: Kumar & Mouchtaki (censored newsvendor, 2602.16842).**
-*Attack:* both prove "indistinguishable environments force a gap."
-*Boundary to establish:* K&M study data-driven inventory decisions with
-censored demand and exact worst-case regret; this draft has a two-round
-causal control problem whose action changes later Top-1 requests through
-pressure. Those differences suggest a possible MoE-specific remainder,
-but do not prove non-reducibility. The attack must either give an explicit
-reduction preserving the value gap or identify a formal property of the
-Top-1/capacity/pressure plant that the newsvendor model cannot represent.
+The explicit construction, cost scaling, history mapping, and limitations
+are in [`phase1_reduction_audit_2026-10-16.md`](phase1_reduction_audit_2026-10-16.md).
+The primary source is Kumar and Mouchtaki, [*What is the Value of Censored
+Data?*](https://arxiv.org/abs/2602.16842), whose model maps censored
+historical demand observations to a future inventory action and evaluates
+regret against the known-distribution optimum.
 
-**Monitored MDPs (Parisi et al., 2402.06819).**
-Closest *proof-pattern* neighbor (indistinguishable set
-\([M]_I\), worst-case \(M_\downarrow\)). It concerns reward
-observability in RL rather than this min-structure load signal. The
-formal comparison should still explain whether its indistinguishability
-argument can reproduce the paired-policy guarantee here.
+**Decision:** this theorem remains a valid MoE realization of the game,
+but its value-gap proof does not survive the roadmap's reduction attack as
+a new centerpiece. Its hard Top-1 routing and heterogeneous capacities
+generate the loss table; after that, the lower bound is a generic binary
+value-of-information argument. At \(H=2\), the pressure update selects one
+final-round action and does not establish a repeated closed-loop effect.
+The gauge projection is not shown to be essential, and uniform \(\mu\) is
+not load-bearing. Do not claim those as contributions of this theorem.
 
-**Bengs & Hüllermeier (2011.00813, censored bandits lower bound).**
-Closest existing *lower bound under censored observations*. Its arm-pull
-and reward-censoring model differs from the load-vector admission map and
-pressure-controlled router; document whether a reduction preserves the
-cost and observation structure.
-
-**Partial monitoring / dual control / queueing lower bounds**
-(Chadaga & Modiano 2609.28219, Zubeldia 1807.02882, queue-regret
-2005.05206, Ledford & Regli 2605.27076): these are boundary cases for
-partial queue information, queueing lower bounds, or threshold-activated
-censored feedback. Their differences should be stated precisely in the
-related-work comparison; the present sweep alone does not establish that
-each is separated by two load-bearing elements.
-
-**Current status:** this is an MoE-realized paired-world example whose
-payoff table depends on hard Top-1 routing and heterogeneous capacities.
-The two-round horizon shows that the action affects future overflow;
-at \(H=1\) the observation arrives too late to affect cost. The present
-proof does **not** establish that the gauge projection is necessary, and
-the uniform target \(\mu\) is not load-bearing. Do not claim those as
-novel mechanisms from this theorem. The reduction attack remains open
-until the explicit comparisons above are completed and an MoE-specific
-remainder is proved, rather than inferred from terminology absent in
-prior work.
+Other cited partial-monitoring, censored-bandit, and queueing papers remain
+related-work obligations, but they are not needed to reach this stop
+decision: the primary reduction target already absorbs the current gap
+argument. Follow the roadmap stop rule and develop a different theorem
+before running experiments.
 
 ---
 
@@ -396,9 +379,10 @@ are the second half and belong in the experiment plan, not here.
 ## Appendix A. Literature sweep summary (2026-10-16)
 
 Five search angles, full details in the sweep report:
-**Reduction status:** unresolved. **NEIGHBORS:** Mon-MDPs 2402.06819 (indistinguishable-set
-formalism — citation armor); Bengs & Hüllermeier 2011.00813 (censored-bandit
-lower-bound structure — citation armor); Chadaga & Modiano 2609.28219
+**Kumar–Mouchtaki reduction:** explicit for the current gap argument (see
+§6 and the audit document). **Other related work:** Mon-MDPs 2402.06819
+(indistinguishable-set formalism); Bengs & Hüllermeier 2011.00813 (censored-bandit
+lower-bound structure); Chadaga & Modiano 2609.28219
 (partial-observation load balancing, algorithmic only); Zubeldia 1807.02882
 (memory-bounded LB lower bound, different mechanism); Ledford & Regli
 2605.27076 (threshold-bandit censoring, upper bounds only); queue-regret
@@ -407,6 +391,6 @@ lower-bound structure — citation armor); Chadaga & Modiano 2609.28219
 Top-K/argmax routing + lower bound + censoring; value-of-information lower
 bound in closed-loop control; min-structure feedback + LB lower bound;
 gauge/translation-invariance + lower bounds.
-Kumar & Mouchtaki remains the primary reduction target. The sweep identifies
-the comparison boundary but does not establish that their framework cannot
-represent this construction (§6).
+The source sweep did not establish novelty. The explicit reduction in §6
+shows that the current value-gap argument is already captured by a simple
+two-point censored newsvendor instance.
