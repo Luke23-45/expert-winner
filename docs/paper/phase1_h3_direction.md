@@ -41,7 +41,8 @@ newsvendors") does not satisfy this: it collapses round-by-round.
 
 ### 2.1 Setup
 
-E experts: 1..E−1 can carry excess, E is a limited sink.
+Use Top-1 routing (\(K=1\)) with E experts: 1..E−1 can carry excess,
+and E is a limited sink.
 C_e = C for e < E. For a correct probe to fit and a wrong probe to
 overload the sink, the construction requires
 E_S ≤ C_sink < C−E_S/2 (hence C > 3E_S/2).
@@ -60,21 +61,37 @@ with q_j−q_E in (m/γ,M/γ] and q_e=q_E for e≠j,E; it moves the low-margin
 j tokens, but retains high-margin baseline tokens. These are properties
 of those probe states, not yet a proof for every reachable pressure.
 
-### 2.2 Proposed E-world mutual exclusivity (not yet proved)
+### 2.2 E-world mutual exclusivity (proved for the explicit construction)
 
-*Proposed lemma (E-world no-hedging).* Use the explicit construction
+*Lemma (E-world no-hedging).* Use the explicit construction
 in §2.1, integer parameters satisfying its capacity conditions, and a
-fixed affinity matrix for each world. For any pressure q in the declared
-reachable state set, the set
-G(q) = {i : overflow_i(q) < E_S/2} satisfies |G(q)| ≤ 1.
+persistent affinity matrix for each world. For every \(q\in\mathcal Q\),
+the set
+\(G(q)=\{i:\|J^i(q)\|_1<E_S/2\}\) satisfies \(|G(q)|\le1\).
 
-*Proof status.* The submitted proof uses q_i>m/γ instead of the required
-relative threshold q_i−q_E>m/γ, and assumes that deflected tokens choose
-the sink. The latter holds for the single-expert probe states defined
-above, but has not been established for arbitrary reachable q: a
-pressured sink or another low-pressure regular expert can alter the
-second-best choice. So the all-q lemma is a target, not a proved result.
-∎
+*Proof.* Fix any pressure q, and let d_e^L(q) be the expert selected by
+Top-1 for a token of low-margin type L_e. This destination is the same
+in every world because the affinity vector and tie rule are fixed.
+Suppose, for contradiction, that two distinct worlds i and j each have
+overflow below E_S/2.
+
+In either world there are E−1 baseline groups of C identical tokens.
+None can be sent to the sink: that would create sink overflow at least
+C−C_sink>E_S/2. No two such groups can be sent to the same regular
+expert: that expert would receive at least 2C and overflow by at least
+C>E_S/2. Therefore the E−1 baseline groups must go one each to the
+E−1 regular experts. The additional E_S-token group also cannot go to a
+regular expert, since every regular expert already receives a C-sized
+baseline group, which would create overflow E_S>E_S/2. It must go to the
+sink. In world i this implies d_i^L(q)=E. But in world j, i≠j, the
+baseline group at i is also of type L_i and has size C. At the same q
+it must therefore also go to the sink, causing overflow at least
+C−C_sink>E_S/2 in world j, a contradiction. Hence |G(q)|≤1. ∎
+
+This proof uses the explicit identical-token-block construction,
+Top-1 determinism, and the capacity inequalities. It does not assume
+the sink has minimum pressure. It establishes the static all-state
+no-hedging lemma (G1), not a sequential value lower bound.
 
 *Restricted-action calculation.* For J=∅, each world has overflow
 E_S. For a single specified sweet-spot probe j, world j has overflow
@@ -92,10 +109,11 @@ with per-round blind decisions, the no-probe admitted policy costs
 H·E_S, versus E_S for the requested policy. This does not establish
 that no-probe is optimal for the admitted policy over the horizon.
 
-*Why this would matter if proved.* The lemma would close the static
-mutual-exclusivity claim for E worlds, not the sequential lower bound.
-The Top-K thresholds and limited sink create the probe costs. Whether
-they yield a non-reducible control theorem remains open.
+*Scope of the result.* The lemma closes the static mutual-exclusivity
+claim for E worlds, not the sequential lower bound. Its proof is a
+capacity and identical-block argument; it does not by itself show that
+Top-K thresholds or gauge geometry are essential. Whether the
+construction yields a non-reducible control theorem remains open.
 
 *Limitation.* This is a *per-round* (one-shot) bound repeated over H
 rounds. It does not yet establish an *irreducible* multi-round gap:
@@ -135,8 +153,8 @@ round. In the worst case over worlds (adversarial ordering), or
 succeeding. Total: Ω(E·E_S) vs O(E_S).
 
 *Gaps in the proof.*
-- (G1) The all-reachable-state no-hedging lemma is open; the current
-  argument only calculates the designated probe states.
+- (G1) CLOSED by the block-counting proof in §2.2 for the explicitly
+  constructed affinity worlds and stated capacity regime.
 - (G2) Probes can be informative. In the explicit single-probe
   construction with E_S<C_sink, a correct probe produces admitted sink
   load E_S and a wrong probe produces C_sink. This distinguishes the
@@ -283,8 +301,9 @@ analysis of the censored observation kernel.
 
 ## 5. Decision
 
-The E-world probing direction (§2) is the most developed, but its
-all-state lemma and sequential value bound are unproved. The H=2
+The E-world probing direction (§2) is the most developed. Its static
+all-state no-hedging lemma is proved, but the sequential value bound
+and novelty reduction remain open. The H=2
 construction in `phase1_lower_bound_draft.md` remains a valid MoE
 realization of a two-point value gap, but its own reduction audit shows
 that it is not a novel centerpiece. The T7-divergence (§3) and
