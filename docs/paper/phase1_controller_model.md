@@ -1,6 +1,6 @@
 # Phase 1 controller model: information, policies, and objective
 
-**Status:** formalization draft v0.2; requirements 1–2 of `conference_roadmap.md`.
+**Status:** formalization draft v0.3; requirements 1–2 of `conference_roadmap.md`.
 **Branch:** `feat/research-censored-feedback`.
 **Scope:** definitions and comparison criterion only. No lower bound or novelty claim is asserted here.
 
@@ -48,12 +48,15 @@ round-`t` observation and selects a feedback vector `epsilon_t`. Both
 regimes then use the same pressure dynamics:
 
 ```text
-q_{t+1} = Pi_g((1-delta) q_t + eta epsilon_t),
+q_{t+1} = Pi_g((1-delta) q_t + eta gamma epsilon_t),
 ```
 
 Here `Pi_g(z) = z - (min_e z_e) 1` is the canonical gauge map. This
-matches the canonical formal definition: `gamma` scales pressure in the
-router scores, while the pressure update uses `eta * epsilon_t`.
+matches the implemented dynamics and `formal_core.md`: `gamma` scales
+pressure in the router scores and also scales the feedback update. The
+coordinate-form update in `formal.md` currently omits this `gamma`; this
+draft follows the implementation convention pending a separate
+correction to that inconsistent formula.
 
 The shared parameters satisfy `eta > 0`, `gamma > 0`, and `delta in
 [0,1)`. The controller cannot change the already-realized routing or
@@ -122,13 +125,17 @@ environment class and all other parameters are fixed. The cost is in
 trajectory on future admitted mass; it does not claim that the current
 round's scalar overflow is hidden from the admitted controller.
 
+For a randomized policy, write `O_H(pi; omega, xi)` for the realized
+cost under private coins `xi`, and define its conditional expected cost
+`bar_O_H(pi; omega) = E_xi[O_H(pi; omega, xi)]`.
+
 Let `nu` be a declared probability distribution over the fixed,
 oblivious affinity sequences in `Omega_M`. The same `nu` is used for
 both information regimes; each controller knows `nu` but not the
 realized affinity sequence. Define the shared-environment values
 
 ```text
-V_X(H; nu) = inf_{pi in Pi_X(B)} E_{omega~nu, xi}[O_H(pi; omega)],
+V_X(H; nu) = inf_{pi in Pi_X(B)} E_{omega~nu}[bar_O_H(pi; omega)],
              X in {R,A},
 Delta_H(nu) = V_A(H; nu) - V_R(H; nu),
 ```
@@ -148,9 +155,26 @@ that the R-policy beats the A-policy on every individual sequence. In a
 paired-world proof, the positive expected gap must come from the
 R-policy distinguishing the worlds through causal observations while
 the A-policy has identical observation histories. Neither policy may
-encode or observe future affinities. A worst-case minimax value gap over
-`Omega_M` is a possible stronger follow-up, but it is not the primary
-criterion defined here.
+encode or observe future affinities.
+
+The shared-distribution result yields a precise worst-case paired-policy
+statement. Let `pi_A^nu` and `pi_R^nu` be `epsilon`-optimal policies for
+their respective values under the same `nu`, with `epsilon >= 0`. Then
+
+```text
+sup_{omega in supp(nu)}
+  [bar_O_H(pi_A^nu; omega) - bar_O_H(pi_R^nu; omega)]
+  >= Delta_H(nu) - epsilon.
+```
+
+Indeed, the expected cost difference under `nu` is at least
+`V_A(H;nu) - (V_R(H;nu) + epsilon)`, and a supremum is at least its
+average. The policies are fixed causal maps, and each bracket compares
+them on the same affinity sequence. This is a worst-case paired-policy
+advantage obtained from a hard distribution. It is distinct from the
+robust minimax value difference formed by taking a separate worst case
+inside each policy-class value; the hard-distribution argument does not
+by itself establish that robust minimax difference.
 
 Requested-target mismatch is a separate secondary metric:
 
@@ -212,10 +236,7 @@ The affinity bound `M`, update bound `B`, horizon `H`, and distribution
 lower-bound proof is written. These choices are mathematical assumptions,
 not implementation details. The theorem must also justify why the
 chosen `nu` captures the intended restricted-telemetry question rather
-than a pathological construction. One point must be reconciled before
-the theorem: roadmap requirement 3 currently says “worst-case cost gap,”
-whereas this comparator defines the expected value gap under a shared
-declared distribution. Keep the shared-distribution comparator if the
-claim is value of information under paired environments; if the paper
-intends a worst-case guarantee, state its exact quantifiers and update
-this model before proving it. Do not call the two guarantees equivalent.
+than a pathological construction. The shared-distribution value gap and
+the resulting worst-case paired-policy advantage are now both defined;
+the theorem must state which one it proves. Neither implies a positive
+difference between the two separately defined robust minimax values.
