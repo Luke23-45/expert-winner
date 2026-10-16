@@ -54,9 +54,8 @@ q_{t+1} = Pi_g((1-delta) q_t + eta gamma epsilon_t),
 Here `Pi_g(z) = z - (min_e z_e) 1` is the canonical gauge map. This
 matches the implemented dynamics and `formal_core.md`: `gamma` scales
 pressure in the router scores and also scales the feedback update. The
-coordinate-form update in `formal.md` currently omits this `gamma`; this
-draft follows the implementation convention pending a separate
-correction to that inconsistent formula.
+coordinate-form update in `formal.md` was corrected on this branch in
+commit `59d6fa4` to match this convention.
 
 The shared parameters satisfy `eta > 0`, `gamma > 0`, and `delta in
 [0,1)`. The controller cannot change the already-realized routing or

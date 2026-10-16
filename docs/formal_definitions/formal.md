@@ -232,7 +232,7 @@ the gauge-quotient pressure dynamics are
 q^{+}
 =
 \gproj\!\left(
-(1-\delta)q + \eta\gamma\,varepsilon(q)
+(1-\delta)q + \eta\gamma\,\varepsilon(q)
 \right).
 \]
 Since \(\gproj(z+c\one)=\gproj(z)\), adding any common-mode component to \(\varepsilon(q)\) leaves this update unchanged. Equivalently, the gauge dynamics depend only on the centered component of the feedback.
@@ -240,7 +240,7 @@ Since \(\gproj(z+c\one)=\gproj(z)\), adding any common-mode component to \(\vare
 \begin{lemma}[Boundary exit and re-entry]
 Let
 \[
-z_e := (1-\delta)q_e + \eta\gamma\,varepsilon_e(q),
+z_e := (1-\delta)q_e + \eta\gamma\,\varepsilon_e(q),
 \qquad
 m := \min_j z_j.
 \]
@@ -264,9 +264,9 @@ z_e = m.
 \]
 In particular, an expert at the boundary, \(q_e = 0\), re-enters with positive pressure if and only if
 \[
-\eta\gamma\,varepsilon_e(q)
+\eta\gamma\,\varepsilon_e(q)
 >
-\min_j\left((1-\delta)q_j + \eta\gamma\,varepsilon_j(q)\right).
+\min_j\left((1-\delta)q_j + \eta\gamma\,\varepsilon_j(q)\right).
 \]
 \end{lemma}
 
@@ -361,7 +361,7 @@ Before passing to the gauge quotient, consider the absolute reflected update on 
 \[
 \widehat{U}_{\varepsilon}(q)
 :=
-\relu{(1-\delta)q + \eta\gamma\,varepsilon(q)}.
+\relu{(1-\delta)q + \eta\gamma\,\varepsilon(q)}.
 \]
 
 \begin{proposition}[No interior fixed point under admitted feedback]
@@ -369,13 +369,13 @@ Suppose \(q \in \R_{++}^E\) is a fixed point of
 \[
 q
 =
-\relu{(1-\delta)q + \eta\gamma\,varepsilon(q)}.
+\relu{(1-\delta)q + \eta\gamma\,\varepsilon(q)}.
 \]
 Then
 \[
 \delta q_e
 =
-\eta\gamma\,varepsilon_e(q),
+\eta\gamma\,\varepsilon_e(q),
 \qquad
 e \in [E].
 \]
