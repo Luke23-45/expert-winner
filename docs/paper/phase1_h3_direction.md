@@ -55,16 +55,53 @@ The sweet spots are *mutually exclusive*: pressuring two experts into
 their sweet spots overflows the sink (Lemma 4 generalized; the
 H=2 case is proved in `phase1_lower_bound_draft.md` Lemma 4).
 
-### 2.2 What is proved: 2-world mutual exclusivity
+### 2.2 What is proved: E-world mutual exclusivity (new)
 
-For E−1 = 2 (the H=2 construction), Lemma 4 proves: for every fixed
-pressure q, the average Round-1 overflow over the two worlds is ≥ E_S,
-with equality only at "do nothing" or single-world sweet spots, and
-*strictly greater* (2·E_S) when both sweet spots are attempted.
-The proof is a complete threshold case analysis using the Top-K flip
-structure (1). This lemma is MoE-specific: the mutual exclusivity
-runs through Top-K discontinuity (sharp thresholds) and the limited
-sink (heterogeneous capacity).
+*Lemma (E-world no-hedging).* Fix E−1 worlds i = 1..E−1 and E experts
+(E is a sink with C_E = C_sink < C). World i: R_{0,i} = C + E_S,
+R_{0,e} = C for e < E, e ≠ i, R_{0,E} = 0; thus A_0 = (C,...,C,0) in
+every world. Margin structure: in world i, expert i carries E_S
+low-margin tokens (margin m, deflectable to the sink via sweet-spot
+pressure q_i ∈ (m/γ, M/γ]); every other expert e < E, e ≠ i, carries
+*all* C tokens at low margin m. Then for any fixed pressure q, the set
+G(q) = {i : overflow_i(q) < E_S/2} satisfies |G(q)| ≤ 1.
+
+*Proof.* Suppose i ≠ j both lie in G(q). To drive world-i overflow
+below E_S/2, q must deflect i's excess: q_i > m/γ. Likewise
+q_j > m/γ for world j. But in world i, expert j ≠ i holds C
+low-margin tokens; q_j > m/γ deflects all C to the sink, giving
+overflow at least (C − C_sink) from the sink alone. Choosing
+C_sink < C − E_S/2 makes this ≥ E_S/2, contradicting i ∈ G(q).
+Hence |G(q)| ≤ 1. ∎
+
+*Corollary (per-round lower bound).* For fixed q, let J = {e < E :
+q_e > m/γ}. If J = ∅, every world incurs overflow E_S (excess
+unfixed): average E_S. If J = {j} with q_j in j's sweet spot,
+world j has overflow 0 but each world i ≠ j incurs ≥ (C − C_sink)
+(sink flooded by j's C deflected tokens) plus its own E_S:
+average ≥ [(E−2)(C − C_sink + E_S)]/(E−1). If C − C_sink ≫ E_S,
+the minimizer is J = ∅ ("do nothing"), so min_q average ≥ E_S,
+and the bound is tight.
+
+The requested policy observes R_0, identifies i, and holds expert i
+in its sweet spot: per-round overflow 0 after Round 0. Over H rounds
+with per-round blind decisions, the admitted policy's optimal
+("do nothing") total is H·E_S vs E_S for the requested policy.
+
+*Why this matters.* The lemma closes gap (G1): mutual exclusivity
+holds for E worlds, not just 2, and the *catastrophic* wrong-probe
+cost (C − C_sink, not merely E_S) is what forces the admitted policy
+to *rationally* stay blind. The Top-K thresholds and the limited
+sink are load-bearing: smooth the thresholds and the sweet spots
+dissolve; enlarge the sink and hedging becomes safe.
+
+*Limitation.* This is a *per-round* (one-shot) bound repeated over H
+rounds. It does not yet establish an *irreducible* multi-round gap:
+a strict reductionist may view it as "H copies of an (E−1)-state
+static game." The multi-round *learning* analysis (G3) — where the
+admitted policy *could* probe but the probing *itself* is the costly
+multi-step process — remains the missing piece for full
+irreducibility. See §2.3.
 
 ### 2.3 What is conjectured: E-world sequential probing lower bound
 
@@ -86,16 +123,24 @@ round. In the worst case over worlds (adversarial ordering), or
 succeeding. Total: Ω(E·E_S) vs O(E_S).
 
 *Gaps in the proof.*
-- (G1) The mutual-exclusivity lemma is proved for 2 worlds; the
-  E-world generalization (any fixed q is "good" for at most one
-  world) needs the full threshold analysis for E−1 experts.
+- (G1) CLOSED by the Lemma above (mutual exclusivity for E worlds,
+  with catastrophic wrong-probe cost forcing rational blindness).
 - (G2) The probing *informativeness* claim (A_t reveals success)
   assumes the sink capacity and margin structure make success/failure
   distinguishable from A_t alone; this needs verification per probe.
-- (G3) *Adaptive* probing strategies (where the next probe depends
-  on previous A_t) need a formal information-theoretic lower bound
-  on the number of probes (Ω(E) worst-case is straightforward for
-  deterministic strategies via adversary; randomized needs Yao).
+  Note: under the Lemma's margin structure, probing is *catastrophic*
+  when wrong, so a rational admitted policy does *not* probe — the
+  "do nothing" bound above is the operative one, and (G2) is moot
+  for the lower bound (it would matter only for an *upper* bound
+  via a probing policy).
+- (G3) For *full irreducibility* (beyond "H copies of a static
+  game"), the multi-round learning analysis remains open: a
+  construction where probing is *worthwhile but slow*, so the
+  admitted policy *does* learn over rounds and the *rate* of
+  learning — governed by Top-K informativeness — determines the
+  gap. The current Lemma gives a *valid* H-round lower bound
+  (H·E_S vs E_S); whether it *survives* the reduction attack as
+  stated is the open question for §2.4.
 
 ### 2.4 Reduction attack on E-world probing (preliminary)
 
