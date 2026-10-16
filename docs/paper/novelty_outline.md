@@ -420,8 +420,7 @@ and why.
    theory of ALF-LB and must be cited as such. Our claimed-novel part is now
    scoped precisely: the capacity-censored extension (their model has no
    capacity, no dropping, no censoring — verified zero hits), the gauge
-   quotient structure (their dual has an unnamed, unexploited common-mode
-   invariance; our `Π_g` makes it explicit and load-bearing), target
+   quotient structure [corrected 2026-10-16: the “common-mode invariance of their dual objective” was wrong for top-K with K>1 — shifting all (y_i,p_k) by c changes their dual objective by c·T·(1−K), vanishing only for top-1 (verified against their LP (4) and dual). What does hold: their primal top-K assignment is invariant to common-mode shifts of p_k, and their uniform-step dual update preserves Σ_k p_k exactly since Σ_k(L−A_k) = LE−KT = 0 — so their scheme implicitly lives on the quotient R^E/span{1}, but unnamed and unexploited: no projection, no quotient dynamics. Our Π_g makes the gauge structure explicit and load-bearing], target
    dependence, and failure conditions under saturation.
 3. **Never-claim list additions:** (a) "persistent per-expert load state" as a
    concept (φ-Balancing's dual price); (b) "first (sub)gradient/primal-dual
