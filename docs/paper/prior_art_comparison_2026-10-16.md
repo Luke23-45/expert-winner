@@ -146,3 +146,113 @@ Heuristic, no theory of its own, no censoring analysis. 2512.03915 is now its th
 - **(vi) gauge-projection formulation:** verdict stays PARTIALLY PREDATED, must-cite list grows — add φ-Balancing's dual price `q = ∇φ(m)` as adjacent stateful-load-tracking prior art (loss-actuated, no gauge structure). The claimed-novel part remains exactly the quotient formal theory.
 - **NEW (vii): primal-dual theory of feedback load balancing** — PARTIALLY PREDATED by 2512.03915 (single-shot primal-dual, monotonicity, band-stability, log regret, for the uncensored uniform-target case). Our claimed-novel part: the capacity-censored extension, gauge quotient structure, target dependence, and failure conditions. Never claim "first primal-dual/subgradient theory of feedback load balancing."
 - **Never-claim list additions:** (a) "persistent per-expert load state" as a concept (φ-Balancing's dual price); (b) "first (sub)gradient/primal-dual theory of feedback load balancing" (2512.03915).
+
+---
+
+## 5. Censored-decision prior art + systems boundary (2026-10-16, exploration branch)
+
+Full-text reads (PDF via arXiv, pdftotext) on the exploration branch.
+Every claim [VERIFIED-PRIMARY] unless noted. Independently spot-checked
+by the owner against the PDFs.
+
+### 5.1 Kumar & Mouchtaki, "What is the Value of Censored Data?" (2602.16842)
+
+Data-driven newsvendor under censored demand. Signal: historical sales
+`x_i = min(D_i, I_i)` (demand censored by past inventory levels).
+Decision: ONE inventory quantity, chosen offline — one-shot, no
+dynamics, no persistent state. Objective: worst-case expected regret
+`sup_F E[c(a,F) − opt(F)]` with overage/underage costs. Thm 1: exact
+finite-dimensional characterization of worst-case regret for
+piecewise-separable policies. Key line (verified verbatim): "distributions
+with different unobserved tails remain indistinguishable" → irreducible
+regret from passive censored data; targeted uncensored observations cut
+worst-case regret ~23.5% (1 sample) to ~61% (5 samples) at n=50.
+
+**Boundary:** closest structural neighbor to our lower-bound *shape*
+(censoring → identification set → worst-case regret → targeted
+observations help). Everything else differs: offline one-shot scalar
+decision vs per-step closed-loop control; no Top-K discontinuity, no
+gauge structure, no hetero capacities/targets, no pressure-state
+evolution. **Blunt consequence:** if our lower bound is just
+"fiber-mates force nonzero worst-case error," it reduces to their
+argument renamed. Our novelty MUST live in the MoE-specific mechanism
+(requirement 4 of the roadmap) — the generic bound alone will not
+survive review. This is the reduction attack's primary target (roadmap
+§3, item 1c).
+
+### 5.2 "Kalman Filtering With Censored Measurements" (2002.08597)
+
+Tobit Type I censored 1-D measurements; recursive Bayesian estimation
+of a hidden multidimensional state under first-order Markov + Gaussian
+assumptions. No controller, no feedback loop, no decision.
+
+**Boundary:** farthest of the four from our setting. Pure estimation
+under strong distributional assumptions vs our worst-case control with
+no distributional assumptions over the fiber. Cite to pre-empt "why
+not just estimate R" — not a threat.
+
+### 5.3 Trinity / SMEBU (2602.17004) — equation-level
+
+Update (exact, must cite): `v_i = (n̄ − n_i)/n̄` (Eq 23, assigned
+counts); `ṽ_i = tanh(κ·v_i)` (Eq 24); `Δb_i = λ·ṽ_i` (Eq 25); centering
+`Δb_i −= (1/N_r)Σ_j Δb_j` (Eq 26); momentum `m_i = β·m_i +
+(1−β)·Δb_i` (Eq 27); `b_i += m_i` (Eq 28); hyperparameters λ = 5×10⁻⁴,
+β = 0.5, κ = 2 (verified verbatim). Rationale: tanh as continuous
+relaxation of the sign operator ("can never fully settle" near
+convergence), momentum as noise dampening. **Zero hits** on
+censored/windup/capacity-constraint/dropped (verified); the one
+"saturation" is tanh saturation speed. No capacity, no censoring, no
+feedback-information analysis.
+
+**Boundary:** direct prior art for *stable, stateful expert-bias
+control*. We must distinguish our contribution from generic
+momentum/damping/centering: their centering (Eq 26) is a heuristic
+zero-mean; our Π_g is a gauge-quotient theory (routing depends only on
+pressure differences; proved equivalences T1/T2; quotient subgradient
+P3). Never claim "persistent per-expert state" as a concept (already
+on the never-claim list). The censoring lane is untouched.
+
+### 5.4 LAER-MoE (2602.11686) — planner, equation-level
+
+Signal: `R` = routing matrix (token→expert assignments from the
+router); `expert_load = R.sum(axis=0)`; `C` = capacity; N devices, E
+experts. Decision: expert→device placement (greedy descending-by-load),
+replica allocation, `lite_routing(R, A, N, E, C)` dispatcher, time-cost
+search over layouts. Objective: minimize training step time (systems).
+**Zero hits** on censored/saturation/windup (verified); the planner
+consumes R directly — observed, never censored. No persistent
+control state; per-iteration heuristic planner.
+
+**Boundary (qualified per reviewer):** LAER co-optimizes placement and
+routing from observed routing counts — it does dispatch tokens to
+replicas, so "doesn't touch routing" would be too broad. But it
+analyzes neither persistent pressure-state feedback dynamics nor an
+admitted-only censoring model. Its "routing" is per-iteration
+assignment given placement, not closed-loop control driven by a
+censored signal.
+**Notation warning:** their R (routing matrix) and C (device/token
+capacity) are different objects from our R_e (per-expert requested
+load) and C_e — do not let symbols collide in prose.
+
+### 5.5 FreeBalance (2608.14205) — confirmed boundary
+
+Pre-routing workload prediction (frozen router on earlier hidden
+state) → expert swap planning → inference latency. The actual router
+makes final assignments. Contribution is prediction + placement;
+**not** a persistent feedback controller driven by censored admitted
+counts. (Assessment from abstract + method; full-text read deferred —
+structural boundary confirmed.)
+
+### 5.6 What this changes
+
+- **Never-claim addition:** "worst-case lower bounds under censored
+  feedback" as a generic claim (Kumar & Mouchtaki). Our claim must be
+  the MoE-specific instantiation + mechanism.
+- **Phase 1 requirement 4 is now the whole game.** The reduction
+  attack (roadmap §3, 1c) has its primary target named: K&M's
+  identification-set regret. Survive it via Top-K/gauge/hetero/dynamics
+  or pivot.
+- **Yang & Shi 2023** (POMS, DOI 10.1111/poms.13824): journal paper,
+  full text not verified — accept reviewer's characterization
+  (regret under censored demand, inventory control) pending direct
+  read. Same boundary shape as K&M expected.
