@@ -40,7 +40,9 @@ and its CUDA/PyTorch dependencies are installed. Check the visible GPU count
 before choosing `--nproc-per-node`; each worker requires one visible GPU. The
 smoke profile uses generated mock data and a small 2-layer model; it checks the
 adapter and the required no-drop equivalence, not language-model quality or the
-paper's research claims.
+paper's research claims. The pinned Megatron version rejects expert bias with
+its default softmax router score, so the protocol fixes the score function to
+sigmoid across every arm, including the auxiliary-loss baseline.
 
 ```bash
 git -C /path/to/Megatron-LM checkout 62c063f2b731b57b1c2031b2b4f4c6a769271ccb

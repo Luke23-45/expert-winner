@@ -120,6 +120,7 @@ def cells(protocol: dict, profile: str) -> list[dict]:
     for cell in result:
         cell["experts"] = design["model"]["experts"]
         cell["top_k"] = design["model"]["top_k"]
+        cell["router_score_function"] = design["model"]["router_score_function"]
         profile_model = design["smoke_model"] if profile == "smoke" else design["model"]
         cell["sequence_length"] = profile_model["sequence_length"]
         cell["global_batch_size"] = profile_model["global_batch_size"]
@@ -151,6 +152,7 @@ def run_command(cell: dict, args: argparse.Namespace, out: Path) -> list[str]:
         "--seq-length", str(model["sequence"]), "--max-position-embeddings", str(model["sequence"]),
         "--micro-batch-size", str(model["micro_batch"]), "--global-batch-size", str(model["global_batch"]),
         "--train-iters", str(cell["steps"]), "--num-experts", "8", "--moe-router-topk", "2",
+        "--moe-router-score-function", cell["router_score_function"],
         "--moe-router-load-balancing-type", "aux_loss", "--seed", str(cell["seed"]), "--log-throughput",
         "--log-interval", "10", "--eval-interval", str(eval_interval), "--eval-iters", "10",
         "--bf16", "--lr", "3e-4", "--min-lr", "3e-5", "--lr-decay-style", "cosine",

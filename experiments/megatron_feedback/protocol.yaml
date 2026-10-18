@@ -51,6 +51,7 @@ design:
   model:
     experts: 8
     top_k: 2
+    router_score_function: sigmoid
     layers: 12
     hidden_size: 768
     attention_heads: 12
@@ -67,6 +68,7 @@ design:
     note: Wiring check only; mock data and this scale are not research evidence.
   controls:
     - Same tokenizer, data shards, training order, initialization seed, optimizer, schedule, and token budget across a paired seed.
+    - Use the sigmoid router score function in every arm; Megatron requires sigmoid or sqrtsoftplus when expert-bias feedback is enabled, and the score function must remain fixed across comparisons.
     - Validation data is held out and evaluated at fixed seen-token checkpoints.
     - Any dropped-token behavior is the pinned framework implementation; do not replace it with the synthetic A=min(R,C) count model.
     - Keep auxiliary loss enabled only in the auxiliary-loss baseline; feedback arms use zero auxiliary-loss coefficient.
