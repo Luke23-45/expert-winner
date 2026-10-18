@@ -22,6 +22,7 @@ env/
 /results/runs/
 /lightning_logs/
 /checkpoints/
+/experiments/megatron_feedback/runs/
 
 # Logs and temporary files
 *.log

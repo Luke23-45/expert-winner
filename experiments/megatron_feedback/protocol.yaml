@@ -1,0 +1,82 @@
+protocol_version: 1
+title: Megatron-Core requested-versus-admitted feedback training study
+source:
+  repository: https://github.com/NVIDIA/Megatron-LM
+  commit: 62c063f2b731b57b1c2031b2b4f4c6a769271ccb
+  router_path: megatron/core/transformer/moe/router.py
+  update_path: megatron/core/distributed/finalize_model_grads.py
+  admission: apply_router_token_dropping runs before expert-count accumulation
+  drop_policy: probs
+  update_group: TP x DP x CP count reduction
+design:
+  experimental_unit: independent training run
+  pairing: same seed, data order, model initialization, and token budget across arms
+  primary_outcome: validation negative log-likelihood at fixed seen-token budget
+  primary_comparison: requested versus admitted feedback, capacity enabled
+  secondary_outcomes:
+    - training and validation loss by step and seen tokens
+    - requested and admitted assignments by layer, expert, rank, and step
+    - overflow rate and fraction of experts at capacity
+    - router selection entropy and load coefficient of variation
+    - controller bias magnitude and update direction
+    - optimizer-step time, examples/second, and peak allocated GPU memory
+  negative_control: with capacity dropping disabled, requested and admitted controller trajectories must match within deterministic tolerance
+  baselines:
+    - no balancing loss and no feedback bias
+    - standard Megatron auxiliary load-balancing loss
+    - unmodified Megatron admitted-count expert-bias controller (adapter disabled; overhead reference)
+    - admitted-count bias feedback
+    - requested-count bias feedback
+  factors:
+    capacity_factor: [disabled, 1.0, 1.25]
+    feedback_scope: [local_action_average, global_count]
+    seeds: [17, 23, 42, 101, 202]
+  controller:
+    update_rule: sign(total_count - expert_count * num_experts)
+    update_rate: 0.001
+    local_action_average: average per-rank sign updates to keep replicated bias state synchronized
+    global_count: all-reduce selected count vector, then apply sign update
+  smoke_profile:
+    seeds: [17]
+    steps: 20
+    cells:
+      - {capacity_factor: disabled, feedback: requested, scope: global}
+      - {capacity_factor: disabled, feedback: admitted, scope: global}
+      - {capacity_factor: 1.0, feedback: requested, scope: global}
+      - {capacity_factor: 1.0, feedback: admitted, scope: global}
+  paper_profile:
+    seeds: [17, 23, 42, 101, 202]
+    cells: all_factorial_cells
+    note: Set the training step budget from a declared compute budget before interpreting quality results.
+  model:
+    experts: 8
+    top_k: 2
+    layers: 12
+    hidden_size: 768
+    attention_heads: 12
+    sequence_length: 2048
+    micro_batch_size: 2
+    global_batch_size: 64
+  smoke_model:
+    layers: 2
+    hidden_size: 128
+    attention_heads: 4
+    sequence_length: 128
+    micro_batch_size: 1
+    global_batch_size: 4
+    note: Wiring check only; mock data and this scale are not research evidence.
+  controls:
+    - Same tokenizer, data shards, training order, initialization seed, optimizer, schedule, and token budget across a paired seed.
+    - Validation data is held out and evaluated at fixed seen-token checkpoints.
+    - Any dropped-token behavior is the pinned framework implementation; do not replace it with the synthetic A=min(R,C) count model.
+    - Keep auxiliary loss enabled only in the auxiliary-loss baseline; feedback arms use zero auxiliary-loss coefficient.
+    - Do not enable CUDA graphs or router fusion for the first adapter validation; reassess only after the adapter is stable.
+    - Record GPU model, CUDA, NCCL, Megatron SHA, config, command, data fingerprints, and git dirty state for every run.
+    - Telemetry stores rank-local counts; global diagnostics are reconstructed offline to avoid measurement collectives.
+    - Requested counts are captured before the capacity transform in requested-feedback cells and both drop-off feedback controls. Admitted-feedback cells consume Megatron's existing post-transform count buffer and do not compute an extra requested histogram.
+    - The unmodified native-admitted arm estimates total adapter and telemetry overhead; requested versus adapted-admitted timing estimates the additional request-count capture cost.
+  stop_checks:
+    - Smoke drop-off requested and admitted runs fail to match for the same seed.
+    - Captured requested/admitted counts do not obey map-level mass and capacity constraints.
+    - Training diverges or the primary outcome degrades consistently for requested feedback.
+    - Adapter changes alter token-selection semantics outside the configured feedback state update.
