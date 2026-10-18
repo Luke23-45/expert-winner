@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import re
 import math
@@ -11,8 +12,9 @@ from collections import defaultdict
 from pathlib import Path
 
 
-VALIDATION_RE = re.compile(
-    r"\bvalidation\s+loss\s+at\s+iteration\s+(\d+)[^\n]*?"
+EVALUATION_RE = re.compile(
+    r"\bvalidation\s+loss\s+at\s+iteration\s+(\d+)"
+    r"(?:\s+on\s+([a-z_-]+)\s+set)?[^\n]*?"
     r"lm loss value:\s*([0-9.eE+-]+)", re.IGNORECASE
 )
 STEP_TIME_RE = re.compile(r"iteration\s+(\d+)\s*/[^\n]*?elapsed time per iteration \(ms\):\s*([0-9.eE+-]+)")
@@ -61,16 +63,20 @@ def load_run(path: Path) -> tuple[dict, dict[tuple[int, int], dict]]:
 
 def parse_training_log(path: Path) -> tuple[list[dict], list[dict]]:
     log = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
-    validation = [
-        {"iteration": int(step), "validation_nll": float(loss)}
-        for step, loss in VALIDATION_RE.findall(log)
+    evaluations = [
+        {
+            "iteration": int(step),
+            "split": (split or "unspecified").lower(),
+            "nll": float(loss),
+        }
+        for step, split, loss in EVALUATION_RE.findall(log)
     ]
     training = []
     times = {int(step): float(ms) for step, ms in STEP_TIME_RE.findall(log)}
     losses = {int(step): float(loss) for step, loss in TRAIN_LOSS_RE.findall(log)}
     for step in sorted(set(times) | set(losses)):
         training.append({"iteration": step, "step_time_ms": times.get(step), "training_nll": losses.get(step)})
-    return validation, training
+    return evaluations, training
 
 
 def load_shape_metrics(counts: list[int] | None) -> tuple[float | None, float | None]:
@@ -101,7 +107,15 @@ def main() -> int:
         key = (int(cell["seed"]), str(cell["capacity_factor"]), str(cell["scope"]), str(cell["feedback"]))
         runs[key] = (run_path, cell, rows)
 
-    summary = {"runs": len(runs), "violations": [], "no_drop_pairs": 0, "rows": 0}
+    summary = {
+        "runs": len(runs),
+        "violations": [],
+        "no_drop_pairs": 0,
+        "rows": 0,
+        "primary_metric_split": "validation",
+        "evaluation_rows_by_split": {},
+        "analyzer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+    }
     if len(runs) == 0:
         summary["violations"].append({"error": "no run cell metadata found"})
     flat_rows = []
@@ -109,7 +123,19 @@ def main() -> int:
     training_rows = []
     final_validation_by_cell = {}
     for key, (run_path, cell, rows) in runs.items():
-        validation, training = parse_training_log(run_path / "stdout.log")
+        evaluations, training = parse_training_log(run_path / "stdout.log")
+        validation = [row for row in evaluations if row["split"] == "validation"]
+        for row in evaluations:
+            split = row["split"]
+            summary["evaluation_rows_by_split"][split] = (
+                summary["evaluation_rows_by_split"].get(split, 0) + 1
+            )
+            training_rows.append({
+                "run_id": run_path.name,
+                "seed": cell["seed"],
+                "metric": "evaluation_nll",
+                **row,
+            })
         if validation:
             final_validation = validation[-1]
             sorted_times = sorted(row["step_time_ms"] for row in training if row["step_time_ms"] is not None)
@@ -122,15 +148,19 @@ def main() -> int:
                 "feedback": cell["feedback"],
                 "scope": cell["scope"],
                 "validation_iteration": final_validation["iteration"],
-                "validation_nll": final_validation["validation_nll"],
+                "metric_split": "validation",
+                "validation_nll": final_validation["nll"],
                 "median_tail_step_time_ms": median_tail_ms,
             })
             final_validation_by_cell[key] = final_validation
-            for row in validation:
-                training_rows.append({"run_id": run_path.name, "seed": cell["seed"],
-                                      "metric": "validation_nll", **row})
         else:
-            summary["violations"].append({"run": run_path.name, "error": "validation loss not found in stdout.log"})
+            summary["violations"].append({
+                "run": run_path.name,
+                "error": (
+                    "explicit validation-set loss not found in stdout.log; "
+                    "test, training, or unspecified evaluation metrics are not valid substitutes"
+                ),
+            })
         for row in training:
             training_rows.append({"run_id": run_path.name, "seed": cell["seed"],
                                   "metric": "training",
@@ -240,10 +270,11 @@ def main() -> int:
             "seed": seed,
             "capacity_factor": capacity_factor,
             "scope": scope,
+            "metric_split": "validation",
             "validation_iteration": requested_val["iteration"],
-            "requested_validation_nll": requested_val["validation_nll"],
-            "admitted_validation_nll": admitted_val["validation_nll"],
-            "requested_minus_admitted_nll": requested_val["validation_nll"] - admitted_val["validation_nll"],
+            "requested_validation_nll": requested_val["nll"],
+            "admitted_validation_nll": admitted_val["nll"],
+            "requested_minus_admitted_nll": requested_val["nll"] - admitted_val["nll"],
         })
     if paired_effects:
         with (args.runs_root / "paired_validation_effects.csv").open("w", newline="", encoding="utf-8") as handle:

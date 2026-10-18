@@ -113,6 +113,19 @@ drop-off pair. With dropping disabled, requested and admitted assignments and
 the global-scope controller trajectories must match for the same seed. Do not
 start the paper profile if this check fails.
 
+The analyzer preserves the evaluation split reported by Megatron. Only an
+explicit `on validation set` result is used for `training_summary.csv` and
+`paired_validation_effects.csv`; `test` and unlabeled evaluation results remain
+separate rows in `training_curves.csv`. If a run has no explicitly labeled
+validation result, analysis records a violation and excludes that run from the
+primary comparison rather than substituting a test or unlabeled loss. Existing
+run logs can be reanalyzed without retraining. `telemetry_checks.json` records
+the analyzer SHA-256 used for that analysis:
+
+```bash
+python experiments/megatron_feedback/analyze.py /path/to/existing/runs
+```
+
 ## Real-data profile
 
 The paper profile is deliberately not launched until the data, tokenizer, GPU
