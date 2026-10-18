@@ -37,6 +37,21 @@ def _source_checkout_sha(root: Path) -> str:
     ).strip()
 
 
+def _has_only_expected_megatron_compat_patch(root: Path) -> bool:
+    """Accept the launcher's exact autograd-safe patch, and no other edits."""
+    patch_path = Path(__file__).resolve().parent / "patches" / "megatron-mlp-view-safe-output-bias.patch"
+    status = subprocess.check_output(
+        ["git", "-C", str(root), "status", "--porcelain", "--untracked-files=all"],
+        text=True,
+    ).splitlines()
+    if status != [" M megatron/core/transformer/mlp.py"]:
+        return False
+    diff = subprocess.check_output(
+        ["git", "-C", str(root), "diff", "--binary", "--no-ext-diff"],
+    )
+    return diff == patch_path.read_bytes()
+
+
 def _count_routes(routing_map: torch.Tensor, padding_mask: torch.Tensor | None) -> torch.Tensor:
     """Count valid token-expert assignments for bool maps or dense top-k IDs."""
     n_experts = getattr(_ACTIVE_ROUTER.get()[0].config, "num_moe_experts")
@@ -142,8 +157,11 @@ def install() -> None:
             f"Unsupported Megatron checkout {actual_sha}; adapter expects {expected_sha}. "
             "Review the source changes and update the adapter deliberately."
         )
-    if dirty:
-        raise RuntimeError("Megatron checkout must be clean; inspect git status before running this experiment")
+    if dirty and not _has_only_expected_megatron_compat_patch(root):
+        raise RuntimeError(
+            "Megatron checkout has unrecognized changes; only the exact experiment compatibility "
+            "patch is allowed. Restore other edits before running."
+        )
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is unavailable in this worker; the experiment does not permit CPU fallback")
 

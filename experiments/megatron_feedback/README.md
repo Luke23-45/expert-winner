@@ -25,7 +25,14 @@ as a communication-free local controller.
 The adapter is guarded to Megatron-LM commit
 `62c063f2b731b57b1c2031b2b4f4c6a769271ccb` (2026-10-18). The version guard is
 intentional: this code hooks framework internals, not a stable plugin API. The
-official [router implementation](https://github.com/NVIDIA/Megatron-LM/blob/62c063f2b731b57b1c2031b2b4f4c6a769271ccb/megatron/core/transformer/moe/router.py)
+launcher applies one recorded compatibility patch to the pinned source:
+`output += ...` becomes the equivalent out-of-place `output = output + ...` in
+the expert MLP. The row-parallel output can be a view returned by a custom
+autograd function, so in-place modification is rejected by current PyTorch.
+The launcher verifies the checkout commit, applies or verifies only this exact
+diff, and records its SHA-256 in each run manifest. The adapter accepts that
+exact patch and rejects any additional Megatron edits. The official
+[router implementation](https://github.com/NVIDIA/Megatron-LM/blob/62c063f2b731b57b1c2031b2b4f4c6a769271ccb/megatron/core/transformer/moe/router.py)
 applies token dropping before accumulating its expert-bias counts. Its
 [finalization path](https://github.com/NVIDIA/Megatron-LM/blob/62c063f2b731b57b1c2031b2b4f4c6a769271ccb/megatron/core/distributed/finalize_model_grads.py)
 updates that state once per global batch; the [drop transform](https://github.com/NVIDIA/Megatron-LM/blob/62c063f2b731b57b1c2031b2b4f4c6a769271ccb/megatron/core/transformer/moe/moe_utils.py)
@@ -98,7 +105,8 @@ The analysis command runs only if training succeeds (`&&`). If you have more
 visible GPUs, increase both `--nproc-per-node` and the number of IDs in
 `--device-ids` to match. If Megatron is installed in a different Python
 environment, invoke both commands with that environment's Python executable.
-The adapter rejects any checkout whose Git SHA differs from the pinned one.
+The adapter rejects any checkout whose Git SHA differs from the pinned one or
+whose working-tree changes differ from the single compatibility patch above.
 
 `telemetry_checks.json` must have no violations and must report one matched
 drop-off pair. With dropping disabled, requested and admitted assignments and

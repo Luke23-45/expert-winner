@@ -20,6 +20,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 ADAPTER_DIR = Path(__file__).resolve().parent
+MEGATRON_COMPAT_PATCH = ADAPTER_DIR / "patches" / "megatron-mlp-view-safe-output-bias.patch"
 
 
 def sha256_file(path: Path) -> str:
@@ -56,6 +57,44 @@ def parse_args() -> argparse.Namespace:
 
 def git_value(root: Path, *args: str) -> str:
     return subprocess.check_output(["git", "-C", str(root), *args], text=True).strip()
+
+
+def ensure_megatron_compat_patch(root: Path) -> str:
+    """Apply, or verify, the one-line autograd-safe fix for the pinned MLP."""
+    patch_bytes = MEGATRON_COMPAT_PATCH.read_bytes()
+    patch_text = MEGATRON_COMPAT_PATCH.read_text(encoding="utf-8")
+    changed_paths = subprocess.check_output(
+        ["git", "-C", str(root), "status", "--porcelain", "--untracked-files=all"],
+        text=True,
+    ).splitlines()
+    current_diff = subprocess.check_output(
+        ["git", "-C", str(root), "diff", "--binary", "--no-ext-diff"],
+    )
+    expected_status = [" M megatron/core/transformer/mlp.py"]
+
+    if not changed_paths:
+        subprocess.run(
+            ["git", "-C", str(root), "apply", "--check", str(MEGATRON_COMPAT_PATCH)],
+            check=True,
+        )
+        subprocess.run(
+            ["git", "-C", str(root), "apply", str(MEGATRON_COMPAT_PATCH)], check=True
+        )
+    elif changed_paths != expected_status or current_diff != patch_bytes:
+        raise SystemExit(
+            "Megatron checkout has local changes beyond the experiment's exact compatibility patch. "
+            "Restore it to the pinned commit and rerun; do not hand-edit Megatron files."
+        )
+
+    applied_diff = subprocess.check_output(
+        ["git", "-C", str(root), "diff", "--binary", "--no-ext-diff"],
+    )
+    if applied_diff != patch_bytes:
+        raise SystemExit(
+            "Megatron compatibility patch did not produce the expected diff; "
+            "the pinned source or line endings may differ."
+        )
+    return hashlib.sha256(patch_text.encode("utf-8")).hexdigest()
 
 
 def runtime_metadata() -> dict:
@@ -277,11 +316,12 @@ def main() -> int:
     actual = git_value(args.megatron_root, "rev-parse", "HEAD")
     if actual != expected:
         raise SystemExit(f"Megatron SHA mismatch: expected {expected}, found {actual}")
-    megatron_dirty = git_value(args.megatron_root, "status", "--porcelain")
-    if megatron_dirty:
-        raise SystemExit("Megatron checkout must be clean before running this experiment.")
+    compatibility_patch_sha256 = None
     if args.execute:
+        compatibility_patch_sha256 = ensure_megatron_compat_patch(args.megatron_root)
         preflight_dataset_helper(args.megatron_root)
+    elif git_value(args.megatron_root, "status", "--porcelain", "--untracked-files=all"):
+        raise SystemExit("Megatron checkout must be clean for a dry run.")
     protocol_path = ADAPTER_DIR / "protocol.yaml"
     protocol = yaml.safe_load(protocol_path.read_text(encoding="utf-8"))
     run_cells = cells(protocol, args.profile)
@@ -296,7 +336,8 @@ def main() -> int:
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "profile": args.profile,
         "megatron_sha": actual,
-        "megatron_dirty": False,
+        "megatron_dirty": bool(git_value(args.megatron_root, "status", "--porcelain")),
+        "megatron_compat_patch_sha256": compatibility_patch_sha256,
         "data_fingerprint": args.data_fingerprint,
         "adapter_sha256": sha256_file(ADAPTER_DIR / "adapter.py"),
         "run_matrix_sha256": sha256_file(ADAPTER_DIR / "run_matrix.py"),
@@ -345,6 +386,7 @@ def main() -> int:
             "cell": cell,
             "created_utc": datetime.now(timezone.utc).isoformat(),
             "megatron_sha": actual,
+            "megatron_compat_patch_sha256": compatibility_patch_sha256,
             "adapter_sha256": suite_manifest["adapter_sha256"],
             "protocol_sha256": suite_manifest["protocol_sha256"],
             "runtime": suite_manifest["runtime"],

@@ -1,0 +1,13 @@
+diff --git a/megatron/core/transformer/mlp.py b/megatron/core/transformer/mlp.py
+index f553cae27..370c390cc 100644
+--- a/megatron/core/transformer/mlp.py
++++ b/megatron/core/transformer/mlp.py
+@@ -382,7 +382,7 @@ class MLP(MegatronModule):
+         if per_token_scale is not None and output_bias is not None:
+             # if this MLP is an expert, and bias is required, we add the bias to output directly
+             # without doing bda later.
+-            output += output_bias.unsqueeze(0) * per_token_scale.unsqueeze(-1)
++            output = output + output_bias.unsqueeze(0) * per_token_scale.unsqueeze(-1)
+             output_bias = None
+ 
+         return output, output_bias
