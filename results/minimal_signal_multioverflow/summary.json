@@ -1,0 +1,295 @@
+{
+  "purpose": "Exact Top-1 enumeration of multi-overflow clipping fibers for one-step requested-update emulation",
+  "scope": "finite exact synthetic audit; no controller-optimality or physical-cost claim",
+  "expert_counts": [
+    2,
+    3,
+    4,
+    8
+  ],
+  "excess_counts": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "enumerated_worlds": 611,
+  "protocol_sha256": "d5867bab86c63dcf5ffbc6023a2f3ba4db482b49e3bfe4298d21d85fa65b5d7a",
+  "script_sha256": "f1071c53c55af229fd1cdae76afebf5e6ce7971583279f1846f9bb9123daba1d",
+  "base_revision": "e1648512e22844f4d8e892577dfc011f83ac307a",
+  "all_groups_pass": true,
+  "groups": [
+    {
+      "experts": 2,
+      "excess_rejected_mass": 1,
+      "tokens": 3,
+      "fiber_size": 2,
+      "distinct_requested_updates": 2,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 1,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 2,
+      "excess_rejected_mass": 2,
+      "tokens": 4,
+      "fiber_size": 3,
+      "distinct_requested_updates": 3,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 2,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 2,
+      "excess_rejected_mass": 3,
+      "tokens": 5,
+      "fiber_size": 4,
+      "distinct_requested_updates": 4,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 2,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 2,
+      "excess_rejected_mass": 4,
+      "tokens": 6,
+      "fiber_size": 5,
+      "distinct_requested_updates": 5,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 3,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 3,
+      "excess_rejected_mass": 1,
+      "tokens": 4,
+      "fiber_size": 3,
+      "distinct_requested_updates": 3,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 2,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 3,
+      "excess_rejected_mass": 2,
+      "tokens": 5,
+      "fiber_size": 6,
+      "distinct_requested_updates": 6,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 3,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 3,
+      "excess_rejected_mass": 3,
+      "tokens": 6,
+      "fiber_size": 10,
+      "distinct_requested_updates": 10,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 4,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 3,
+      "excess_rejected_mass": 4,
+      "tokens": 7,
+      "fiber_size": 15,
+      "distinct_requested_updates": 15,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 4,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 4,
+      "excess_rejected_mass": 1,
+      "tokens": 5,
+      "fiber_size": 4,
+      "distinct_requested_updates": 4,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 2,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 4,
+      "excess_rejected_mass": 2,
+      "tokens": 6,
+      "fiber_size": 10,
+      "distinct_requested_updates": 10,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 4,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 4,
+      "excess_rejected_mass": 3,
+      "tokens": 7,
+      "fiber_size": 20,
+      "distinct_requested_updates": 20,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 5,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 4,
+      "excess_rejected_mass": 4,
+      "tokens": 8,
+      "fiber_size": 35,
+      "distinct_requested_updates": 35,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 6,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 8,
+      "excess_rejected_mass": 1,
+      "tokens": 9,
+      "fiber_size": 8,
+      "distinct_requested_updates": 8,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 3,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 8,
+      "excess_rejected_mass": 2,
+      "tokens": 10,
+      "fiber_size": 36,
+      "distinct_requested_updates": 36,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 6,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 8,
+      "excess_rejected_mass": 3,
+      "tokens": 11,
+      "fiber_size": 120,
+      "distinct_requested_updates": 120,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 7,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    },
+    {
+      "experts": 8,
+      "excess_rejected_mass": 4,
+      "tokens": 12,
+      "fiber_size": 330,
+      "distinct_requested_updates": 330,
+      "distinct_admitted_updates": 1,
+      "minimum_fixed_length_bits": 9,
+      "checks": {
+        "fiber_cardinality_stars_and_bars": true,
+        "rejected_signal_injective": true,
+        "requested_update_injective": true,
+        "admitted_update_constant": true,
+        "fixed_length_code_tight": true,
+        "code_capacity_covers_fiber": true
+      }
+    }
+  ]
+}

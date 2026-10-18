@@ -1,0 +1,13 @@
+# Preregistered long-horizon population-limit experiment
+
+**Question.** Does the all-horizon population recurrence and its predicted long-run overflow gap appear in finite batches when the same random affinity matrix is reused over time?
+
+**Model.** This is the existing hard Top-K router, canonical independent per-expert admission `A=min(R,C)`, and gauge-projected proportional update from `formal.md`. Use `gamma=1`, zero leak, uniform target, one under-capacity expert, and equal compensating capacity on all other experts. No device-level admission, score-ranked group cap, auxiliary loss, or new controller is introduced.
+
+**Locked grid.** `E=4`, `K in {1,2,3}`, iid affinities `{Normal(0,1), Logistic(0,1), standard Gumbel}`, `r=1/48`, and `T in {2304,9216}`. Capacities are `C_1/T=K/4-r` and `C_e/T=K/4+r/3` for `e=2,3,4`; both T values make all capacities integral and `sum C=K*T`. For each affinity law and K, set the step size from the proved stability range as `eta=0.8*K*(E-1)/L_F`, with `L_F=||f||_infinity*(E-1)*binom(E-2,K-1)`. Use 12 independent affinity matrices per `(law,K,T)` and fixed seed formula in the runner. Reuse each matrix for both feedback arms and all rounds.
+
+Registered cumulative horizons are `H in {1,2,4,8,16,32,64}`. At every round, requested and admitted arms route on the same fixed matrix, compute `R`, `A=min(R,C)`, overflow, and the respective canonical pressure update. The primary endpoint is paired cumulative overflow difference divided by `T`; also report average per-round gap and compare both with the population recurrence from the theorem. Report paired means, 95% t intervals, fraction of positive plants, and absolute deviation from the population prediction at every horizon. Do not drop any plant or horizon.
+
+**Controls.** Check mass `sum R=K*T`, load bounds `R_e<=T`, clipping `A=min(R,C)`, and overflow identity `sum J=sum(R-A)` at every arm and round. Verify both arms have equal step-zero costs. For each plant, run a no-clipping one-step control with `C_e=T`; requested/admitted next pressures and routes must agree exactly and overflow must be zero. This one-step identity extends to the full no-clipping trajectory by deterministic induction.
+
+**Interpretation boundary.** The theorem takes `T->infinity` at fixed `H` and then `H->infinity`. The registered finite-T runs do not establish infinite-horizon convergence at fixed batch size. They check finite-horizon approach to the population recurrence and the predicted long-run average gap; they do not establish universal controller ranking, trained-model or serving benefit, observation cost, or separation from the exact finite-instance outcome-map benchmark.

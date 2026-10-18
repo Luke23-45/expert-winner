@@ -1,0 +1,29 @@
+{
+  "experiment": "one-bit decision sufficiency in saturation-multiplicity Top-K family",
+  "protocol": "docs/paper/saturation_multiplicity_one_bit_experiment_protocol_2026-10-18.md",
+  "main_grid_cells": 72,
+  "main_grid_profiles": {
+    "one": 36,
+    "two": 36
+  },
+  "small_exact_rational_cells": 19,
+  "all_one_bit_equals_full_R": true,
+  "all_capacity_and_target_checks_passed": true,
+  "all_two_saturation_A_only_gaps_strictly_positive": true,
+  "minimum_two_saturation_A_only_gap": 0.004824844911193352,
+  "mean_two_saturation_A_only_gap": 0.012902986647902754,
+  "main_grid_sha256": "822e5f417da409bacfbc5dfa1d858c71c028abf72ffac0fcd967b25136400a65",
+  "small_grid_sha256": "89b9ee94aa5f2415758ce3dc0236ace5ee8c7bc6039b1d008abeef9d29f5bbec",
+  "runner_sha256": "fe248c1bd6f4ff3b5d603e108b94e3b272b96076b0c1855442cebb5c2e2d7714",
+  "master_weight_ratio": "4/3",
+  "main_E": [
+    3,
+    5,
+    7
+  ],
+  "multipliers": [
+    96,
+    192,
+    384
+  ]
+}

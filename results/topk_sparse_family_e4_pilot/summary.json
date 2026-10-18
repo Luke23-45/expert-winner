@@ -1,0 +1,97 @@
+{
+  "E": 4,
+  "K": 2,
+  "capacity_fractions": [
+    "7/8",
+    "1/8",
+    "1/8",
+    "7/8"
+  ],
+  "cells": [
+    {
+      "T": 1600,
+      "classifier_error_rate": 0.0,
+      "classifier_errors": 0,
+      "identical_admitted_pairs": 500,
+      "identical_admitted_rate": 1.0,
+      "identical_no_clip_pairs": 0,
+      "replicates": 500
+    },
+    {
+      "T": 6400,
+      "classifier_error_rate": 0.0,
+      "classifier_errors": 0,
+      "identical_admitted_pairs": 500,
+      "identical_admitted_rate": 1.0,
+      "identical_no_clip_pairs": 0,
+      "replicates": 500
+    },
+    {
+      "T": 25600,
+      "classifier_error_rate": 0.0,
+      "classifier_errors": 0,
+      "identical_admitted_pairs": 500,
+      "identical_admitted_rate": 1.0,
+      "identical_no_clip_pairs": 0,
+      "replicates": 500
+    }
+  ],
+  "classifier_threshold": 0.375327651598354,
+  "exact_world0_inclusions": [
+    "68225/68289",
+    "670/1339",
+    "34183/136578",
+    "34183/136578"
+  ],
+  "exact_world1_inclusions": [
+    "68225/68289",
+    "34183/136578",
+    "670/1339",
+    "34183/136578"
+  ],
+  "limits": [
+    "The fixed common action is a diagnostic and is not asserted to be optimal for admitted telemetry.",
+    "Finite Monte Carlo outcomes support the finite-weight construction but do not prove the family theorem.",
+    "No trained-model gain, measured telemetry cost, or benchmark separation is tested."
+  ],
+  "population_overflow": {
+    "fixed_common_q0_equal_prior": 0.05550748472723098,
+    "no_feedback_equal_prior": 0.6247181097980641,
+    "q0_in_world0": 1.377509217803663e-13,
+    "q0_in_world1": 0.11101496945432421,
+    "q1_in_world0": 0.11101496945424999,
+    "q1_in_world1": 4.107825191113079e-15
+  },
+  "replicates_per_T": 500,
+  "seed_rule": "2026101702 + 100000*T_index + replicate",
+  "status": "controlled finite-weight synthetic audit; not a theorem proof",
+  "target_pressure_max_residual": 1.3500311979441904e-13,
+  "target_pressures": [
+    [
+      4.6051701859870455,
+      2.9798356707365983,
+      2.2866884901766413,
+      0.0
+    ],
+    [
+      4.605170185988136,
+      2.286688490177585,
+      2.979835670737531,
+      0.0
+    ]
+  ],
+  "world_weights": [
+    [
+      100,
+      2,
+      1,
+      1
+    ],
+    [
+      100,
+      1,
+      2,
+      1
+    ]
+  ]
+}

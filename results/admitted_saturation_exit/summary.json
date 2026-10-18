@@ -1,0 +1,705 @@
+{
+  "protocol": {
+    "experts": 4,
+    "top_k": 2,
+    "tokens": 128,
+    "capacities": [
+      40,
+      42,
+      43,
+      44
+    ],
+    "target": [
+      "2/5",
+      "3/10",
+      "1/5",
+      "1/10"
+    ],
+    "eta": "1/10",
+    "gamma": "1",
+    "delta": "0",
+    "edge_pair_multiplicities": [
+      40,
+      24,
+      32,
+      32
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "controllers": [
+      "admitted",
+      "requested",
+      "none"
+    ],
+    "route_scores_and_state_are_exact_fractions": true,
+    "protocol_sha256": "d09385d2fba0a7bf9b1af1836faeedb2a5d6d8ff658abe509ab118a7996a059c",
+    "script_sha256": "ffa22986fc06193b3a6f9d8990f11ce5c904f3b398dd66dfdc7b85765210eacb",
+    "base_revision": "e1648512e22844f4d8e892577dfc011f83ac307a"
+  },
+  "theorem": "T6a global N_sep bound; T6b capacity-slack order-statistic refinement",
+  "exact_checks": {
+    "initial_global_saturation_all_seeds": true,
+    "theorem_strict_slope_gap_all_seeds": true,
+    "predicted_exit_by_Nsep_all_seeds": true,
+    "order_statistic_bound_finite_all_seeds": true,
+    "admitted_exit_by_order_statistic_bound_all_seeds": true,
+    "order_statistic_bound_le_Nsep_all_seeds": true,
+    "order_statistic_bound_exact_in_registered_plant_all_seeds": true,
+    "admitted_state_matches_open_loop_through_exit_all_seeds": true,
+    "no_feedback_remains_frozen_and_saturated_all_seeds": true,
+    "mass_and_clipping_identities_all_states": true
+  },
+  "per_seed": [
+    {
+      "seed": 0,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 1,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 2,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 3,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 4,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 5,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 6,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 7,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 8,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 9,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 10,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 11,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 12,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 13,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 14,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 15,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 16,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 17,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 18,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    },
+    {
+      "seed": 19,
+      "initial_requested": [
+        72,
+        64,
+        56,
+        64
+      ],
+      "minimum_slope_experts": [
+        0,
+        1
+      ],
+      "phantom_direction": [
+        "-813/5120",
+        "-261/5120",
+        "271/5120",
+        "803/5120"
+      ],
+      "strict_slope_gap": "133/1280",
+      "N_sep": 30,
+      "max_slope_expert": 3,
+      "initial_requests_to_max_slope_expert": 64,
+      "departures_needed_to_fall_below_capacity": 21,
+      "capacity_slack_exit_bound": 9,
+      "predicted_first_exit": 9,
+      "admitted_first_exit": 9,
+      "requested_first_exit": 11,
+      "admitted_first_route_change": 9,
+      "no_feedback_first_exit": null,
+      "admitted_exit_overflow": 99
+    }
+  ],
+  "summary": {
+    "seeds": 20,
+    "N_sep_min": 30,
+    "N_sep_max": 30,
+    "capacity_slack_bound_min": 9,
+    "capacity_slack_bound_max": 9,
+    "admitted_exit_min": 9,
+    "admitted_exit_max": 9,
+    "admitted_exit_equals_exact_open_loop_prediction_all_seeds": true,
+    "capacity_slack_bound_equals_observed_exit_all_seeds": true
+  }
+}

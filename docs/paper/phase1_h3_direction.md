@@ -1,6 +1,25 @@
 # Phase 1 H≥3 replacement: research direction and partial results
 
-**Status:** research in progress. NOT a proved theorem.
+**Status (reconciled 2026-10-18):** research-direction note with historical conjectures. The fixed
+E=3 probe-versus-wait value theorem is now proved separately in
+[`phase1_probe_wait_value_theorem_2026-10-16.md`](phase1_probe_wait_value_theorem_2026-10-16.md).
+An exact E=4, three-round value theorem over all causal admitted policies is
+now documented in
+[`phase1_matched_testing_comparator_e4_2026-10-16.md`](phase1_matched_testing_comparator_e4_2026-10-16.md).
+The continuous-pressure note gives exact E=4 values at horizons three and
+four for every movement radius, plus exact values for every horizon
+\(H\ge4\) when \(\beta>1/\sqrt2\). The remaining fixed-instance value domain is
+\(H\ge5\), \(\beta\le1/\sqrt2\); these values are not a priority because
+they cannot change the fixed-instance benchmark result. A reduction-resistant
+novelty claim is not established. The fixed E=3/E=4 results
+reduce exactly to
+state-constrained adaptive testing. The independent benchmark and the
+coarse-matching no-go counterexample are in
+[`phase1_benchmark_gate_2026-10-16.md`](phase1_benchmark_gate_2026-10-16.md).
+The current E-world family gate, including the all-pressure pair-separation
+inequality, finite-horizon all-policy lower bound, and exact E=4
+pair-separation audit, is in
+[`phase1_eworld_pair_separation_gate_2026-10-16.md`](phase1_eworld_pair_separation_gate_2026-10-16.md).
 **Branch:** `feat/research-censored-feedback`.
 **Context:** the H=2 lower bound (`phase1_lower_bound_draft.md` v0.3) was
 reduced to censored newsvendor (`phase1_reduction_audit_2026-10-16.md`).
@@ -9,8 +28,9 @@ multi-round feedback where Top-K, hetero C/μ, gauge, and pressure
 dynamics are all load-bearing.
 
 This document records the design space, the most promising direction,
-what is proved, and what remains open. It does not claim a complete
-H≥3 lower bound.
+what is proved, and what remains open. The E-world family now has an
+all-causal-policy finite-horizon lower bound; extension beyond that family
+and novelty beyond adaptive testing remain open.
 
 ---
 
@@ -91,7 +111,9 @@ C−C_sink>E_S/2 in world j, a contradiction. Hence |G(q)|≤1. ∎
 This proof uses the explicit identical-token-block construction,
 Top-1 determinism, and the capacity inequalities. It does not assume
 the sink has minimum pressure. It establishes the static all-state
-no-hedging lemma (G1), not a sequential value lower bound.
+no-hedging lemma (G1), not a sequential value lower bound for the E-world
+family. The fixed E=3 sequential value question is handled separately in the
+linked probe-versus-wait theorem.
 
 *One-round value corollary.* Let \(N=E-1\) and use the uniform prior on
 the N worlds. At round zero all admitted observations are identical,
@@ -132,7 +154,8 @@ Top-K thresholds or gauge geometry are essential. Whether the
 construction yields a non-reducible control theorem remains open.
 
 *Limitation.* This is a *per-round* (one-shot) bound repeated over H
-rounds. It does not yet establish an *irreducible* multi-round gap:
+rounds. It does not establish an *irreducible* multi-round gap for the
+E-world family:
 a strict reductionist may view it as "H copies of an (E−1)-state
 static game." The multi-round *learning* analysis (G3) — where the
 admitted policy *could* probe but the probing *itself* is the costly
@@ -148,7 +171,16 @@ specified parameter regime. Under the document's normalized cost, the
 corresponding gap is Ω(E·E_S/(HKT)); it decreases as H grows with fixed
 E, so no horizon-independent normalized gap is claimed.
 
-This is not yet a well-posed theorem statement: the constants and
+This conjecture is now superseded for the named E-world family by the
+finite-horizon bound in
+[`eworld_finite_horizon_all_policy_gap_theorem_2026-10-18.md`](eworld_finite_horizon_all_policy_gap_theorem_2026-10-18.md).
+That theorem proves a lower bound of order `min{E_S(H-1),L(N-1)}` up to
+constants against every causal randomized admitted policy when the requested
+policy can reach a zero-overflow pressure. The older, stronger
+`Omega(E*E_S)` conjecture as originally parameterized is not asserted.
+
+The earlier version of this section said the finite-horizon theorem was not
+well-posed: the constants and
 quantifiers must specify how C−C_sink scales with E, E_S, and H, as
 well as B, δ, the prior, and the exact policy class. In particular,
 H≥E alone does not imply the proposed tradeoff.
@@ -177,7 +209,8 @@ succeeding. Total: Ω(E·E_S) vs O(E_S).
   probed world from the others using A, so information acquisition must
   be included in the lower-bound analysis.
 - (G3) For *full irreducibility* (beyond "H copies of a static
-  game"), the multi-round learning analysis remains open: a
+  game"), the multi-round learning analysis for the E-world family remains
+  open: a
   construction where probing is *worthwhile but slow*, so the
   admitted policy *does* learn over rounds and the *rate* of
   learning — governed by Top-K informativeness — determines the
@@ -297,25 +330,32 @@ boundary, not a novelty claim.
 
 ## 3. Alternative: T7 divergence over H rounds
 
-Theorem T7 (`formal_core.md`) proves: under (A₀) feedback with
-heterogeneous C, pressure diverges in the capacity direction,
-and overflow is *non-decreasing* along the divergent trajectory.
+Theorem T7 (`formal_core.md`) is a fixed-controller trajectory result:
+under `(A₀)` feedback and its saturation assumptions, pressure moves in the
+capacity direction and overflow is non-decreasing, with a strict increase
+possible when saturation breaks.
 
-*Idea.* Pair two worlds where the T7-divergent pressure direction is
-*correct* in one and *harmful* in the other, with identical A_t
-(global saturation). Over H rounds, the harmful divergence
-*compounds* (overflow strictly increases at each flip, T7 part 2),
-while the requested policy applies the corrective pressure.
-The gap *grows* with H (not just a one-shot).
+*Original paired-world idea (rejected as written).* Pair worlds with identical
+`A_t=C` histories and claim that overflow compounds while the admitted
+controller remains blind. This is impossible: `O_t = K T - sum_e A_{t,e}`,
+so identical admitted vectors imply identical stage overflow; moreover,
+`A_t=C` makes overflow the constant `K T - sum_e C_e`. Any strict increase
+changes `A_t` and is observable at that transition. The exact identity and
+scope correction are recorded in
+[`phase1_t7_trajectory_audit_2026-10-16.md`](phase1_t7_trajectory_audit_2026-10-16.md).
 
-*Why it might survive.* The *compounding* is driven by the
-*interaction* of pressure dynamics with Top-K flips — a genuinely
-dynamical mechanism with no static analogue. The proof must track
-the pressure *trajectory*, not just a single decision.
+This does not rule out a value-of-information gap. A requested policy may
+choose world-dependent actions with lower cost, while an admitted policy must
+trade off probing cost, information, and constrained pressure movement. The
+open theorem must quantify that tradeoff against every causal randomized
+admitted policy and attack its reduction to state-constrained adaptive
+testing. T7 may motivate a fixed-controller failure or a plant mechanism; it
+does not itself supply the policy-class lower bound.
 
-*Status.* Not yet constructed. The key challenge is the same as
-H=2: ruling out *all* blind policies, not just (A₀). Requires a
-*trajectory* no-hedging lemma.
+*Status.* The proposed hidden-compounding argument is invalid as phrased.
+Any replacement must explicitly model informative actions, observations,
+costs, and pressure transitions. No gap or novelty claim follows from T7
+alone.
 
 ---
 
@@ -339,19 +379,71 @@ analysis of the censored observation kernel.
 ## 5. Decision
 
 The E-world probing direction (§2) is the most developed. Its static
-all-state no-hedging lemma is proved, but the sequential value bound
-and novelty reduction remain open. The H=2
+all-state no-hedging lemma and the canonical-family all-pressure
+pair-separation inequality are proved. The E=4 full-pressure value is known
+at H=3 and H=4 for all movement radii, and for H≥4 when β>1/√2; values for
+H≥5 and β≤1/√2 remain uncomputed but are not the active research gate. The
+class-level novelty attempt is documented in
+[`phase1_class_level_go_no_go_2026-10-17.md`](phase1_class_level_go_no-go_2026-10-17.md)
+and did not establish a benchmarked control limitation. The
+fixed E=3 sequential
+result is proved separately in the linked companion note. The H=2
 construction in `phase1_lower_bound_draft.md` remains a valid MoE
 realization of a two-point value gap, but its own reduction audit shows
-that it is not a novel centerpiece. The T7-divergence (§3) and
-Markov-switching (§4) directions are research hypotheses, not results.
+that it is not a novel centerpiece. T7 (§3) is a proved fixed-controller
+mechanism, but its proposed hidden-compounding paired-world argument is
+invalid as written; the replacement policy-class theorem is open.
+Markov-switching (§4) remains a research hypothesis.
 
-**Recommendation:** generalize the exact $E=3$ value calculation only
-after a full reduction comparison. First determine whether a parameterized
-small-$B$ gap survives against every causal admitted policy and whether
-its bound uses a score-cell/reachability property absent from the abstract
-constrained-testing model. If not, report it as a constrained-testing
-result/application or pivot to T7-divergence. Do not run large sweeps until
-that theorem and reduction boundary are fixed.
+**Recommendation:** the exact E=3 probe-versus-wait value theorem is now in
+[`phase1_probe_wait_value_theorem_2026-10-16.md`](phase1_probe_wait_value_theorem_2026-10-16.md).
+The E=4 high-movement three-round value and matched-comparator audit are in
+[`phase1_matched_testing_comparator_e4_2026-10-16.md`](phase1_matched_testing_comparator_e4_2026-10-16.md).
+The E=3 result covers every causal randomized admitted policy and yields a
+raw long-horizon gap of order $1/\beta$; the E=4 result gives an exact
+three-round value under a large movement budget. Both transfer to their
+induced state-constrained adaptive-testing models, so neither yet supports a
+distinct MoE-control impossibility claim. The all-pressure inequality (PS) and its finite-horizon unrestricted-movement
+Bellman reduction are now proved in
+[`phase1_eworld_pair_separation_gate_2026-10-16.md`](phase1_eworld_pair_separation_gate_2026-10-16.md).
+The same note gives exact finite-movement reachability within canonical subset
+probes. The exact continuous-pressure Bellman recursion, a short-horizon quiet zone,
+the complete E=4 values for H=3 and H=4 at all β, and the E=4 values for
+H≥4 and β>1/√2 are in
+[`phase1_full_pressure_cell_dp_gate_2026-10-17.md`](phase1_full_pressure_cell_dp_gate_2026-10-17.md).
+The E=4 construction also shows that optimizing pressure location inside a
+test cell matters under movement constraints. Values for H≥5 and
+β≤1/√2 remain uncomputed, but are not the next priority: all such
+fixed-instance values transfer exactly to the metric-constrained polyhedral
+testing benchmark. The single class-level attempt is now assessed in
+[`phase1_class_level_go_no_go_2026-10-17.md`](phase1_class_level_go_no_go_2026-10-17.md):
+PS is a valid family lemma, but no benchmarked optimal-value separation or
+new general control principle follows. The current decision is no-go for the
+control-limitation claim; retain these results as exact MoE applications.
+The T7 audit (`phase1_t7_trajectory_audit_2026-10-16.md`) rules out hiding
+increasing overflow inside an unchanged admitted history. Do not run large
+sweeps until that broader theorem and its reduction boundary survive review.
 
-No sweeps were run. No theorem is claimed here.
+The all-pressure result is specific to the stated
+canonical E-world family; it is not a theorem for arbitrary MoE instances.
+The fixed E=3 theorem is stated and proved in the linked companion document.
+
+## 6. Status update: finite-horizon all-policy theorem (2026-10-18)
+
+The historical G3 statements above are superseded for the canonical E-world
+family by
+[`eworld_finite_horizon_all_policy_gap_theorem_2026-10-18.md`](eworld_finite_horizon_all_policy_gap_theorem_2026-10-18.md).
+Combining the proved pair-separation inequality with the all-state
+no-hedging lemma gives, for `D=H-1`, an explicit all-causal-policy lower
+bound `abD/(a+b(D-1))` on post-initial admitted overflow, where
+`a=L(N-1)/2` and `b=E_S/4`. With a one-update reachable zero-overflow
+pressure, requested value is exactly the unavoidable initial `E_S`, so this
+is a positive shared-prior value gap. The exact rational DP audit covers 156
+parameter/horizon cells and passes every bound; see
+[`eworld_finite_horizon_lower_bound_results_2026-10-18.md`](eworld_finite_horizon_lower_bound_results_2026-10-18.md).
+
+This closes the finite-horizon all-policy proof gap for the stated family.
+It does **not** close the conference novelty gate: the fixed family has an
+exact outcome-cost adaptive-testing representation, and the prior-art
+comparison for the new quantitative theorem remains to be completed. The
+older comments that called G3 open refer to the state before this update.

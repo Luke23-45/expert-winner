@@ -134,13 +134,20 @@ R_e(q) - A_e(q)
 =
 \relu{R_e(q) - C_e}.
 \]
-More generally, any admission rule satisfying
-\[
-A_e(q) \le R_e(q),
-\qquad
-A_e(q) \le C_e
-\]
-only strengthens the censoring statements below.
+The censoring claims in this document use the canonical coordinatewise rule
+\(A_e(q)=\min\{R_e(q),C_e\}\). The inequalities
+\(A_e(q)\le R_e(q)\) and \(A_e(q)\le C_e\) alone do not imply the same
+information loss: an admission mechanism satisfying those bounds could make
+its admitted counts depend on the excess requests and thereby encode
+additional information. Results below that use saturation censoring are not
+claimed for arbitrary admission rules; extending them requires an explicit
+admission model, such as work-conserving independent per-expert admission.
+For example, with \(C=(1,1,3,3)\), the request vectors
+\(R=(2,2,2,2)\) and \(\widetilde R=(3,1,2,2)\) both clip to
+\((1,1,2,2)\). Yet an admission rule satisfying only the two coordinatewise
+bounds could output \((0,1,2,2)\) for the first vector and \((1,0,2,2)\) for
+the second. Thus those bounds alone do not preserve the canonical clipping
+fiber.
 
 Let
 \[
@@ -529,6 +536,37 @@ q^{+}
 (1-\delta)q.
 \]
 The conclusions follow.
+\end{proof}
+
+\begin{proposition}[Pairwise pressure invariance on the saturated set]
+Assume uniform per-expert capacity \(C_e=C\), uniform target
+\(\mu_e=1/E\), canonical admission, and the gauge-quotient admitted-feedback
+dynamics
+\[
+q^{+}=\gproj\!\left((1-\delta)q+\eta\gamma\,
+\varepsilon^{\mathrm A}(q)\right).
+\]
+Let \(S(q)=\{e:R_e(q)\ge C\}\) be the saturated set. Then, for every
+\(e,f\in S(q)\),
+\[
+q_e^{+}-q_f^{+}=(1-\delta)(q_e-q_f).
+\]
+In particular, with no leak (\(\delta=0\)), the admitted-feedback update
+cannot change any pairwise pressure difference among experts saturated at
+that step. With leak, those differences contract by the factor
+\(1-\delta\).
+\end{proposition}
+
+\begin{proof}
+For \(e\in S(q)\), canonical admission gives \(A_e(q)=C\). Uniform
+capacity and target therefore imply
+\[
+\varepsilon^{\mathrm A}_e(q)=\frac{C}{KT}-\frac1E,
+\]
+which is identical for all \(e\in S(q)\). The gauge projection subtracts
+the same scalar from every coordinate, so it cancels when subtracting the
+updates for \(e\) and \(f\). The remaining difference is
+\((1-\delta)(q_e-q_f)\), as claimed.
 \end{proof}
 
 \begin{proposition}[Information loss under saturation]

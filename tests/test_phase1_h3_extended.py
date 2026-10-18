@@ -1,26 +1,18 @@
+"""Behavioral checks and finite-grid diagnostics for the Phase-1 helpers.
+
+The finite grids are diagnostics, not certificates over continuous pressure
+space or verifiers for the analytic theorems.
 """
-Extended tests for Phase 1 H=3 formal claims (tests 21-60).
-
-Categories:
-  A. E=3 partition with varied parameters (tests 21-35)
-  B. General E-world constructions (tests 36-45)
-  C. Bellman recursion exact values (tests 46-55)
-  D. Reachability with varied dynamics (tests 56-65)
-
-Companion: tests/test_phase1_h3_math.py (tests 1-20).
-"""
-import math
-
 import numpy as np
 import pytest
 
 from test_phase1_h3_math import (
-    winning_expert, score_cells, request_vectors, admitted_and_cost,
+    winning_expert, request_vectors, admitted_and_cost,
     proj_g, P0,
 )
 
 # ---------------------------------------------------------------------------
-# Category A: E=3 partition with varied parameters (21-35)
+# Parameterized E=3 checks
 # ---------------------------------------------------------------------------
 
 def make_params(C, E_S, C_sink, m, M, gamma=1.0):
@@ -58,11 +50,11 @@ class TestVariedParams:
     """No-hedging must hold for all valid parameter choices."""
 
     @pytest.mark.parametrize("C,E_S,C_sink,m,M", [
-        (50.0, 20.0, 30.0, 1.0, 3.0),   # 21: defaults
-        (100.0, 10.0, 20.0, 0.5, 2.0),  # 22: larger C, smaller excess
-        (40.0, 5.0, 10.0, 1.0, 5.0),    # 23: tight sink
-        (60.0, 25.0, 30.0, 2.0, 4.0),   # 24: large excess
-        (50.0, 20.0, 35.0, 1.0, 3.0),   # 25: roomier sink
+        (50.0, 20.0, 30.0, 1.0, 3.0),
+        (100.0, 10.0, 20.0, 0.5, 2.0),
+        (40.0, 5.0, 10.0, 1.0, 5.0),
+        (60.0, 25.0, 30.0, 2.0, 4.0),
+        (50.0, 20.0, 35.0, 1.0, 3.0),
     ])
     def test_no_hedging_grid(self, C, E_S, C_sink, m, M):
         adm_cost, _, _ = make_params(C, E_S, C_sink, m, M)
@@ -74,9 +66,9 @@ class TestVariedParams:
                 assert n_good <= 1, f"violated at ({x},{y}) params={(C,E_S)}"
 
     @pytest.mark.parametrize("C,E_S,C_sink,m,M", [
-        (50.0, 20.0, 30.0, 1.0, 3.0),   # 26
-        (100.0, 10.0, 20.0, 0.5, 2.0),  # 27
-        (40.0, 5.0, 10.0, 1.0, 5.0),    # 28
+        (50.0, 20.0, 30.0, 1.0, 3.0),
+        (100.0, 10.0, 20.0, 0.5, 2.0),
+        (40.0, 5.0, 10.0, 1.0, 5.0),
     ])
     def test_origin_blind(self, C, E_S, C_sink, m, M):
         adm_cost, T, _ = make_params(C, E_S, C_sink, m, M)
@@ -85,28 +77,18 @@ class TestVariedParams:
         assert c1 == pytest.approx(E_S)
         assert c2 == pytest.approx(E_S)
 
-    def test_tie_breaking_lower_index(self):  # 29
+    def test_tie_breaking_lower_index(self):
         # Exactly tied scores -> lower index wins
         assert winning_expert([1.0, 1.0, 1.0]) == 0
         assert winning_expert([0.0, 0.0, 5.0]) == 2
         assert winning_expert([2.0, 2.0, 1.0]) == 0
 
-    def test_strict_winner(self):  # 30
+    def test_strict_winner(self):
         assert winning_expert([3.0, 1.0, 2.0]) == 0
         assert winning_expert([1.0, 5.0, 2.0]) == 1
         assert winning_expert([1.0, 2.0, 9.0]) == 2
 
-    def test_requests_conserve_total_varied(self):  # 31
-        adm_cost, T, _ = make_params(60.0, 25.0, 30.0, 2.0, 4.0)
-        rng = np.random.default_rng(42)
-        for _ in range(100):
-            x, y = rng.uniform(-5, 5, 2)
-            # reconstruct R from cells to check conservation
-            d_1L, d_1H, d_2L, d_2H = score_cells(float(x), float(y))
-            # default-param cells; just check the function runs
-            assert d_1L in (0, 1, 2)
-
-    def test_sink_never_exceeds_cap(self):  # 32
+    def test_sink_never_exceeds_cap(self):
         adm_cost, _, _ = make_params(50.0, 20.0, 30.0, 1.0, 3.0)
         xs = np.linspace(-6, 6, 25)
         for x in xs:
@@ -115,22 +97,16 @@ class TestVariedParams:
                 assert A1[2] <= 30.0 + 1e-9
                 assert A2[2] <= 30.0 + 1e-9
 
-    def test_cost_equals_unadmitted(self):  # 33
+    def test_cost_equals_unadmitted(self):
         # c_i = sum(R^i - A^i) by definition
-        from test_phase1_h3_math import request_vectors, CAP
+        from test_phase1_h3_math import request_vectors
         x, y = 1.5, -0.5
         R1, R2 = request_vectors(x, y)
         A1, c1, A2, c2 = admitted_and_cost(x, y)
         assert c1 == pytest.approx(float((R1 - A1).sum()))
         assert c2 == pytest.approx(float((R2 - A2).sum()))
 
-    def test_monotone_sink_pressure(self):  # 34
-        # Pushing x very negative sends L_1/H_1 tokens to sink/expert3
-        A1, c1, _, _ = admitted_and_cost(-10.0, 0.0)
-        # Expert 1's tokens deflect away; expert 1 admitted drops
-        assert A1[0] <= 50.0
-
-    def test_symmetric_worlds(self):  # 35
+    def test_symmetric_worlds(self):
         # Swapping x<->y and worlds 1<->2 is a symmetry of the construction
         A1_xy, c1_xy, A2_xy, c2_xy = admitted_and_cost(2.0, -1.0)
         A1_yx, c1_yx, A2_yx, c2_yx = admitted_and_cost(-1.0, 2.0)
@@ -140,7 +116,7 @@ class TestVariedParams:
 
 
 # ---------------------------------------------------------------------------
-# Category B: General E-world (36-45)
+# General E-world construction checks
 # ---------------------------------------------------------------------------
 class TestGeneralEWorld:
     """E-world mutual exclusivity for E-1 worlds (E experts, last is sink)."""
@@ -152,7 +128,7 @@ class TestGeneralEWorld:
         R[E - 1] = 0.0
         return R
 
-    def test_e4_fiber_dim(self):  # 36
+    def test_e4_fiber_dim(self):
         # 4 experts (3 can have excess, 4th is sink): fiber is 2-dim simplex
         E, C, E_S = 4, 50.0, 20.0
         CAP = np.array([C, C, C, 30.0])
@@ -161,7 +137,7 @@ class TestGeneralEWorld:
             A = np.minimum(R, CAP)
             np.testing.assert_allclose(A, [C, C, C, 0.0])
 
-    def test_e5_fiber_dim(self):  # 37
+    def test_e5_fiber_dim(self):
         E, C, E_S = 5, 50.0, 20.0
         CAP = np.array([C, C, C, C, 30.0])
         for w in range(4):
@@ -169,7 +145,7 @@ class TestGeneralEWorld:
             A = np.minimum(R, CAP)
             np.testing.assert_allclose(A, [C, C, C, C, 0.0])
 
-    def test_e4_total_overflow_known(self):  # 38
+    def test_e4_total_overflow_known(self):
         E, C, E_S = 4, 50.0, 20.0
         T = 3 * C + E_S
         for w in range(3):
@@ -177,7 +153,7 @@ class TestGeneralEWorld:
             assert R.sum() == pytest.approx(T)
             assert (R - np.minimum(R, [C, C, C, 30.0])).sum() == pytest.approx(E_S)
 
-    def test_e_world_allocation_hidden(self):  # 39
+    def test_e_world_allocation_hidden(self):
         # The hidden part is the ALLOCATION of rejected mass among
         # saturated experts (controller-model identity)
         E, C, E_S = 4, 50.0, 20.0
@@ -189,12 +165,12 @@ class TestGeneralEWorld:
             allocations.add(tuple(np.round(J, 6)))
         assert len(allocations) == 3  # three distinct hidden allocations
 
-    def test_e3_is_special_case(self):  # 40
+    def test_e3_is_special_case(self):
         E, C, E_S = 3, 50.0, 20.0
         R0 = self._world_requests(E, C, E_S, 0)
         np.testing.assert_allclose(R0, [C + E_S, C, 0.0])
 
-    @pytest.mark.parametrize("E", [3, 4, 5, 6])  # 41-44
+    @pytest.mark.parametrize("E", [3, 4, 5, 6])
     def test_worlds_pairwise_distinguishable_by_R(self, E):
         C, E_S = 50.0, 20.0
         Rs = [self._world_requests(E, C, E_S, w) for w in range(E - 1)]
@@ -202,18 +178,12 @@ class TestGeneralEWorld:
             for j in range(i + 1, len(Rs)):
                 assert not np.allclose(Rs[i], Rs[j])
 
-    def test_e_world_prior_entropy(self):  # 45
-        # Uniform prior over N=E-1 worlds has entropy log2(N) bits
-        for E in [3, 4, 5]:
-            N = E - 1
-            assert math.log2(N) == pytest.approx(math.log(N, 2))
-
 
 # ---------------------------------------------------------------------------
-# Category C: Bellman recursion exact values (46-55)
+# Sampled-grid diagnostics
 # ---------------------------------------------------------------------------
-class TestBellmanExact:
-    """Exact DP-A values for tiny horizons by enumerating the 13 cells."""
+class TestSampledOutcomeDiagnostics:
+    """Sampled outcome-pair diagnostics; no exact continuous enumeration."""
 
     def _cell_data(self):
         # (A1, A2, c1, c2, informative) for each distinct cell
@@ -232,18 +202,19 @@ class TestBellmanExact:
                     })
         return cells
 
-    def test_dp_h1(self):  # 46
-        # H=1: V = min_q E[c(q)] = 20 (from partition analysis)
+    def test_sampled_grid_minimum_one_round_cost(self):
+        # Diagnostic over the sampled pressures only; not a continuous-space
+        # minimum certificate.
         cells = self._cell_data()
         assert min((d['c1'] + d['c2']) / 2 for d in cells) == pytest.approx(20.0)
 
-    def test_dp_h2_lower(self):  # 47
-        # H=2: round0 sunk 20 + round1 >= 20 (min over q) => V >= 40
-        # (stronger than the E_S/4-based 25)
+    def test_sampled_grid_round_cost_lower_bound(self):
+        # The finite grid's minimum is at least 20; the grid alone does not
+        # prove this lower bound over all pressures.
         cells = self._cell_data()
         assert min((d['c1'] + d['c2']) / 2 for d in cells) >= 20.0 - 1e-9
 
-    def test_informative_cells_reveal(self):  # 48
+    def test_sampled_informative_points_reveal(self):
         cells = self._cell_data()
         inf = [d for d in cells if d['informative']]
         assert len(inf) > 0
@@ -251,20 +222,20 @@ class TestBellmanExact:
         for d in inf:
             assert max(d['c1'], d['c2']) >= 2 * 20.0 - 1e-9
 
-    def test_uninformative_cells_costly(self):  # 49
+    def test_sampled_uninformative_points_costly(self):
         cells = self._cell_data()
         uninf = [d for d in cells if not d['informative']]
         for d in uninf:
             assert (d['c1'] + d['c2']) / 2 >= 20.0 - 1e-9
 
-    def test_no_cheap_informative(self):  # 50
-        # The cost-vs-information lemma: no cell is both cheap and informative
+    def test_sampled_points_show_no_cheap_informative_action(self):
+        # This finite-grid check is not the analytic all-pressure lemma.
         cells = self._cell_data()
         for d in cells:
             if d['informative']:
                 assert (d['c1'] + d['c2']) / 2 >= 20.0 - 1e-9
 
-    def test_posterior_after_informative(self):  # 51
+    def test_posterior_after_informative(self):
         # Deterministic worlds: informative observation -> point mass.
         # Version-space update: observing A at (x,y) keeps only worlds
         # i with A^i(x,y) == A. When A^1 != A^2, exactly one survives.
@@ -273,27 +244,20 @@ class TestBellmanExact:
         A1, _, A2, _ = admitted_and_cost(2.0, 0.0)
         assert not np.allclose(A1, A2)
 
-    def test_dp_recursion_terminal(self):  # 52
-        # V^A_H = 0 by definition
-        assert 0.0 == pytest.approx(0.0)
-
-    def test_requested_identifies(self):  # 53
+    def test_requested_identifies(self):
         # R^1 != R^2 at origin, so requested learns immediately
         from test_phase1_h3_math import request_vectors
         R1, R2 = request_vectors(0.0, 0.0)
         assert not np.allclose(R1, R2)
 
-    def test_value_gap_raw(self):  # 54
-        # V^A >= 40 (20 sunk + 20 min round-1) vs V^R = 20
-        assert 40.0 - 20.0 == pytest.approx(20.0)
-
-    def test_cell_count_stable(self):  # 55
-        # Partition has exactly 13 cells (documents the finite structure)
+    def test_sampled_grid_observes_thirteen_outcome_pairs(self):
+        # The grid observes 13 distinct pairs in this search box; it does
+        # not prove that there are exactly 13 continuous arrangement cells.
         assert len(self._cell_data()) == 13
 
 
 # ---------------------------------------------------------------------------
-# Category D: Reachability with varied dynamics (56-65)
+# Reachability checks with varied dynamics
 # ---------------------------------------------------------------------------
 class TestReachabilityVaried:
     ETA = 0.1
@@ -303,7 +267,7 @@ class TestReachabilityVaried:
         lhs = np.linalg.norm(P0(qp - (1 - delta) * q))
         return lhs <= self.ETA * self.GAMMA * B + 1e-9
 
-    @pytest.mark.parametrize("delta", [0.0, 0.1, 0.5, 0.9])  # 56-59
+    @pytest.mark.parametrize("delta", [0.0, 0.1, 0.5, 0.9])
     def test_self_loop_any_delta(self, delta):
         q = proj_g(np.array([1.0, 0.5, 0.0]))
         # q' = (1-delta)q + delta*mean(q)*1 is reachable with eps=0;
@@ -311,35 +275,35 @@ class TestReachabilityVaried:
         B_big = 100.0
         assert self._reachable(q, q, B_big, delta)
 
-    def test_delta_zero_no_decay(self):  # 60
+    def test_delta_zero_no_decay(self):
         q = np.array([1.0, 2.0, 3.0])
         # delta=0: q'=(1-delta)q + ... ; with eps=0, q'=q stays
         assert self._reachable(q, q, 100.0, 0.0)
 
-    def test_gauge_invariance(self):  # 61
+    def test_gauge_invariance(self):
         # Adding a constant to q doesn't change P0(q)
         q = np.array([1.0, 2.0, 3.0])
         qc = q + 5.0
         np.testing.assert_allclose(P0(q), P0(qc))
 
-    def test_proj_g_idempotent(self):  # 62
+    def test_proj_g_idempotent(self):
         q = np.array([1.0, -2.0, 3.0])
         np.testing.assert_allclose(proj_g(proj_g(q)), proj_g(q))
 
-    def test_proj_g_min_zero(self):  # 63
+    def test_proj_g_min_zero(self):
         rng = np.random.default_rng(7)
         for _ in range(20):
             q = rng.normal(size=3)
             assert proj_g(q).min() == pytest.approx(0.0)
 
-    def test_reach_ball_monotone_in_B(self):  # 64
+    def test_reach_ball_monotone_in_B(self):
         q = np.zeros(3)
         qp = proj_g(np.array([2.0, 0.0, 0.0]))
         r_small = self._reachable(q, qp, B=1.0, delta=0.0)
         r_big = self._reachable(q, qp, B=1000.0, delta=0.0)
         assert (not r_small) or r_big  # bigger B can't hurt
 
-    def test_p0_orthogonal_to_ones(self):  # 65
+    def test_p0_orthogonal_to_ones(self):
         rng = np.random.default_rng(11)
         for _ in range(20):
             q = rng.normal(size=4)

@@ -1,0 +1,42 @@
+{
+  "experiment": "controlled Top-K saturation sensitivity and freeze audit",
+  "E": 4,
+  "K_values": [
+    1,
+    2
+  ],
+  "T_values": [
+    60,
+    240,
+    960
+  ],
+  "profiles": [
+    "no_clipping",
+    "global_shortage",
+    "boundary",
+    "one_overloaded",
+    "two_overloaded"
+  ],
+  "MC_batches_per_K_T": 4000,
+  "MC_seed_formula": "20261017 + 1000*K + T",
+  "finite_difference_step": 0.0001,
+  "exact_cells": 30,
+  "mc_global_shortage_cells": 6,
+  "max_requested_fd_error": 0.0,
+  "max_admitted_fd_error": 1.0972065145331555e-08,
+  "min_global_saturation_rate": 0.45075,
+  "max_global_saturation_rate": 1.0,
+  "checks": {
+    "pl_probabilities_sum_to_k": true,
+    "capacity_profiles_are_valid": true,
+    "capacity_profiles_have_registered_saturation_pattern": true,
+    "analytic_jacobian_matches_exact_field_finite_difference": true,
+    "no_clipping_jacobians_match": true,
+    "heterogeneous_factorization_holds": true,
+    "dropless_pathwise_R_equals_A": true,
+    "admitted_sign_feedback_zero_when_all_counts_saturated": true
+  },
+  "runner_sha256": "916532d98dc1024c757e5105ed9fad52fbc7dca1814f894412a65c54178a009f",
+  "exact_csv_sha256": "2f9f89b2393fd50c9584ac74413e8a3d1ab8cfceec6f963d00f9bb9ef0b7a713",
+  "mc_csv_sha256": "578a745dd19aa8cb958c46c031c03e98465e4a0290410c0f5455d25d0358f976"
+}

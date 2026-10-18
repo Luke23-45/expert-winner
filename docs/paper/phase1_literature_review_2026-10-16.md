@@ -93,16 +93,40 @@ to cumulative-overflow minimization with continuous vector outcomes.
 ## 4. Search for state-constrained adaptive testing
 
 Searches for "adaptive testing state-dependent test availability,"
-"optimal decision tree outcome-dependent cost state constraint," and
-related terms returned no paper combining outcome-dependent costs
-with state-dependent test availability. The optimal-decision-tree
-literature (e.g., recent approximation algorithms) assumes fixed
-test costs and unrestricted test selection. The psychometric
-"adaptive testing" literature (CAT/IRT) is unrelated.
+"metric-constrained active hypothesis testing with action-dependent
+costs," and related terms surfaced several adjacent models that must be
+compared directly:
 
-**Conclusion:** the combination (a)+(b)+(c) — outcome-dependent
-costs, state-constrained test sequences, cumulative cost — does not
-appear in the surveyed literature as a solved problem.
+- Nitinawarat and Veeravalli study controlled Markovian observations and
+  accumulate a general non-uniform control cost up to a sequential stopping
+  time. The control is selected from a fixed control set, and its cost is a
+  function of the selected control, rather than the realized admitted
+  outcome. The paper's guarantees are asymptotic testing results; the stated
+  model does not directly encode a continuous pressure state with a
+  pressure-dependent reachable-action set and overflow cost
+  ([full text](https://arxiv.org/abs/1310.1844), §§3, 5).
+- Vaidhiyan and Sundaresan explicitly add switching costs between actions
+  to active sequential hypothesis testing. Their total cost combines
+  decision delay with switching cost, and their optimality result is in the
+  vanishing-error asymptotic regime. This is closer on movement penalties,
+  but has a finite action set and does not model a metric-bounded continuous
+  state transition or cost determined by the admitted outcome
+  ([full text](https://arxiv.org/abs/1505.02358), §§II-A–II-B).
+- Li et al. solve finite- and infinite-horizon sequential tests with online
+  sensor-usage constraints by introducing sampling costs. Those are usage
+  budgets/penalties on selected sensors, not a metric constraint coupling
+  the next test to the current pressure state
+  ([full text](https://arxiv.org/abs/1601.06447), §§II–III).
+- Davenport et al. study adaptive sensing over a finite set of physically
+  allowable measurement vectors, for sparse recovery. This constrains which
+  tests may be selected but does not state our pressure-transition and
+  overflow-cost model ([full text](https://arxiv.org/abs/1506.05889)).
+
+The exact triple—outcome-dependent cumulative overflow, pressure-induced
+state-constrained test transitions, and this deterministic Top-K outcome
+map—did not appear in the sources reviewed here. This is a bounded search
+result, not evidence that the general problem is unstudied or that our
+specialization is novel.
 
 ---
 
@@ -114,22 +138,25 @@ state-dependent test availability." If a future theorem about this
 *general* problem yields our bound, the contribution is at that
 level, not at the MoE level.
 
-**What does not reduce (currently).**
-- Neither Golovin et al. nor Sabato et al. covers the combination.
-  Citing them as "prior art that already solves it" would be false.
-- The (Reach) state constraint has no analogue in either paper.
-  Any lower bound that essentially uses (Reach) — e.g., showing that
-  pressure-switching limits information-per-overflow — is not
-  inherited from these results.
+**What does not follow from adjacent prior art.** The papers above do not,
+from the models and results checked, directly yield the finite-horizon
+probe-versus-wait theorem. The controlled-sensing paper charges selected
+control actions; the active-search paper adds switching penalties over a
+finite action set; and the sensor-usage paper constrains aggregate use.
+None of these formulations, as stated, combines a metric-bounded continuous
+pressure transition with overflow determined by the realized admitted
+outcome. These model differences do not establish novelty: the exact
+instance-matched testing reduction remains valid, and a broader novelty
+claim still needs a matched benchmark and an equation-level comparison.
 
-**What remains open (G3).** Whether the Top-K score-cell structure
-imposes a *sharp additional* information-cost restriction beyond the
-generic constrained-adaptive-testing framework. The cost-versus-
-information lemma (user step 3) is the precise missing piece:
-for each pressure, bound how much it can reduce uncertainty *per
-unit of overflow paid*. Until that lemma is proved, we cannot say
-whether the MoE structure adds anything beyond the generic
-framework.
+**G3 status (reconciled 2026-10-17).** The fixed E=3 instance has an exact
+long-horizon probe-versus-wait bound, but it reduces verbatim to its induced
+state-constrained testing system. The canonical E-world family additionally
+has the proved pair-separation inequality, but the one class-level go/no-go
+assessment did not establish a benchmarked optimal-value separation or a new
+general control principle. Current decision: retain these as exact MoE
+results; do not claim a general control limitation. See
+[`phase1_class_level_go_no_go_2026-10-17.md`](phase1_class_level_go_no_go_2026-10-17.md).
 
 ---
 

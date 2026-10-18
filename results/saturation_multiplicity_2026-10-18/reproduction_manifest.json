@@ -1,0 +1,37 @@
+{
+  "experiment": "one-versus-two persistent saturation under Gumbel Top-K",
+  "reproduced_on": "2026-10-18",
+  "command": "python scripts/run_saturation_multiplicity_experiment.py",
+  "exit_code": 0,
+  "repository": {
+    "branch": "feat/research-censored-feedback",
+    "head": "e1648512e22844f4d8e892577dfc011f83ac307a",
+    "working_tree_was_dirty": true
+  },
+  "runtime": {
+    "python": "3.14.5",
+    "numpy": "2.4.6"
+  },
+  "design": {
+    "cell_count": 102,
+    "paired_profile_comparisons": 51,
+    "monte_carlo_replicates_per_cell": 5000,
+    "registered_experts": [3, 4, 6, 8],
+    "registered_k": "all integers 1 through E-1",
+    "registered_scales": [64, 128, 256]
+  },
+  "verified_summary": {
+    "controls_passed": true,
+    "one_saturation_gap_within_decoder_bound": true,
+    "two_saturation_gap_exceeded_one_saturation_gap_in_all_51_pairs": true,
+    "all_monte_carlo_checks_within_4_standard_errors": true,
+    "maximum_monte_carlo_deviation_in_standard_errors": 2.7448149688117915
+  },
+  "sha256": {
+    "runner": "e8cefc2fc81f67c553cbed472d2f40866b8950b6d021756a5cf711684e1b27de",
+    "imported_value_helpers": "fb02ee4d7315a7c1de17f9a1a487e41981d05afac43b38f804d82e167cbd13f3",
+    "cells_csv": "7b92fa09248a3ddf21e6533e7b862f4802a6b5a1001645dc6478f3ea477560fd",
+    "summary_json": "41ec7240d3c3b3159c8fe9680a0fbee5b81ba63770dba46663e257109d81d7a8"
+  },
+  "scope_note": "The exact primary value is for the registered two-target-pressure action class, not the unrestricted all-pressure value. Monte Carlo validates the count-law implementation; it is not evidence for the theorem's asymptotic limit or conference-level novelty."
+}

@@ -1,0 +1,96 @@
+{
+  "by_T": [
+    {
+      "T": 16,
+      "candidate_found": 248,
+      "candidate_rate": 0.496,
+      "mean_tau_fraction_given_regular": 0.4039818548387097,
+      "mean_x0_fraction_given_regular": 0.4715221774193548,
+      "mean_x1_fraction_given_regular": 0.4692540322580645,
+      "mismatch_rate_given_regular": 0.9354838709677419,
+      "no_clipping_mismatches": 0,
+      "regular_facets": 248,
+      "regular_mismatches": 232,
+      "regular_rate_given_candidate": 1.0,
+      "replicates": 500,
+      "unconditional_regular_mismatch_rate": 0.464
+    },
+    {
+      "T": 64,
+      "candidate_found": 367,
+      "candidate_rate": 0.734,
+      "mean_tau_fraction_given_regular": 0.38436648501362397,
+      "mean_x0_fraction_given_regular": 0.4962108310626703,
+      "mean_x1_fraction_given_regular": 0.4853542234332425,
+      "mismatch_rate_given_regular": 1.0,
+      "no_clipping_mismatches": 0,
+      "regular_facets": 367,
+      "regular_mismatches": 367,
+      "regular_rate_given_candidate": 1.0,
+      "replicates": 500,
+      "unconditional_regular_mismatch_rate": 0.734
+    },
+    {
+      "T": 256,
+      "candidate_found": 468,
+      "candidate_rate": 0.936,
+      "mean_tau_fraction_given_regular": 0.30507144764957267,
+      "mean_x0_fraction_given_regular": 0.4967698317307692,
+      "mean_x1_fraction_given_regular": 0.4972956730769231,
+      "mismatch_rate_given_regular": 1.0,
+      "no_clipping_mismatches": 0,
+      "regular_facets": 468,
+      "regular_mismatches": 468,
+      "regular_rate_given_candidate": 1.0,
+      "replicates": 500,
+      "unconditional_regular_mismatch_rate": 0.936
+    },
+    {
+      "T": 1024,
+      "candidate_found": 500,
+      "candidate_rate": 1.0,
+      "mean_tau_fraction_given_regular": 0.183599609375,
+      "mean_x0_fraction_given_regular": 0.499470703125,
+      "mean_x1_fraction_given_regular": 0.499205078125,
+      "mismatch_rate_given_regular": 1.0,
+      "no_clipping_mismatches": 0,
+      "regular_facets": 500,
+      "regular_mismatches": 500,
+      "regular_rate_given_candidate": 1.0,
+      "replicates": 500,
+      "unconditional_regular_mismatch_rate": 1.0
+    },
+    {
+      "T": 4096,
+      "candidate_found": 500,
+      "candidate_rate": 1.0,
+      "mean_tau_fraction_given_regular": 0.0916455078125,
+      "mean_x0_fraction_given_regular": 0.50049755859375,
+      "mean_x1_fraction_given_regular": 0.49896728515625,
+      "mismatch_rate_given_regular": 1.0,
+      "no_clipping_mismatches": 0,
+      "regular_facets": 500,
+      "regular_mismatches": 500,
+      "regular_rate_given_candidate": 1.0,
+      "replicates": 500,
+      "unconditional_regular_mismatch_rate": 1.0
+    }
+  ],
+  "protocol": {
+    "E": 4,
+    "K": 2,
+    "T": [
+      16,
+      64,
+      256,
+      1024,
+      4096
+    ],
+    "admission": "A_e=min(R_e,C_e)",
+    "affinity_grid_denominator": 1073741824,
+    "capacity_rule": "(T/4, 3T/4, T/2, T/2)",
+    "epsilon_rule": "T^(-1/2), checked by integer squaring",
+    "replicates_per_T": 500,
+    "seed_rule": "20261017 + 10000*T + replicate_index"
+  }
+}

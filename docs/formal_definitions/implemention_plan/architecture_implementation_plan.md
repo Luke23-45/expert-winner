@@ -1,8 +1,8 @@
 # Architecture and implementation plan
 
-**Status:** proposed design; no experiment code has been implemented yet
+**Status:** original architecture proposal; the synthetic control core has since been implemented. This document is retained as design history and is not a complete inventory of the current research repository.
 **Scope:** a reproducible control experiment for the formal definitions in [`../formal.md`](../formal.md)
-**Repository state observed:** this repository currently contains the formal document but no experiment package or established Python tooling. This plan therefore proposes a clean initial structure rather than fitting an existing runtime.
+**Repository state checked:** the repository now contains `src/moe_control/`, `configs/`, `scripts/`, and `pyproject.toml`. The training-specific Lightning layer in this proposal remains deferred. There is no checked-in dependency lockfile, so exact environment reconstruction still needs a lock or an equivalent pinned environment record. The tree below is a proposed logical layout, not a description of the present tree.
 
 ## 1. Objective and research framing
 
@@ -135,7 +135,7 @@ One iteration must follow this order to avoid off-by-one ambiguity:
 8. Compute and write metrics for step k, storing pressure before and after the update.
 9. Advance the scenario and begin the next step.
 
-The default transition should match the document: q_next = gauge_project((1 - delta) * q + eta * epsilon). Keep eta, gamma, and delta separate in configuration and artifacts, even when a sweep uses the effective scale eta * gamma. This makes the score penalty and update scale inspectable.
+The default transition should match the code and formal update: q_next = gauge_project((1 - delta) * q + eta * gamma * epsilon). Keep eta, gamma, and delta separate in configuration and artifacts, even when a sweep uses the effective scale eta * gamma. This makes the score penalty and update scale inspectable.
 
 For the initial synthetic study, implement the canonical count admission (A_e = min(R_e, C_e)) exactly. Do not silently turn it into a token-order policy. If later model execution needs a concrete accepted-token mask, add a separate token-level admission adapter and document how its ordering maps back to the formal count rule.
 

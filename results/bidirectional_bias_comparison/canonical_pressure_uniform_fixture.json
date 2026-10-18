@@ -1,0 +1,308 @@
+{
+  "status": "PASS",
+  "arithmetic": "exact fractions.Fraction",
+  "controller": "formal.md proportional gauge-pressure update; delta=0; q_next=P_g(q+eta*gamma*(L/(K*T)-mu)); score=a-gamma*q",
+  "plant": {
+    "experts": 8,
+    "top_k": 2,
+    "tokens": 128,
+    "per_expert_capacity": 32,
+    "horizon": 120,
+    "gamma": "1",
+    "eta_grid": [
+      "1/100",
+      "1/10",
+      "1/2",
+      "1"
+    ],
+    "target": "uniform",
+    "affinity_fixture": "docs/paper/fixtures/uniform_capacity_seed5_affinities.csv",
+    "affinity_sha256": "b7cb4002f5aa7a0ddc384fbacaa7617ca744534e5a2bcb0987bfc1ab2c43bc2d",
+    "tie_rule": "lower expert index wins exact score ties"
+  },
+  "paired_results": {
+    "1/100": {
+      "admitted": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "18721367635091437/5000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "3/80"
+      },
+      "requested": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "37228396007518803/10000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "21/320"
+      },
+      "none": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "37806719560039579/10000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "0"
+      }
+    },
+    "1/10": {
+      "admitted": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "17047930135091437/5000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "3/8"
+      },
+      "requested": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "31371364757518803/10000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "21/32"
+      },
+      "none": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "37806719560039579/10000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "0"
+      }
+    },
+    "1/2": {
+      "admitted": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "9610430135091437/5000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "15/8"
+      },
+      "requested": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "5340114757518803/10000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "105/32"
+      },
+      "none": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "37806719560039579/10000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "0"
+      }
+    },
+    "1": {
+      "admitted": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "313555135091437/5000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "15/4"
+      },
+      "requested": {
+        "cumulative_overflow": 1874,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "47149144803/2500000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "977/256"
+      },
+      "none": {
+        "cumulative_overflow": 1920,
+        "first_requested": [
+          38,
+          38,
+          30,
+          32,
+          36,
+          32,
+          24,
+          26
+        ],
+        "min_cutoff_margin": "37806719560039579/10000000000000000",
+        "all_routes_strict": true,
+        "first_global_saturation_step": null,
+        "globally_saturated_step_count": 0,
+        "final_pressure_linf": "0"
+      }
+    }
+  },
+  "exact_route_stability_interval_around_eta_1": {
+    "admitted": {
+      "lower_open": "0",
+      "upper_open": "1112194419711261/1093750000000000",
+      "selected_vs_unselected_inequalities": 184320
+    },
+    "requested": {
+      "lower_open": "18944223025711/18945312500000",
+      "upper_open": "38087479892954599/38085937500000000",
+      "selected_vs_unselected_inequalities": 184320
+    },
+    "none": {
+      "lower_open": "0",
+      "upper_open": "infinity",
+      "selected_vs_unselected_inequalities": 184320
+    }
+  },
+  "common_open_interval_preserving_all_three_eta_1_paths": {
+    "lower_open": "18944223025711/18945312500000",
+    "upper_open": "38087479892954599/38085937500000000",
+    "exact_midpoint_checked": "7388609039630241103/7388671875000000000",
+    "midpoint_paths_and_costs_match_eta_1": {
+      "admitted": true,
+      "requested": true,
+      "none": true
+    },
+    "requested_minus_admitted_overflow": -46
+  },
+  "affinity_robustness_at_eta_1": {
+    "entrywise_epsilon": "1/1000000",
+    "maximum_pairwise_gap_change": "1/500000",
+    "minimum_controlled_cutoff_margin": "47149144803/2500000000000000",
+    "strict_margin_proves_open_affinity_neighborhood": true,
+    "exact_perturbed_controller_cells_checked": 6,
+    "all_checked_paths_and_costs_preserved": true
+  },
+  "exact_controls": {
+    "dropless_requested_admitted_paths_equal_for_every_eta": true,
+    "all_routes_strict_for_all_reported_controller_eta_pairs": true
+  },
+  "no_clipping_control": {
+    "1/100": {
+      "requested_and_admitted_paths_identical": true,
+      "overflow_both_zero": true
+    },
+    "1/10": {
+      "requested_and_admitted_paths_identical": true,
+      "overflow_both_zero": true
+    },
+    "1/2": {
+      "requested_and_admitted_paths_identical": true,
+      "overflow_both_zero": true
+    },
+    "1": {
+      "requested_and_admitted_paths_identical": true,
+      "overflow_both_zero": true
+    }
+  },
+  "interpretation": "A finite exact sensitivity audit on one fixed plant; it does not imply a universal controller ranking or a Top-K-specific benchmark separation."
+}

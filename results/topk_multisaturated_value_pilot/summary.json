@@ -1,0 +1,194 @@
+{
+  "capacity_fractions": [
+    0.55,
+    0.55,
+    0.9
+  ],
+  "capacity_integer_units": {
+    "1800": [
+      990,
+      990,
+      1620
+    ],
+    "28800": [
+      15840,
+      15840,
+      25920
+    ],
+    "7200": [
+      3960,
+      3960,
+      6480
+    ]
+  },
+  "cells": [
+    {
+      "T": 1800,
+      "admitted_fixed_q0_population_risk": 0.14902597402597453,
+      "identical_admitted_pairs": 498,
+      "identical_admitted_rate": 0.996,
+      "identical_admitted_wilson95": [
+        0.9855342847848231,
+        0.9989023694773173
+      ],
+      "identical_no_clip_rate": 0.0,
+      "identical_no_clip_request_pairs": 0,
+      "max_clipping_identity_error": 0,
+      "max_mass_error": 0,
+      "replicates": 500,
+      "requested_classifier_error_rate": 0.0,
+      "requested_classifier_error_wilson95": [
+        4.336808689942018e-19,
+        0.007624340461552241
+      ],
+      "requested_classifier_errors": 0,
+      "requested_classifier_mean_population_risk": 3.3306690738754696e-16
+    },
+    {
+      "T": 7200,
+      "admitted_fixed_q0_population_risk": 0.14902597402597453,
+      "identical_admitted_pairs": 500,
+      "identical_admitted_rate": 1.0,
+      "identical_admitted_wilson95": [
+        0.9923756595384479,
+        1.0
+      ],
+      "identical_no_clip_rate": 0.0,
+      "identical_no_clip_request_pairs": 0,
+      "max_clipping_identity_error": 0,
+      "max_mass_error": 0,
+      "replicates": 500,
+      "requested_classifier_error_rate": 0.0,
+      "requested_classifier_error_wilson95": [
+        4.336808689942018e-19,
+        0.007624340461552241
+      ],
+      "requested_classifier_errors": 0,
+      "requested_classifier_mean_population_risk": 3.3306690738754696e-16
+    },
+    {
+      "T": 28800,
+      "admitted_fixed_q0_population_risk": 0.14902597402597453,
+      "identical_admitted_pairs": 500,
+      "identical_admitted_rate": 1.0,
+      "identical_admitted_wilson95": [
+        0.9923756595384479,
+        1.0
+      ],
+      "identical_no_clip_rate": 0.0,
+      "identical_no_clip_request_pairs": 0,
+      "max_clipping_identity_error": 0,
+      "max_mass_error": 0,
+      "replicates": 500,
+      "requested_classifier_error_rate": 0.0,
+      "requested_classifier_error_wilson95": [
+        4.336808689942018e-19,
+        0.007624340461552241
+      ],
+      "requested_classifier_errors": 0,
+      "requested_classifier_mean_population_risk": 3.3306690738754696e-16
+    }
+  ],
+  "classifier_threshold": 0.7083333333333334,
+  "common_action_search": {
+    "bounded_domain": [
+      -8.0,
+      8.0
+    ],
+    "common_action_q": [
+      1.098612288669699,
+      1.791759469226248,
+      0.0
+    ],
+    "common_action_risk": 0.14902597402611006,
+    "interpretation": "numerically found feasible common-action risk; not a certified global minimum",
+    "optimizer_message": "Optimization terminated successfully.",
+    "optimizer_success": true,
+    "symmetric_action_risk": 0.16223692131513756,
+    "symmetric_q1_q2": 1.4215805396521481
+  },
+  "cross_world_action_overflow": [
+    0.2980519480519479,
+    0.2980519480519488
+  ],
+  "exact_common_target_action_population_risk": "459/3080",
+  "exact_cross_world_inclusion_under_q0": [
+    "97/385",
+    "46/55",
+    "351/385"
+  ],
+  "exact_no_feedback_population_risk": "19/60",
+  "exact_target_inclusion": [
+    "11/20",
+    "11/20",
+    "9/10"
+  ],
+  "exact_world0_inclusion_at_zero": [
+    "5/6",
+    "7/12",
+    "7/12"
+  ],
+  "exact_world1_inclusion_at_zero": [
+    "7/12",
+    "5/6",
+    "7/12"
+  ],
+  "limits": [
+    "The common-action minimization is numerical on [-8,8]^2, not a certified global minimum.",
+    "The requested classifier and fixed admitted action are concrete policies, not optimal policies.",
+    "Finite-batch admitted vectors are only coupled to be equal on the event that both saturated coordinates clip and the common third count remains uncapped.",
+    "No training run, system cost, multi-round result, Top-K theorem, or venue-level novelty claim is established by this pilot."
+  ],
+  "max_target_solver_residual": 2.220446049250313e-16,
+  "model": "E=3, K=2 Gumbel-Top-2 / Plackett-Luce, static base weights, pressure multiplies weights by exp(-q), A=min(R,C)",
+  "no_feedback_population_risk": 0.3166666666666665,
+  "replicates_per_T": 500,
+  "seed_rule": "2026101701 + T_index*100000 + replicate",
+  "status": "exploratory controlled synthetic pilot; not proof or preregistered confirmation",
+  "target_action_population_overflow": [
+    3.3306690738754696e-16,
+    3.3306690738754696e-16
+  ],
+  "target_pressure_world0": [
+    1.7917594692280552,
+    1.0986122886681098,
+    0.0
+  ],
+  "target_pressure_world1": [
+    1.098612288668108,
+    1.7917594692280536,
+    0.0
+  ],
+  "world0_inclusion_at_zero": [
+    0.8333333333333333,
+    0.5833333333333333,
+    0.5833333333333334
+  ],
+  "world0_omission_at_zero": [
+    0.16666666666666674,
+    0.41666666666666674,
+    0.41666666666666663
+  ],
+  "world1_inclusion_at_zero": [
+    0.5833333333333334,
+    0.8333333333333333,
+    0.5833333333333333
+  ],
+  "world1_omission_at_zero": [
+    0.41666666666666663,
+    0.16666666666666674,
+    0.41666666666666674
+  ],
+  "world_weights": [
+    [
+      2.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      2.0,
+      1.0
+    ]
+  ]
+}

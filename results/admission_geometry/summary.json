@@ -1,0 +1,237 @@
+{
+  "protocol": {
+    "experts": 8,
+    "top_k": 2,
+    "tokens": 128,
+    "steps": 120,
+    "bias_step": 0.025,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "initial_ring_pair_multiplicities": [
+      30,
+      8,
+      22,
+      10,
+      26,
+      6,
+      18,
+      8
+    ],
+    "per_expert_capacity": 24,
+    "per_expert_capacity_factor": 0.75,
+    "capacity_formula_note": "matches Megatron-Core get_capacity: ceil(T*K/E * factor); does not model its full distributed training or probability scores",
+    "device_groups": [
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        4,
+        5,
+        6,
+        7
+      ]
+    ],
+    "device_group_capacity": 112,
+    "group_policy_note": "synthetic group-capacity abstraction; not a reproduction of DeepSeek-V2",
+    "drop_score_note": "raw affinity; selection bias affects routing only"
+  },
+  "exact_control_checks": {
+    "per_expert_score_vs_position_counts_and_trajectories_equal": true,
+    "dropless_requested_vs_admitted_trajectories_equal": true,
+    "initial_uniform_per_expert_admitted_sign_feedback_zero": true,
+    "shared_device_rank_change_changes_A_at_fixed_R": true
+  },
+  "summary": [
+    {
+      "admission": "device",
+      "drop_rule": "position",
+      "sensor": "admitted",
+      "seeds": 20,
+      "mean_final_bias_l2": 5.326262547085792,
+      "max_final_bias_l2": 5.401265846488505,
+      "mean_final_bias_linf": 1.9418750289361923,
+      "mean_final_request_l1": 29.6,
+      "mean_final_admitted_l1": 27.4,
+      "mean_final_overflow": 32.0
+    },
+    {
+      "admission": "device",
+      "drop_rule": "position",
+      "sensor": "none",
+      "seeds": 20,
+      "mean_final_bias_l2": 0.0,
+      "max_final_bias_l2": 0.0,
+      "mean_final_bias_linf": 0.0,
+      "mean_final_request_l1": 32.0,
+      "mean_final_admitted_l1": 30.8,
+      "mean_final_overflow": 32.0
+    },
+    {
+      "admission": "device",
+      "drop_rule": "position",
+      "sensor": "requested",
+      "seeds": 20,
+      "mean_final_bias_l2": 4.6587427903284535,
+      "max_final_bias_l2": 4.6941453595616505,
+      "mean_final_bias_linf": 1.92734377871966,
+      "mean_final_request_l1": 30.9,
+      "mean_final_admitted_l1": 30.1,
+      "mean_final_overflow": 32.0
+    },
+    {
+      "admission": "device",
+      "drop_rule": "score",
+      "sensor": "admitted",
+      "seeds": 20,
+      "mean_final_bias_l2": 4.812891516150791,
+      "max_final_bias_l2": 5.4474765611596645,
+      "mean_final_bias_linf": 2.1709375323494897,
+      "mean_final_request_l1": 57.3,
+      "mean_final_admitted_l1": 40.5125,
+      "mean_final_overflow": 34.25
+    },
+    {
+      "admission": "device",
+      "drop_rule": "score",
+      "sensor": "none",
+      "seeds": 20,
+      "mean_final_bias_l2": 0.0,
+      "max_final_bias_l2": 0.0,
+      "mean_final_bias_linf": 0.0,
+      "mean_final_request_l1": 32.0,
+      "mean_final_admitted_l1": 32.9,
+      "mean_final_overflow": 32.0
+    },
+    {
+      "admission": "device",
+      "drop_rule": "score",
+      "sensor": "requested",
+      "seeds": 20,
+      "mean_final_bias_l2": 4.6587427903284535,
+      "max_final_bias_l2": 4.6941453595616505,
+      "mean_final_bias_linf": 1.92734377871966,
+      "mean_final_request_l1": 30.9,
+      "mean_final_admitted_l1": 30.7,
+      "mean_final_overflow": 32.0
+    },
+    {
+      "admission": "none",
+      "drop_rule": "position",
+      "sensor": "admitted",
+      "seeds": 20,
+      "mean_final_bias_l2": 4.6587427903284535,
+      "max_final_bias_l2": 4.6941453595616505,
+      "mean_final_bias_linf": 1.92734377871966,
+      "mean_final_request_l1": 30.9,
+      "mean_final_admitted_l1": 30.9,
+      "mean_final_overflow": 0.0
+    },
+    {
+      "admission": "none",
+      "drop_rule": "position",
+      "sensor": "requested",
+      "seeds": 20,
+      "mean_final_bias_l2": 4.6587427903284535,
+      "max_final_bias_l2": 4.6941453595616505,
+      "mean_final_bias_linf": 1.92734377871966,
+      "mean_final_request_l1": 30.9,
+      "mean_final_admitted_l1": 30.9,
+      "mean_final_overflow": 0.0
+    },
+    {
+      "admission": "per_expert",
+      "drop_rule": "position",
+      "sensor": "admitted",
+      "seeds": 20,
+      "mean_final_bias_l2": 0.0,
+      "max_final_bias_l2": 0.0,
+      "mean_final_bias_linf": 0.0,
+      "mean_final_request_l1": 32.0,
+      "mean_final_admitted_l1": 0.0,
+      "mean_final_overflow": 64.0
+    },
+    {
+      "admission": "per_expert",
+      "drop_rule": "position",
+      "sensor": "none",
+      "seeds": 20,
+      "mean_final_bias_l2": 0.0,
+      "max_final_bias_l2": 0.0,
+      "mean_final_bias_linf": 0.0,
+      "mean_final_request_l1": 32.0,
+      "mean_final_admitted_l1": 0.0,
+      "mean_final_overflow": 64.0
+    },
+    {
+      "admission": "per_expert",
+      "drop_rule": "position",
+      "sensor": "requested",
+      "seeds": 20,
+      "mean_final_bias_l2": 4.6587427903284535,
+      "max_final_bias_l2": 4.6941453595616505,
+      "mean_final_bias_linf": 1.92734377871966,
+      "mean_final_request_l1": 30.9,
+      "mean_final_admitted_l1": 2.1875,
+      "mean_final_overflow": 65.25
+    },
+    {
+      "admission": "per_expert",
+      "drop_rule": "score",
+      "sensor": "admitted",
+      "seeds": 20,
+      "mean_final_bias_l2": 0.0,
+      "max_final_bias_l2": 0.0,
+      "mean_final_bias_linf": 0.0,
+      "mean_final_request_l1": 32.0,
+      "mean_final_admitted_l1": 0.0,
+      "mean_final_overflow": 64.0
+    },
+    {
+      "admission": "per_expert",
+      "drop_rule": "score",
+      "sensor": "none",
+      "seeds": 20,
+      "mean_final_bias_l2": 0.0,
+      "max_final_bias_l2": 0.0,
+      "mean_final_bias_linf": 0.0,
+      "mean_final_request_l1": 32.0,
+      "mean_final_admitted_l1": 0.0,
+      "mean_final_overflow": 64.0
+    },
+    {
+      "admission": "per_expert",
+      "drop_rule": "score",
+      "sensor": "requested",
+      "seeds": 20,
+      "mean_final_bias_l2": 4.6587427903284535,
+      "max_final_bias_l2": 4.6941453595616505,
+      "mean_final_bias_linf": 1.92734377871966,
+      "mean_final_request_l1": 30.9,
+      "mean_final_admitted_l1": 2.1875,
+      "mean_final_overflow": 65.25
+    }
+  ]
+}

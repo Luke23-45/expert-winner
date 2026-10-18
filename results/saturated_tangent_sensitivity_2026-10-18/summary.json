@@ -1,0 +1,100 @@
+{
+  "E": 4,
+  "K_values": [
+    1,
+    2,
+    3
+  ],
+  "T_values": [
+    160,
+    320,
+    640
+  ],
+  "cell_count": 27,
+  "cells_sha256": "abed9c5d8895d30bae4a2322b977ee0041ca0ce6d50f38068a98d5bd793d850f",
+  "checks_passed": true,
+  "claim_boundary": "local derivative of expected mean feedback only; no finite-law non-identifiability, policy-value gap, stability, or hardware-cost inference",
+  "experiment": "exact_expected_topk_saturated_tangent_sensitivity",
+  "max_directional_fd_error": 5.673244376699229e-10,
+  "max_jacobian_fd_error": 8.342623120105586e-11,
+  "no_clipping_ratio_by_K_T": [
+    0.9999999999999999,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "protocol": "docs/paper/saturated_tangent_sensitivity_experiment_protocol_2026-10-18.md",
+  "protocol_sha256": "1e396a4e5826b9848fa22025fb9c08d202af46ef0a481d0793f3f9aecdf3542e",
+  "router": "iid standard-Gumbel Top-K; exact Plackett-Luce order enumeration",
+  "runner_sha256": "af94646fc9fbdfa6b2fde6f68cd86bb82dc78029b51425bf7acca8824c7e94b6",
+  "single_saturated_ratio_by_K_T": [
+    {
+      "K": 1,
+      "T": 160,
+      "ratio": 0.4277824995013888
+    },
+    {
+      "K": 1,
+      "T": 320,
+      "ratio": 0.44069591357795457
+    },
+    {
+      "K": 1,
+      "T": 640,
+      "ratio": 0.4399514448169589
+    },
+    {
+      "K": 2,
+      "T": 160,
+      "ratio": 0.4187224201280432
+    },
+    {
+      "K": 2,
+      "T": 320,
+      "ratio": 0.4106179487613965
+    },
+    {
+      "K": 2,
+      "T": 640,
+      "ratio": 0.43780482229557416
+    },
+    {
+      "K": 3,
+      "T": 160,
+      "ratio": 0.4152863573223434
+    },
+    {
+      "K": 3,
+      "T": 320,
+      "ratio": 0.42874291664104297
+    },
+    {
+      "K": 3,
+      "T": 640,
+      "ratio": 0.4842136296382566
+    }
+  ],
+  "statistical_design": "exact expectation; no Monte Carlo sampling or confidence intervals",
+  "two_saturated_ratio_by_K": {
+    "1": [
+      0.05357070978120229,
+      0.011170598361271883,
+      0.0006313136878704962
+    ],
+    "2": [
+      0.05256898440034807,
+      0.011190485526158388,
+      0.0007270171635965025
+    ],
+    "3": [
+      0.01367856848995203,
+      0.0011808700597858907,
+      1.1993909434045432e-05
+    ]
+  }
+}

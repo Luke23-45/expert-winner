@@ -2,9 +2,13 @@
 
 **Date:** 2026-10-16.
 **Branch:** `feat/research-censored-feedback`.
-**Status:** hand-checkable fixed-instance value calculation for one (E=3),
-two-world parameter instance. The parameterized small-(B) theorem and its
-reduction attack remain open.
+**Status (reconciled 2026-10-17):** the fixed E=3 calculation, its
+small-\(B\) first-reachable-horizon result, and the separate long-horizon
+probe-versus-wait theorem are documented in this note and its linked
+companion. Those mathematical results are no longer open. They remain exact
+MoE realizations of a state-constrained adaptive-testing problem; a
+Top-K/gauge result beyond that representation is not established. See the
+[current research ledger](phase1_research_status_2026-10-17.md).
 
 This note supersedes the earlier heuristic that estimated the admitted cost
 as approximately (1.5) times an open-loop steering cost. That estimate was
@@ -145,24 +149,38 @@ admitted value of 90 misses the explicit continuous-pressure policy of cost
 value claim rests on the analytic reach argument and the explicit winner/cost
 table in the companion lemma, not on the lattice values.
 
-## 4. What remains open
+## 4. Long-horizon update and remaining open questions
 
-1. The existing E=3 instance now has an exact small-$B$ parameterization:
-   $n(B)=\lfloor 1/(\sqrt2\,\eta\gamma^2B)\rfloor+1$,
-   $V_R(H)=E_S\min\{H,n(B)\}$, and the first-horizon gap at $H=n(B)+1$
-   is exactly $E_S$. The normalized gap there shrinks as $B\to0$.
-   Therefore small $B$ alone does not yield a growing signal gap. A new
-   family must change the information/cost geometry, not only the travel
-   radius.
-2. For horizons beyond the first reachable horizon, determine the optimal
-   admitted value and whether any raw gap grows. The present prefix argument
-   gives $V_A(H)\ge(n(B)+1)E_S$ but no matching long-horizon upper/lower bound.
-3. The exact reduction to state-constrained adaptive testing is recorded in
-   [phase1_parameterized_small_b_2026-10-16.md](phase1_parameterized_small_b_2026-10-16.md).
-   Any stronger theorem must identify a score-cell or gauge-metric property
-   that yields a bound beyond the same abstract outcome/cost/transition model.
-4. The T7 trajectory candidate is separate. It must be proved against every
-   causal randomized admitted policy and subjected to its own reduction
-   attack; the fixed E=3 result does not transfer to it.
+The admitted value beyond the first reachable horizon is now bounded by the
+analytic all-policy theorem in
+[`phase1_probe_wait_value_theorem_2026-10-16.md`](phase1_probe_wait_value_theorem_2026-10-16.md).
+For sufficiently long horizons,
+
+$$
+E_S\frac{\sqrt{2/3}}{\beta}\le V_A(H)
+\le E_S\left(\left\lceil\frac{\sqrt{2/3}}{\beta}\right\rceil+2\right),
+\qquad \beta=\eta\gamma^2B,
+$$
+
+while $V_R(H)=E_S(\lfloor1/(\sqrt2\beta)\rfloor+1)$. The raw value gap
+therefore grows as
+$E_S(\sqrt{2/3}-1/\sqrt2)/\beta+O(E_S)$; this is distinct from the
+constant $E_S$ gap at the first reachable horizon. The lower bound covers
+all causal randomized admitted policies and explicitly charges the probe and
+post-probe travel.
+
+At the theorem's sufficient horizon scale $H=\Theta(1/\beta)$, the lower
+bound also yields a positive limiting normalized gap; for the stated
+parameters it is at least approximately `0.00779`. This does not imply a
+positive normalized gap for horizons growing faster than that scale.
+
+The exact abstraction remains constrained adaptive testing with the same
+score-cell outcomes, outcome-dependent costs, and gauge-induced transition
+metric. The theorem is therefore an exact MoE specialization, not yet a
+separation from generic constrained-testing theory. The open research gate
+is a parameterized $E$/$K$/$C$ result with a quantitative Top-K/gauge
+property that survives the reduction attack. The T7 hidden-compounding
+paired-world proposal is invalid as phrased; see
+[`phase1_t7_trajectory_audit_2026-10-16.md`](phase1_t7_trajectory_audit_2026-10-16.md).
 
 No large parameter sweep or trained-model experiment was run.

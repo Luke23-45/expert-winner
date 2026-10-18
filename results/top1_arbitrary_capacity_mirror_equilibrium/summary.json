@@ -1,0 +1,75 @@
+{
+  "experiment": "Top-1 arbitrary-capacity mirror equilibrium audit",
+  "E_values": [
+    3,
+    4,
+    6,
+    8
+  ],
+  "T_values": [
+    256,
+    1024,
+    4096
+  ],
+  "profiles_per_E_T": 24,
+  "profile_count": 288,
+  "population_trajectory_rows": 9504,
+  "finite_batch_profiles": 288,
+  "population_etas": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "population_horizon": 1024,
+  "checkpoints": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "finite_batch_replicates": 4096,
+  "finite_batch_overflow_ci_cover_count": 266,
+  "finite_batch_overflow_ci_total": 288,
+  "checks": {
+    "all_profile_controls_pass": true,
+    "all_population_update_and_rate_controls_pass": true,
+    "all_finite_batch_identities_pass": true
+  },
+  "eta_summary": [
+    {
+      "eta": 0.1,
+      "profiles": 288,
+      "max_final_potential_gap": 0.0008845135396787496,
+      "mean_final_potential_gap": 7.280067528963498e-05,
+      "max_final_overflow_abs_error": 0.04678200101671237,
+      "rate_bound_passes": true
+    },
+    {
+      "eta": 0.5,
+      "profiles": 288,
+      "max_final_potential_gap": 0.0001278028237594736,
+      "mean_final_potential_gap": 1.8701094024335355e-06,
+      "max_final_overflow_abs_error": 0.006991539632347332,
+      "rate_bound_passes": true
+    },
+    {
+      "eta": 0.9,
+      "profiles": 288,
+      "max_final_potential_gap": 1.2446434415183671e-05,
+      "mean_final_potential_gap": 4.329948108980179e-08,
+      "max_final_overflow_abs_error": 0.003325006631593519,
+      "rate_bound_passes": true
+    }
+  ],
+  "population_trajectories_sha256": "d4ebdc580605db26bb246696ae854f0052bb8fa1c23e1a4eecefa05de582d4c2",
+  "finite_batch_equilibrium_sha256": "f7ca4688cdeda8f4ba01dd93d9b90606b2269cc6d676b2c6ab03422390caffbf",
+  "capacity_profiles_sha256": "88ddd69e2278319e1153008199c7ee423cac69ae19ff9978c40a46168c8ae0d0",
+  "runner_sha256": "4ba9ebe5a41bbfa861a2c9a7befd0aba2aa2dfca10c1c237d21676c31c1a53a9"
+}

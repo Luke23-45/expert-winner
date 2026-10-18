@@ -463,3 +463,97 @@ independent corroboration that the *tap point* of the feedback signal is a
 live design decision in the field — consistent with framing the paper around
 "which signal controls better under saturation" rather than asserting a
 telemetry restriction. See `docs/paper/deployment_telemetry_model.md`.
+
+## Addendum 2026-10-18: exact global quantiles and the price of telemetry
+
+**Primary-source read:** Neitemeier et al., *Exact Quantile Balancing and
+Load-Error Injection for Mixture-of-Experts*, arXiv:2609.28053v1,
+submitted 2026-09-23, [arXiv full text](https://arxiv.org/html/2609.28053).
+EQB obtains exact global-batch BF16 margin quantiles with two 256-bin
+all-reduces per layer, communicating `2E*256` int32 counts independent of
+token count (§3.1–3.2). LEI uses local hard-load residuals in a
+straight-through-estimator score-gradient update (Eqs. 4–10). The paper
+studies global-versus-local balance and reports 7.5B training, but does not
+model per-expert capacity clipping, requested-versus-admitted count feedback,
+or overflow censoring. It is therefore adjacent to the *cost/scope of load
+telemetry*, not a preemption of the current clipped-count theorem.
+
+**Consequence for our claim:** the cost `kappa` in the current value theorem
+is an abstract price in normalized-overflow units. EQB shows that a real
+global statistic may be obtained through a token-count-independent collective
+scheme, but it does not give a marginal cost for adding requested counts to
+an implementation that already aggregates admitted counts. We must measure
+that incremental cost in a named stack; we cannot cite a generic “extra
+collective” as an established surcharge. This weakens the professor report's
+unverified cost premise and leaves the theorem's exact mathematical value
+result intact.
+
+**Related paid-observation prior:** Gong and Zhang, *The Cost of Information:
+Phase Transitions in Contextual Bandits with Paid Observations*, ICML 2026,
+[PMLR](https://proceedings.mlr.press/v306/gong26i.html), studies regret when
+observation is explicitly purchased. This establishes paid observation as an
+active theoretical area. Its bandit regret and free-observation-budget
+results do not directly give the one-shot, two-world overflow value or the
+Top-K clipping attenuation identity here. The precise novelty boundary still
+requires the benchmark and system-cost comparison documented in the roadmap.
+
+## Addendum 2026-10-18: Top-K sensitivity literature boundary
+
+This is a targeted primary-source check of the current claim that the
+saturation-dependent value coefficient is Top-K-specific. It is not a
+systematic review and cannot establish novelty by absence.
+
+- Kool, van Hoof, and Welling (ICML 2019) establish Gumbel-Top-K as sampling
+  without replacement and use it for stochastic beam search. The sampling law
+  itself is prior art and is not a contribution here
+  ([paper](https://proceedings.mlr.press/v97/kool19a.html)).
+- Rolland and Cugliari (2019; published 2020) define a sensitivity index for
+  deterministic rankings, including top-k lists, under changes to aggregation
+  weights. This precludes a broad claim to be the first to study top-k ranking
+  sensitivity, but their index is not the derivative of a Gumbel-Top-K
+  inclusion vector or a clipped overflow value
+  ([article](https://pmc.ncbi.nlm.nih.gov/articles/PMC9041578/)).
+- Saha and Gopalan (COLT 2020) analyze best-item identification and sample
+  complexity under Plackett-Luce winner and top-m ranking feedback. This
+  establishes active learning/control-adjacent results for PL feedback, but
+  not capacity-clipped count observations or the current overflow objective
+  ([paper](https://proceedings.mlr.press/v119/saha20b.html)).
+- Mattsson, Weibull, and Lindberg (2014) derive random-utility choice
+  probabilities from derivatives of a value function for extreme-value
+  choice models. This is a direct conceptual neighbor to the identity
+  `rho = grad(Psi)`; the present work's support function for a Top-K subset
+  and its capacity-clipped value calculation must be distinguished from that
+  general gradient/value-function relation
+  ([paper](https://doi.org/10.1016/j.trb.2013.10.014)).
+- Aoki-Sherwood et al. (AISTATS 2025) study top-k Plackett-Luce rankings after
+  sampling a consideration set and derive bounds for nonidentified
+  consideration probabilities. This is a nearby partial-observation result;
+  its latent consideration-set channel is distinct from per-expert
+  `min(R_e,C_e)` clipping
+  ([paper](https://proceedings.mlr.press/v258/aoki-sherwood25a.html)).
+- Wijk, Vinuesa, and Azizpour's *Differentiable Top-k: From One-Hot to
+  k-Hot* studies k-hot sampling designs parameterized by exact inclusion
+  probabilities, contrasting these with Gumbel-Top-K marginals. The
+  workshop paper read is from the 2025 DiffSys workshop. A pre-decision
+  OpenReview index also lists an ICLR 2026 submission, but I did not verify
+  its final decision from official proceedings; cite the workshop version
+  unless that status is checked. It makes exact inclusion-probability
+  parameterization a must-cite neighbor, but it does not analyze capacity
+  clipping, feedback control, or overflow value
+  ([workshop paper](https://openreview.net/pdf?id=HxLmtJYfBi),
+  [submission index](https://openreview.net/submissions?page=18&venue=ICLR.cc%2F2026%2FConference)).
+
+**What these sources support:** do not claim Gumbel-Top-K, PL ranking,
+generic top-k sensitivity, or generic partial-feedback value as new. The
+current coefficient `j_(E,K)(r_c)/K` is an explicit derivative/value slope
+for the symmetric PL inclusion family combined with exact-total capacity
+clipping. Exact inclusion-probability parameterization is also prior work,
+though under a different sampling design. The local value expansion itself
+uses only smoothness, local
+invertibility, and the L1 overflow geometry; that expansion is not by itself
+a Top-K-specific principle. The potentially model-specific content is the
+computed PL coefficient, its switching-facet representation, and its
+dependence on `(E,K,r_c)` within the stated family. Whether those formulas
+are novel and consequential against broader random-utility, sampling, and
+adaptive-testing work remains **unresolved**. The evidence currently clears
+the proof claim under its assumptions, not the top-conference novelty gate.

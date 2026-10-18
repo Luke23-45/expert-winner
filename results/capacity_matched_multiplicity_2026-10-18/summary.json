@@ -1,0 +1,53 @@
+{
+  "T_values": [
+    2304,
+    9216
+  ],
+  "capacity_profiles": {
+    "1": [
+      1008,
+      1200,
+      1200,
+      1200
+    ],
+    "2": [
+      1008,
+      1008,
+      1296,
+      1296
+    ],
+    "3": [
+      1008,
+      1008,
+      1008,
+      1584
+    ]
+  },
+  "cells_sha256": "a65e1aba515f5a90832f8e0b8d18f927c97672458baf112d47ab788548f52fd7",
+  "contrasts_sha256": "b620ee62fa5bb6d2c7cb71471f20bc68dff8ebb9f6897d336196ccbe55724548",
+  "controller_cells": 420,
+  "horizons": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "m_values": [
+    1,
+    2,
+    3
+  ],
+  "no_clipping_controls": 72,
+  "paired_contrasts": 336,
+  "plants_sha256": "f93d05e6192dc6fe921c945e28b963fc695923a1c7a8942cda05010fccb5db41",
+  "protocol": "docs/paper/capacity_matched_multiplicity_experiment_protocol_2026-10-18.md",
+  "protocol_locked": true,
+  "protocol_sha256": "7f4dd1db8b23edbcfdf60e5982f9fbdea83d626582cb810e86329797e7dfa4be",
+  "replicates_per_cell": 12,
+  "rows": 5040,
+  "script_sha256": "596931f5b6282f5985a7e9ea1c059ec5af7ad2b3642ddef84b0246aabb077728",
+  "topk_ties": 0
+}

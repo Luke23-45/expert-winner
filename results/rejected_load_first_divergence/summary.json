@@ -1,0 +1,146 @@
+{
+  "status": "PASS",
+  "audit": "rejected_load_first_divergence_identity",
+  "theorem": "docs\\paper\\rejected_load_route_divergence_identity_2026-10-17.md",
+  "theorem_sha256": "9e8de472c31065ef77513de45875b64001fc5991bf6cc7ea4d9254618361d1c1",
+  "protocol_sha256": "2966079a75e88d68e5061bbdd1c30da15f171f63c331b4c98901b16e3461c853",
+  "script_sha256": "9208a75831bf5c97761a0fa1f42c632747dea9f3f222e99de64a4d6d17fdb82e",
+  "dimensions": {
+    "E": 4,
+    "K": 2,
+    "T": 12,
+    "horizon": 120,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ]
+  },
+  "dynamics": {
+    "eta": "1/10",
+    "gamma": "1",
+    "delta": "0",
+    "target": "uniform"
+  },
+  "exact_checks": {
+    "common_prefix_pairwise_pressure_identity_checked_for_all_pairs": true,
+    "every_observed_first_divergence_has_topk_margin_witness": true,
+    "paired_plants": 160
+  },
+  "profiles": {
+    "no_clipping": {
+      "capacity": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "plants": 40,
+      "divergence_within_horizon": 0,
+      "no_divergence_within_horizon": 40,
+      "first_divergence_state": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "max": null
+      },
+      "all_divergence_states_have_nonpositive_selected_unselected_gap_witness": true
+    },
+    "exact_total_uniform": {
+      "capacity": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "plants": 40,
+      "divergence_within_horizon": 28,
+      "no_divergence_within_horizon": 12,
+      "first_divergence_state": {
+        "n": 28,
+        "mean": "443/14",
+        "median": "4",
+        "min": "1",
+        "max": "100"
+      },
+      "all_divergence_states_have_nonpositive_selected_unselected_gap_witness": true
+    },
+    "exact_total_heterogeneous": {
+      "capacity": [
+        2,
+        4,
+        8,
+        10
+      ],
+      "plants": 40,
+      "divergence_within_horizon": 38,
+      "no_divergence_within_horizon": 2,
+      "first_divergence_state": {
+        "n": 38,
+        "mean": "25/2",
+        "median": "1",
+        "min": "1",
+        "max": "80"
+      },
+      "all_divergence_states_have_nonpositive_selected_unselected_gap_witness": true
+    },
+    "aggregate_shortage": {
+      "capacity": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "plants": 40,
+      "divergence_within_horizon": 34,
+      "no_divergence_within_horizon": 6,
+      "first_divergence_state": {
+        "n": 34,
+        "mean": "146/17",
+        "median": "1",
+        "min": "1",
+        "max": "80"
+      },
+      "all_divergence_states_have_nonpositive_selected_unselected_gap_witness": true
+    }
+  },
+  "interpretation": "Exact mechanism audit of the prefix identity and first route divergence; it does not predict post-divergence cumulative overflow."
+}

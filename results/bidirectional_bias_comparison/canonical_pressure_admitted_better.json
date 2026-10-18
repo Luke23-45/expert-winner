@@ -1,0 +1,120 @@
+{
+  "status": "PASS",
+  "arithmetic": "exact fractions.Fraction",
+  "controller": "canonical proportional gauge-pressure update; delta=0; q_next=P_g(q+eta*gamma*(L/(K*T)-mu)); score=a-gamma*q",
+  "plant": {
+    "experts": 3,
+    "top_k": 1,
+    "tokens_per_batch": 3,
+    "uniform_capacity_per_expert": 1,
+    "horizon_batches": 12,
+    "gamma": "1",
+    "eta": "4",
+    "target": "uniform",
+    "initial_pressure": [
+      0,
+      0,
+      0
+    ],
+    "affinity_fixture": "docs/paper/fixtures/canonical_pressure_admitted_better.csv",
+    "affinity_sha256": "cf457272476603ad64d7566997adf4b73854fc6a0b4cf4faff8ced5a1bc87723",
+    "tie_rule": "lower expert index wins exact ties"
+  },
+  "cumulative_overflow": {
+    "admitted": 18,
+    "requested": 23,
+    "none": 12
+  },
+  "per_step_overflow": {
+    "admitted": [
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2
+    ],
+    "requested": [
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "none": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "minimum_cutoff_margin": {
+    "admitted": "1/3",
+    "requested": "1/3",
+    "none": "1"
+  },
+  "exact_common_eta_interval": {
+    "lower_open": "3",
+    "upper_open": "infinity",
+    "midpoint": "4",
+    "midpoint_routes_and_costs_match": {
+      "admitted": true,
+      "requested": true,
+      "none": true
+    },
+    "requested_minus_admitted_overflow": 5
+  },
+  "affinity_robustness": {
+    "entrywise_epsilon": "1/10",
+    "maximum_pairwise_gap_change": "1/5",
+    "minimum_cutoff_margin": "1/3",
+    "strict_margin_proves_full_open_neighborhood": true,
+    "exact_perturbation_matrices_checked": 2,
+    "all_signals_preserved_paths_and_costs": true
+  },
+  "row_replication": {
+    "1": {
+      "admitted": 18,
+      "requested": 23,
+      "none": 12
+    },
+    "2": {
+      "admitted": 36,
+      "requested": 46,
+      "none": 24
+    },
+    "5": {
+      "admitted": 90,
+      "requested": 115,
+      "none": 60
+    },
+    "10": {
+      "admitted": 180,
+      "requested": 230,
+      "none": 120
+    }
+  },
+  "dropless_negative_control": "requested and admitted paths are exactly identical at each checked eta",
+  "interpretation": "A strict admitted-better witness for the canonical proportional controller; combined with the separate strict requested-better uniform-capacity witness, it disproves universal signal dominance for this controller. It does not provide a predictive family criterion or benchmark separation."
+}

@@ -1,0 +1,70 @@
+{
+  "model": {
+    "experts": 3,
+    "top_k": 1,
+    "tokens": 6,
+    "capacities": [
+      2,
+      2,
+      2
+    ],
+    "noise": "iid standard Gumbel",
+    "admission": "A_e=min(R_e,C_e)",
+    "arithmetic": "exact rational"
+  },
+  "witness": {
+    "probabilities": [
+      "1/2",
+      "1/3",
+      "1/6"
+    ],
+    "curl_clipped": "-29/2187",
+    "curl_no_clipping": "0"
+  },
+  "symmetric_control": {
+    "probabilities": [
+      "1/3",
+      "1/3",
+      "1/3"
+    ],
+    "curl_clipped": "0"
+  },
+  "grids": [
+    {
+      "denominator": 30,
+      "interior_grid_points": 406,
+      "zero_curl_points": 40,
+      "nonzero_curl_points": 366,
+      "positive_curl_points": 183,
+      "negative_curl_points": 183,
+      "minimum_nonzero_absolute_curl": "37453/341718750"
+    },
+    {
+      "denominator": 60,
+      "interior_grid_points": 1711,
+      "zero_curl_points": 85,
+      "nonzero_curl_points": 1626,
+      "positive_curl_points": 813,
+      "negative_curl_points": 813,
+      "minimum_nonzero_absolute_curl": "4798499/349920000000"
+    },
+    {
+      "denominator": 120,
+      "interior_grid_points": 7021,
+      "zero_curl_points": 175,
+      "nonzero_curl_points": 6846,
+      "positive_curl_points": 3423,
+      "negative_curl_points": 3423,
+      "minimum_nonzero_absolute_curl": "76793999/44789760000000"
+    },
+    {
+      "denominator": 240,
+      "interior_grid_points": 28441,
+      "zero_curl_points": 355,
+      "nonzero_curl_points": 28086,
+      "positive_curl_points": 14043,
+      "negative_curl_points": 14043,
+      "minimum_nonzero_absolute_curl": "1228775999/5733089280000000"
+    }
+  ]
+}

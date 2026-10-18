@@ -1,0 +1,22 @@
+{
+  "claims_not_tested": [
+    "open-set non-potentiality (proved analytically, not by this grid)",
+    "closed-loop controller stability or overflow ranking",
+    "real-router prevalence or model-quality benefit",
+    "novelty against the full prior literature"
+  ],
+  "csv_sha256": "6937acf53d484e5cb489f322fa3a2fffd473794bda7b8aceafcf4ddc527ebe9b",
+  "exact_rational_arithmetic": true,
+  "expert_swap_sign_checks": 30,
+  "main_cells": 30,
+  "main_design": "T=3m, C=m, m=1..30, p=(1/2,1/3,1/6)",
+  "main_nonzero_curls": 30,
+  "main_omega_at_T3": "-1/108",
+  "main_omega_at_T90": "-2996153506406630521286318718605552190393885763508318686261736310787/112548912107915317898949934415616133840875163839696867527618520416256",
+  "main_orientation": "all negative for the registered expert ordering",
+  "model": "E=3, K=1, iid standard Gumbel, per-expert A=min(R,C), gamma=1",
+  "no_clipping_zero_controls": 30,
+  "protocol_sha256": "e1d0b01ef84d155e7f41b3646fd0a3867f74622d1f9e89d91874eda68f87a3ac",
+  "script_sha256": "e4fdc5b17dd4c9ceac803a7bf1eb5f4a29dfc90613e52b7dc57c4d2e0d66aa10",
+  "uniform_symmetry_zero_controls": 30
+}

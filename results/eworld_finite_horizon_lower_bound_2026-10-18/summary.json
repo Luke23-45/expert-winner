@@ -1,0 +1,47 @@
+{
+  "N_values": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "all_bounds_above_half_min": true,
+  "all_dp_values_above_bound": true,
+  "cell_count": 156,
+  "cells_sha256": "d55d133df477921aa28701a08c0ab6f8cbfe6d370e6ecd5740ed08e8831f008c",
+  "claim_boundary": "validates a lower bound for this family; no generic adaptive-testing novelty or hardware/model-quality claim",
+  "dp_source_sha256": "9884cccba530d2091d7dacf18c3968f743b68e8e98cf80bc906eca1c0710b108",
+  "experiment": "exact_rational_eworld_finite_horizon_lower_bound_audit",
+  "maximum_bound_to_dp_ratio": 0.6153846153846154,
+  "method": "exact rational finite-horizon DP over all subset probes, under the proved all-pressure action reduction",
+  "minimum_bound_to_dp_ratio": 0.20689655172413793,
+  "parameter_rows": [
+    [
+      50,
+      20,
+      30
+    ],
+    [
+      45,
+      20,
+      30
+    ],
+    [
+      55,
+      20,
+      30
+    ],
+    [
+      100,
+      20,
+      20
+    ]
+  ],
+  "protocol": "docs/paper/eworld_finite_horizon_lower_bound_protocol_2026-10-18.md",
+  "protocol_sha256": "0d49c9c6458f850ba148eb04904317937546adee027f44de8c3b75796d62c1d8",
+  "runner_sha256": "1af2a8bb58546d799ce64f27ccdf49855c05b88edf1d20063b2fd0a5048c85a0",
+  "singleton_upper_attained_cases": 69,
+  "singleton_upper_cases": 96
+}

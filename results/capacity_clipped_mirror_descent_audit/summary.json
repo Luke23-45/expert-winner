@@ -1,0 +1,19 @@
+{
+  "all_capacity_and_exact_total_checks_passed": true,
+  "all_identity_tolerances_passed": true,
+  "cells": 162,
+  "claims_not_tested": [
+    "closed-loop convergence or monotone objective decrease",
+    "finite-batch stochastic trajectory concentration",
+    "reused-affinity empirical trajectory equivalence",
+    "real-system cost or model-quality benefit",
+    "conference novelty"
+  ],
+  "csv_sha256": "deaeb4b786220884dfbf01633cd1f83db3892aa767574a9baec0be5462e5efa3",
+  "max_common_shift_gauge_error": 1.3322676295501878e-15,
+  "max_pressure_vs_mirror_probability_error": 0.0,
+  "model": "E=3,K=1,iid standard Gumbel, fresh-batch conditional mean, canonical A=min(R,C)",
+  "no_clipping_requested_formula_controls": 54,
+  "protocol_sha256": "b5fc895915aa726abb855c98540d0b7d7739d86d639f682f2863c1366730c32f",
+  "script_sha256": "edd84de2367d59d5e853fa3d56e078f40ff9b1ce37637fde3210c612218e9424"
+}

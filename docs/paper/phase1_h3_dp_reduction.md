@@ -1,7 +1,10 @@
 # Phase 1: finite-horizon controller DP and reduction audit
 
-**Status:** exact model reduction and bounds for a finite static-world
-problem; no new lower bound claimed.
+**Status:** exact model reduction and finite-horizon Bellman recursion.
+The companion probe-versus-wait note solves the fixed E=3 instance to its
+leading long-horizon coefficient against the full admitted policy class;
+the E=4 audit gives an exact high-movement three-round value for a larger
+instance. Both results reduce exactly to state-constrained adaptive testing.
 **Branch:** feat/research-censored-feedback.
 **Companion:** [phase1_h3_direction.md](phase1_h3_direction.md).
 **Purpose:** make the H≥3 controller problem explicit enough to test
@@ -176,6 +179,12 @@ known reduction, and whether a proposed theorem uses a property that
 survives no such reduction. Merely deriving a search lower bound for
 the E-world probe example is not enough.
 
+The instance-matched comparator and the E=4 candidate-test audit are now
+specified in
+[`phase1_matched_testing_comparator_e4_2026-10-16.md`](phase1_matched_testing_comparator_e4_2026-10-16.md).
+The comparator is exactly equivalent by construction; the E=4 candidate
+policy is an upper bound only, not a continuous-pressure optimality result.
+
 ### 4.1 Exact all-pressure observation map for the E=3 construction
 
 For \(E=3,K=1\), write the gauge-invariant relative pressures as
@@ -312,21 +321,33 @@ with an MoE application. That may still be publishable, but it is not
 evidence for the stronger claim that Top-K/gauge dynamics create a
 distinct control-theoretic limitation.
 
-## 7. Next proof task
+## 7. Probe-versus-wait value solution for the E=3 family
 
-The full \(E=3\) observation partition and pressure reachability are now
-explicit in §4.1. Next solve (DP-A) or obtain certified upper/lower
-bounds for small \((H,B,\delta)\) regimes, using the exact test cells
-and transitions. Then use the resulting test tree to attack the
-reduction:
+The all-policy long-horizon comparison for the exact E=3 instance is now
+proved in
+[`phase1_probe_wait_value_theorem_2026-10-16.md`](phase1_probe_wait_value_theorem_2026-10-16.md).
+It decomposes every admitted policy at its first informative pressure,
+charges the expected overflow of that probe, and lower-bounds all later
+known-world travel. For sufficiently long horizons it gives
 
-- If every useful observation tree is equivalent to outcome-dependent
-  adaptive testing with the same cost and state constraint, state that
-  theorem at the right level and stop claiming a new generic lower
-  bound.
-- If Top-K and gauge impose a sharp additional restriction, isolate it
-  as a lemma first, then prove the value gap from that lemma.
-- Do not run parameter sweeps as evidence for the theorem until the
-  theorem statement and reduction boundary are fixed.
+\[
+V_A(H)=E_S\frac{\sqrt{2/3}}{\beta}+O(E_S),\qquad
+V_R(H)=E_S\frac{1/\sqrt2}{\beta}+O(E_S),
+\]
 
-No experiments were run for this note.
+with explicit additive constants and a lower bound against randomized as
+well as deterministic causal admitted policies. The raw value gap is
+therefore \(E_S(\sqrt{2/3}-1/\sqrt2)/\beta+O(E_S)\).
+
+This closes the finite-instance probe-versus-wait value calculation; it
+does not establish a conference novelty claim. The proof transfers unchanged
+to an abstract state-constrained adaptive-testing model with the same
+pressure-cell outcomes, outcome-dependent overflow costs, and transition
+metric. The single class-level attempt is now recorded in
+[`phase1_class_level_go_no_go_2026-10-17.md`](phase1_class_level_go_no_go_2026-10-17.md).
+It preserves the E-world pair-separation lemma as a candidate structural
+result but does not establish a benchmarked optimal-value separation or a
+new general control principle. The decision is no-go for the current
+control-limitation claim; present this E=3 result as an exact MoE
+specialization. No sweep is needed to establish the theorem above, and no
+new experiment was run.

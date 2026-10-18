@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-16
 **Branch:** feat/research-censored-feedback
-**Status:** proved for the fixed E=3 score/capacity instance while varying only the pressure-step budget. This is a parameterized control result, but it does not produce a growing information gap or a MoE-specific novelty claim.
+**Status (reconciled 2026-10-17):** proved for the fixed E=3 score/capacity instance while varying only the pressure-step budget. The first-reachable-horizon gap is constant, while the separate sufficiently-long-horizon raw gap grows as \(1/\beta\), as §4 and the linked all-policy theorem state. Both results reduce exactly to the induced state-constrained testing problem; neither establishes a MoE-specific novelty claim. See the [current research ledger](phase1_research_status_2026-10-17.md).
 
 ## 1. Question and scope
 
@@ -128,16 +128,25 @@ holds, while requested feedback can hold its zero-overflow pressure, giving
 ## 4. What the parameterization does—and does not—show
 
 As $B\downarrow0$, $n(\beta)=\Theta(1/B)$. The requested value grows as
-$\Theta(E_S/B)$ when the horizon is long enough. The admitted value has the
-same lower bound, and the **exact gap at the first reachable horizon remains
-the constant $E_S$**. With the paper's $1/(HKT)$ normalization, that first-
-reachable-horizon gap is $E_S/((n+1)KT)=\Theta(B)$, so it vanishes as the
-step budget shrinks.
+$\Theta(E_S/B)$ when the horizon is long enough. The **exact gap at the
+first reachable horizon remains the constant $E_S$**. At that particular
+horizon, the paper's $1/(HKT)$ normalization makes the gap
+$E_S/((n+1)KT)=\Theta(B)$, which vanishes as the step budget shrinks.
 
-This refutes the shortcut “small step size gives a horizon-growing signal
-gap.” Small $B$ delays both controllers. It does not, by itself, amplify the
-cost of having to learn. Equation (5) is a lower bound only; the all-horizon
-optimal admitted value and a matching long-horizon gap are not established.
+That first-horizon fact does not settle long horizons. The separate
+probe-versus-wait theorem now gives, for the same fixed E=3 family and
+sufficiently long horizons,
+$V_A(H)=E_S\sqrt{2/3}/\beta+O(E_S)$ and
+$V_R(H)=E_S/(\sqrt2\,\beta)+O(E_S)$. Thus the **raw long-horizon gap does
+grow as $1/\beta$**; it is not the constant first-horizon gap. See
+[`phase1_probe_wait_value_theorem_2026-10-16.md`](phase1_probe_wait_value_theorem_2026-10-16.md)
+for the explicit policy-class lower bound and horizon condition. At the
+sufficient horizon scale in that theorem, its lower bound also gives a positive
+limiting normalized gap of about `0.00779` for the stated `E_S=20`, `K=1`,
+`T=120` instance. That normalized statement requires `H=Theta(1/beta)`;
+it does not hold uniformly for horizons that grow faster. This remains an
+exact result for a specific constrained-testing instance, not yet a
+Top-K/gauge result beyond that abstraction.
 
 ## 5. Reduction attack and literature boundary
 
@@ -172,16 +181,19 @@ is proved here.
 
 ## 6. Next mathematical discriminator
 
-Do not run a parameter sweep on this static two-world family. It has now
-reached its clean parameterized boundary: the exact requested value and the
-first-horizon admitted value are known, while the gap does not grow at that
-horizon. The next viable theory target is the separate T7 trajectory question
-already listed in [phase1_h3_direction.md](phase1_h3_direction.md) §3:
-construct paired worlds with identical admitted observations along the
-harmful trajectory, then prove a lower bound against **every** causal admitted
-policy, not merely the frozen controller. If that construction also reduces
-to a generic state-constrained testing/control model without a quantitative
-Top-K/gauge remainder, stop this novelty lane and pivot the paper's central
-claim.
+The fixed E=3 family now has a long-horizon all-policy value sandwich, not
+just a first-horizon result. Its raw gap scales as $1/\beta$ under the
+explicit horizon condition, but its proof is preserved exactly by the
+state-constrained adaptive-testing reduction. Do not present this as a
+distinct MoE impossibility theorem.
+
+The remaining discriminator is to generalize the geometric coefficient to
+a parameterized family in $E$, $K$, or heterogeneous capacities and prove a
+sharp Top-K/gauge structural statement that is not just the same induced
+test metric restated. If that generalization reduces unchanged to existing
+constrained sensing/testing theory, re-scope this result as an application
+or stop this novelty lane. The T7 hidden-overflow-compounding proposal is
+separately invalid as written; see
+[`phase1_t7_trajectory_audit_2026-10-16.md`](phase1_t7_trajectory_audit_2026-10-16.md).
 
 No experiment or parameter sweep was run for this proof.

@@ -1,0 +1,39 @@
+{
+  "E": 4,
+  "H_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "K_values": [
+    1,
+    2,
+    3
+  ],
+  "T_values": [
+    2304,
+    9216
+  ],
+  "all_invariants_passed": true,
+  "cells_sha256": "c11438b7cf340cebd990c4ebf4e02d7808b63f488f0f1652fca4852e128852aa",
+  "contrasts_sha256": "13f479c530d9f5366834504efc8c431ba8234764f97e26c87dab7b2b22be149f",
+  "controller_cells": 420,
+  "interpretation": "Synthetic paired study of target choice and feedback signal; no system-cost claim.",
+  "no_clipping_controls": 72,
+  "paired_contrasts": 336,
+  "plants_sha256": "02eb3f130f274e02c77fee84bbb650b5a41e435a3ddbab62ccd5cf7599e3346d",
+  "protocol": "docs/paper/capacity_matched_target_experiment_protocol_2026-10-18.md",
+  "protocol_sha256": "1dd730249ddd497df9f09ef5c27ea2dba776b0b245822358ab02add6a97add00",
+  "replicates_per_cell": 12,
+  "rows": 5040,
+  "script_sha256": "d9ceecf2d5688510979f1723b64ef3067494625de6f238267b561d3829a1e806",
+  "temporal_regimes": [
+    "static",
+    "fresh"
+  ],
+  "ties": 0
+}

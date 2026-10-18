@@ -1,14 +1,9 @@
 """
-Tests for Phase 1 H=3 formal claims.
+Behavioral regression checks and sampled-grid diagnostics for the E=3 helper model.
 
-Verifies the exact mathematical statements in:
-- docs/paper/phase1_h3_dp_reduction.md (§4.1 E=3 pressure partition,
-  §5 three-round bounds, §3 reachability)
-- docs/paper/phase1_h3_direction.md (no-hedging lemma)
-
-These are pure-math verification tests: they check the score-cell
-partition, the no-hedging lemma, the reachability constraint, and the
-value bounds by direct computation. They do not run simulations.
+These tests exercise concrete score, admission, and reachability cases. Grid
+checks are diagnostics, not proofs over continuous pressure space. They do
+not verify the analytic theorems in the linked research documents.
 
 Parameters (from §5 of phase1_h3_dp_reduction.md):
   E=3, K=1, capacities (C, C, C_sink), T = 2C + E_S
@@ -146,17 +141,23 @@ class TestSweetSpot:
 #   5 E_S / 4 <= V^A(H) <= min{H E_S, E_S + (E_S + C - C_sink)/2}
 #   V^R(H) = E_S
 # ---------------------------------------------------------------------------
-class TestValueBounds:
-    def test_requested_value(self):
-        # V^R(H) = E_S: first round sunk, then zero via sweet spot
-        # (verified constructively: sweet spot reachable and zero-cost)
-        assert E_S == pytest.approx(20.0)
+class TestPolicyWitnesses:
+    def test_requested_signal_and_reachable_zero_cost_action(self):
+        # At the origin, requested counts distinguish the worlds while
+        # admitted counts alias. A reachable world-1 sweet spot witnesses
+        # the requested policy's post-observation zero-overflow action.
+        R1, R2 = request_vectors(0.0, 0.0)
+        A1, c1, A2, c2 = admitted_and_cost(0.0, 0.0)
+        assert not np.allclose(R1, R2)
+        np.testing.assert_allclose(A1, A2)
+        assert c1 == pytest.approx(E_S)
+        assert c2 == pytest.approx(E_S)
 
-    def test_admitted_lower_bound(self):
-        # Round-zero overflow E_S (sunk, both policies) plus
-        # round-one expected >= E_S/4 by no-hedging.
-        lower = E_S + E_S / 4
-        assert lower == pytest.approx(5 * E_S / 4)
+        x, y = (M_LOW + M_MARGIN) / 2, 0.0
+        _, c1_safe, _, _ = admitted_and_cost(x, y)
+        assert c1_safe == pytest.approx(0.0)
+        q_safe = proj_g(np.array([x / GAMMA, y / GAMMA, 0.0]))
+        assert TestReachability()._reachable(np.zeros(3), q_safe)
 
     def test_one_probe_upper_bound(self):
         # One-probe policy: E_S + (E_S + C - C_sink)/2
@@ -168,22 +169,8 @@ class TestValueBounds:
         assert expected_probe <= bound + 1e-9, (
             f"expected_probe={expected_probe}, bound={bound}"
         )
-        upper = E_S + bound
-        assert upper == pytest.approx(E_S + (E_S + C - C_SINK) / 2)
-
-    def test_gap_positive(self):
-        lower_A = 5 * E_S / 4
-        V_R = E_S
-        assert lower_A - V_R == pytest.approx(E_S / 4)
-        assert lower_A - V_R > 0
-
-    def test_normalized_gap_decays(self):
-        # E_S/(4 H K T) shrinks with H: documents why no
-        # horizon-growing normalized gap is claimed.
-        K = 1
-        gaps = [E_S / (4 * H * K * T_BATCH) for H in (2, 3, 10, 100)]
-        assert gaps == sorted(gaps, reverse=True)
-        assert gaps[-1] < gaps[0]
+        initial_cost = E_S
+        assert initial_cost + expected_probe <= E_S + bound + 1e-9
 
 
 # ---------------------------------------------------------------------------
@@ -207,9 +194,10 @@ class TestReachability:
     B = math.sqrt(2) * M_MARGIN / (0.1 * GAMMA ** 2)  # per §5 assumption
     DELTA = 0.0
 
-    def _reachable(self, q, qp):
+    def _reachable(self, q, qp, B=None):
         lhs = np.linalg.norm(P0(qp - (1 - self.DELTA) * q))
-        return lhs <= self.ETA * GAMMA * self.B + 1e-9
+        budget = self.B if B is None else B
+        return lhs <= self.ETA * GAMMA * budget + 1e-9
 
     def test_origin_to_sweet_spot_reachable(self):
         # q0 = 0; sweet spot needs x in (m, M): take gauge-fixed
@@ -226,8 +214,12 @@ class TestReachability:
         # With tiny B, a large jump must be infeasible.
         q = np.zeros(3)
         qp = proj_g(np.array([100.0, 0.0, 0.0]))
-        lhs = np.linalg.norm(P0(qp - q))
-        assert lhs > self.ETA * GAMMA * 1e-6  # sanity: jump is large
+        assert not self._reachable(q, qp, B=1e-6)
+
+    def test_zero_budget_rejects_non_gauge_equivalent_state(self):
+        q = proj_g(np.array([1.0, 0.5, 0.0]))
+        qp = proj_g(np.array([1.0, 0.4, 0.0]))
+        assert not self._reachable(q, qp, B=0.0)
 
     def test_reachability_is_tight(self):
         # Construct eps achieving equality and verify round-trip.
@@ -240,8 +232,8 @@ class TestReachability:
 
 
 # ---------------------------------------------------------------------------
-# Test 6: observation-cell finiteness (sanity: distinct admitted
-# vectors over the grid are finitely many)
+# Test 6: sampled-grid observation diagnostic. This does not certify that
+# the grid intersects every continuous score cell.
 # ---------------------------------------------------------------------------
 class TestCellFiniteness:
     def test_finite_distinct_outcomes(self):

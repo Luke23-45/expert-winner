@@ -1,0 +1,358 @@
+{
+  "status": "PASS",
+  "model": "P2f static E=3,K=2 Top-2 family; exact Fraction arithmetic",
+  "horizon": 100,
+  "replication_factors": [
+    1,
+    3,
+    10
+  ],
+  "gains_theorem_units": [
+    "9/40",
+    "6/25",
+    "1/4"
+  ],
+  "paired_cells": 9,
+  "claims_checked": [
+    "admitted cumulative overflow exact for every H=1..100",
+    "no-feedback cumulative overflow exact for every H=1..100",
+    "requested cumulative overflow exact through H=8",
+    "requested total-shortage lower bound for every H=9..100",
+    "all arms tie through H=3 and admitted is strictly lower for H=4..100"
+  ],
+  "cells": [
+    {
+      "replication_m": 1,
+      "gain_theorem_units": "9/40",
+      "overflow": {
+        "3": {
+          "admitted": 33,
+          "requested": 33,
+          "none": 33
+        },
+        "4": {
+          "admitted": 43,
+          "requested": 44,
+          "none": 44
+        },
+        "8": {
+          "admitted": 83,
+          "requested": 88,
+          "none": 88
+        },
+        "9": {
+          "admitted": 93,
+          "requested": 98,
+          "none": 99
+        },
+        "20": {
+          "admitted": 203,
+          "requested": 208,
+          "none": 220
+        },
+        "100": {
+          "admitted": 1003,
+          "requested": 1008,
+          "none": 1100
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    },
+    {
+      "replication_m": 1,
+      "gain_theorem_units": "6/25",
+      "overflow": {
+        "3": {
+          "admitted": 33,
+          "requested": 33,
+          "none": 33
+        },
+        "4": {
+          "admitted": 43,
+          "requested": 44,
+          "none": 44
+        },
+        "8": {
+          "admitted": 83,
+          "requested": 88,
+          "none": 88
+        },
+        "9": {
+          "admitted": 93,
+          "requested": 98,
+          "none": 99
+        },
+        "20": {
+          "admitted": 203,
+          "requested": 208,
+          "none": 220
+        },
+        "100": {
+          "admitted": 1003,
+          "requested": 1008,
+          "none": 1100
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    },
+    {
+      "replication_m": 1,
+      "gain_theorem_units": "1/4",
+      "overflow": {
+        "3": {
+          "admitted": 33,
+          "requested": 33,
+          "none": 33
+        },
+        "4": {
+          "admitted": 43,
+          "requested": 44,
+          "none": 44
+        },
+        "8": {
+          "admitted": 83,
+          "requested": 88,
+          "none": 88
+        },
+        "9": {
+          "admitted": 93,
+          "requested": 98,
+          "none": 99
+        },
+        "20": {
+          "admitted": 203,
+          "requested": 208,
+          "none": 220
+        },
+        "100": {
+          "admitted": 1003,
+          "requested": 1008,
+          "none": 1100
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    },
+    {
+      "replication_m": 3,
+      "gain_theorem_units": "9/40",
+      "overflow": {
+        "3": {
+          "admitted": 99,
+          "requested": 99,
+          "none": 99
+        },
+        "4": {
+          "admitted": 129,
+          "requested": 132,
+          "none": 132
+        },
+        "8": {
+          "admitted": 249,
+          "requested": 264,
+          "none": 264
+        },
+        "9": {
+          "admitted": 279,
+          "requested": 294,
+          "none": 297
+        },
+        "20": {
+          "admitted": 609,
+          "requested": 624,
+          "none": 660
+        },
+        "100": {
+          "admitted": 3009,
+          "requested": 3024,
+          "none": 3300
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    },
+    {
+      "replication_m": 3,
+      "gain_theorem_units": "6/25",
+      "overflow": {
+        "3": {
+          "admitted": 99,
+          "requested": 99,
+          "none": 99
+        },
+        "4": {
+          "admitted": 129,
+          "requested": 132,
+          "none": 132
+        },
+        "8": {
+          "admitted": 249,
+          "requested": 264,
+          "none": 264
+        },
+        "9": {
+          "admitted": 279,
+          "requested": 294,
+          "none": 297
+        },
+        "20": {
+          "admitted": 609,
+          "requested": 624,
+          "none": 660
+        },
+        "100": {
+          "admitted": 3009,
+          "requested": 3024,
+          "none": 3300
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    },
+    {
+      "replication_m": 3,
+      "gain_theorem_units": "1/4",
+      "overflow": {
+        "3": {
+          "admitted": 99,
+          "requested": 99,
+          "none": 99
+        },
+        "4": {
+          "admitted": 129,
+          "requested": 132,
+          "none": 132
+        },
+        "8": {
+          "admitted": 249,
+          "requested": 264,
+          "none": 264
+        },
+        "9": {
+          "admitted": 279,
+          "requested": 294,
+          "none": 297
+        },
+        "20": {
+          "admitted": 609,
+          "requested": 624,
+          "none": 660
+        },
+        "100": {
+          "admitted": 3009,
+          "requested": 3024,
+          "none": 3300
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    },
+    {
+      "replication_m": 10,
+      "gain_theorem_units": "9/40",
+      "overflow": {
+        "3": {
+          "admitted": 330,
+          "requested": 330,
+          "none": 330
+        },
+        "4": {
+          "admitted": 430,
+          "requested": 440,
+          "none": 440
+        },
+        "8": {
+          "admitted": 830,
+          "requested": 880,
+          "none": 880
+        },
+        "9": {
+          "admitted": 930,
+          "requested": 980,
+          "none": 990
+        },
+        "20": {
+          "admitted": 2030,
+          "requested": 2080,
+          "none": 2200
+        },
+        "100": {
+          "admitted": 10030,
+          "requested": 10080,
+          "none": 11000
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    },
+    {
+      "replication_m": 10,
+      "gain_theorem_units": "6/25",
+      "overflow": {
+        "3": {
+          "admitted": 330,
+          "requested": 330,
+          "none": 330
+        },
+        "4": {
+          "admitted": 430,
+          "requested": 440,
+          "none": 440
+        },
+        "8": {
+          "admitted": 830,
+          "requested": 880,
+          "none": 880
+        },
+        "9": {
+          "admitted": 930,
+          "requested": 980,
+          "none": 990
+        },
+        "20": {
+          "admitted": 2030,
+          "requested": 2080,
+          "none": 2200
+        },
+        "100": {
+          "admitted": 10030,
+          "requested": 10080,
+          "none": 11000
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    },
+    {
+      "replication_m": 10,
+      "gain_theorem_units": "1/4",
+      "overflow": {
+        "3": {
+          "admitted": 330,
+          "requested": 330,
+          "none": 330
+        },
+        "4": {
+          "admitted": 430,
+          "requested": 440,
+          "none": 440
+        },
+        "8": {
+          "admitted": 830,
+          "requested": 880,
+          "none": 880
+        },
+        "9": {
+          "admitted": 930,
+          "requested": 980,
+          "none": 990
+        },
+        "20": {
+          "admitted": 2030,
+          "requested": 2080,
+          "none": 2200
+        },
+        "100": {
+          "admitted": 10030,
+          "requested": 10080,
+          "none": 11000
+        }
+      },
+      "checked_all_integer_horizons_1_through_100": true
+    }
+  ]
+}

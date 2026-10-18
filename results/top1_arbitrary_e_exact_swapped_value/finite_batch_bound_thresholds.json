@@ -1,0 +1,66 @@
+{
+  "status": "floating-point binomial-tail diagnostic; not interval certified",
+  "bound": "1/36 - eps_admitted/2 - exact_sign_classifier_error - target_action_expected_overflow",
+  "thresholds": [
+    {
+      "E": 3,
+      "T": 704,
+      "capacity_denominator": 4,
+      "eps_admitted": 0.00031482619708191647,
+      "eps_requested_exact_sign_error": 0.006961841233979766,
+      "eps_requested_chernoff_upper_bound": 0.04858805946142833,
+      "target_action_expected_overflow": 0.020529805486472597,
+      "all_policy_gap_lower_bound": 0.00012871795878445502
+    },
+    {
+      "E": 4,
+      "T": 832,
+      "capacity_denominator": 4,
+      "eps_admitted": 0.00010356477041531325,
+      "eps_requested_exact_sign_error": 0.003753286629307213,
+      "eps_requested_chernoff_upper_bound": 0.028036044845274513,
+      "target_action_expected_overflow": 0.02394531388374488,
+      "all_policy_gap_lower_bound": 2.739487951802788e-05
+    },
+    {
+      "E": 8,
+      "T": 1356,
+      "capacity_denominator": 12,
+      "eps_admitted": 1.180152057431295e-06,
+      "eps_requested_exact_sign_error": 0.0003210531427559371,
+      "eps_requested_chernoff_upper_bound": 0.0029517312417269973,
+      "target_action_expected_overflow": 0.027332290778621163,
+      "all_policy_gap_lower_bound": 0.00012384378037195998
+    },
+    {
+      "E": 16,
+      "T": 2492,
+      "capacity_denominator": 28,
+      "eps_admitted": 8.738342390853382e-11,
+      "eps_requested_exact_sign_error": 1.8539122735190579e-06,
+      "eps_requested_chernoff_upper_bound": 2.2418840038348897e-05,
+      "target_action_expected_overflow": 0.027663401371877946,
+      "all_policy_gap_lower_bound": 0.00011252244993459684
+    },
+    {
+      "E": 32,
+      "T": 4620,
+      "capacity_denominator": 60,
+      "eps_admitted": 2.023801026831671e-18,
+      "eps_requested_exact_sign_error": 1.4851888303964416e-10,
+      "eps_requested_chernoff_upper_bound": 2.400768035272039e-09,
+      "target_action_expected_overflow": 0.02759982691935873,
+      "all_policy_gap_lower_bound": 0.0001779507099001626
+    },
+    {
+      "E": 64,
+      "T": 8556,
+      "capacity_denominator": 124,
+      "eps_admitted": 1.9556629116588107e-32,
+      "eps_requested_exact_sign_error": 5.0012298028668075e-18,
+      "eps_requested_chernoff_upper_bound": 1.0885699579089769e-16,
+      "target_action_expected_overflow": 0.02762257864975519,
+      "all_policy_gap_lower_bound": 0.00015519912802258382
+    }
+  ]
+}

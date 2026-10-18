@@ -1,0 +1,32 @@
+{
+  "E": 4,
+  "K_values": [
+    1,
+    2,
+    3
+  ],
+  "T_values": [
+    160,
+    320,
+    640
+  ],
+  "all_finite_ranks_full": true,
+  "all_limiting_ranks_match": true,
+  "all_saturated_subspace_bounds_pass": true,
+  "cell_count": 36,
+  "cells_sha256": "ab74383a6df6ae4fef4393f46b2d2193a394a0bf3767a14a4d29adfba6be7521",
+  "computation": "exact binomial clipping expectations; central finite differences only as an independent Jacobian audit",
+  "experiment": "exact_expected_topk_saturation_rank_threshold",
+  "max_jacobian_error": 5.582884154975432e-10,
+  "protocol": "docs/paper/saturation_rank_threshold_experiment_2026-10-18.md",
+  "protocol_sha256": "966462942412592ecc74775cd617b853690d92404a3dacbd42977758cfd19ce3",
+  "rank_claim_boundary": "local expected-mean feedback only; not finite-law non-identifiability, policy-value separation, closed-loop performance, or hardware cost",
+  "router": "iid standard-Gumbel Top-K; exact Plackett-Luce order enumeration",
+  "runner_sha256": "4fb828a9663834a39f4322e2e2a069497a8940dd4c305d0160b38e20796098cf",
+  "saturated_counts": [
+    0,
+    1,
+    2,
+    3
+  ]
+}

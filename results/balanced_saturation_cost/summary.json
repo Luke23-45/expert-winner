@@ -1,0 +1,49 @@
+{
+  "experiment": "balanced_saturation_cost",
+  "seed_schedule": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "E_values": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "K_rule": "deduplicated {1, floor(E/2), E-1}",
+  "controller": "canonical proportional gauge-pressure; eta=gamma=1; delta=0",
+  "target": "uniform",
+  "arithmetic": "fractions.Fraction; exact top-k, pressure, clipping, and overflow",
+  "plants": 110,
+  "cells": 11,
+  "checks": {
+    "balanced_initial_counts": 110,
+    "positive_capacities_below_balanced_count": 110,
+    "strict_k_cut_gap": 110,
+    "requested_equals_no_feedback": 110,
+    "admitted_constant_feedback_until_exit": 110,
+    "exit_within_n_sep": 110,
+    "overflow_floor_identity_all_states": 13345,
+    "strict_excess_at_exit": 110,
+    "nonnegative_prefix_gap": 110,
+    "positive_prefix_by_n_sep_plus_one": 110,
+    "no_clipping_equivalence": 110
+  },
+  "all_checks_passed": true,
+  "plant_artifact_rows": 110,
+  "affinity_artifact_rows": 5100,
+  "trajectory_artifact_rows": 66725,
+  "protocol_sha256": "33e9411b4e1c2c4f6d840945d6276321874d20956e48e31fea9f4d52ce06cbff",
+  "runner_sha256": "d560f480bf3b21e48ef50d3915e4e8d5131b810d691362976d1de0586ebeea61",
+  "plants_sha256": "a1f2ee1da832405f8c83b23909e07f9579dadcb41d5bb93040d04f9e3289b4cf",
+  "affinities_sha256": "d5888f541a7d006088d4d175342941cbaa895d9995617d98d480bfd5be7e36e4",
+  "trajectories_sha256": "b61b3be02086cead4120d68fb111f4dfed689c023e036c5988d5cb4c901dcb85"
+}

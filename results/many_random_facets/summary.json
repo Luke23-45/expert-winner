@@ -1,0 +1,124 @@
+{
+  "by_T": [
+    {
+      "T": 64,
+      "candidate_rows_range": [
+        0,
+        6
+      ],
+      "fraction_facets_mismatched": 1.0,
+      "mean_X0_over_T": 0.4954111319255223,
+      "mean_X1_over_T": 0.48576010445049955,
+      "mean_candidate_rows": 1.334,
+      "mean_candidate_rows_over_sqrt_T": 0.16675,
+      "mean_mismatched_facets": 1.334,
+      "mean_mismatched_facets_over_sqrt_T": 0.16675,
+      "mean_regular_facets": 1.334,
+      "mismatched_facets_range": [
+        0,
+        6
+      ],
+      "no_clipping_mismatches": 0,
+      "plants_meeting_integerized_lower_count": 367,
+      "replicates": 500,
+      "theorem_lower_count": 1
+    },
+    {
+      "T": 256,
+      "candidate_rows_range": [
+        0,
+        8
+      ],
+      "fraction_facets_mismatched": 1.0,
+      "mean_X0_over_T": 0.4984291930580993,
+      "mean_X1_over_T": 0.4959367030900234,
+      "mean_candidate_rows": 2.726,
+      "mean_candidate_rows_over_sqrt_T": 0.170375,
+      "mean_mismatched_facets": 2.726,
+      "mean_mismatched_facets_over_sqrt_T": 0.170375,
+      "mean_regular_facets": 2.726,
+      "mismatched_facets_range": [
+        0,
+        8
+      ],
+      "no_clipping_mismatches": 0,
+      "plants_meeting_integerized_lower_count": 468,
+      "replicates": 500,
+      "theorem_lower_count": 1
+    },
+    {
+      "T": 1024,
+      "candidate_rows_range": [
+        1,
+        16
+      ],
+      "fraction_facets_mismatched": 1.0,
+      "mean_X0_over_T": 0.499065262406864,
+      "mean_X1_over_T": 0.49967458414252847,
+      "mean_candidate_rows": 5.332,
+      "mean_candidate_rows_over_sqrt_T": 0.166625,
+      "mean_mismatched_facets": 5.332,
+      "mean_mismatched_facets_over_sqrt_T": 0.166625,
+      "mean_regular_facets": 5.332,
+      "mismatched_facets_range": [
+        1,
+        16
+      ],
+      "no_clipping_mismatches": 0,
+      "plants_meeting_integerized_lower_count": 488,
+      "replicates": 500,
+      "theorem_lower_count": 2
+    },
+    {
+      "T": 4096,
+      "candidate_rows_range": [
+        3,
+        21
+      ],
+      "fraction_facets_mismatched": 1.0,
+      "mean_X0_over_T": 0.499983826774524,
+      "mean_X1_over_T": 0.49945717669779294,
+      "mean_candidate_rows": 10.664,
+      "mean_candidate_rows_over_sqrt_T": 0.166625,
+      "mean_mismatched_facets": 10.664,
+      "mean_mismatched_facets_over_sqrt_T": 0.166625,
+      "mean_regular_facets": 10.664,
+      "mismatched_facets_range": [
+        3,
+        21
+      ],
+      "no_clipping_mismatches": 0,
+      "plants_meeting_integerized_lower_count": 497,
+      "replicates": 500,
+      "theorem_lower_count": 4
+    }
+  ],
+  "model": "iid rational-grid affinities; deterministic Top-2; A_e=min(R_e,C_e)",
+  "parameters": {
+    "E": 4,
+    "K": 2,
+    "T": [
+      64,
+      256,
+      1024,
+      4096
+    ],
+    "b_EK": "25/216",
+    "candidate_affinity_pair": [
+      0,
+      1
+    ],
+    "candidate_rule": "midpoint in [5/12,7/12], |a0-a1|<=T^-1/2, exactly one outsider above midpoint",
+    "capacity_fraction": [
+      "1/4",
+      "3/4",
+      "1/2",
+      "1/2"
+    ],
+    "grid_denominator": 1073741824,
+    "replicates_per_T": 500,
+    "seed_rule": "20261018 + 10000*T + replicate_index"
+  },
+  "protocol_sha256": "f2d9c65f0438aab1d9a347aff208c7d9cfc27f5eb318b08c13e2d93033c5e8a0",
+  "script_sha256": "7b9eb32734b4250aee8a3904d8ed2a283c9fbcb3a7e652f76ec56177725b7cb0"
+}

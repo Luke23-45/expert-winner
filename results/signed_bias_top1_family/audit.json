@@ -1,0 +1,14 @@
+{
+  "capacity_range": [
+    3,
+    50
+  ],
+  "horizon_range": [
+    1,
+    100
+  ],
+  "capacity_horizon_pairs_checked": 4800,
+  "event_sequence_and_all_cost_identities_pass": true,
+  "arithmetic": "integer-scaled margins and bias differences; no floating-point comparisons",
+  "scope": "finite exact audit of Proposition P2d; analytic proof is in formal_core.md"
+}

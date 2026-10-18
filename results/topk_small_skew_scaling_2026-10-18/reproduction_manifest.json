@@ -1,0 +1,27 @@
+{
+  "experiment": "symmetric pair-skew Top-K value and sensitivity scaling",
+  "reproduction_date": "2026-10-18",
+  "source_branch": "feat/research-censored-feedback",
+  "source_commit": "e1648512e22844f4d8e892577dfc011f83ac307a",
+  "working_tree_state": "dirty; runner file itself was fingerprinted",
+  "runner": "scripts/run_topk_small_skew_scaling.py",
+  "runner_sha256": "d0a546b1e41a968eb297860a21961fd155318439cb10c3572a91679089828efe",
+  "runtime": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.14.5",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "seed": 20261018,
+  "reproduced_artifact_sha256": {
+    "population_scaling.csv": "039269d53c54fe89f1ee7e2490f705c7a85cb6ee1ac20a5d8eef27b91d917bd4",
+    "finite_batch_signal_check.csv": "67bd765b36bce05fe35ca70e1f0f707616c68909a8437dcb405e9c52c1a6c317",
+    "priced_decision_class.csv": "5a85f7893bb489db34eff3c448e3758ee5bc0d180ad17979d0918f712b432ce3",
+    "joint_limit_scaling.csv": "2c7d49a4020f07c5b0eae773e9f1354661825e88a4a3ba333108972639101afb",
+    "pair_sensitivity_grid.csv": "01db97190ac2017d02e455a6dc78100aced2e9a4f9f24036b3205eef5e372910",
+    "root_facet_sensitivity.csv": "eac989cc0cc921221c91550331ab2745f5e626496fd8d13843ef9b66e734fde6",
+    "root_facet_clipping_attenuation.csv": "025a84ee2b4fcabfa143cd1d58b8e6cb8ea216cc063654a1e146cf2696113a15",
+    "large_pair_sensitivity_grid.csv": "6ad94cc54a0c903991ed4fc670dd6df82449eae3614399f71bf35cbb0fce6cb4"
+  },
+  "interpretation": "The runner reproduced its registered artifact hashes exactly. This establishes computational reproducibility for this run and environment; it does not establish benchmark separation, hardware telemetry cost, or trained-model benefit."
+}

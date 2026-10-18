@@ -1,0 +1,87 @@
+{
+  "exact_arithmetic": true,
+  "plant": {
+    "E": 4,
+    "K": 2,
+    "T": 8,
+    "capacities": [
+      1,
+      2,
+      3,
+      3
+    ],
+    "gamma": "1/100",
+    "horizon_batches": 34,
+    "tie_rule": "stable descending score; lower expert index wins exact ties"
+  },
+  "admitted": {
+    "initial_R": [
+      2,
+      4,
+      3,
+      7
+    ],
+    "R_at_33": [
+      3,
+      5,
+      1,
+      7
+    ],
+    "first_unsaturated_step": 33,
+    "overflow_at_33": 9,
+    "cumulative_overflow_H34": 240,
+    "minimum_cutoff_margin_states_0_to_33": "21/31250",
+    "strict_all_states": true
+  },
+  "requested": {
+    "initial_R": [
+      2,
+      4,
+      3,
+      7
+    ],
+    "R_at_33": [
+      2,
+      4,
+      4,
+      6
+    ],
+    "first_unsaturated_step": 46,
+    "overflow_at_33": 7,
+    "cumulative_overflow_H34": 238,
+    "minimum_cutoff_margin_states_0_to_33": "9971/1000000",
+    "strict_all_states": true
+  },
+  "no_feedback_cumulative_overflow_H34": 238,
+  "robustness": {
+    "entrywise_affinity_perturbation_epsilon": "1/10000",
+    "minimum_margin_both_arms": "21/31250",
+    "twice_epsilon": "1/5000",
+    "same_route_paths_guaranteed_by_margin_induction": true,
+    "exact_random_perturbation_trials": 100,
+    "exact_random_perturbation_seed": 20261017,
+    "all_trials_preserved_both_trajectories_and_costs": true
+  },
+  "replication_family": {
+    "1": {
+      "admitted_cumulative_overflow": 240,
+      "requested_cumulative_overflow": 238,
+      "difference": 2
+    },
+    "2": {
+      "admitted_cumulative_overflow": 480,
+      "requested_cumulative_overflow": 476,
+      "difference": 4
+    },
+    "5": {
+      "admitted_cumulative_overflow": 1200,
+      "requested_cumulative_overflow": 1190,
+      "difference": 10
+    },
+    "10": {
+      "admitted_cumulative_overflow": 2400,
+      "requested_cumulative_overflow": 2380,
+      "difference": 20
+    }
+  }
+}

@@ -1,0 +1,6812 @@
+{
+  "status": "PASS",
+  "arithmetic": "exact fractions.Fraction and integer counts",
+  "family": "existing P2f E=3,K=2,T=20m affinity multiset, m=1 representative",
+  "capacity_grid": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "gain_grid": [
+    "9/40",
+    "6/25",
+    "1/4"
+  ],
+  "tie_rule": "Top-2; lower expert index wins exact score ties",
+  "cycle_detection": "exact repeated gauge-centered bias state",
+  "source_sha256": "938e47a82728f40e16138594f5a10d7c2f7fb385618f2cc586fa32fa08b8ab8e",
+  "audit_script_sha256": "ce4938760976f33cf3d1257866bfd38357c1384dc89045c2bd576d7882dab384",
+  "cells": [
+    {
+      "capacity_per_expert": 1,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            37,
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 1,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            37,
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 1,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            37,
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            37
+          ],
+          "cycle_mean_overflow": "37",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 37,
+            "4": 148,
+            "9": 333,
+            "100": 3700,
+            "1000": 37000,
+            "10000": 370000
+          },
+          "capacity_lower_bound_per_batch": 37,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 2,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            34
+          ],
+          "cycle_mean_overflow": "34",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34000,
+            "10000": 340000
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            34,
+            35
+          ],
+          "cycle_mean_overflow": "69/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34277,
+            "10000": 344777
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            34
+          ],
+          "cycle_mean_overflow": "34",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34000,
+            "10000": 340000
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 1,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 1,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 448
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 2,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            34
+          ],
+          "cycle_mean_overflow": "34",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34000,
+            "10000": 340000
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            34,
+            35
+          ],
+          "cycle_mean_overflow": "69/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34291,
+            "10000": 344791
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            34
+          ],
+          "cycle_mean_overflow": "34",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34000,
+            "10000": 340000
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 1,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 1,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 420
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 2,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            34
+          ],
+          "cycle_mean_overflow": "34",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34000,
+            "10000": 340000
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            34,
+            35
+          ],
+          "cycle_mean_overflow": "69/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34300,
+            "10000": 344800
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            34
+          ],
+          "cycle_mean_overflow": "34",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 34,
+            "4": 136,
+            "9": 306,
+            "100": 3400,
+            "1000": 34000,
+            "10000": 340000
+          },
+          "capacity_lower_bound_per_batch": 34,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 1,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 1,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 402
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 3,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            31
+          ],
+          "cycle_mean_overflow": "31",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31000,
+            "10000": 310000
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            31,
+            33
+          ],
+          "cycle_mean_overflow": "32",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31554,
+            "10000": 319554
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            31
+          ],
+          "cycle_mean_overflow": "31",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31000,
+            "10000": 310000
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 2,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 2,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 448
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 3,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            31
+          ],
+          "cycle_mean_overflow": "31",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31000,
+            "10000": 310000
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            31,
+            33
+          ],
+          "cycle_mean_overflow": "32",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31582,
+            "10000": 319582
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            31
+          ],
+          "cycle_mean_overflow": "31",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31000,
+            "10000": 310000
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 2,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 2,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 420
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 3,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            31
+          ],
+          "cycle_mean_overflow": "31",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31000,
+            "10000": 310000
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            31,
+            33
+          ],
+          "cycle_mean_overflow": "32",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31600,
+            "10000": 319600
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            31
+          ],
+          "cycle_mean_overflow": "31",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 31,
+            "4": 124,
+            "9": 279,
+            "100": 3100,
+            "1000": 31000,
+            "10000": 310000
+          },
+          "capacity_lower_bound_per_batch": 31,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 2,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 2,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 402
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 4,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            28
+          ],
+          "cycle_mean_overflow": "28",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28000,
+            "10000": 280000
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            28,
+            31
+          ],
+          "cycle_mean_overflow": "59/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28831,
+            "10000": 294331
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            28
+          ],
+          "cycle_mean_overflow": "28",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28000,
+            "10000": 280000
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 3,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 3,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 448
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 4,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            28
+          ],
+          "cycle_mean_overflow": "28",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28000,
+            "10000": 280000
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            28,
+            31
+          ],
+          "cycle_mean_overflow": "59/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28873,
+            "10000": 294373
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            28
+          ],
+          "cycle_mean_overflow": "28",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28000,
+            "10000": 280000
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 3,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 3,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 420
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 4,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            28
+          ],
+          "cycle_mean_overflow": "28",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28000,
+            "10000": 280000
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            28,
+            31
+          ],
+          "cycle_mean_overflow": "59/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28900,
+            "10000": 294400
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            28
+          ],
+          "cycle_mean_overflow": "28",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 28,
+            "4": 112,
+            "9": 252,
+            "100": 2800,
+            "1000": 28000,
+            "10000": 280000
+          },
+          "capacity_lower_bound_per_batch": 28,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 3,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 3,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 402
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 5,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            25
+          ],
+          "cycle_mean_overflow": "25",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 25000,
+            "10000": 250000
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            25,
+            29
+          ],
+          "cycle_mean_overflow": "27",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 26108,
+            "10000": 269108
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            25
+          ],
+          "cycle_mean_overflow": "25",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 25000,
+            "10000": 250000
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 4,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 4,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 448
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 5,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            25
+          ],
+          "cycle_mean_overflow": "25",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 25000,
+            "10000": 250000
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            25,
+            29
+          ],
+          "cycle_mean_overflow": "27",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 26164,
+            "10000": 269164
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            25
+          ],
+          "cycle_mean_overflow": "25",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 25000,
+            "10000": 250000
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 4,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 4,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 420
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 5,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            25
+          ],
+          "cycle_mean_overflow": "25",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 25000,
+            "10000": 250000
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            25,
+            29
+          ],
+          "cycle_mean_overflow": "27",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 26200,
+            "10000": 269200
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            25
+          ],
+          "cycle_mean_overflow": "25",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 25,
+            "4": 100,
+            "9": 225,
+            "100": 2500,
+            "1000": 25000,
+            "10000": 250000
+          },
+          "capacity_lower_bound_per_batch": 25,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 4,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 4,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 402
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 6,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            22
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 22000,
+            "10000": 220000
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            22,
+            27
+          ],
+          "cycle_mean_overflow": "49/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 23385,
+            "10000": 243885
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            22
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 22000,
+            "10000": 220000
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 5,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 5,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 448
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 6,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            22
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 22000,
+            "10000": 220000
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            22,
+            27
+          ],
+          "cycle_mean_overflow": "49/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 23455,
+            "10000": 243955
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            22
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 22000,
+            "10000": 220000
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 5,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 5,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 420
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 6,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            22
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 22000,
+            "10000": 220000
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            22,
+            27
+          ],
+          "cycle_mean_overflow": "49/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 23500,
+            "10000": 244000
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            22
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 22,
+            "4": 88,
+            "9": 198,
+            "100": 2200,
+            "1000": 22000,
+            "10000": 220000
+          },
+          "capacity_lower_bound_per_batch": 22,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 5,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 5,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 402
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 7,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            19
+          ],
+          "cycle_mean_overflow": "19",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 19000,
+            "10000": 190000
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            19,
+            25
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 20662,
+            "10000": 218662
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            19
+          ],
+          "cycle_mean_overflow": "19",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 19000,
+            "10000": 190000
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 6,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 6,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 448
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 7,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            19
+          ],
+          "cycle_mean_overflow": "19",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 19000,
+            "10000": 190000
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            19,
+            25
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 20746,
+            "10000": 218746
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            19
+          ],
+          "cycle_mean_overflow": "19",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 19000,
+            "10000": 190000
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 6,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 6,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 420
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 7,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            19
+          ],
+          "cycle_mean_overflow": "19",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 19000,
+            "10000": 190000
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            19,
+            25
+          ],
+          "cycle_mean_overflow": "22",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 20800,
+            "10000": 218800
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            19
+          ],
+          "cycle_mean_overflow": "19",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 19,
+            "4": 76,
+            "9": 171,
+            "100": 1900,
+            "1000": 19000,
+            "10000": 190000
+          },
+          "capacity_lower_bound_per_batch": 19,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 6,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 6,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 402
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 8,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            16
+          ],
+          "cycle_mean_overflow": "16",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 16000,
+            "10000": 160000
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            16,
+            23
+          ],
+          "cycle_mean_overflow": "39/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 17939,
+            "10000": 193439
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            16
+          ],
+          "cycle_mean_overflow": "16",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 16000,
+            "10000": 160000
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 7,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 7,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 448
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 8,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            16
+          ],
+          "cycle_mean_overflow": "16",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 16000,
+            "10000": 160000
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            16,
+            23
+          ],
+          "cycle_mean_overflow": "39/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 18037,
+            "10000": 193537
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            16
+          ],
+          "cycle_mean_overflow": "16",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 16000,
+            "10000": 160000
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 7,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 7,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 420
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 8,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            16
+          ],
+          "cycle_mean_overflow": "16",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 16000,
+            "10000": 160000
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            16,
+            23
+          ],
+          "cycle_mean_overflow": "39/2",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 18100,
+            "10000": 193600
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            16
+          ],
+          "cycle_mean_overflow": "16",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 16,
+            "4": 64,
+            "9": 144,
+            "100": 1600,
+            "1000": 16000,
+            "10000": 160000
+          },
+          "capacity_lower_bound_per_batch": 16,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 7,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 7,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 402
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 9,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            13
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 13000,
+            "10000": 130000
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            13,
+            21
+          ],
+          "cycle_mean_overflow": "17",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 15216,
+            "10000": 168216
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            13
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 13000,
+            "10000": 130000
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 8,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 8,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 448
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 9,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            13
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 13000,
+            "10000": 130000
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            13,
+            21
+          ],
+          "cycle_mean_overflow": "17",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 15328,
+            "10000": 168328
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            13
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 13000,
+            "10000": 130000
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 8,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 8,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 420
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 9,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            13
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 13000,
+            "10000": 130000
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            13,
+            21
+          ],
+          "cycle_mean_overflow": "17",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 15400,
+            "10000": 168400
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            13
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": 0,
+          "cumulative_overflow": {
+            "1": 13,
+            "4": 52,
+            "9": 117,
+            "100": 1300,
+            "1000": 13000,
+            "10000": 130000
+          },
+          "capacity_lower_bound_per_batch": 13,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 8,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 0,
+        "requested_minus_admitted_drift_per_joint_period": 8,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 402
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 10,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 3,
+          "cycle_repeat_state": 4,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ]
+          ],
+          "cycle_overflow": [
+            10
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": 3,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 43,
+            "9": 93,
+            "100": 1003,
+            "1000": 10003,
+            "10000": 100003
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            10,
+            19
+          ],
+          "cycle_mean_overflow": "29/2",
+          "first_global_saturation_batch": 8,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 44,
+            "9": 98,
+            "100": 1008,
+            "1000": 12501,
+            "10000": 143001
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            11
+          ],
+          "cycle_mean_overflow": "11",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 44,
+            "9": 99,
+            "100": 1100,
+            "1000": 11000,
+            "10000": 110000
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 14,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 445,
+        "requested_minus_admitted_drift_per_joint_period": 9,
+        "no_feedback_minus_admitted_drift_per_joint_period": 2,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 4
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 4
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 10,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 3,
+          "cycle_repeat_state": 4,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ]
+          ],
+          "cycle_overflow": [
+            10
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": 3,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 43,
+            "9": 93,
+            "100": 1003,
+            "1000": 10003,
+            "10000": 100003
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            10,
+            19
+          ],
+          "cycle_mean_overflow": "29/2",
+          "first_global_saturation_batch": 8,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 44,
+            "9": 98,
+            "100": 1008,
+            "1000": 12627,
+            "10000": 143127
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            11
+          ],
+          "cycle_mean_overflow": "11",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 44,
+            "9": 99,
+            "100": 1100,
+            "1000": 11000,
+            "10000": 110000
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 14,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 417,
+        "requested_minus_admitted_drift_per_joint_period": 9,
+        "no_feedback_minus_admitted_drift_per_joint_period": 2,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 4
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 4
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 10,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 3,
+          "cycle_repeat_state": 4,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ]
+          ],
+          "cycle_overflow": [
+            10
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": 3,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 43,
+            "9": 93,
+            "100": 1003,
+            "1000": 10003,
+            "10000": 100003
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            10,
+            19
+          ],
+          "cycle_mean_overflow": "29/2",
+          "first_global_saturation_batch": 8,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 44,
+            "9": 98,
+            "100": 1008,
+            "1000": 12708,
+            "10000": 143208
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            11
+          ],
+          "cycle_mean_overflow": "11",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 11,
+            "4": 44,
+            "9": 99,
+            "100": 1100,
+            "1000": 11000,
+            "10000": 110000
+          },
+          "capacity_lower_bound_per_batch": 10,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 14,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 399,
+        "requested_minus_admitted_drift_per_joint_period": 9,
+        "no_feedback_minus_admitted_drift_per_joint_period": 2,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 4
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": "+infinity",
+          "strict_advantage_all_horizons_from": 4
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 11,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 225,
+          "cycle_repeat_state": 227,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              20,
+              1,
+              19
+            ],
+            [
+              10,
+              20,
+              10
+            ]
+          ],
+          "cycle_overflow": [
+            17,
+            9
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 78,
+            "100": 806,
+            "1000": 11885,
+            "10000": 128885
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            9,
+            17
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 81,
+            "100": 854,
+            "1000": 10997,
+            "10000": 127997
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            9
+          ],
+          "cycle_mean_overflow": "9",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 81,
+            "100": 900,
+            "1000": 9000,
+            "10000": 90000
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": -888,
+        "requested_minus_admitted_gap_max": 111,
+        "no_feedback_minus_admitted_gap_min": -677,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -8,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -888,
+          "maximum_gap_over_all_horizons": 111,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 11,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 211,
+          "cycle_repeat_state": 213,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              20,
+              1,
+              19
+            ],
+            [
+              10,
+              20,
+              10
+            ]
+          ],
+          "cycle_overflow": [
+            17,
+            9
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 78,
+            "100": 806,
+            "1000": 11955,
+            "10000": 128955
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            9,
+            17
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 81,
+            "100": 854,
+            "1000": 11123,
+            "10000": 128123
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            9
+          ],
+          "cycle_mean_overflow": "9",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 81,
+            "100": 900,
+            "1000": 9000,
+            "10000": 90000
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": -832,
+        "requested_minus_admitted_gap_max": 104,
+        "no_feedback_minus_admitted_gap_min": -635,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -8,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -832,
+          "maximum_gap_over_all_horizons": 104,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 11,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 202,
+          "cycle_repeat_state": 204,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              20,
+              1,
+              19
+            ],
+            [
+              10,
+              20,
+              10
+            ]
+          ],
+          "cycle_overflow": [
+            17,
+            9
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 78,
+            "100": 806,
+            "1000": 11996,
+            "10000": 128996
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            9,
+            17
+          ],
+          "cycle_mean_overflow": "13",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 81,
+            "100": 854,
+            "1000": 11204,
+            "10000": 128204
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            9
+          ],
+          "cycle_mean_overflow": "9",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 9,
+            "4": 36,
+            "9": 81,
+            "100": 900,
+            "1000": 9000,
+            "10000": 90000
+          },
+          "capacity_lower_bound_per_batch": 7,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": -800,
+        "requested_minus_admitted_gap_max": 99,
+        "no_feedback_minus_admitted_gap_min": -604,
+        "no_feedback_minus_admitted_gap_max": 196,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -8,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -800,
+          "maximum_gap_over_all_horizons": 99,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 196,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 12,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 335,
+          "cycle_repeat_state": 337,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            8,
+            15
+          ],
+          "cycle_mean_overflow": "23/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 70,
+            "100": 737,
+            "1000": 10105,
+            "10000": 113605
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            8,
+            15
+          ],
+          "cycle_mean_overflow": "23/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 72,
+            "100": 754,
+            "1000": 9720,
+            "10000": 113220
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            8
+          ],
+          "cycle_mean_overflow": "8",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 72,
+            "100": 800,
+            "1000": 8000,
+            "10000": 80000
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": -392,
+        "requested_minus_admitted_gap_max": 56,
+        "no_feedback_minus_admitted_gap_min": -173,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -7,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -392,
+          "maximum_gap_over_all_horizons": 56,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 12,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 314,
+          "cycle_repeat_state": 316,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            8,
+            15
+          ],
+          "cycle_mean_overflow": "23/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 70,
+            "100": 737,
+            "1000": 10196,
+            "10000": 113696
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            8,
+            15
+          ],
+          "cycle_mean_overflow": "23/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 72,
+            "100": 754,
+            "1000": 9832,
+            "10000": 113332
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            8
+          ],
+          "cycle_mean_overflow": "8",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 72,
+            "100": 800,
+            "1000": 8000,
+            "10000": 80000
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": -364,
+        "requested_minus_admitted_gap_max": 53,
+        "no_feedback_minus_admitted_gap_min": -166,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -7,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -364,
+          "maximum_gap_over_all_horizons": 53,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 12,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 299,
+          "cycle_repeat_state": 301,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            8,
+            15
+          ],
+          "cycle_mean_overflow": "23/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 70,
+            "100": 737,
+            "1000": 10254,
+            "10000": 113754
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            8,
+            15
+          ],
+          "cycle_mean_overflow": "23/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 72,
+            "100": 754,
+            "1000": 9904,
+            "10000": 113404
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            8
+          ],
+          "cycle_mean_overflow": "8",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 8,
+            "4": 32,
+            "9": 72,
+            "100": 800,
+            "1000": 8000,
+            "10000": 80000
+          },
+          "capacity_lower_bound_per_batch": 4,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": -357,
+        "requested_minus_admitted_gap_max": 51,
+        "no_feedback_minus_admitted_gap_min": -161,
+        "no_feedback_minus_admitted_gap_max": 196,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -7,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -357,
+          "maximum_gap_over_all_horizons": 51,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 196,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 13,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 443,
+          "cycle_repeat_state": 445,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            7,
+            13
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 61,
+            "100": 653,
+            "1000": 8449,
+            "10000": 98449
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            7,
+            13
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 63,
+            "100": 654,
+            "1000": 8443,
+            "10000": 98443
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            7
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 63,
+            "100": 700,
+            "1000": 7000,
+            "10000": 70000
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": -12,
+        "requested_minus_admitted_gap_max": 2,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -6,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -12,
+          "maximum_gap_over_all_horizons": 2,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 13,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 415,
+          "cycle_repeat_state": 417,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            7,
+            13
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 61,
+            "100": 653,
+            "1000": 8547,
+            "10000": 98547
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            7,
+            13
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 63,
+            "100": 654,
+            "1000": 8541,
+            "10000": 98541
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            7
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 63,
+            "100": 700,
+            "1000": 7000,
+            "10000": 70000
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": -12,
+        "requested_minus_admitted_gap_max": 2,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -6,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -12,
+          "maximum_gap_over_all_horizons": 2,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 13,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 398,
+          "cycle_repeat_state": 400,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            7,
+            13
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 61,
+            "100": 652,
+            "1000": 8609,
+            "10000": 98609
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            7,
+            13
+          ],
+          "cycle_mean_overflow": "10",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 63,
+            "100": 654,
+            "1000": 8604,
+            "10000": 98604
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            7
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 7,
+            "4": 28,
+            "9": 63,
+            "100": 700,
+            "1000": 7000,
+            "10000": 70000
+          },
+          "capacity_lower_bound_per_batch": 1,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": -5,
+        "requested_minus_admitted_gap_max": 2,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 197,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -6,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": -5,
+          "maximum_gap_over_all_horizons": 2,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 197,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": false,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 14,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            6,
+            11
+          ],
+          "cycle_mean_overflow": "17/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 554,
+            "1000": 7166,
+            "10000": 83666
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            6,
+            11
+          ],
+          "cycle_mean_overflow": "17/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 554,
+            "1000": 7166,
+            "10000": 83666
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            6
+          ],
+          "cycle_mean_overflow": "6",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 600,
+            "1000": 6000,
+            "10000": 60000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -5,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 14,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            6,
+            11
+          ],
+          "cycle_mean_overflow": "17/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 554,
+            "1000": 7250,
+            "10000": 83750
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            6,
+            11
+          ],
+          "cycle_mean_overflow": "17/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 554,
+            "1000": 7250,
+            "10000": 83750
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            6
+          ],
+          "cycle_mean_overflow": "6",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 600,
+            "1000": 6000,
+            "10000": 60000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -5,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 14,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            6,
+            11
+          ],
+          "cycle_mean_overflow": "17/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 554,
+            "1000": 7304,
+            "10000": 83804
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            6,
+            11
+          ],
+          "cycle_mean_overflow": "17/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 554,
+            "1000": 7304,
+            "10000": 83804
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            6
+          ],
+          "cycle_mean_overflow": "6",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 6,
+            "4": 24,
+            "9": 54,
+            "100": 600,
+            "1000": 6000,
+            "10000": 60000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 196,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -5,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 196,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 15,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            5,
+            9
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 454,
+            "1000": 5889,
+            "10000": 68889
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            5,
+            9
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 454,
+            "1000": 5889,
+            "10000": 68889
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            5
+          ],
+          "cycle_mean_overflow": "5",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 500,
+            "1000": 5000,
+            "10000": 50000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -4,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 15,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            5,
+            9
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 454,
+            "1000": 5959,
+            "10000": 68959
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            5,
+            9
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 454,
+            "1000": 5959,
+            "10000": 68959
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            5
+          ],
+          "cycle_mean_overflow": "5",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 500,
+            "1000": 5000,
+            "10000": 50000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -4,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 15,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            5,
+            9
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 454,
+            "1000": 6004,
+            "10000": 69004
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            5,
+            9
+          ],
+          "cycle_mean_overflow": "7",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 454,
+            "1000": 6004,
+            "10000": 69004
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            5
+          ],
+          "cycle_mean_overflow": "5",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 5,
+            "4": 20,
+            "9": 45,
+            "100": 500,
+            "1000": 5000,
+            "10000": 50000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 196,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -4,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 196,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 16,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            4,
+            7
+          ],
+          "cycle_mean_overflow": "11/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 354,
+            "1000": 4612,
+            "10000": 54112
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            4,
+            7
+          ],
+          "cycle_mean_overflow": "11/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 354,
+            "1000": 4612,
+            "10000": 54112
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            4
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 400,
+            "1000": 4000,
+            "10000": 40000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -3,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 16,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            4,
+            7
+          ],
+          "cycle_mean_overflow": "11/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 354,
+            "1000": 4668,
+            "10000": 54168
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            4,
+            7
+          ],
+          "cycle_mean_overflow": "11/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 354,
+            "1000": 4668,
+            "10000": 54168
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            4
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 400,
+            "1000": 4000,
+            "10000": 40000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -3,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 16,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            4,
+            7
+          ],
+          "cycle_mean_overflow": "11/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 354,
+            "1000": 4704,
+            "10000": 54204
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            4,
+            7
+          ],
+          "cycle_mean_overflow": "11/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 354,
+            "1000": 4704,
+            "10000": 54204
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            4
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 4,
+            "4": 16,
+            "9": 36,
+            "100": 400,
+            "1000": 4000,
+            "10000": 40000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 196,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -3,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 196,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 17,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            3,
+            5
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 254,
+            "1000": 3335,
+            "10000": 39335
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            3,
+            5
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 254,
+            "1000": 3335,
+            "10000": 39335
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            3
+          ],
+          "cycle_mean_overflow": "3",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 300,
+            "1000": 3000,
+            "10000": 30000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -2,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 17,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            3,
+            5
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 254,
+            "1000": 3377,
+            "10000": 39377
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            3,
+            5
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 254,
+            "1000": 3377,
+            "10000": 39377
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            3
+          ],
+          "cycle_mean_overflow": "3",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 300,
+            "1000": 3000,
+            "10000": 30000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -2,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 17,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            3,
+            5
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 254,
+            "1000": 3404,
+            "10000": 39404
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            3,
+            5
+          ],
+          "cycle_mean_overflow": "4",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 254,
+            "1000": 3404,
+            "10000": 39404
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            3
+          ],
+          "cycle_mean_overflow": "3",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 3,
+            "4": 12,
+            "9": 27,
+            "100": 300,
+            "1000": 3000,
+            "10000": 30000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 196,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -2,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 196,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 18,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            2,
+            3
+          ],
+          "cycle_mean_overflow": "5/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 154,
+            "1000": 2058,
+            "10000": 24558
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            2,
+            3
+          ],
+          "cycle_mean_overflow": "5/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 154,
+            "1000": 2058,
+            "10000": 24558
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            2
+          ],
+          "cycle_mean_overflow": "2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 200,
+            "1000": 2000,
+            "10000": 20000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -1,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 18,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            2,
+            3
+          ],
+          "cycle_mean_overflow": "5/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 154,
+            "1000": 2086,
+            "10000": 24586
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            2,
+            3
+          ],
+          "cycle_mean_overflow": "5/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 154,
+            "1000": 2086,
+            "10000": 24586
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            2
+          ],
+          "cycle_mean_overflow": "2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 200,
+            "1000": 2000,
+            "10000": 20000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -1,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 18,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            2,
+            3
+          ],
+          "cycle_mean_overflow": "5/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 154,
+            "1000": 2104,
+            "10000": 24604
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            2,
+            3
+          ],
+          "cycle_mean_overflow": "5/2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 154,
+            "1000": 2104,
+            "10000": 24604
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            2
+          ],
+          "cycle_mean_overflow": "2",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 2,
+            "4": 8,
+            "9": 18,
+            "100": 200,
+            "1000": 2000,
+            "10000": 20000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 196,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": -1,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": "-infinity",
+          "maximum_gap_over_all_horizons": 196,
+          "strict_advantage_all_horizons_from": null
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 19,
+      "gain": "9/40",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            1,
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 54,
+            "1000": 781,
+            "10000": 9781
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 446,
+          "cycle_repeat_state": 448,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            1,
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 54,
+            "1000": 781,
+            "10000": 9781
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 100,
+            "1000": 1000,
+            "10000": 10000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 446,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 448,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 219,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 219,
+          "strict_advantage_all_horizons_from": 10
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 19,
+      "gain": "6/25",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            1,
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 54,
+            "1000": 795,
+            "10000": 9795
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 418,
+          "cycle_repeat_state": 420,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            1,
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 54,
+            "1000": 795,
+            "10000": 9795
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 100,
+            "1000": 1000,
+            "10000": 10000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 418,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 420,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 205,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 205,
+          "strict_advantage_all_horizons_from": 10
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    },
+    {
+      "capacity_per_expert": 19,
+      "gain": "1/4",
+      "arms": {
+        "admitted": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            1,
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 54,
+            "1000": 804,
+            "10000": 9804
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "requested": {
+          "cycle_start_state": 400,
+          "cycle_repeat_state": 402,
+          "cycle_period": 2,
+          "cycle_request_vectors": [
+            [
+              10,
+              20,
+              10
+            ],
+            [
+              20,
+              1,
+              19
+            ]
+          ],
+          "cycle_overflow": [
+            1,
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 54,
+            "1000": 804,
+            "10000": 9804
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        },
+        "none": {
+          "cycle_start_state": 0,
+          "cycle_repeat_state": 1,
+          "cycle_period": 1,
+          "cycle_request_vectors": [
+            [
+              9,
+              20,
+              11
+            ]
+          ],
+          "cycle_overflow": [
+            1
+          ],
+          "cycle_mean_overflow": "1",
+          "first_global_saturation_batch": null,
+          "cumulative_overflow": {
+            "1": 1,
+            "4": 4,
+            "9": 9,
+            "100": 100,
+            "1000": 1000,
+            "10000": 10000
+          },
+          "capacity_lower_bound_per_batch": 0,
+          "cycle_certifies_all_future_steps": true
+        }
+      },
+      "comparison_certificate": {
+        "joint_cycle_start_bound": 400,
+        "joint_cycle_period": 2,
+        "checked_horizons_through": 402,
+        "requested_minus_admitted_gap_min": 0,
+        "requested_minus_admitted_gap_max": 0,
+        "no_feedback_minus_admitted_gap_min": 0,
+        "no_feedback_minus_admitted_gap_max": 196,
+        "requested_minus_admitted_drift_per_joint_period": 0,
+        "no_feedback_minus_admitted_drift_per_joint_period": 0,
+        "requested_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 0,
+          "strict_advantage_all_horizons_from": null
+        },
+        "no_feedback_minus_admitted_all_horizon": {
+          "minimum_gap_over_all_horizons": 0,
+          "maximum_gap_over_all_horizons": 196,
+          "strict_advantage_all_horizons_from": 10
+        },
+        "requested_and_admitted_request_paths_equal_for_all_steps": true,
+        "all_future_horizon_costs_and_gaps_certified_by_exact_cycles": true
+      }
+    }
+  ],
+  "replication_note": "Repeating every affinity row m times and scaling capacities by m preserves the sign feedback and bias trajectories; all overflow costs and gaps scale by m."
+}

@@ -1,0 +1,119 @@
+{
+  "design": {
+    "experts": 4,
+    "top_k": 2,
+    "tokens": 12,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "affinities": "iid integer Uniform[-4,4]",
+    "candidate_pressure": "exact random rational points on sampled token-pair tie hyperplanes",
+    "admission": "A_e=min(R_e,C_e)",
+    "tie_rule": "lower expert index; side evaluations are strict",
+    "scope": "exact finite structural audit; not model quality or production prevalence"
+  },
+  "totals": {
+    "facets": 4944,
+    "matched": 2787,
+    "mismatched": 2157,
+    "local_cycles": 2157
+  },
+  "by_capacity_profile": {
+    "no_clipping": {
+      "facets": 1236,
+      "matched": 1236,
+      "mismatched": 0,
+      "mismatch_fraction": 0.0,
+      "independent_plants_with_facet": 40,
+      "mismatch_facets_with_nonzero_exact_local_cycle": 0,
+      "capacity_vector": [
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    "exact_total_uniform": {
+      "facets": 1236,
+      "matched": 308,
+      "mismatched": 928,
+      "mismatch_fraction": 0.7508090614886731,
+      "independent_plants_with_facet": 40,
+      "mismatch_facets_with_nonzero_exact_local_cycle": 928,
+      "capacity_vector": [
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    "exact_total_heterogeneous": {
+      "facets": 1236,
+      "matched": 434,
+      "mismatched": 802,
+      "mismatch_fraction": 0.6488673139158576,
+      "independent_plants_with_facet": 40,
+      "mismatch_facets_with_nonzero_exact_local_cycle": 802,
+      "capacity_vector": [
+        2,
+        4,
+        8,
+        10
+      ]
+    },
+    "aggregate_shortage": {
+      "facets": 1236,
+      "matched": 809,
+      "mismatched": 427,
+      "mismatch_fraction": 0.3454692556634304,
+      "independent_plants_with_facet": 40,
+      "mismatch_facets_with_nonzero_exact_local_cycle": 427,
+      "capacity_vector": [
+        3,
+        3,
+        3,
+        3
+      ]
+    }
+  },
+  "interpretation": "Every sampled facet passed the exact jump formula. On E=4, a facet is potential-compatible exactly when aggregate admitted source decrease equals aggregate destination increase. The no-clipping arm is a negative control. Unsampled facets and untested router regimes are not covered."
+}

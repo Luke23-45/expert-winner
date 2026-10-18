@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "exact_arithmetic": "fractions.Fraction over decimal-rational affinity file",
+  "plant": {
+    "E": 8,
+    "K": 2,
+    "T": 128,
+    "uniform_capacity": 32,
+    "gain": "1/40",
+    "horizon": 120,
+    "generator": "ring-pair counts (30, 8, 22, 10, 26, 6, 18, 8); torch CPU float64 uniform noise [0,0.02), seed 5, followed by exact decimal rationalization",
+    "tie_rule": "lower expert index wins exact ties"
+  },
+  "overflow": {
+    "admitted": 2449,
+    "requested": 1918,
+    "none": 1920
+  },
+  "initial_saturated_expert_count": {
+    "admitted": 5,
+    "requested": 5,
+    "none": 5
+  },
+  "first_globally_saturated_state": {
+    "admitted": null,
+    "requested": null,
+    "none": null
+  },
+  "minimum_top2_cutoff_margin": {
+    "admitted": "542933344799/10000000000000000",
+    "requested": "114112300983/2500000000000000",
+    "none": "37806719560039579/10000000000000000"
+  },
+  "strict_routes_entire_horizon": {
+    "admitted": true,
+    "requested": true,
+    "none": true
+  },
+  "requested_minus_admitted_overflow": -531,
+  "replication_checks": {
+    "1": {
+      "admitted_overflow": 2449,
+      "requested_overflow": 1918,
+      "requested_minus_admitted": -531
+    },
+    "2": {
+      "admitted_overflow": 4898,
+      "requested_overflow": 3836,
+      "requested_minus_admitted": -1062
+    }
+  },
+  "robustness": {
+    "entrywise_epsilon": "1/100000",
+    "twice_epsilon": "1/50000",
+    "strict_margin_guarantee": true,
+    "exact_random_perturbation_trials": 10,
+    "seed": 20261017,
+    "all_trials_preserved_paths_and_costs": true
+  },
+  "affinity_file": "docs/paper/fixtures/uniform_capacity_seed5_affinities.csv",
+  "affinity_file_sha256": "b7cb4002f5aa7a0ddc384fbacaa7617ca744534e5a2bcb0987bfc1ab2c43bc2d",
+  "source_revision": "e1648512e22844f4d8e892577dfc011f83ac307a"
+}

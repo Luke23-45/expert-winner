@@ -1,0 +1,35 @@
+{
+  "H_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "K_values": [
+    1,
+    2,
+    3
+  ],
+  "T_values": [
+    2304,
+    9216
+  ],
+  "all_invariants_passed": true,
+  "cells": 84,
+  "cells_sha256": "cc40537a62c9eb9fd8b467806c73b03cafb477fff559b24cc303dd58097e57b1",
+  "fresh_static_sha256": "e37f3f649cd3cf6776358e91a0c067ee6852524fc1dbc1b454bcaf7c7eb64a11",
+  "interpretation": "Controlled stochastic paired experiment; no trained model or telemetry-cost claim.",
+  "no_clipping_full_trajectory_controls": 144,
+  "paired_regime_cells": 42,
+  "plants_sha256": "c9be8164a2c8738c89f2a7f4d920e0a4bbc249ae9d4ec0d8cdb31fc8cc0e7306",
+  "population_comparator": "finite-T deterministic mean-feedback recurrence and T-infinity iterated limit",
+  "protocol": "docs/paper/topk_fresh_batch_closed_loop_protocol_2026-10-17.md",
+  "protocol_sha256": "d8aa83de768f1bbf997c0566a7e7aaca0f769282b17874580029f6111038200d",
+  "replicates": 12,
+  "rows": 1008,
+  "script_sha256": "3e2bccb986b3cb7df9d0bc7a7152ab0617b8aaeda3ac5ee01bc8f61b545d2bd2",
+  "total_exact_ties": 0
+}

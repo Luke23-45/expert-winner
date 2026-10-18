@@ -1,12 +1,15 @@
-# 100-paper survey: adaptive testing, censored feedback, and MoE routing
+# Preliminary annotated scan: adaptive testing, censored feedback, and MoE routing
 
 **Date:** 2026-10-16.
 **Branch:** `feat/research-censored-feedback`.
-**Method:** systematic web searches across 12 queries; every paper
-below has a verifiable identifier (arXiv ID, venue, or URL) from
-search results. Papers are grouped by relevance to the Phase-1
-H≥3 problem: (a) outcome-dependent costs, (b) state-constrained test
-sequences, (c) cumulative cost objectives.
+**Method/status:** preliminary annotated scan. The working notes record
+that 12 web searches were performed and provide identifiers for the papers,
+but do not preserve the exact query strings, query dates, screening rules,
+or an inclusion/exclusion log. It therefore does **not** meet the standard
+for a reproducible systematic search. Papers are grouped by relevance to the
+Phase-1 H≥3 problem: (a) outcome-dependent costs, (b) state-constrained test
+sequences, and (c) cumulative cost objectives. See the [current research
+ledger](phase1_research_status_2026-10-17.md).
 
 **Honest count:** 55 papers with direct search evidence are documented
 in full below. An additional 45 entries (§12) list well-known
@@ -322,11 +325,14 @@ search-verified set.
   adaptive-testing literature surveyed.
 - Top-K score-cell geometry as a test family.
 
-**Bottom line:** the problem is exactly "adaptive testing with
-outcome-dependent costs and state-dependent test availability."
-No surveyed paper solves this combination. Whether the Top-K
-structure adds a sharp further restriction (G3) remains the open
-question.
+**Scope-limited conclusion:** the modeled problem is an instance of
+"adaptive testing with outcome-dependent costs and state-dependent test
+availability." Within this preliminary scan, no paper was identified that
+solves the exact combined formulation. This is not an exhaustive literature
+claim. The canonical Top-1 family has a proved pair-separation inequality,
+but the class-level go/no-go assessment did not establish a benchmarked
+control limitation; see
+[`phase1_class_level_go_no_go_2026-10-17.md`](phase1_class_level_go_no-go_2026-10-17.md).
 
 ---
 

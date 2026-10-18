@@ -1,0 +1,28 @@
+{
+  "experiment": "exact_expected_topk_saturation_rank_threshold",
+  "reproduced_on": "2026-10-18",
+  "command": "python scripts/run_saturation_rank_threshold_experiment.py",
+  "exit_code": 0,
+  "repository": {
+    "branch": "feat/research-censored-feedback",
+    "head": "e1648512e22844f4d8e892577dfc011f83ac307a",
+    "working_tree_was_dirty": true
+  },
+  "runtime": {
+    "python": "3.14.5",
+    "numpy": "2.4.6"
+  },
+  "verified_summary": {
+    "cell_count": 36,
+    "finite_ranks_full": true,
+    "limiting_ranks_match": true,
+    "saturated_subspace_bounds_pass": true,
+    "maximum_jacobian_error": 5.582884154975432E-10
+  },
+  "sha256": {
+    "scripts/run_saturation_rank_threshold_experiment.py": "4fb828a9663834a39f4322e2e2a069497a8940dd4c305d0160b38e20796098cf",
+    "results/saturation_rank_threshold_2026-10-18/cells.csv": "ab74383a6df6ae4fef4393f46b2d2193a394a0bf3767a14a4d29adfba6be7521",
+    "results/saturation_rank_threshold_2026-10-18/summary.json": "cb72ef2beaa73cdaf80936736f0fcb7294d27613bec9512d884d55d0e221abb2",
+    "docs/paper/saturation_rank_threshold_experiment_2026-10-18.md": "966462942412592ecc74775cd617b853690d92404a3dacbd42977758cfd19ce3"
+  }
+}

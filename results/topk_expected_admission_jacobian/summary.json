@@ -1,0 +1,39 @@
+{
+  "T_values": [
+    6,
+    12,
+    24,
+    48,
+    96,
+    192
+  ],
+  "all_checks_passed": true,
+  "capacity_fractions": [
+    "1/6",
+    "1/3",
+    "1/2",
+    "1"
+  ],
+  "cells": 72,
+  "grid_sha256": "00e21f496e352e793ffa4be79b076b8e45c1990f8fdbb1dc949856017bec3e09",
+  "interpretation": "Exact deterministic numerical audit of an analytically evaluated synthetic model; not Monte Carlo evidence.",
+  "max_abs_jacobian_fd_error": 2.376070729059876e-10,
+  "no_clipping_curl_controls": 18,
+  "nonzero_clipped_skew_cells": 36,
+  "profiles": [
+    "uniform",
+    "witness",
+    "strong_skew"
+  ],
+  "protocol": "docs/paper/topk_expected_admission_jacobian_protocol_2026-10-17.md",
+  "protocol_sha256": "135fd29a1ae8dd0d2b4610197f44a5ee1b6a105c1bf3973913e75dc367012fed",
+  "script_sha256": "9c4a6315eb1cb003e5b693ef8a1f2d22cf66cd83589eb662bbc3c15ecc31f94c",
+  "uniform_curl_controls": 24,
+  "witness_attenuation_exact": [
+    "3/16",
+    "112/243",
+    "3125/3888"
+  ],
+  "witness_curl_exact": "-29/2187",
+  "witness_curl_numeric": -0.013260173754000959
+}

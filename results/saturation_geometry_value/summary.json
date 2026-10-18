@@ -1,0 +1,58 @@
+{
+  "experiment": "exact one-vs-two-saturated Top-1 value audit",
+  "protocol_sha256": "d28aaa8eb5ac72ee63e8f1b3d06411190e665285f863ac1c9417e87973036fab",
+  "runner_sha256": "ef2e79db00235cc1a9f99a941414f33f0a8dacc95e8f7e6e346487f9c4adae3b",
+  "rows": 12,
+  "horizons": [
+    40,
+    80,
+    160,
+    320,
+    640,
+    1280
+  ],
+  "worlds": [
+    [
+      0.4,
+      0.4,
+      0.2
+    ],
+    [
+      0.46,
+      0.34,
+      0.2
+    ]
+  ],
+  "capacity_profiles": {
+    "one_saturated": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "two_saturated": [
+      0.25,
+      0.25,
+      0.5
+    ]
+  },
+  "registered_action_class": "two pressures that individually route a world to C/T",
+  "exact_multinomial_enumeration": true,
+  "max_augmented_full_R_bayes_value_difference": 0.0,
+  "max_full_R_vs_A_plus_R1_action_disagreement_probability": 0.0,
+  "max_full_R_vs_A_plus_R1_action_disagreement_count": 0,
+  "max_full_R_vs_R1_only_action_disagreement_probability": 0.1333844526720647,
+  "csv_sha256": "a07518408e428f61e6cbcce9768e58753a02bad506e07df138cc1d084e58a2dd",
+  "checks": {
+    "all_world_laws_normalized": true,
+    "all_request_vectors_mass_conserving": true,
+    "all_capacity_vectors_exact_total": true,
+    "requested_value_no_greater_than_admitted_value": true,
+    "signal_value_ordering_R_ge_A_plus_R1_ge_A": true,
+    "signal_TV_ordering_R_ge_A_plus_R1_ge_A": true,
+    "full_R_value_no_greater_than_R1_value": true,
+    "full_R_and_A_plus_R1_bayes_actions_agree_on_full_support": true,
+    "full_R_and_A_plus_R1_actions_match_all_count_vectors": true,
+    "one_saturation_population_gap_prediction": 0.0,
+    "two_saturation_population_gap_prediction": 0.01875
+  }
+}

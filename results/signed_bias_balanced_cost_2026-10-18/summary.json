@@ -1,0 +1,28 @@
+{
+  "all_cells_passed": true,
+  "all_exit_bounds_passed": true,
+  "all_strict_cumulative_gaps_passed": true,
+  "arithmetic": "exact Python integers and fractions; no Monte Carlo",
+  "capacities": "C_i=1 for i<K; C_i=2K for i>=K",
+  "cell_count": 63,
+  "cells_sha256": "020e9570c5d204fb138b592dda6912fdb0ca5fb162c23c8bfa3944b616437a04",
+  "experiment": "exact signed-bias balanced-request overflow corollary audit",
+  "max_actual_exit": 500,
+  "max_exit_bound": 501,
+  "plant": "T=2E; two copies of E cyclic windows of K consecutive experts",
+  "registered_E": [
+    3,
+    4,
+    5,
+    6,
+    8
+  ],
+  "registered_K": "all integers 1..E-1",
+  "registered_gamma": [
+    "1/1000",
+    "1/16",
+    "1/4"
+  ],
+  "runner_sha256": "c534fe5ba1ee528c63a1a5a356438f7aab79501753850f8e7beabd44ed16139d",
+  "scope": "deterministic controlled audit of the stated theorem hypotheses; not workload prevalence or measured runtime"
+}
