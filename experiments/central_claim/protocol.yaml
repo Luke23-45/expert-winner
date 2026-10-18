@@ -1,0 +1,95 @@
+protocol_version: "1.0.0"
+title: "Pre-data audit of the capacity-censored feedback claim"
+
+# This protocol tests the formal, regime-conditioned signal claim. It does
+# not claim that mock-language-model NLL predicts real-data quality.
+claim:
+  statement: >-
+    Under canonical per-expert admission A_e=min(R_e,C_e), admitted feedback
+    cannot identify excess requested load on saturated experts. In the
+    uniform-capacity, uniform-target, globally saturated shortage regime
+    (c<1), admitted feedback is common-mode and produces no relative pressure
+    update under gauge dynamics; requested feedback retains the requested-load
+    imbalance signal.
+  scope:
+    experts: 8
+    top_k: 2
+    tokens: 1024
+    target: uniform
+    score_gain: 1.0
+    step_size: 0.05
+    pressure_decay: 0.0
+    initialization: zero_pressure
+  non_claims:
+    - "Universal observability limitations in deployed MoE implementations."
+    - "Universal convergence of hard Top-K feedback dynamics."
+    - "Overflow reduction during persistent global saturation with aggregate shortage."
+    - "Improved real-model validation NLL; mock data cannot establish this."
+
+sampling:
+  seed_start: 1000
+  seed_count: 50
+  pairing: "Within each seed and regime, both controllers receive identical affinities and initial state."
+  profile_generator: >-
+    Four token groups map to expert pairs (0,1), (2,3), (4,5), (6,7).
+    Group sizes are sampled by a seeded weak-composition generator. For shortage
+    regimes, every group is constrained to be at least 32 above the per-expert
+    capacity, making global saturation robust at step zero; profiles with max-min group size
+    below 32 are rejected so the primary case has nonzero requested imbalance.
+    Small deterministic affinity noise is added under the existing pair-affinity
+    generator. All sampling rules are fixed before the run.
+  noise_scale: 0.1
+  controllers: [requested, admitted]
+  trajectory_storage: gzip_jsonl
+
+conditions:
+  - name: shortage_c075
+    role: primary_saturation_dynamics
+    capacity_per_expert: 192
+    capacity_ratio: 0.75
+    group_profile: saturated_imbalanced
+    steps: 1200
+  - name: shortage_c050
+    role: saturation_severity_sensitivity
+    capacity_per_expert: 128
+    capacity_ratio: 0.50
+    group_profile: saturated_imbalanced
+    steps: 1200
+  - name: exact_total_boundary
+    role: c_equals_one_boundary_control
+    capacity_per_expert: 256
+    capacity_ratio: 1.0
+    group_profile: balanced
+    noise_scale: 0.0
+    steps: 1
+  - name: partial_slack_c1125
+    role: partial_saturation_boundary_control
+    capacity_per_expert: 288
+    capacity_ratio: 1.125
+    group_profile: partial_saturation
+    steps: 300
+  - name: no_drop_control
+    role: requested_admitted_equivalence_control
+    capacity_per_expert: 1024
+    capacity_ratio: 4.0
+    group_profile: paired_with_shortage_c075
+    steps: 100
+
+invariants:
+  - "Every realized request vector sums to K*T and each coordinate is at most T."
+  - "Admission is exactly A=min(R,C), and rejection is J=R-A."
+  - "For both shortage conditions, every expert is saturated at step zero."
+  - "Under both shortage conditions, admitted gauge pressure remains zero for the full run."
+  - "The primary shortage profile starts with nonzero centered requested feedback."
+  - "At c=1, the balanced boundary control has R=C=K*T/E at step zero."
+  - "The partial-slack control starts with both saturated and unsaturated experts."
+  - "Under no dropping, requested and admitted trajectories match exactly within float tolerance."
+
+analysis:
+  primary_dynamic_metric: "time_mean_total_variation_of_requested_load_from_uniform_target"
+  paired_effect: "admitted_metric_minus_requested_metric; positive favors requested feedback on this metric"
+  uncertainty: "seed-bootstrap percentile interval conditional on this declared synthetic generator"
+  bootstrap_replicates: 10000
+  report_first_request_count_change: true
+  report_overflow_and_global_saturation_separately: true
+  inferential_scope: "synthetic-generator robustness only; not real-data generalization"
