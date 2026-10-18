@@ -36,31 +36,29 @@ not treat token composition as interchangeable.
 ## Run the wiring check first
 
 Run this only on a Linux NVIDIA-GPU machine where the pinned Megatron checkout
-and its CUDA/PyTorch dependencies are installed. Two GPUs are recommended for
-the first distributed check. The smoke profile uses generated mock data and a
-small 2-layer model; it checks the adapter and the required no-drop equivalence,
-not language-model quality or the paper's research claims.
+and its CUDA/PyTorch dependencies are installed. Check the visible GPU count
+before choosing `--nproc-per-node`; each worker requires one visible GPU. The
+smoke profile uses generated mock data and a small 2-layer model; it checks the
+adapter and the required no-drop equivalence, not language-model quality or the
+paper's research claims.
 
 ```bash
 git -C /path/to/Megatron-LM checkout 62c063f2b731b57b1c2031b2b4f4c6a769271ccb
+python -c "import torch; print('CUDA:', torch.cuda.is_available(), 'visible GPUs:', torch.cuda.device_count()); assert torch.cuda.is_available() and torch.cuda.device_count() >= 1"
 python experiments/megatron_feedback/run_matrix.py \
   --megatron-root /path/to/Megatron-LM \
-  --output-root "$PWD/experiments/megatron_feedback/runs/smoke" \
-  --nproc-per-node 2 --device-ids 0,1 \
-  --profile smoke --steps 20 --execute
-```
-
-If your Megatron installation is in the same Python environment as this
-repository, the command above is sufficient. Otherwise invoke this script with
-the Python executable from the Megatron CUDA environment. The adapter rejects
-any checkout whose Git SHA differs from the pinned one.
-
-After a successful smoke run, inspect the four run logs and validate telemetry:
-
-```bash
+  --output-root "$PWD/experiments/megatron_feedback/runs/smoke_gpu1" \
+  --nproc-per-node 1 --device-ids 0 \
+  --profile smoke --steps 20 --execute && \
 python experiments/megatron_feedback/analyze.py \
-  experiments/megatron_feedback/runs/smoke
+  experiments/megatron_feedback/runs/smoke_gpu1
 ```
+
+The analysis command runs only if training succeeds (`&&`). If you have more
+visible GPUs, increase both `--nproc-per-node` and the number of IDs in
+`--device-ids` to match. If Megatron is installed in a different Python
+environment, invoke both commands with that environment's Python executable.
+The adapter rejects any checkout whose Git SHA differs from the pinned one.
 
 `telemetry_checks.json` must have no violations and must report one matched
 drop-off pair. With dropping disabled, requested and admitted assignments and

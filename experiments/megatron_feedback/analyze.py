@@ -88,6 +88,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("runs_root", type=Path)
     args = parser.parse_args()
+    if not args.runs_root.is_dir():
+        parser.error(
+            f"runs directory does not exist: {args.runs_root}. "
+            "Run the smoke launcher successfully before analyzing its outputs."
+        )
     runs = {}
     for run_path in sorted(args.runs_root.iterdir()):
         if not run_path.is_dir() or not (run_path / "cell.json").is_file():
