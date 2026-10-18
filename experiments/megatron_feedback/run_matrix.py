@@ -7,9 +7,11 @@ import hashlib
 import json
 import os
 import platform
+import shutil
 import shlex
 import subprocess
 import sys
+import sysconfig
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -95,6 +97,66 @@ def require_cuda(nproc_per_node: int, device_ids: str | None) -> None:
         )
 
 
+def megatron_build_env() -> dict[str, str]:
+    """Make Megatron's Makefile use this process's Python environment."""
+    env = os.environ.copy()
+    python_bin_dir = str(Path(sys.executable).resolve().parent)
+    env["PATH"] = os.pathsep.join([python_bin_dir, env.get("PATH", "")])
+    return env
+
+
+def preflight_dataset_helper(megatron_root: Path) -> None:
+    """Validate and compile the pinned Megatron C++ dataset helper before a run."""
+    env = megatron_build_env()
+    python3 = shutil.which("python3", path=env["PATH"])
+    python3_config = shutil.which("python3-config", path=env["PATH"])
+    make = shutil.which("make", path=env["PATH"])
+    compiler = shutil.which("g++", path=env["PATH"])
+    missing = [name for name, value in (
+        ("python3", python3), ("python3-config", python3_config),
+        ("make", make), ("g++", compiler),
+    ) if value is None]
+    if missing:
+        raise SystemExit(
+            "Megatron's dataset helper needs these build tools: " + ", ".join(missing)
+            + ". On Colab, install build-essential and the matching python3-dev package."
+        )
+
+    try:
+        suffix = subprocess.check_output(
+            [python3_config, "--extension-suffix"], text=True, env=env
+        ).strip()
+        expected_suffix = sysconfig.get_config_var("EXT_SUFFIX")
+        if suffix != expected_suffix:
+            raise SystemExit(
+                "python3-config targets a different Python ABI than the launcher: "
+                f"{suffix!r} != {expected_suffix!r}. Install the matching Python development headers."
+            )
+        includes = subprocess.check_output(
+            [sys.executable, "-m", "pybind11", "--includes"],
+            text=True, stderr=subprocess.STDOUT, env=env,
+        ).strip()
+    except subprocess.CalledProcessError as exc:
+        raise SystemExit(
+            "Megatron's dataset helper prerequisites are incomplete. Install pybind11 into "
+            f"{sys.executable} and matching Python development headers. Probe output:\n"
+            f"{exc.output}"
+        ) from exc
+    if not includes:
+        raise SystemExit("pybind11 returned no C++ include flags for the active Python environment.")
+
+    dataset_dir = megatron_root / "megatron" / "core" / "datasets"
+    built = subprocess.run(
+        [make, "-C", str(dataset_dir)], text=True, capture_output=True, env=env, check=False
+    )
+    if built.returncode != 0:
+        raise SystemExit(
+            "Megatron's C++ dataset-helper preflight failed before any run directory was created.\n"
+            f"{built.stdout}{built.stderr}"
+        )
+    print("Megatron dataset-helper build preflight passed.")
+
+
 def cells(protocol: dict, profile: str) -> list[dict]:
     design = protocol["design"]
     if profile == "smoke":
@@ -168,6 +230,9 @@ def run_command(cell: dict, args: argparse.Namespace, out: Path) -> list[str]:
                     "--no-create-attention-mask-in-dataloader"]
     if cell["capacity_factor"] != "disabled":
         command += ["--moe-expert-capacity-factor", str(cell["capacity_factor"])]
+    if args.profile == "smoke":
+        # The smoke profile must not silently depend on optional Transformer Engine.
+        command += ["--transformer-impl", "local"]
     if cell["feedback"] in {"requested", "admitted", "native_admitted"}:
         command += ["--moe-router-enable-expert-bias", "--moe-router-bias-update-rate", "0.001"]
         command += ["--moe-aux-loss-coeff", "0.0"]
@@ -207,6 +272,8 @@ def main() -> int:
     megatron_dirty = git_value(args.megatron_root, "status", "--porcelain")
     if megatron_dirty:
         raise SystemExit("Megatron checkout must be clean before running this experiment.")
+    if args.execute:
+        preflight_dataset_helper(args.megatron_root)
     protocol_path = ADAPTER_DIR / "protocol.yaml"
     protocol = yaml.safe_load(protocol_path.read_text(encoding="utf-8"))
     run_cells = cells(protocol, args.profile)
@@ -238,7 +305,7 @@ def main() -> int:
     for cell in run_cells:
         out = args.output_root / cell_id(cell)
         command = run_command(cell, args, out)
-        env = os.environ.copy()
+        env = megatron_build_env()
         env["MEGATRON_ROOT"] = str(args.megatron_root)
         env["MEGATRON_EXPECTED_SHA"] = expected
         env["MOE_FEEDBACK_EXPERIMENT"] = (

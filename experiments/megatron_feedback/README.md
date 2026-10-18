@@ -42,7 +42,37 @@ smoke profile uses generated mock data and a small 2-layer model; it checks the
 adapter and the required no-drop equivalence, not language-model quality or the
 paper's research claims. The pinned Megatron version rejects expert bias with
 its default softmax router score, so the protocol fixes the score function to
-sigmoid across every arm, including the auxiliary-loss baseline.
+sigmoid across every arm, including the auxiliary-loss baseline. It also pins
+`--transformer-impl local` for the smoke profile so the wiring check does not
+silently require the optional Transformer Engine package. All smoke arms use
+the same implementation.
+
+Megatron compiles its dataset-index helper the first time training starts. On a
+Colab runtime based on the system CPython (the failure log showed
+`/usr/bin/python3`), install the compiler, matching Python development headers,
+and `pybind11` in the experiment virtual environment before launching:
+
+```bash
+apt-get update -qq
+apt-get install -y build-essential python3-dev
+cd /content/expert-winner
+uv pip install --python .venv/bin/python pybind11
+python3 -c 'import sys; print("system Python:", sys.version)'
+.venv/bin/python -c 'import sys; print("experiment Python:", sys.version)'
+python3-config --extension-suffix
+.venv/bin/python -m pybind11 --includes
+make -C /content/Megatron-LM/megatron/core/datasets
+git -C /content/Megatron-LM status --short
+```
+
+The two Python version lines must have the same major/minor version; in the
+reported run both resolve to CPython 3.13. The extension suffix from
+`python3-config` must match the active environment's ABI. The launcher now
+checks the compiler, Python ABI, and `pybind11`, then builds this helper before
+creating any run directory. The generated `.so` is ignored by the pinned
+Megatron checkout. If the preflight reports an ABI mismatch, install the dev
+package matching the interpreter used to create `.venv` and recreate that
+virtual environment with the system Python.
 
 ```bash
 git -C /path/to/Megatron-LM checkout 62c063f2b731b57b1c2031b2b4f4c6a769271ccb
