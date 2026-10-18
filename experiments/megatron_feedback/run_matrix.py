@@ -232,7 +232,15 @@ def run_command(cell: dict, args: argparse.Namespace, out: Path) -> list[str]:
         command += ["--moe-expert-capacity-factor", str(cell["capacity_factor"])]
     if args.profile == "smoke":
         # The smoke profile must not silently depend on optional Transformer Engine.
-        command += ["--transformer-impl", "local"]
+        # Expert MLPs receive per_token_scale. The local MLP's fused bias-SwiGLU
+        # path only accepts selected activations for that case; disabling the
+        # fusion selects Megatron's equivalent eager PyTorch implementation.
+        command += [
+            "--transformer-impl", "local", "--swiglu",
+            "--no-persist-layer-norm", "--no-gradient-accumulation-fusion",
+            "--no-masked-softmax-fusion",
+            "--no-bias-swiglu-fusion", "--no-bias-gelu-fusion",
+        ]
     if cell["feedback"] in {"requested", "admitted", "native_admitted"}:
         command += ["--moe-router-enable-expert-bias", "--moe-router-bias-update-rate", "0.001"]
         command += ["--moe-aux-loss-coeff", "0.0"]

@@ -45,7 +45,15 @@ its default softmax router score, so the protocol fixes the score function to
 sigmoid across every arm, including the auxiliary-loss baseline. It also pins
 `--transformer-impl local` for the smoke profile so the wiring check does not
 silently require the optional Transformer Engine package. All smoke arms use
-the same implementation.
+the same implementation. It also disables persistent LayerNorm, gradient-
+accumulation fusion, masked-softmax fusion, and bias-activation fusion for the
+smoke profile; these are execution-path choices shared by all arms. The launcher
+explicitly selects SwiGLU and disables both bias-activation fusion flags. The
+local MLP receives
+`per_token_scale` for expert execution; the pinned source only supports its
+fused path for particular activation cases. Disabling the fusion uses its
+eager PyTorch path, which still applies the bias, activation, and per-token
+scale. This avoids modifying the pinned Megatron checkout.
 
 Megatron compiles its dataset-index helper the first time training starts. On a
 Colab runtime based on the system CPython (the failure log showed
