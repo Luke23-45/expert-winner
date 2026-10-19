@@ -1,7 +1,7 @@
 # Architecture and implementation plan
 
-**Status:** original architecture proposal; superseded for current real-workload benchmarking by [`real_workload_benchmark_protocol.md`](real_workload_benchmark_protocol.md)
-**Scope:** the initial synthetic-control architecture for the formal definitions in [`../formal.md`](../formal.md)
+**Status:** original architecture proposal; superseded for current real-workload benchmarking by [`real_workload_benchmark_protocol.md`](../../implementation_plan/real_workload_benchmark_protocol.md)
+**Scope:** the initial synthetic-control architecture for the formal definitions in [`formal.md`](../../formal_definitions/formal.md)
 **Repository note:** this document predates the implemented `src/moe_control/` package and the Megatron adapter. Its original repository-state assumptions and “later phase” sequencing are historical. Use the linked real-workload protocol for the current benchmark design, controller distinctions, and launch gates.
 
 ## 1. Objective and research framing
@@ -104,7 +104,7 @@ moe/
 └── results/                         # generated; ignored by version control
 ```
 
-Keep the experiment package in the `moe` repository root. Keep this architecture document in `docs/formal_definitions/implemention_plan/`; later experiment-specific protocol and results documents can live beside it without mixing raw outputs into the formal-definition folder.
+At the time this plan was written, it was stored in `docs/formal_definitions/implemention_plan/`. It is now preserved under `docs/research_history/superseded_plans/`; the current real-workload protocol is stored in `docs/implementation_plan/`.
 
 ## 4. Component responsibilities and boundaries
 

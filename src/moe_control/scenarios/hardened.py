@@ -2,7 +2,7 @@
 
 These scenarios stress-test the controller where the v1 synthetic study was
 too easy, following the failure-mode catalog in
-docs/literature_review/moe_routing_load_balancing.md:
+docs/research_history/literature_reviews/moe_routing_load_balancing.md:
 
 - SaturationWindupScenario: base demand, then a demand spike that saturates
   several experts for a fixed window, then release. Tests integrator windup:

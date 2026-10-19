@@ -22,7 +22,7 @@ Operational definitions (descriptive, not convergence claims):
     settling    otherwise
 
 Usage:
-    .venv/bin/python scripts/analyze_v2.py [--runs-dir docs/control_experiment_results/v2_runs]
+    .venv/bin/python scripts/analyze_v2.py [--runs-dir docs/research_history/control_experiment_results/v2_runs]
 """
 
 from __future__ import annotations
@@ -159,7 +159,7 @@ def analyze_thrash(runs):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--runs-dir",
-                    default="docs/control_experiment_results/v2_runs")
+                    default="docs/research_history/control_experiment_results/v2_runs")
     args = ap.parse_args()
     runs = load_runs(Path(args.runs_dir))
     print(f"# loaded {len(runs)} v2 runs\n")

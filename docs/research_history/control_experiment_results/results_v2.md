@@ -8,13 +8,13 @@ pretrained-router integration, no model training, no downstream quality
 evaluation. The trained-model transfer experiment is explicitly out of scope
 (see section 8 for why it is the bar for belief).
 
-This report extends the v1 study (`docs/control_experiment_results/results.md`,
+This report extends the v1 study (`docs/research_history/control_experiment_results/results.md`,
 protocol 0.1.0, 64 runs). v1 artifacts under `runs/` are frozen and untouched;
-all v2 runs live under `docs/control_experiment_results/v2_runs/`.
+all v2 runs live under `docs/research_history/control_experiment_results/v2_runs/`.
 
 ## 1. Motivation
 
-The literature review (`docs/literature_review/moe_routing_load_balancing.md`)
+The literature review (`docs/research_history/literature_reviews/moe_routing_load_balancing.md`)
 identifies the sharpest theoretical claim available to this project: under
 capacity saturation, admitted-direction feedback suffers the equivalent of
 classical integrator windup — admitted load stops reflecting demand while
@@ -69,7 +69,7 @@ Scenarios (all deterministic, seeded):
 Reproduce with `bash scripts/run_v2_matrix.sh` (from repo root, `.venv`
 active). Analyze with `scripts/analyze_v2.py`; verify with
 `scripts/verify_findings.py --suite v2 --runs-dir
-docs/control_experiment_results/v2_runs` (all checks pass; the v1 suite is
+docs/research_history/control_experiment_results/v2_runs` (all checks pass; the v1 suite is
 unaffected).
 
 ## 3. Saturation windup: the requested/admitted dissociation, confirmed
@@ -252,7 +252,7 @@ just mathematical bookkeeping. (Verifier W3 encodes both halves of this.)
 
 ## 9. Files
 
-- Runs: `docs/control_experiment_results/v2_runs/` (93 runs; each with
+- Runs: `docs/research_history/control_experiment_results/v2_runs/` (93 runs; each with
   `config.resolved.yaml`, `manifest.json`, `metrics.parquet`, `summary.json`,
   `affinity_reference.json`; manifests record protocol 0.2.0 and
   controller-specific notes).

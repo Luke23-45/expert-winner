@@ -20,6 +20,7 @@ env/
 /outputs/
 /multirun/
 /results/runs/
+/results/reproductions/
 /lightning_logs/
 /checkpoints/
 /experiments/megatron_feedback/runs/

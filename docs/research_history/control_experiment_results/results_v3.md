@@ -12,7 +12,7 @@ This report extends v1 (`results.md`, protocol 0.1.0, 64 runs) and v2
 (`results_v2.md`, protocol 0.2.0, 93 runs). v1 artifacts under `runs/`
 and v2 artifacts under `v2_runs/` are frozen and untouched (verifier
 check V3-IMM confirms byte-identity via git); all v3 runs live under
-`docs/control_experiment_results/v3_runs/` (79 runs). Every
+`docs/research_history/control_experiment_results/v3_runs/` (79 runs). Every
 scenario/controller/seed combination ran on the identical affinity batch
 (SHA-256 content hashes match across controllers within each scenario and
 seed; verifier V3-PAIR), so all controller comparisons are paired.
@@ -32,7 +32,7 @@ the batch across etas.
 
 Reproduce with `bash scripts/run_v3_matrix.sh` (from repo root, `.venv`
 active). Verify with `scripts/verify_findings.py --suite v3 --runs-dir
-docs/control_experiment_results/v3_runs` (213 checks, all pass; the v1
+docs/research_history/control_experiment_results/v3_runs` (213 checks, all pass; the v1
 and v2 suites are unaffected and still pass).
 
 ## 1. What was run
@@ -315,9 +315,9 @@ perplexity -- beyond this VM's scope.
 
 ## 10. Files
 
-- Runs: `docs/control_experiment_results/v3_runs/` (79 runs).
-- This report: `docs/control_experiment_results/results_v3.md` (draft).
-- Notes: `docs/control_experiment_results/v3_notes/` (theorem + proof
+- Runs: `docs/research_history/control_experiment_results/v3_runs/` (79 runs).
+- This report: `docs/research_history/control_experiment_results/results_v3.md` (draft).
+- Notes: `docs/research_history/control_experiment_results/v3_notes/` (theorem + proof
   script, feasibility estimate + verdict, smoke test, T1/T2/T5 analyses).
 - Verification: `scripts/verify_findings.py --suite v3` (213 checks);
   unit checks `scripts/check_antiwindup_unit.py`; matrix

@@ -4,8 +4,8 @@
 # Run from the repository root with the venv active:
 #   bash scripts/run_v2_matrix.sh
 #
-# Writes immutable run directories under docs/control_experiment_results/v2_runs/.
-# Does NOT touch docs/control_experiment_results/runs/ (v1 artifacts frozen).
+# Writes new runs under ignored results/reproductions/v2_runs/.
+# The archived v1/v2 artifacts under docs/research_history/ remain unchanged.
 #
 # Inventory: 93 runs
 #   head-to-head: 5 scenarios x 7 controllers x seeds {17, 23} = 70
@@ -13,7 +13,7 @@
 #                   7 bias-gamma (exact_total, uncensored) = 23
 set -euo pipefail
 
-OUT=docs/control_experiment_results/v2_runs
+OUT=results/reproductions/v2_runs
 CTLS="requested,admitted,admitted_centered,capacity_relative,bias_integral,requested_leaky,requested_no_projection"
 PY=.venv/bin/python
 

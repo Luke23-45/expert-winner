@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Cross-seed verification of the headline findings in
-docs/control_experiment_results/results.md.
+docs/research_history/control_experiment_results/results.md.
 
 Loads every run in the runs dir, groups by (scenario, capacity_regime, seed),
 and checks each headline finding independently per seed:
@@ -25,7 +25,7 @@ and checks each headline finding independently per seed:
      and reduces the violation; overflow stays fixed at 512 for all.
 
 Usage:
-    .venv/bin/python scripts/verify_findings.py [--runs-dir docs/control_experiment_results/runs]
+    .venv/bin/python scripts/verify_findings.py [--runs-dir docs/research_history/control_experiment_results/runs]
 
 Exits nonzero if any check fails. Tolerances are deliberately tight for
 deterministic quantities (F1/F2/F5/F7-freeze) and loose for behavioral ones
@@ -282,9 +282,9 @@ def main() -> int:
     args = ap.parse_args()
     if args.runs_dir is None:
         args.runs_dir = {
-            "v1": "docs/control_experiment_results/runs",
-            "v2": "docs/control_experiment_results/v2_runs",
-            "v3": "docs/control_experiment_results/v3_runs",
+            "v1": "docs/research_history/control_experiment_results/runs",
+            "v2": "docs/research_history/control_experiment_results/v2_runs",
+            "v3": "docs/research_history/control_experiment_results/v3_runs",
         }[args.suite]
     if args.suite == "v2":
         return main_v2(Path(args.runs_dir))
@@ -629,7 +629,7 @@ def main_v2(runs_dir: Path) -> int:
 # ---------------------------------------------------------------------------
 # v3 suite: utmost-version experiments (protocol 0.3.0)
 #
-# Checks the 79-run v3 matrix in docs/control_experiment_results/v3_runs/:
+# Checks the 79-run v3 matrix in docs/research_history/control_experiment_results/v3_runs/:
 #   V3-INV  run inventory (exact 79-run set)
 #   V3-PAIR paired affinity batches across controllers within (scenario, seed)
 #   V3-DUP  duplicate run-configuration detection (fails loudly)
@@ -667,8 +667,8 @@ V3_T1_TARGET_COUNTS = [384, 352, 320, 288, 256, 224, 128, 96]
 
 
 def _v3_repo_root(runs_dir: Path) -> Path:
-    # runs_dir = <root>/docs/control_experiment_results/v3_runs
-    return runs_dir.resolve().parent.parent.parent
+    # Derive the repository root from this script, not the archive depth.
+    return Path(__file__).resolve().parents[1]
 
 
 def _v3_imports(runs_dir: Path):
@@ -943,11 +943,11 @@ def main_v3(runs_dir: Path) -> int:
 
     root = _v3_repo_root(runs_dir)
     frozen_paths = [
-        "docs/control_experiment_results/runs",
-        "docs/control_experiment_results/v2_runs",
-        "docs/control_experiment_results/results.md",
-        "docs/control_experiment_results/results_v2.md",
-        "docs/literature_review/moe_routing_load_balancing.md",
+        "docs/research_history/control_experiment_results/runs",
+        "docs/research_history/control_experiment_results/v2_runs",
+        "docs/research_history/control_experiment_results/results.md",
+        "docs/research_history/control_experiment_results/results_v2.md",
+        "docs/research_history/literature_reviews/moe_routing_load_balancing.md",
     ]
     ps = _sp.run(["git", "-C", str(root), "status", "--porcelain", "--"]
                  + frozen_paths, capture_output=True, text=True)

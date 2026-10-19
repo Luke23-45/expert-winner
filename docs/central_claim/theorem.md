@@ -209,10 +209,12 @@ overflow values are equal within each pair because total overflow is fixed at
 corroborates a conditional load-imbalance result; it does not demonstrate
 overflow reduction.
 
-Audit artifacts: `outputs/central_claim/results/20261018T132657Z/`, including
-`report.md`, `claim_audit.json`, `manifest.json`, paired effects, and compressed
-trajectories. The run was CPU-executed; it exercises the same deterministic
-simulator logic and is not a trained-model result.
+Audit artifacts are committed under
+`docs/central_claim/evidence/20261018T132657Z/`, including `report.md`,
+`claim_audit.json`, `manifest.json`, paired effects, and compressed
+trajectories. The original generated bundle remains at the ignored path
+`outputs/central_claim/results/20261018T132657Z/`. The run was CPU-executed; it
+exercises the deterministic simulator and is not a trained-model result.
 
 ## Scope of the theorem
 

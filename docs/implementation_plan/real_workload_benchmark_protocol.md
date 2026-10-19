@@ -3,8 +3,8 @@
 **Status:** research protocol for implementation and preregistration; no real-data result is claimed here.
 **Implementation status:** planning only; the clean-room v1 code has not been started.
 **Repository branch inspected:** `feat/control-experiment-v3-utmost`.
-**Related implementation:** [`experiments/megatron_feedback/README.md`](../../../experiments/megatron_feedback/README.md), [`protocol.yaml`](../../../experiments/megatron_feedback/protocol.yaml), `run_matrix.py`, `adapter.py`, and `analyze.py`.
-**Formal mechanism:** [`central_theorem.md`](../../notes/central_theorem.md).
+**Related implementation:** [`experiments/megatron_feedback/README.md`](../../experiments/megatron_feedback/README.md), [`protocol.yaml`](../../experiments/megatron_feedback/protocol.yaml), `run_matrix.py`, `adapter.py`, and `analyze.py`.
+**Formal mechanism:** [`theorem.md`](../central_claim/theorem.md).
 **Protocol version:** 1.0, 2026-10-19.
 
 This protocol converts the project's saturation mechanism into two linked empirical studies: a real-router observation/replay study and a controlled real-data training study. It specifies what each study can establish, how to compare methods fairly, and what evidence is required before making a practical claim. It is a plan, not evidence that the planned experiments have run or succeeded.

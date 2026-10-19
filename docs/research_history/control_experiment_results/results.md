@@ -23,14 +23,14 @@ identical affinity batch (the batch is a pure function of the scenario seed;
 SHA-256 hashes match across controllers within each scenario and seed), so all
 controller comparisons are paired.
 
-Published artifacts: `docs/control_experiment_results/runs/<run_id>/` (committed
+Published artifacts: `docs/research_history/control_experiment_results/runs/<run_id>/` (committed
 alongside this report; each holds `config.resolved.yaml`, `manifest.json`,
 `metrics.parquet`, `summary.json`, `affinity_reference.json`).
 
 Reproduce with (from the repo root, `.venv` active):
 
 ```bash
-OUT=docs/control_experiment_results/runs
+OUT=docs/research_history/control_experiment_results/runs
 # main matrix, seed 17
 for pair in "shortage shortage" "exact_total exact_total" "slack slack" "demand_shift shortage"; do
   set -- $pair
@@ -60,13 +60,13 @@ Regenerate the summary tables and run the findings verification from the
 artifacts with:
 
 ```bash
-python scripts/summarize_runs.py --runs-dir docs/control_experiment_results/runs
-python scripts/verify_findings.py --runs-dir docs/control_experiment_results/runs
+python scripts/summarize_runs.py --runs-dir docs/research_history/control_experiment_results/runs
+python scripts/verify_findings.py --runs-dir docs/research_history/control_experiment_results/runs
 ```
 
 ## 2. Run inventory
 
-64 published runs in `docs/control_experiment_results/runs/`, named
+64 published runs in `docs/research_history/control_experiment_results/runs/`, named
 `<timestamp>-saturation_signal_test-<scenario>-<controller>-<hex8>`:
 
 - Main matrix: 4 scenarios x 4 controllers x seeds {17, 23, 42}, 500 steps
@@ -231,7 +231,7 @@ Post-shift (steps 250-499), requested/capacity_relative:
 
 The initial 16 runs were executed against uncommitted implementation files.
 All 64 published runs were regenerated from the clean commit `4e7c58f` into
-`docs/control_experiment_results/runs/` and are committed alongside this
+`docs/research_history/control_experiment_results/runs/` and are committed alongside this
 report. Manifests record `dirty=true` for all but the first run; the dirt
 consists solely of the runs' own untracked output directories — no tracked
 file differs from `4e7c58f` (`git status` shows no `M` entries), and the first

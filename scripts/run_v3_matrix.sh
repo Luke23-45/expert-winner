@@ -4,9 +4,8 @@
 # Run from the repository root with the venv active:
 #   bash scripts/run_v3_matrix.sh
 #
-# Writes immutable run directories under docs/control_experiment_results/v3_runs/.
-# Does NOT touch docs/control_experiment_results/runs/ or v2_runs/
-# (v1/v2 artifacts frozen).
+# Writes new runs under ignored results/reproductions/v3_runs/.
+# The archived v1/v2/v3 artifacts under docs/research_history/ remain unchanged.
 #
 # Inventory: 79 runs
 #   T1 non-uniform target: 2 capacity regimes x 6 controllers x seeds {17,23,42} = 36
@@ -19,7 +18,7 @@
 #   T5 DeepSeek head-to-head extension: 2 controllers x 5 scenarios x seeds {42,99} = 20
 set -euo pipefail
 
-OUT=docs/control_experiment_results/v3_runs
+OUT=results/reproductions/v3_runs
 PY=.venv/bin/python
 # Feasible integer-count explicit target: K*T*mu = [384,352,320,288,256,224,128,96].
 MU="problem.target=explicit problem.target_weights=[0.1875,0.171875,0.15625,0.140625,0.125,0.109375,0.0625,0.046875]"
@@ -77,7 +76,7 @@ run scenario=adversarial_init capacity=shortage controller=requested_leaky \
 
 # --- T4: theorem prospective check (predict first, then run) ----------------
 # Predicted eta*t_flip from the affinity tensor is recorded in
-# docs/control_experiment_results/v3_notes/eta_flip_theorem.md BEFORE these
+# docs/research_history/control_experiment_results/v3_notes/eta_flip_theorem.md BEFORE these
 # runs execute; the verifier checks the observed first-flip steps against it.
 for eta in 0.15 0.3; do
   run scenario=shortage capacity=shortage controller=requested \
