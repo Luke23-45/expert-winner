@@ -1,8 +1,8 @@
 # Architecture and implementation plan
 
-**Status:** proposed design; no experiment code has been implemented yet
-**Scope:** a reproducible control experiment for the formal definitions in [`../formal.md`](../formal.md)
-**Repository state observed:** this repository currently contains the formal document but no experiment package or established Python tooling. This plan therefore proposes a clean initial structure rather than fitting an existing runtime.
+**Status:** original architecture proposal; superseded for current real-workload benchmarking by [`real_workload_benchmark_protocol.md`](real_workload_benchmark_protocol.md)
+**Scope:** the initial synthetic-control architecture for the formal definitions in [`../formal.md`](../formal.md)
+**Repository note:** this document predates the implemented `src/moe_control/` package and the Megatron adapter. Its original repository-state assumptions and “later phase” sequencing are historical. Use the linked real-workload protocol for the current benchmark design, controller distinctions, and launch gates.
 
 ## 1. Objective and research framing
 
